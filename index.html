@@ -70,17 +70,10 @@
       margin-top: 60px;
     }
 
-    /* Shorts 영상 위치 조정 */
-    .shorts-wrapper {
-      display: flex;
-      justify-content: center;
-      margin-top: 40px;
-      margin-bottom: 40px;
-    }
-
+    /* Shorts 반응형 스타일 */
     .short-embed {
-      width: 360px;
-      height: 640px;
+      width: min(360px, 90vw);
+      height: calc(min(360px, 90vw) * 1.777);
       border-radius: 16px;
       overflow: hidden;
       border: none;
@@ -94,16 +87,14 @@
     <h3>삶의 안심을 위한 연결고리 · 안심365</h3>
   </header>
 
-  <!-- 🔥 Shorts 영상 영역 추가 -->
-  <div class="shorts-wrapper">
-    <iframe class="short-embed"
-      src="https://www.youtube.com/embed/RbI8C-hVrHQ"
-      title="YouTube Shorts"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-    </iframe>
-  </div>
+  <!-- 🔥 Shorts 영상 영역 -->
+  <iframe class="short-embed"
+    src="https://www.youtube.com/embed/RbI8C-hVrHQ"
+    title="YouTube Shorts"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
 
   <section>
     <h2>데이터 미입력 기반 응급상황 감지 시스템</h2>
@@ -125,7 +116,7 @@
       • <strong>ODRE402 리스크 엔진</strong> — 실시간 위험도 평가 및 주기적 자동 로그 생성<br/>
       • <strong>AI 예측 시스템</strong> — 사용자 패턴 기반 위험 궤적(3일·1주·1개월) 분석<br/>
       • <strong>FCM 양방향 감시</strong> — 사용자 ↔ 보호자 세션·하트비트 실시간 동기화<br/>
-      • <strong>정밀 위치 로그</strong> — 위도·경도 소수점 7자리 저장(약 1.1cm)<br/>
+      • <strong>정밀 위치 로그</strong> — 위도·경도 소수점 7자리(약 1.1cm) 단위 저장<br/>
       • <strong>Non-Input 기반 감지</strong> — 움직임·데이터 미입력 자체를 위험 신호로 분석<br/>
       • <strong>삶의 안심 연결고리</strong> — 혼자 있는 사람을 보호자와 즉시 연결하는 생명 플랫폼
     </p>
@@ -141,8 +132,51 @@
       • 응답 자동 서명(Signature): 위·변조 완전 차단<br/>
       • “서버 설정”이 아니라 <strong>키 자체</strong>가 보안등급을 결정<br/>
       • 개발자 옵션 없음 — 엔진이 스스로 판단하는 <strong>풀 오토 보안</strong><br/>
+      • 사용자의 디바이스 능력에 따라 보안 모드 자동 적용<br/>
       • 세계적으로도 사례가 드문 <strong>완전 자동 Hybrid-PQC 보안 시스템</strong><br/>
     </p>
+
+    <h3 style="margin-top:30px; color:#6fffe9;">ODRE CryptoEngine 보안 구조도</h3>
+    <p>
+      <strong>Classic Layer</strong><br/>
+      • AES / RSA / ECDH 전통 암호 기반 보호<br/><br/>
+
+      <strong>PQC Layer</strong><br/>
+      • Kyber KEM / Dilithium Signature 기반 양자내성 보호<br/><br/>
+
+      <strong>Hybrid Layer</strong><br/>
+      • Classic + PQC 키 혼합<br/>
+      • 자동 Perfect Forward Secrecy<br/>
+      • Drift Protection(클럭·타임스탬프 변조 감지)<br/><br/>
+
+      <strong>AEAD Layer</strong><br/>
+      • AES-GCM / ChaCha20-Poly1305 데이터 암·복호화<br/><br/>
+
+      <strong>Signature Layer</strong><br/>
+      • Ed25519 / Dilithium 서명 기반 응답 위변조 방지<br/><br/>
+
+      <strong>Canonical Metadata</strong><br/>
+      • nonce, timestamp, client-mode, integrity hash 자동 포함<br/><br/>
+
+      <strong>Drift Protection</strong><br/>
+      • 시간 변조·리플레이 공격 자동 차단<br/><br/>
+
+      <strong>Full Auto Mode</strong><br/>
+      • classic → hybrid → pqc 보안모드 자동 선택
+    </p>
+  </section>
+
+  <section>
+    <h2>ODRE 공식 기술 블로그</h2>
+    <p>
+      우리의 안심365, CryptoEngine, PQC, 보안 철학 등을 공유하는 기술 블로그입니다.
+    </p>
+    <a class="btn" 
+      href="https://blog.naver.com/goskm" 
+      target="_blank" 
+      rel="noopener noreferrer">
+      기술 블로그 바로가기
+    </a>
   </section>
 
   <section>
@@ -150,7 +184,7 @@
     <p>사업 제휴, 기술 문의, 미디어 문의는 아래 채널을 이용해주세요.</p>
     <p style="margin-top:15px;">
       ✉ <strong>odreai2025@gmail.com</strong><br/>
-      🌐 <strong>www.odreai.com</strong>
+      🌐 <strong>www.odreai.com</strong><br/>
       🌐 <strong>www.odreai.kr</strong>
     </p>
   </section>
@@ -159,5 +193,7 @@
     © 2025 ODRE AI. All Rights Reserved.<br/>
     Designed & Managed by OdreAI (odreai.kr)
   </footer>
+
 </body>
 </html>
+
