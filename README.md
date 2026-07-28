@@ -1,2 +1,2 @@
 # odreai.github.io
-Official ODRE AI Landing Page
+Official 안심365-장례서비스 Landing Page
