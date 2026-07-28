@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>안심365 상담 접수 완료</title>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Pretendard:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+
+<style>
+
+
+*{
+
+box-sizing:border-box;
+font-family:"Pretendard","Noto Sans KR",sans-serif;
+
+}
+
+
+body{
+
+margin:0;
+
+background:#f8f5ef;
+
+color:#222;
+
+}
+
+
+.container{
+
+max-width:480px;
+
+margin:auto;
+
+padding:35px 22px;
+
+}
+
+
+/* 로고 */
+
+
+.logo{
+
+text-align:center;
+
+font-family:"Noto Serif KR",serif;
+
+font-size:38px;
+
+font-weight:900;
+
+letter-spacing:2px;
+
+color:#0f243e;
+
+}
+
+
+.logo span{
+
+color:#b89b5e;
+
+}
+
+
+
+/* 카드 */
+
+
+.card{
+
+background:white;
+
+margin-top:35px;
+
+border-radius:22px;
+
+padding:35px 25px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+text-align:center;
+
+}
+
+
+
+/* 체크 */
+
+
+.check{
+
+font-size:60px;
+
+margin-bottom:20px;
+
+}
+
+
+
+/* 제목 */
+
+
+h1{
+
+font-family:"Noto Serif KR",serif;
+
+font-size:27px;
+
+line-height:1.5;
+
+margin:0;
+
+color:#0f243e;
+
+}
+
+
+
+.gold{
+
+color:#b89b5e;
+
+font-weight:900;
+
+}
+
+
+
+/* 안내 */
+
+
+.message{
+
+margin-top:25px;
+
+font-size:17px;
+
+line-height:1.9;
+
+color:#555;
+
+}
+
+
+.message b{
+
+color:#7a1010;
+
+font-size:19px;
+
+}
+
+
+
+/* 진행 */
+
+
+.process{
+
+margin-top:30px;
+
+background:#fafafa;
+
+border-radius:16px;
+
+padding:20px;
+
+text-align:left;
+
+}
+
+
+
+.process-title{
+
+font-weight:900;
+
+font-size:18px;
+
+color:#0f243e;
+
+margin-bottom:15px;
+
+}
+
+
+.step{
+
+padding:10px 0;
+
+border-bottom:1px solid #eee;
+
+font-size:15px;
+
+}
+
+
+.step:last-child{
+
+border-bottom:none;
+
+}
+
+
+.done{
+
+color:#7a1010;
+
+font-weight:bold;
+
+}
+
+
+
+/* 전화 버튼 */
+
+
+.call{
+
+display:block;
+
+margin-top:30px;
+
+padding:18px;
+
+border-radius:16px;
+
+background:#7a1010;
+
+color:white;
+
+text-decoration:none;
+
+font-size:19px;
+
+font-weight:bold;
+
+}
+
+
+
+/* 서비스 안내 */
+
+
+.info{
+
+margin-top:25px;
+
+padding-top:25px;
+
+border-top:1px solid #ddd;
+
+line-height:2;
+
+font-size:15px;
+
+color:#555;
+
+}
+
+
+
+/* 하단 */
+
+
+.footer{
+
+text-align:center;
+
+margin-top:35px;
+
+line-height:1.8;
+
+font-size:14px;
+
+color:#777;
+
+}
+
+
+
+.footer b{
+
+color:#0f243e;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="logo">
+
+안심<span>365</span>
+
+</div>
+
+
+
+<div class="card">
+
+
+<div class="check">
+
+✅
+
+</div>
+
+
+
+<h1>
+
+상담 접수가<br>
+
+<span class="gold">완료되었습니다</span>
+
+</h1>
+
+
+
+<div class="message">
+
+입력하신 연락처<br>
+
+<b id="userPhone"></b> 로
+
+<br>
+
+장례 전문가가
+
+<b>5분 이내 연락</b>
+
+드립니다.
+
+
+<br><br>
+
+
+갑작스러운 상황에서도<br>
+
+필요한 절차를 차분히 안내해드립니다.
+
+</div>
+
+
+
+
+
+<div class="process">
+
+
+<div class="process-title">
+
+상담 진행 상황
+
+</div>
+
+
+
+<div class="step done">
+
+① 상담 접수 완료 ✓
+
+</div>
+
+
+
+<div class="step">
+
+② 장례 전문가 확인 중
+
+</div>
+
+
+
+<div class="step">
+
+③ 맞춤 상담 진행
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<a href="tel:010-5934-3137" class="call">
+
+📞 24시간 긴급 상담 전화
+
+</a>
+
+
+
+
+<div class="info">
+
+
+<b>안심365 장례서비스</b><br><br>
+
+
+✓ 24시간 장례 상담<br>
+
+✓ 전문 운구 연결<br>
+
+✓ 병원 · 자택 · 요양시설 대응<br>
+
+✓ 빈소 · 무빈소 상담 지원<br>
+
+✓ 고독사 현장 상담
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div class="footer">
+
+
+가족의 마지막 순간까지<br>
+
+<b>안심365</b>가 함께합니다.
+
+
+<br><br>
+
+
+© 2026 ODRE AI. All rights reserved.
+
+
+</div>
+
+
+
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(location.search);
+
+const phone = params.get("phone");
+
+
+if(phone){
+
+document.getElementById("userPhone").innerText = phone;
+
+}
+
+</script>
+
+</body>
+
+</html>
