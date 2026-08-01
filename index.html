@@ -1007,7 +1007,7 @@ placeholder="예) 계명대 동산병원 / ○○요양원 / 대구 달서구 �
 id="deceasedName"
 type="text"
 autocomplete="off"
-placeholder="고인 성함">
+placeholder="고인 성함 (선택)">
 
 
 
@@ -1370,12 +1370,6 @@ submitBtn.onclick = async function(){
     }
 
     const deceasedName = document.getElementById("deceasedName");
-
-    if(deceasedName.value.trim() === ""){
-        alert("고인 성함을 입력해주세요.");
-        scrollToField(deceasedName);
-        return;
-    }
 
     const guardianName = document.getElementById("guardianName");
 
