@@ -48,35 +48,6 @@
 
 html{scroll-behavior:smooth;}
 
-//방문기록 저장    
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    fetch("https://www.odreai.com/api/visit", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            page: window.location.pathname,
-            referrer: document.referrer || "",
-            userAgent: navigator.userAgent,
-            screen: `${window.screen.width}x${window.screen.height}`,
-            visitedAt: new Date().toISOString()
-        })
-    })
-    .then(response => {
-        console.log("방문기록 응답:", response.status);
-        return response.json();
-    })
-    .then(data => {
-        console.log("방문기록 성공:", data);
-    })
-    .catch(error => {
-        console.error("방문기록 실패:", error);
-    });
-});
-</script>
-
 </body>
     
 body{
@@ -1579,6 +1550,34 @@ window.onclick=function(e){
 
 </script>
 
+//방문기록 저장    
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("https://www.odreai.com/api/visit", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            page: window.location.pathname,
+            referrer: document.referrer || "",
+            userAgent: navigator.userAgent,
+            screen: `${window.screen.width}x${window.screen.height}`,
+            visitedAt: new Date().toISOString()
+        })
+    })
+    .then(response => {
+        console.log("방문기록 응답:", response.status);
+        return response.json();
+    })
+    .then(data => {
+        console.log("방문기록 성공:", data);
+    })
+    .catch(error => {
+        console.error("방문기록 실패:", error);
+    });
+});
+</script>  
 </body>
 
 </html>
