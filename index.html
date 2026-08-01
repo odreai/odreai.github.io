@@ -747,9 +747,6 @@ border-color:#b89b5e;
     font-weight:900;
 }
 
-shadow:0 7px 18px rgba(122,16,16,.18);
-}
-
 .urgent-copy{
     margin-top:10px;
     color:#7a1010;
@@ -942,76 +939,23 @@ shadow:0 7px 18px rgba(122,16,16,.18);
 
 
 <div class="title">
-
 📍 고인 위치
-
 </div>
-
-
 
 <div class="address-title">
-
-현재 고인이 계시는 주소
-
+현재 고인이 계신 장소
 </div>
 
-
-
 <p class="address-info">
-
-운구 전문가가 정확한 이동 경로 확인을 위해 필요합니다.
-
+병원명, 요양시설명 또는 주소를 입력해 주세요.
 </p>
-
-
-
-
-<label class="select-option">
-
-<input type="radio" name="place" value="자택">
-
-<span>자택</span>
-
-</label>
-
-
-
-<label class="select-option">
-
-<input type="radio" name="place" value="병원">
-
-<span>병원</span>
-
-</label>
-
-
-
-<label class="select-option">
-
-<input type="radio" name="place" value="요양시설">
-
-<span>요양시설</span>
-
-</label>
-
-
-
-<label class="select-option">
-
-<input type="radio" name="place" value="기타">
-
-<span>기타</span>
-
-</label>
-
-
 
 <input
 id="address"
 class="address-input"
 type="text"
 autocomplete="street-address"
-placeholder="예) 대구 ○○병원 / ○○요양원">
+placeholder="예) 계명대 동산병원 / ○○요양원 / 대구 달서구 ○○">
 
 
 </div>
@@ -1408,20 +1352,12 @@ submitBtn.onclick = async function(){
     }
 
     // 고인 위치 확인
-    const place = document.querySelector('input[name="place"]:checked');
-
-    if(!place){
-        alert("고인 위치를 선택해주세요.");
-        scrollToField(document.querySelector('input[name="place"]'));
-        return;
-    }
-
     const address = document.getElementById("address");
 
     if(address.value.trim() === ""){
-        alert("현재 고인이 계시는 주소를 입력해주세요.");
-        scrollToField(address);
-        return;
+    alert("현재 고인이 계신 장소를 입력해 주세요.");
+    scrollToField(address);
+    return;
     }
 
     // 희망 장례 형태 확인
@@ -1474,7 +1410,7 @@ submitBtn.onclick = async function(){
 
     const consultationData = {
         death_status: death.value,
-        place_type: place.value,
+        place_type: "직접 입력",
         address: address.value.trim(),
         funeral_type: funeral.value,
         deceased_name: deceasedName.value.trim(),
@@ -1621,6 +1557,4 @@ window.onclick=function(e){
 </body>
 
 </html>
-
-
 
