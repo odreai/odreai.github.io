@@ -25,6 +25,23 @@ font-family:"Pretendard","Noto Sans KR",sans-serif;
 
 }
 
+<script>
+fetch("https://api.odreai.kr/api/visit", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        page: location.pathname,
+        referrer: document.referrer || "",
+        userAgent: navigator.userAgent,
+        screen: `${window.screen.width}x${window.screen.height}`,
+        visitedAt: new Date().toISOString()
+    })
+}).catch(() => {
+    // 방문기록 저장 실패가 페이지 이용에 영향을 주지 않도록 무시
+});
+</script>  
 
 body{
 
