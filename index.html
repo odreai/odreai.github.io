@@ -48,7 +48,7 @@
 
 html{scroll-behavior:smooth;}
 
-</body>
+
     
 body{
 
@@ -140,7 +140,7 @@ body{
     border-radius:16px;
 
 
-    background:#7a1010;
+    background:#14345a;
 
 
     color:white;
@@ -769,6 +769,74 @@ border-color:#b89b5e;
     font-size:20px;
 }
 
+.service-area{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px 8px;
+    margin-top:20px;
+    font-size:16px;
+    line-height:1.5;
+    text-align:center;
+}
+
+.service-area > div{
+    white-space:nowrap;
+}
+
+.service-area .wide{
+    grid-column:1 / -1;
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:2px;
+}
+
+.service-note{
+    margin-top:22px;
+    color:#777;
+    text-align:center;
+    line-height:1.8;
+    font-size:13px;
+}
+
+.section-guide{
+    margin:6px 0 18px;
+    font-size:14px;
+    color:#777;
+    text-align:center;
+}
+
+.consult-guide{
+
+    margin:24px 0 28px;
+
+    text-align:center;
+
+    font-size:22px;
+
+    font-weight:800;
+
+    color:#0f5fd6;
+
+    letter-spacing:-0.3px;
+
+    animation:guidePulse 2s ease-in-out infinite;
+
+}
+
+@keyframes guidePulse{
+
+    0%,100%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:.65;
+        transform:scale(1.03);
+    }
+
+}
+
 </style>
 
 
@@ -797,10 +865,8 @@ border-color:#b89b5e;
 <h1>
 
 임종 직후,<br>
-
 가장 먼저 필요한<br>
-
-24시간 운구·장례 접수
+24시간 장례상담 접수
 
 </h1>
 
@@ -816,7 +882,7 @@ border-color:#b89b5e;
 
 
 <a href="tel:010-5934-3137" class="main-btn">
-  📞 지금 바로 운구 상담하기
+  📞 지금 바로 장례절차 상담하기
 </a>
 
 
@@ -825,8 +891,8 @@ border-color:#b89b5e;
 <div class="quick-trust">
   <div>✓ 24시간 접수</div>
   <div>✓ 상담비 무료</div>
-  <div>✓ 운구 우선 연결</div>
-  <div>✓ 빈소·무빈소 가능</div>
+  <div>✓ 후불상조 상담 가능</div>
+  <div>✓ 무빈소 장례 상담</div>
 </div>
 
 <div class="message">
@@ -835,27 +901,33 @@ border-color:#b89b5e;
 <div class="card">
 
     <div class="title">
-        📍 서비스 가능 지역
+        🗺️ 상담 서비스 가능 지역
     </div>
 
-    <div style="line-height:2;font-size:17px;">
+    <div class="service-area">
 
-        ✔ 대구광역시 전 지역<br>
-        ✔ 경산시<br>
-        ✔ 영천시<br>
-        ✔ 청도군<br>
-        ✔ 고령군<br>
-        ✔ 성주군<br>
-        ✔ 칠곡군<br>
-        ✔ 합천군<br>
-        ✔ 구미시<br>
-        ✔ 달성군<br>
-        ✔ 창녕군
+        <div class="wide">✔ 대구광역시 전 지역</div>
+
+        <div>✔ 경산시</div>
+        <div>✔ 영천시</div>
+
+        <div>✔ 청도군</div>
+        <div>✔ 고령군</div>
+
+        <div>✔ 성주군</div>
+        <div>✔ 칠곡군</div>
+
+        <div>✔ 합천군</div>
+        <div>✔ 구미시</div>
+
+        <div>✔ 달성군</div>
+        <div>✔ 창녕군</div>
 
     </div>
 
-    <p style="margin-top:15px;color:#666;">
-    그 외 지역도 먼저 문의해 주세요. 가능한 경우 신속히 안내해드립니다.
+    <p class="service-note">
+        그 외 지역도 먼저 문의해 주세요.<br>
+        가능한 경우 신속히 안내해드립니다.
     </p>
 
 </div>
@@ -864,19 +936,41 @@ border-color:#b89b5e;
 
 무엇부터 해야 할지 막막하지 않도록<br>
 
-<b>안심365</b>가 운구부터 장례까지 연결합니다.
+<b>안심365</b>가 운구부터 발인까지 원스톱으로 안내합니다.
 
 
 </div>
 
 <div class="card reason-card">
   <div class="title">왜 안심365를 이용할까요?</div>
+
   <div class="reason-list">
-    <div class="reason-item"><span class="reason-check">✓</span><span>임종 직후 필요한 운구부터 바로 상담합니다.</span></div>
-    <div class="reason-item"><span class="reason-check">✓</span><span>장례지도사와 장례식장을 상황에 맞게 연결합니다.</span></div>
-    <div class="reason-item"><span class="reason-check">✓</span><span>빈소 장례와 무빈소 장례 모두 상담 가능합니다.</span></div>
-    <div class="reason-item"><span class="reason-check">✓</span><span>유족 상담은 무료이며 24시간 접수합니다.</span></div>
+
+    <div class="reason-item">
+      <span class="reason-check">✓</span>
+      <span>임종 직후 5분 이내 전문가 상담 연결</span>
+    </div>
+
+    <div class="reason-item">
+      <span class="reason-check">✓</span>
+      <span>후불상조·장례지도사 상담 가능</span>
+    </div>
+
+    <div class="reason-item">
+      <span class="reason-check">✓</span>
+      <span>무빈소 장례 전문 상담</span>
+    </div>
+
+    <div class="reason-item">
+      <span class="reason-check">✓</span>
+      <span>24시간 접수 · 상담비 무료</span>
+    </div>
+
   </div>
+</div>
+
+<div class="consult-guide">
+  👇 아래에서 바로 장례상담을 접수하세요.
 </div>
 
 <!-- 임종 여부 -->
@@ -886,7 +980,8 @@ border-color:#b89b5e;
 
 <div class="title">
 
-🕊 임종 여부
+<h3>🕊️ 임종 여부</h3>
+<p class="section-guide">(해당 항목을 선택해 주세요)</p>
 
 </div>
 
@@ -941,7 +1036,7 @@ border-color:#b89b5e;
 
 
 <div class="title">
-📍 고인 위치
+🗺️ 고인 위치
 </div>
 
 <div class="address-title">
@@ -970,7 +1065,9 @@ placeholder="예) 계명대 동산병원 / ○○요양원 / 대구 달서구 �
 
 <div class="title">
     
-🕊 희망 장례 형태
+<h3>🕊️ 희망 장례 형태</h3>
+<p class="section-guide">(해당 항목을 선택해 주세요)</p>
+
 </div>
 
 <label class="select-option">
@@ -999,7 +1096,7 @@ placeholder="예) 계명대 동산병원 / ○○요양원 / 대구 달서구 �
 
 <div class="title">
 
-🕊 고인 정보
+<h3>🕊️ 고인 정보</h3>
 
 </div>
 
@@ -1102,15 +1199,11 @@ placeholder="연락처 010-0000-0000">
 <br><br>
 
 
-✓ 24시간 대응<br>
-
-✓ 현장 중심 운구 상담<br>
-
-✓ 장례지도사 상담<br>
-
-✓ 빈소·무빈소 선택 지원<br>
-
-✓ 불필요한 비용 최소화
+✓ 24시간 접수<br>
+✓ 상담비 무료<br>
+✓ 후불상조 상담<br>
+✓ 무빈소 장례 전문<br>
+✓ 운구부터 발인까지 원스톱 연결
 
 
 
@@ -1550,7 +1643,7 @@ window.onclick=function(e){
 
 </script>
 
-<!-- 방문기록 저장 --> 
+<!-- 방문기록 저장 -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     fetch("https://www.odreai.com/api/visit", {
@@ -1567,18 +1660,18 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     })
     .then(response => {
-        console.log("방문기록 응답:", response.status);
-        return response.json();
-    })
-    .then(data => {
-        console.log("방문기록 성공:", data);
+        if (!response.ok) {
+            throw new Error(`HTTP 오류: ${response.status}`);
+        }
+
+        console.log("방문기록 성공:", response.status);
     })
     .catch(error => {
         console.error("방문기록 실패:", error);
     });
 });
-</script>  
+</script>
+
 </body>
 
 </html>
-
