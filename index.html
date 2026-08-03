@@ -1762,10 +1762,10 @@ document.addEventListener("DOMContentLoaded", function () {
 </a>
 
 <!-- 우측 운구 상담 스티키 -->
-<a href="#"
-   id="transportCall"
+<a href="tel:010-8857-5022"
    class="transport-call-sticky"
-   aria-label="운구 상담">
+   aria-label="운구 상담"
+   onclick="return confirm('운구 상담 전용입니다.\n\n운구(고인 이송) 관련 상담만 가능합니다.\n\n일반 장례 상담은 메인 상담 버튼 또는 상담 접수를 이용해 주세요.\n\n운구 상담으로 연결하시겠습니까?');">
 
     <span class="transport-call-icon">☎</span>
 
@@ -1775,31 +1775,6 @@ document.addEventListener("DOMContentLoaded", function () {
     </span>
 
 </a>
-
-<script>
-const transportCall = document.getElementById("transportCall");
-
-transportCall.addEventListener("click", function(e){
-
-    e.preventDefault();
-
-    const ok = confirm(
-`운구 상담 전용입니다.
-
-운구(고인 이송) 관련 상담만 가능합니다.
-
-일반 장례 상담은
-메인 상담 버튼 또는 상담 접수를 이용해 주세요.
-
-운구 상담으로 연결하시겠습니까?`
-    );
-
-    if(ok){
-        window.location.href = "tel:010-8857-5022";
-    }
-
-});
-</script>
 
 </body>
 
