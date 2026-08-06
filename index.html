@@ -886,34 +886,34 @@ body{
 .transport-call-sticky{
     position:fixed;
 
-    right:max(14px, calc((100vw - 560px) / 2 - 80px));
+    right:max(14px, calc((100vw - 560px) / 2 - 70px));
     top:50%;
     transform:translateY(-50%);
 
     z-index:9998;
 
-    width:66px;
-    min-height:132px;
+    width:52px;
+    min-height:108px;
 
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
 
-    gap:7px;
+    gap:5px;
 
-    padding:12px 7px;
+    padding:8px 5px;
 
     background:#14345a;
     color:#fff;
 
     border:2px solid #b89b5e;
-    border-radius:18px 0 0 18px;
+    border-radius:16px 0 0 16px;
 
     text-align:center;
     text-decoration:none;
 
-    box-shadow:0 6px 18px rgba(0,0,0,.2);
+    box-shadow:0 5px 14px rgba(0,0,0,.2);
 
     transition:
         transform .2s ease,
@@ -926,23 +926,23 @@ body{
     align-items:center;
     justify-content:center;
 
-    width:38px;
-    height:38px;
+    width:30px;
+    height:30px;
 
     border-radius:50%;
 
     background:#fff;
     color:#14345a;
 
-    font-size:23px;
+    font-size:18px;
     line-height:1;
 }
 
 .transport-call-text{
-    font-size:15px;
+    font-size:13px;
     font-weight:900;
-    line-height:1.35;
-    letter-spacing:1px;
+    line-height:1.25;
+    letter-spacing:0;
 }
 
 .transport-call-sticky:hover{
@@ -950,9 +950,9 @@ body{
 
     transform:
         translateY(-50%)
-        translateX(-3px);
+        translateX(-2px);
 
-    box-shadow:0 8px 22px rgba(0,0,0,.27);
+    box-shadow:0 7px 18px rgba(0,0,0,.27);
 }
 
 .transport-call-sticky:active{
@@ -966,29 +966,56 @@ body{
 @media (max-width:420px){
 
     .transport-call-sticky{
-        right:8px;
+        right:6px;
 
-        width:58px;
-        min-height:120px;
+        width:48px;
+        min-height:100px;
 
-        padding:10px 6px;
+        padding:7px 4px;
 
-        border-radius:16px 0 0 16px;
+        border-radius:14px 0 0 14px;
     }
 
     .transport-call-icon{
-        width:34px;
-        height:34px;
+        width:28px;
+        height:28px;
 
-        font-size:21px;
+        font-size:17px;
     }
 
     .transport-call-text{
-        font-size:14px;
+        font-size:12px;
+        line-height:1.2;
     }
-
 }
 
+.select-option span{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+}
+
+.select-option strong{
+    font-size:17px;
+    font-weight:700;
+    color:#1f2d3d;
+}
+
+.select-option small{
+    font-size:14px;
+    font-weight:500;
+    color:#8a6d3b;
+}
+
+.price-notice{
+    margin-top:14px;
+    padding:12px 14px;
+    border-radius:8px;
+    background:#f7f4ed;
+    font-size:13px;
+    line-height:1.6;
+    color:#666;
+}
 </style>
 
 
@@ -1158,31 +1185,42 @@ placeholder="예) ○○요양원 / 대구 달서구 ○○">
 
 <!-- 장례 형태 -->
 
-
 <div class="card">
 
+    <div class="title">
+        <h3>희망 장례 형태</h3>
+        <p class="section-guide">
+            현재 생각하고 계신 장례 형태를 선택해 주세요.
+        </p>
+    </div>
 
-<div class="title">
-    
-<h3>희망 장례 형태</h3>
-<p class="section-guide">(해당 항목을 선택해 주세요)</p>
+    <label class="select-option">
+        <input type="radio" name="funeral" value="빈소 장례">
+        <span>
+            <strong>빈소 장례</strong>
+            <small>250만원부터</small>
+        </span>
+    </label>
 
-</div>
+    <label class="select-option">
+        <input type="radio" name="funeral" value="무빈소 장례">
+        <span>
+            <strong>무빈소 장례</strong>
+            <small>150만원부터</small>
+        </span>
+    </label>
 
-<label class="select-option">
-<input type="radio" name="funeral" value="빈소 장례">
-<span>빈소 장례를 희망합니다.</span>
-</label>
+    <label class="select-option">
+        <input type="radio" name="funeral" value="미정">
+        <span>
+            <strong>아직 결정하지 못했습니다</strong>
+            <small>상담 후 상황에 맞게 안내해 드립니다.</small>
+        </span>
+    </label>
 
-<label class="select-option">
-<input type="radio" name="funeral" value="무빈소 장례">
-<span>무빈소 장례를 희망합니다.</span>
-</label>
-
-<label class="select-option">
-<input type="radio" name="funeral" value="미정">
-<span>아직 결정하지 못했습니다.</span>
-</label>
+    <p class="price-notice">
+    ※ 장례식장, 지역, 종교 및 선택 품목에 따라 최종 비용이 달라질 수 있습니다.
+    </p>
 
 </div>
 
