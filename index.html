@@ -72,9 +72,14 @@ body{
 }
 
 /* PC 화면 */
-@media (min-width: 769px){
+@media (min-width:769px){
+
     .container{
         max-width:840px;
+    }
+
+    .transport-call-sticky{
+        right:max(14px, calc((100vw - 840px) / 2 - 70px));
     }
 }
 
