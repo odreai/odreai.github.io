@@ -77,7 +77,7 @@ body{
         max-width:728px;
     }
 
-    .transport-call-sticky{
+    .price-sticky{
         right:max(14px, calc((100vw - 728px) / 2 - 70px));
     }
 }
@@ -892,111 +892,273 @@ body{
 }
 
 
-/* 우측 운구 전문 전화 스티키 */
+/* 우측 장례상품 가격보기 스티키 */
 
-.transport-call-sticky{
-    position:fixed;
+.price-sticky {
+    position: fixed;
 
-    right:max(14px, calc((100vw - 560px) / 2 - 70px));
-    top:50%;
-    transform:translateY(-50%);
+    right: max(14px, calc((100vw - 560px) / 2 - 70px));
+    top: 50%;
+    transform: translateY(-50%);
 
-    z-index:9998;
+    z-index: 9998;
 
-    width:52px;
-    min-height:108px;
+    width: 58px;
+    min-height: 122px;
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    gap:5px;
+    gap: 7px;
+    padding: 10px 5px;
 
-    padding:8px 5px;
+    background: #14345a;
+    color: #ffffff;
 
-    background:#14345a;
-    color:#fff;
+    border: 2px solid #b89b5e;
+    border-radius: 17px 0 0 17px;
 
-    border:2px solid #b89b5e;
-    border-radius:16px 0 0 16px;
+    text-align: center;
+    text-decoration: none;
 
-    text-align:center;
-    text-decoration:none;
-
-    box-shadow:0 5px 14px rgba(0,0,0,.2);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
 
     transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
-.transport-call-icon{
-    display:flex;
-    align-items:center;
-    justify-content:center;
+/* 가격 아이콘 */
 
-    width:30px;
-    height:30px;
+.price-sticky-icon {
+    width: 32px;
+    height: 32px;
 
-    border-radius:50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    background:#fff;
-    color:#14345a;
+    border-radius: 50%;
 
-    font-size:18px;
-    line-height:1;
+    background: #b89b5e;
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1;
 }
 
-.transport-call-text{
-    font-size:13px;
-    font-weight:900;
-    line-height:1.25;
-    letter-spacing:0;
+/* 스티키 문구 */
+
+.price-sticky-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 2px;
+
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: 0;
 }
 
-.transport-call-sticky:hover{
-    background:#0f2948;
+.price-sticky-text strong {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.price-sticky-text small {
+    color: #e1c587;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* 마우스를 올렸을 때 */
+
+.price-sticky:hover {
+    background: #0f2948;
 
     transform:
         translateY(-50%)
-        translateX(-2px);
+        translateX(-3px);
 
-    box-shadow:0 7px 18px rgba(0,0,0,.27);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
 }
 
-.transport-call-sticky:active{
+/* 누르는 순간 */
+
+.price-sticky:active {
     transform:
         translateY(-50%)
-        scale(.96);
+        scale(0.96);
 }
 
 /* 작은 휴대폰 화면 */
 
-@media (max-width:420px){
+@media (max-width: 420px) {
+    .price-sticky {
+        right: 6px;
 
-    .transport-call-sticky{
-        right:6px;
+        width: 54px;
+        min-height: 114px;
 
-        width:48px;
-        min-height:100px;
+        padding: 8px 4px;
 
-        padding:7px 4px;
-
-        border-radius:14px 0 0 14px;
+        border-radius: 15px 0 0 15px;
     }
 
-    .transport-call-icon{
-        width:28px;
-        height:28px;
+    .price-sticky-icon {
+        width: 29px;
+        height: 29px;
 
-        font-size:17px;
+        font-size: 15px;
     }
 
-    .transport-call-text{
-        font-size:12px;
-        line-height:1.2;
+    .price-sticky-text strong {
+        font-size: 12px;
+    }
+
+    .price-sticky-text small {
+        font-size: 10px;
+    }
+}
+
+/* 특별우대 혜택 팝업 */
+
+.benefit-popup {
+    position: fixed;
+    left: max(14px, calc((100vw - 728px) / 2 - 70px));
+    bottom: 24px;
+    z-index: 9997;
+
+    width: min(330px, calc(100vw - 32px));
+    padding: 0;
+
+    overflow: hidden;
+    border: 1px solid rgba(184, 155, 94, 0.75);
+    border-radius: 15px;
+
+    background: #ffffff;
+    box-shadow: 0 12px 34px rgba(8, 28, 46, 0.24);
+
+    animation: benefitPopupIn 0.45s ease-out;
+}
+
+.benefit-popup.is-hidden {
+    display: none;
+}
+
+.benefit-popup-close {
+    position: absolute;
+    top: 8px;
+    right: 9px;
+    z-index: 2;
+
+    width: 28px;
+    height: 28px;
+
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.benefit-popup-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.benefit-popup-head {
+    padding: 17px 44px 14px 18px;
+    background: #0f2948;
+    color: #ffffff;
+}
+
+.benefit-popup-head small {
+    display: block;
+    margin-bottom: 5px;
+    color: #d8ba77;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.benefit-popup-head strong {
+    display: block;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.benefit-popup-body {
+    padding: 16px 18px 17px;
+}
+
+.benefit-popup-body span {
+    display: block;
+    color: #6c7480;
+    font-size: 11px;
+}
+
+.benefit-popup-body b {
+    display: block;
+    margin-top: 5px;
+    color: #0f243e;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.benefit-popup-body em {
+    display: block;
+    margin-top: 11px;
+    color: #9a7435;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 800;
+}
+
+@keyframes benefitPopupIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .benefit-popup {
+        left: 12px;
+        bottom: 14px;
+        width: min(310px, calc(100vw - 76px));
+    }
+
+    .benefit-popup-head {
+        padding: 14px 40px 12px 15px;
+    }
+
+    .benefit-popup-head strong {
+        font-size: 14px;
+    }
+
+    .benefit-popup-body {
+        padding: 13px 15px 14px;
+    }
+
+    .benefit-popup-body b {
+        font-size: 16px;
     }
 }
 
@@ -1163,7 +1325,7 @@ body{
   </p>
 </section>
   
-<div class="form-heading">
+<div class="form-heading" id="funeral-consultation">
   장례 상담 접수
   <span>아래 항목을 순서대로 입력해 주세요.</span>
 </div>
@@ -1200,7 +1362,7 @@ body{
 </label>
 
 </div> <!-- 현재 상황 카드 닫기 -->
-  
+
 
 <!-- 고인 위치 -->
 
@@ -1857,19 +2019,53 @@ document.addEventListener("DOMContentLoaded", function () {
 
 </script>
 
-<!-- 우측 운구 상담 스티키 -->
-<a href="tel:010-8857-5022"
-   class="transport-call-sticky"
-   aria-label="운구 상담"
-   onclick="return confirm('운구 상담 전용입니다.\n\n운구(고인 이송) 관련 상담만 가능합니다.\n\n일반 장례 상담은 메인 상담 버튼 또는 상담 접수를 이용해 주세요.\n\n운구 상담으로 연결하시겠습니까?');">
+<aside class="benefit-popup" id="benefitPopup" aria-label="안심365 특별우대 혜택">
+    <button
+        type="button"
+        class="benefit-popup-close"
+        id="benefitPopupClose"
+        aria-label="특별우대 혜택 팝업 닫기"
+    >&times;</button>
 
-    <span class="transport-call-icon">☎</span>
+    <a
+        href="price.html#benefits"
+        class="benefit-popup-link"
+        aria-label="기초생활수급자와 국가유공자 특별우대 혜택 확인하기"
+    >
+        <div class="benefit-popup-head">
+            <small>SPECIAL BENEFIT</small>
+            <strong>기초생활수급자·국가유공자 특별우대</strong>
+        </div>
 
-    <span class="transport-call-text">
-        운구<br>
-        상담
+        <div class="benefit-popup-body">
+            <span>화장 장례 시</span>
+            <b>장의용품 무료지원</b>
+            <b>협력장례식장 분향실 사용료 50%할인</b>
+            <em>특별지원 혜택 확인하기 →</em>
+        </div>
+    </a>
+</aside>
+
+<script>
+const benefitPopup = document.getElementById("benefitPopup");
+const benefitPopupClose = document.getElementById("benefitPopupClose");
+
+benefitPopupClose.addEventListener("click", function () {
+    benefitPopup.classList.add("is-hidden");
+});
+</script>
+
+<a
+    href="price.html"
+    class="price-sticky"
+    aria-label="안심365 장례상품과 가격 보기"
+>
+    <span class="price-sticky-icon">₩</span>
+
+    <span class="price-sticky-text">
+        <strong>장례상품</strong>
+        <small>가격보기</small>
     </span>
-
 </a>
 
 </body>
