@@ -1027,6 +1027,44 @@ body{
     line-height:1.6;
     color:#666;
 }
+
+.video-section {
+  padding: 40px 20px;
+  text-align: center;
+  background: #f7f4ee;
+}
+
+.video-section h2 {
+  margin: 0 0 20px;
+  color: #0f243e;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.video-wrap {
+  width: min(100%, 340px);
+  aspect-ratio: 9 / 16;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 2px solid #b89b5e;
+  border-radius: 18px;
+  background: #000;
+  box-shadow: 0 10px 26px rgba(15, 36, 62, 0.16);
+}
+
+.video-wrap iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-text {
+  margin: 18px 0 0;
+  color: #485260;
+  font-size: 15px;
+  line-height: 1.7;
+}
 </style>
 
 
@@ -1324,6 +1362,26 @@ placeholder="연락처 010-0000-0000">
 <button id="submitBtn" class="submit">
 장례 상담 접수하기
 </button>
+
+<section class="video-section">
+  <h2>이별의 순간, 함께하겠습니다</h2>
+
+  <div class="video-wrap">
+    <iframe
+      src="https://www.youtube.com/embed/R06PfadcSZs"
+      title="이별 준비, 안심365 장례서비스"
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <p class="video-text">
+    운구부터 장례식장, 장례 절차와 발인까지<br>
+    안심365가 함께 안내합니다.
+  </p>
+</section>
 
 <div class="footer">
 
