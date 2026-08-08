@@ -1158,5 +1158,232 @@
       renderPackages();
       renderBenefit("priority");
     </script>
-  </body>
+  
+
+<!-- 안심365 방문/광고/검색어/체류시간 추적 -->
+<script>
+(function(){
+    const API_BASE = "https://www.odreai.com";
+    const TRAFFIC_KEY = "a365_traffic_v1";
+    const startedAt = Date.now();
+
+    function safeStorageGet(key){
+        try{
+            return sessionStorage.getItem(key);
+        }catch(e){
+            return null;
+        }
+    }
+
+    function safeStorageSet(key, value){
+        try{
+            sessionStorage.setItem(key, value);
+        }catch(e){}
+    }
+
+    function makeVisitId(){
+        try{
+            if(window.crypto && crypto.randomUUID){
+                return crypto.randomUUID();
+            }
+        }catch(e){}
+
+        return "v-" + Date.now() + "-" +
+            Math.random().toString(36).slice(2, 12);
+    }
+
+    function hostSource(referrer){
+        const ref = String(referrer || "").toLowerCase();
+
+        if(ref.includes("naver.")) return "naver";
+        if(ref.includes("google.")) return "google";
+        if(ref.includes("daum.") || ref.includes("kakao.")) return "daum-kakao";
+        if(ref.includes("bing.")) return "bing";
+
+        return "";
+    }
+
+    function collectTraffic(){
+        const params = new URLSearchParams(location.search);
+
+        const naverKeyword =
+            params.get("n_keyword") ||
+            params.get("n_query") ||
+            "";
+
+        const keyword =
+            params.get("utm_term") ||
+            naverKeyword ||
+            params.get("keyword") ||
+            params.get("query") ||
+            "";
+
+        const campaign =
+            params.get("utm_campaign") ||
+            params.get("n_ad_group") ||
+            params.get("n_campaign_type") ||
+            "";
+
+        const medium =
+            params.get("utm_medium") ||
+            (naverKeyword ? "cpc" : "");
+
+        let source =
+            params.get("utm_source") ||
+            (naverKeyword ? "naver" : "") ||
+            hostSource(document.referrer);
+
+        let ad = "";
+
+        const mediumLower = String(medium).toLowerCase();
+
+        if(
+            naverKeyword ||
+            params.has("n_keyword_id") ||
+            params.has("n_ad") ||
+            (source.toLowerCase().includes("naver") &&
+                ["cpc","paid","search_ad","powerlink"].includes(mediumLower))
+        ){
+            ad = "파워링크";
+            if(!source) source = "naver";
+        }else if(
+            ["cpc","paid","ppc","search_ad"].includes(mediumLower)
+        ){
+            ad = "검색광고";
+        }
+
+        const current = {
+            trafficSource: source,
+            ad: ad,
+            keyword: keyword,
+            campaign: campaign,
+            medium: medium
+        };
+
+        const hasCurrent =
+            current.trafficSource ||
+            current.ad ||
+            current.keyword ||
+            current.campaign ||
+            current.medium;
+
+        if(hasCurrent){
+            safeStorageSet(
+                TRAFFIC_KEY,
+                JSON.stringify(current)
+            );
+            return current;
+        }
+
+        const previous = safeStorageGet(TRAFFIC_KEY);
+
+        if(previous){
+            try{
+                return JSON.parse(previous);
+            }catch(e){}
+        }
+
+        return current;
+    }
+
+    const traffic = collectTraffic();
+    const visitId = makeVisitId();
+
+    function durationSeconds(){
+        return Math.max(
+            1,
+            Math.floor((Date.now() - startedAt) / 1000)
+        );
+    }
+
+    function sendDuration(){
+        const duration = durationSeconds();
+
+        const url =
+            API_BASE +
+            "/api/visit-duration?visit_id=" +
+            encodeURIComponent(visitId) +
+            "&duration=" +
+            encodeURIComponent(duration);
+
+        try{
+            navigator.sendBeacon(url);
+        }catch(e){
+            try{
+                fetch(url, {
+                    method:"POST",
+                    keepalive:true
+                }).catch(function(){});
+            }catch(ignore){}
+        }
+    }
+
+    function snapshot(){
+        return {
+            visitId: visitId,
+            trafficSource: traffic.trafficSource || "",
+            ad: traffic.ad || "",
+            keyword: traffic.keyword || "",
+            campaign: traffic.campaign || "",
+            medium: traffic.medium || "",
+            duration: durationSeconds()
+        };
+    }
+
+    window.A365Tracker = {
+        visitId: visitId,
+        snapshot: snapshot,
+        sendDuration: sendDuration
+    };
+
+    document.addEventListener("DOMContentLoaded", function(){
+        fetch(API_BASE + "/api/visit", {
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                "Accept":"application/json"
+            },
+            body:JSON.stringify({
+                visitId: visitId,
+                page: location.pathname,
+                referrer: document.referrer || "",
+                userAgent: navigator.userAgent,
+                screen: `${window.screen.width}x${window.screen.height}`,
+                visitedAt: new Date().toISOString(),
+                trafficSource: traffic.trafficSource || "",
+                ad: traffic.ad || "",
+                keyword: traffic.keyword || "",
+                campaign: traffic.campaign || "",
+                medium: traffic.medium || ""
+            })
+        }).catch(function(error){
+            console.error("방문기록 실패:", error);
+        });
+    });
+
+    // 창 닫기/페이지 이동 시 마지막 체류시간 저장
+    window.addEventListener("pagehide", sendDuration);
+
+    // pagehide 누락 대비: 15초마다 현재 체류시간 보정
+    const heartbeat = setInterval(function(){
+        const url =
+            API_BASE +
+            "/api/visit-duration?visit_id=" +
+            encodeURIComponent(visitId) +
+            "&duration=" +
+            encodeURIComponent(durationSeconds());
+
+        fetch(url, {
+            method:"POST",
+            keepalive:true
+        }).catch(function(){});
+    }, 15000);
+
+    window.addEventListener("pagehide", function(){
+        clearInterval(heartbeat);
+    });
+})();
+</script>
+
+</body>
 </html>
