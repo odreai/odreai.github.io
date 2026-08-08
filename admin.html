@@ -390,12 +390,12 @@ body{
     </section>
 
     <section class="panel full">
-        <div class="panel-head"><div><h3>최근 방문 기록</h3><p class="panel-desc">유입경로 · 광고 · 검색어 · 체류시간</p></div></div>
+        <div class="panel-head"><div><h3>최근 방문자 기록</h3><p class="panel-desc">동일 IP 1명 기준 · 이동경로 · 총 체류시간</p></div></div>
         <div class="table-wrap">
             <table class="admin-table">
                 <thead><tr>
                     <th>시간</th><th>유입</th><th>광고</th><th>검색어</th><th>캠페인</th>
-                    <th>기기</th><th>페이지</th><th>체류시간</th><th>IP</th><th>화면</th>
+                    <th>기기</th><th>페이지뷰</th><th>이동경로</th><th>총 체류시간</th><th>IP</th><th>화면</th>
                 </tr></thead>
                 <tbody id="visitTable"></tbody>
             </table>
@@ -546,7 +546,7 @@ function renderVisits(rows){
     const tbody = $("visitTable");
 
     if(!Array.isArray(rows) || !rows.length){
-        tbody.innerHTML = '<tr><td colspan="10" class="empty">방문 기록이 없습니다.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="11" class="empty">방문 기록이 없습니다.</td></tr>';
         return;
     }
 
@@ -558,7 +558,8 @@ function renderVisits(rows){
             <td class="keyword" title="${esc(v.keyword || "")}">${esc(v.keyword || "-")}</td>
             <td class="keyword" title="${esc(v.campaign || "")}">${esc(v.campaign || "-")}</td>
             <td>${esc(v.device || "-")}</td>
-            <td>${esc(v.page || "/")}</td>
+            <td>${esc(v.pageviews || 1)}</td>
+            <td class="keyword" title="${esc(v.page || "/")}">${esc(v.page || "/")}</td>
             <td><span class="duration ${durationClass(v.duration)}">${esc(fmtDuration(v.duration))}</span></td>
             <td>${esc(v.ip || "-")}</td>
             <td>${esc(v.screen || "-")}</td>
@@ -578,7 +579,7 @@ function renderVisitPagination(meta){
     currentVisitPage = page;
 
     info.textContent =
-        `총 ${totalRecords.toLocaleString()}건 · ${page}/${totalPages} 페이지 · 페이지당 ${VISIT_PAGE_SIZE}건`;
+        `총 ${totalRecords.toLocaleString()}명 · ${page}/${totalPages} 페이지 · 페이지당 ${VISIT_PAGE_SIZE}명`;
 
     nav.innerHTML = "";
 
