@@ -73,7 +73,7 @@ body{
 }
 .cards{
     display:grid;
-    grid-template-columns:repeat(6,minmax(0,1fr));
+    grid-template-columns:repeat(5,minmax(0,1fr));
     gap:12px;
     margin-bottom:12px;
 }
@@ -262,6 +262,55 @@ body{
     text-align:center !important;
     color:var(--muted);
 }
+
+.pagination-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-top:16px;
+    flex-wrap:wrap;
+}
+
+.pagination-info{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.pagination{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    flex-wrap:wrap;
+}
+
+.page-btn{
+    min-width:36px;
+    height:34px;
+    padding:0 10px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:#fff;
+    color:var(--navy);
+    font-weight:800;
+    cursor:pointer;
+}
+
+.page-btn:hover{
+    border-color:var(--gold);
+}
+
+.page-btn.active{
+    background:var(--navy2);
+    border-color:var(--navy2);
+    color:#fff;
+}
+
+.page-btn:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+}
+
 @media(max-width:1100px){
     .cards{grid-template-columns:repeat(3,1fr)}
 }
@@ -300,12 +349,11 @@ body{
     </div>
 
     <section class="cards">
-        <div class="card"><div class="label">방문 횟수</div><div id="visits" class="value">0</div><small>페이지뷰 기준</small></div>
-        <div class="card"><div class="label">고유 방문자</div><div id="unique" class="value">0</div><small>IP 기준</small></div>
+        <div class="card"><div class="label">고유 방문자</div><div id="unique" class="value">0</div><small>선택 기간 · IP 기준</small></div>
         <div class="card"><div class="label">상담 접수</div><div id="consultations" class="value">0</div><small>중복 제외 저장 건수</small></div>
-        <div class="card"><div class="label">전환율</div><div id="conversion" class="value">0%</div><small>상담 ÷ 방문</small></div>
-        <div class="card"><div class="label">평균 체류시간</div><div id="avgDuration" class="value">0초</div><small>페이지 체류시간 평균</small></div>
-        <div class="card"><div class="label">광고 유입</div><div id="adVisits" class="value">0</div><small>광고값 식별 방문</small></div>
+        <div class="card"><div class="label">전환율</div><div id="conversion" class="value">0%</div><small>상담 ÷ 고유 방문자</small></div>
+        <div class="card"><div class="label">평균 체류시간</div><div id="avgDuration" class="value">0초</div><small>고유 방문자별 총 체류시간 평균</small></div>
+        <div class="card"><div class="label">광고 유입자</div><div id="adVisits" class="value">0</div><small>광고 식별 · IP 중복 제외</small></div>
     </section>
 
     <section class="grid">
@@ -321,7 +369,7 @@ body{
 
     <section class="panel full">
         <div class="panel-head">
-            <div><h3>날짜별 추이</h3><p class="panel-desc">방문 및 상담 접수 현황</p></div>
+            <div><h3>날짜별 추이</h3><p class="panel-desc">고유 방문자(IP 기준) 및 상담 접수 현황</p></div>
             <span id="generatedAt" class="updated"></span>
         </div>
         <div id="daily" class="daily"></div>
@@ -352,6 +400,11 @@ body{
                 <tbody id="visitTable"></tbody>
             </table>
         </div>
+
+        <div class="pagination-wrap">
+            <div id="visitPageInfo" class="pagination-info">총 0건</div>
+            <div id="visitPagination" class="pagination"></div>
+        </div>
     </section>
 
     <p id="status" class="status"></p>
@@ -359,6 +412,8 @@ body{
 
 <script>
 const API_BASE = "https://www.odreai.com";
+const VISIT_PAGE_SIZE = 50;
+let currentVisitPage = 1;
 
 const $ = id => document.getElementById(id);
 
@@ -439,10 +494,10 @@ function renderDaily(rows){
         return;
     }
 
-    const maxVisit = Math.max(...rows.map(x => Number(x.visits) || 0), 1);
+    const maxVisit = Math.max(...rows.map(x => Number(x.unique_visitors) || 0), 1);
 
     target.innerHTML = rows.map(x => {
-        const vWidth = Math.max(2, Math.round((Number(x.visits || 0) / maxVisit) * 100));
+        const vWidth = Math.max(2, Math.round((Number(x.unique_visitors || 0) / maxVisit) * 100));
         const cWidth = Math.max(2, Math.round((Number(x.consultations || 0) / maxVisit) * 100));
 
         return `
@@ -452,7 +507,7 @@ function renderDaily(rows){
                     <div class="day-visit" style="width:${vWidth}%"></div>
                     ${Number(x.consultations || 0) ? `<div class="day-consult" style="width:${cWidth}%"></div>` : ""}
                 </div>
-                <div class="day-num">${esc(x.visits)} / 상담 ${esc(x.consultations)}</div>
+                <div class="day-num">${esc(x.unique_visitors)}명 / 상담 ${esc(x.consultations)}</div>
             </div>
         `;
     }).join("");
@@ -511,7 +566,56 @@ function renderVisits(rows){
     `).join("");
 }
 
-async function loadStats(){
+
+function renderVisitPagination(meta){
+    const info = $("visitPageInfo");
+    const nav = $("visitPagination");
+
+    const page = Number(meta?.page || 1);
+    const totalPages = Number(meta?.total_pages || 1);
+    const totalRecords = Number(meta?.total_records || 0);
+
+    currentVisitPage = page;
+
+    info.textContent =
+        `총 ${totalRecords.toLocaleString()}건 · ${page}/${totalPages} 페이지 · 페이지당 ${VISIT_PAGE_SIZE}건`;
+
+    nav.innerHTML = "";
+
+    function addButton(label, targetPage, active = false, disabled = false){
+        const btn = document.createElement("button");
+
+        btn.type = "button";
+        btn.className = "page-btn" + (active ? " active" : "");
+        btn.textContent = label;
+        btn.disabled = disabled;
+
+        if(!disabled && !active){
+            btn.addEventListener("click", () => {
+                loadStats(targetPage, true);
+            });
+        }
+
+        nav.appendChild(btn);
+    }
+
+    addButton("이전", page - 1, false, page <= 1);
+
+    let start = Math.max(1, page - 2);
+    let end = Math.min(totalPages, start + 4);
+
+    if(end - start < 4){
+        start = Math.max(1, end - 4);
+    }
+
+    for(let p = start; p <= end; p++){
+        addButton(String(p), p, p === page, false);
+    }
+
+    addButton("다음", page + 1, false, page >= totalPages);
+}
+
+async function loadStats(page = currentVisitPage, fromPaging = false){
     const key = $("adminKey").value.trim();
     const days = $("days").value;
     const status = $("status");
@@ -534,7 +638,7 @@ async function loadStats(){
 
     try{
         const response = await fetch(
-            `${API_BASE}/api/admin/stats?days=${encodeURIComponent(days)}`,
+            `${API_BASE}/api/admin/stats?days=${encodeURIComponent(days)}&visit_page=${encodeURIComponent(page)}&visit_limit=${VISIT_PAGE_SIZE}`,
             {
                 headers:{
                     "X-Admin-Key": key,
@@ -554,18 +658,18 @@ async function loadStats(){
 
         const s = data.summary || {};
 
-        $("visits").textContent = s.visits ?? 0;
         $("unique").textContent = s.unique_visitors ?? 0;
         $("consultations").textContent = s.consultations ?? 0;
         $("conversion").textContent = `${s.conversion_rate ?? 0}%`;
         $("avgDuration").textContent = fmtDuration(s.avg_duration ?? 0);
-        $("adVisits").textContent = s.ad_visits ?? 0;
+        $("adVisits").textContent = s.ad_visitors ?? 0;
 
         renderMetricList("sources", data.sources);
         renderMetricList("devices", data.devices);
         renderDaily(data.daily);
         renderConsultations(data.recent_consultations);
         renderVisits(data.recent_visits);
+        renderVisitPagination(data.visit_pagination);
 
         $("generatedAt").textContent =
             `갱신 ${shortTime(data.generated_at)}`;
@@ -581,9 +685,16 @@ async function loadStats(){
     }
 }
 
-$("loadBtn").addEventListener("click", loadStats);
+$("loadBtn").addEventListener("click", () => {
+    currentVisitPage = 1;
+    loadStats(1, false);
+});
+
+$("days").addEventListener("change", () => {
+    currentVisitPage = 1;
+});
 $("adminKey").addEventListener("keydown", e => {
-    if(e.key === "Enter") loadStats();
+    if(e.key === "Enter"){ currentVisitPage = 1; loadStats(1, false); }
 });
 
 const savedKey = localStorage.getItem("a365_admin_key");
@@ -593,13 +704,13 @@ if(savedKey) $("adminKey").value = savedKey;
 if(savedDays) $("days").value = savedDays;
 
 if(savedKey){
-    loadStats();
+    loadStats(1, false);
 }
 
 // 관리자 화면을 켜둔 경우 30초마다 자동 갱신
 setInterval(() => {
     if($("adminKey").value.trim()){
-        loadStats();
+        loadStats(currentVisitPage, true);
     }
 }, 30000);
 </script>
