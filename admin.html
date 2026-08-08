@@ -1,406 +1,368 @@
-<section class="cards">
-
-  <div class="card">
-    <div class="label">방문 횟수</div>
-    <div id="visits" class="value">0</div>
-    <small>새로고침 포함</small>
-  </div>
-
-  <div class="card">
-    <div class="label">고유 방문자</div>
-    <div id="unique" class="value">0</div>
-    <small>IP 기준</small>
-  </div>
-
-  <div class="card">
-    <div class="label">상담 접수</div>
-    <div id="consultations" class="value">0</div>
-    <small>중복 제외 저장 건수</small>
-  </div>
-
-  <div class="card">
-    <div class="label">전환율</div>
-    <div id="conversion" class="value">0%</div>
-    <small>상담 ÷ 방문</small>
-  </div>
-
-</section>
-
-
-<section class="grid">
-
-  <div class="panel">
-    <h3>유입 경로</h3>
-    <div id="sources"></div>
-  </div>
-
-  <div class="panel">
-    <h3>접속 기기</h3>
-    <div id="devices"></div>
-  </div>
-
-</section>
-
-
-<section class="panel full">
-
-  <div class="panel-head">
-    <div>
-      <h3>날짜별 추이</h3>
-      <p class="panel-desc">
-        날짜별 방문 및 상담 접수 현황
-      </p>
-    </div>
-  </div>
-
-  <div id="daily" class="daily"></div>
-
-  <div class="legend">
-    <span class="dot"></span>
-    방문
-
-    <span class="dot red"></span>
-    상담
-  </div>
-
-</section>
-
-
-<section class="panel full">
-
-  <div class="panel-head">
-
-    <div>
-      <h3>최근 상담 접수</h3>
-
-      <p class="panel-desc">
-        최근 저장된 장례 상담 접수 내역
-      </p>
-    </div>
-
-  </div>
-
-
-  <div class="table-wrap">
-
-    <table class="admin-table">
-
-      <thead>
-        <tr>
-          <th>시간</th>
-          <th>보호자</th>
-          <th>연락처</th>
-          <th>임종상태</th>
-          <th>장례형태</th>
-          <th>위치</th>
-          <th>SMS</th>
-        </tr>
-      </thead>
-
-      <tbody id="consultTable"></tbody>
-
-    </table>
-
-  </div>
-
-</section>
-
-
-<section class="panel full">
-
-  <div class="panel-head">
-
-    <div>
-
-      <h3>최근 방문 기록</h3>
-
-      <p class="panel-desc">
-        유입경로 · 광고 · 검색어 · 체류시간 분석
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <div class="table-wrap">
-
-    <table class="admin-table visit-table">
-
-      <thead>
-
-        <tr>
-
-          <th>시간</th>
-
-          <th>유입</th>
-
-          <th>광고</th>
-
-          <th>검색어</th>
-
-          <th>기기</th>
-
-          <th>페이지</th>
-
-          <th>체류시간</th>
-
-          <th>IP</th>
-
-          <th>화면</th>
-
-        </tr>
-
-      </thead>
-
-
-      <tbody id="visitTable"></tbody>
-
-    </table>
-
-  </div>
-
-</section>
-
-
-<p id="status" class="status"></p>
-
-
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>안심365 관리자 대시보드</title>
 <style>
-
-/* =========================================
-   관리자 공통 테이블
-========================================= */
-
+:root{
+    --navy:#0f243e;
+    --navy2:#14345a;
+    --gold:#b89b5e;
+    --bg:#f4f6f8;
+    --panel:#ffffff;
+    --line:#e5e9ef;
+    --text:#1f2937;
+    --muted:#7b8794;
+    --red:#9f2d2d;
+    --green:#216e4e;
+}
+*{box-sizing:border-box}
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo",sans-serif;
+}
+.wrap{
+    width:min(1500px,calc(100% - 32px));
+    margin:0 auto;
+    padding:28px 0 50px;
+}
+.topbar{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:22px;
+}
+.brand h1{
+    margin:0;
+    color:var(--navy);
+    font-size:25px;
+}
+.brand p{
+    margin:6px 0 0;
+    color:var(--muted);
+    font-size:13px;
+}
+.controls{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+.controls input,
+.controls select,
+.controls button{
+    height:40px;
+    border:1px solid var(--line);
+    border-radius:9px;
+    background:#fff;
+    padding:0 12px;
+    font:inherit;
+}
+.controls input{width:220px}
+.controls button{
+    border-color:var(--navy2);
+    background:var(--navy2);
+    color:#fff;
+    font-weight:800;
+    cursor:pointer;
+}
+.cards{
+    display:grid;
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    gap:12px;
+    margin-bottom:12px;
+}
+.card,.panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    box-shadow:0 3px 14px rgba(15,36,62,.04);
+}
+.card{
+    padding:20px;
+}
+.card .label{
+    color:var(--muted);
+    font-size:12px;
+    font-weight:700;
+}
+.card .value{
+    margin-top:8px;
+    color:var(--navy);
+    font-size:28px;
+    font-weight:900;
+}
+.card small{
+    display:block;
+    margin-top:5px;
+    color:#9aa3ad;
+    font-size:11px;
+}
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:12px;
+}
+.panel{
+    padding:20px;
+    margin-bottom:12px;
+}
+.panel.full{width:100%}
+.panel-head{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:14px;
+}
+.panel h3{
+    margin:0;
+    color:var(--navy);
+    font-size:16px;
+}
+.panel-desc{
+    margin:5px 0 0;
+    color:var(--muted);
+    font-size:12px;
+}
+.metric-list{
+    display:grid;
+    gap:10px;
+}
+.metric-row{
+    display:grid;
+    grid-template-columns:130px 1fr 55px;
+    align-items:center;
+    gap:10px;
+    font-size:13px;
+}
+.metric-bar{
+    height:9px;
+    overflow:hidden;
+    border-radius:20px;
+    background:#eef1f4;
+}
+.metric-bar span{
+    display:block;
+    height:100%;
+    border-radius:20px;
+    background:var(--navy2);
+}
+.metric-count{
+    text-align:right;
+    font-weight:800;
+}
+.daily{
+    display:grid;
+    gap:9px;
+}
+.day-row{
+    display:grid;
+    grid-template-columns:100px 1fr 90px;
+    align-items:center;
+    gap:12px;
+    font-size:12px;
+}
+.day-bars{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    height:18px;
+}
+.day-visit,.day-consult{
+    height:9px;
+    min-width:2px;
+    border-radius:10px;
+}
+.day-visit{background:var(--navy2)}
+.day-consult{background:var(--red)}
+.day-num{
+    text-align:right;
+    color:var(--muted);
+}
+.legend{
+    margin-top:14px;
+    color:var(--muted);
+    font-size:11px;
+}
+.dot{
+    display:inline-block;
+    width:8px;height:8px;
+    margin:0 5px 0 12px;
+    border-radius:50%;
+    background:var(--navy2);
+}
+.dot:first-child{margin-left:0}
+.dot.red{background:var(--red)}
+.table-wrap{
+    width:100%;
+    overflow-x:auto;
+}
 .admin-table{
     width:100%;
     border-collapse:collapse;
 }
-
 .admin-table th,
 .admin-table td{
-    padding:12px 11px;
-
-    border-bottom:1px solid #e9edf2;
-
+    padding:11px 10px;
+    border-bottom:1px solid var(--line);
     text-align:left;
-
+    white-space:nowrap;
     vertical-align:middle;
-
-    white-space:nowrap;
+    font-size:12px;
 }
-
-
 .admin-table th{
-    background:#f6f8fb;
-
-    color:#475569;
-
-    font-size:13px;
-
-    font-weight:700;
-}
-
-
-.admin-table td{
-    color:#1f2937;
-
-    font-size:13px;
-}
-
-
-.admin-table tbody tr{
-    transition:background .15s ease;
-}
-
-
-.admin-table tbody tr:hover{
-    background:#fafbfd;
-}
-
-
-/* =========================================
-   패널 제목
-========================================= */
-
-.panel-head{
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:12px;
-
-    margin-bottom:14px;
-}
-
-
-.panel-head h3{
-    margin:0;
-}
-
-
-.panel-desc{
-    margin:4px 0 0;
-
-    color:#8a94a3;
-
-    font-size:12px;
-}
-
-
-/* =========================================
-   방문기록
-========================================= */
-
-.visit-source{
-    font-weight:700;
-}
-
-
-.visit-ad{
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    min-width:52px;
-
-    padding:4px 8px;
-
-    border-radius:6px;
-
-    background:#eef3f8;
-
-    color:#14345a;
-
-    font-size:12px;
-
-    font-weight:700;
-}
-
-
-.visit-keyword{
-    max-width:190px;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
-}
-
-
-.visit-duration{
-    font-weight:700;
-
-    color:#14345a;
-}
-
-
-.visit-duration.short{
-    opacity:.55;
-}
-
-
-.visit-duration.long{
+    position:sticky;
+    top:0;
+    background:#f7f9fb;
+    color:#566270;
     font-weight:800;
 }
-
-
-/* =========================================
-   테이블 스크롤
-========================================= */
-
-.table-wrap{
-    width:100%;
-
-    overflow-x:auto;
+.admin-table tbody tr:hover{background:#fafbfd}
+.visit-ad{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:20px;
+    background:#edf2f7;
+    color:var(--navy2);
+    font-weight:800;
 }
-
-
-/* =========================================
-   모바일
-========================================= */
-
-@media(max-width:900px){
-
-    .admin-table{
-        min-width:1050px;
-    }
-
-    .panel-head{
-        flex-direction:column;
-
-        align-items:flex-start;
-    }
-
+.keyword{
+    max-width:230px;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
-
+.duration{
+    color:var(--navy2);
+    font-weight:800;
+}
+.duration.short{opacity:.55}
+.duration.long{color:var(--green)}
+.sms-ok{color:var(--green);font-weight:800}
+.sms-fail{color:var(--red);font-weight:800}
+.status{
+    min-height:20px;
+    margin:8px 2px;
+    color:var(--muted);
+    font-size:12px;
+}
+.status.error{color:var(--red);font-weight:700}
+.updated{
+    color:var(--muted);
+    font-size:11px;
+}
+.empty{
+    padding:28px !important;
+    text-align:center !important;
+    color:var(--muted);
+}
+@media(max-width:1100px){
+    .cards{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:760px){
+    .wrap{width:min(100% - 20px,1500px);padding-top:16px}
+    .topbar{align-items:flex-start;flex-direction:column}
+    .controls{width:100%}
+    .controls input{flex:1;min-width:170px}
+    .cards{grid-template-columns:repeat(2,1fr)}
+    .grid{grid-template-columns:1fr}
+    .metric-row{grid-template-columns:90px 1fr 45px}
+    .admin-table{min-width:1050px}
+}
 </style>
+</head>
+<body>
+<div class="wrap">
 
+    <div class="topbar">
+        <div class="brand">
+            <h1>안심365 관리자 대시보드</h1>
+            <p>방문 · 광고유입 · 검색어 · 체류시간 · 상담전환</p>
+        </div>
+
+        <div class="controls">
+            <input id="adminKey" type="password" placeholder="관리자 비밀번호">
+            <select id="days">
+                <option value="1">오늘</option>
+                <option value="3">최근 3일</option>
+                <option value="7">최근 7일</option>
+                <option value="14">최근 14일</option>
+                <option value="30">최근 30일</option>
+            </select>
+            <button id="loadBtn" type="button">조회</button>
+        </div>
+    </div>
+
+    <section class="cards">
+        <div class="card"><div class="label">방문 횟수</div><div id="visits" class="value">0</div><small>페이지뷰 기준</small></div>
+        <div class="card"><div class="label">고유 방문자</div><div id="unique" class="value">0</div><small>IP 기준</small></div>
+        <div class="card"><div class="label">상담 접수</div><div id="consultations" class="value">0</div><small>중복 제외 저장 건수</small></div>
+        <div class="card"><div class="label">전환율</div><div id="conversion" class="value">0%</div><small>상담 ÷ 방문</small></div>
+        <div class="card"><div class="label">평균 체류시간</div><div id="avgDuration" class="value">0초</div><small>페이지 체류시간 평균</small></div>
+        <div class="card"><div class="label">광고 유입</div><div id="adVisits" class="value">0</div><small>광고값 식별 방문</small></div>
+    </section>
+
+    <section class="grid">
+        <div class="panel">
+            <div class="panel-head"><div><h3>유입 경로</h3><p class="panel-desc">네이버 · 직접방문 · 기타</p></div></div>
+            <div id="sources" class="metric-list"></div>
+        </div>
+        <div class="panel">
+            <div class="panel-head"><div><h3>접속 기기</h3><p class="panel-desc">PC / 모바일</p></div></div>
+            <div id="devices" class="metric-list"></div>
+        </div>
+    </section>
+
+    <section class="panel full">
+        <div class="panel-head">
+            <div><h3>날짜별 추이</h3><p class="panel-desc">방문 및 상담 접수 현황</p></div>
+            <span id="generatedAt" class="updated"></span>
+        </div>
+        <div id="daily" class="daily"></div>
+        <div class="legend"><span class="dot"></span>방문 <span class="dot red"></span>상담</div>
+    </section>
+
+    <section class="panel full">
+        <div class="panel-head"><div><h3>최근 상담 접수</h3><p class="panel-desc">광고/검색어까지 함께 확인</p></div></div>
+        <div class="table-wrap">
+            <table class="admin-table">
+                <thead><tr>
+                    <th>시간</th><th>보호자</th><th>연락처</th><th>임종상태</th>
+                    <th>장례형태</th><th>위치</th><th>유입</th><th>광고</th><th>검색어</th><th>SMS</th>
+                </tr></thead>
+                <tbody id="consultTable"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="panel full">
+        <div class="panel-head"><div><h3>최근 방문 기록</h3><p class="panel-desc">유입경로 · 광고 · 검색어 · 체류시간</p></div></div>
+        <div class="table-wrap">
+            <table class="admin-table">
+                <thead><tr>
+                    <th>시간</th><th>유입</th><th>광고</th><th>검색어</th><th>캠페인</th>
+                    <th>기기</th><th>페이지</th><th>체류시간</th><th>IP</th><th>화면</th>
+                </tr></thead>
+                <tbody id="visitTable"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <p id="status" class="status"></p>
+</div>
 
 <script>
+const API_BASE = "https://www.odreai.com";
 
-/* =========================================
-   체류시간 표시
-========================================= */
+const $ = id => document.getElementById(id);
 
-function formatDuration(seconds){
-
-    seconds = Number(seconds || 0);
-
-    if(seconds <= 0){
-        return "-";
-    }
-
-    if(seconds < 60){
-        return `${seconds}초`;
-    }
-
-    const min =
-        Math.floor(seconds / 60);
-
-    const sec =
-        seconds % 60;
-
-    return `${min}분 ${String(sec).padStart(2,"0")}초`;
-}
-
-
-/* =========================================
-   체류시간 CSS 클래스
-========================================= */
-
-function durationClass(seconds){
-
-    seconds =
-        Number(seconds || 0);
-
-    if(seconds <= 0){
-        return "";
-    }
-
-    if(seconds < 10){
-        return "short";
-    }
-
-    if(seconds >= 60){
-        return "long";
-    }
-
-    return "";
-}
-
-
-/* =========================================
-   안전한 HTML 출력
-========================================= */
-
-function escapeHtml(value){
-
+function esc(value){
     return String(value ?? "")
         .replaceAll("&","&amp;")
         .replaceAll("<","&lt;")
@@ -409,359 +371,237 @@ function escapeHtml(value){
         .replaceAll("'","&#039;");
 }
 
+function fmtDuration(value){
+    const seconds = Math.max(0, Math.round(Number(value || 0)));
+    if(seconds < 60) return `${seconds}초`;
 
-/* =========================================
-   유입 표시 정리
-========================================= */
+    const min = Math.floor(seconds / 60);
+    const sec = seconds % 60;
 
-function getSourceName(v){
-
-    if(v.source){
-        return v.source;
+    if(min < 60){
+        return `${min}분 ${String(sec).padStart(2,"0")}초`;
     }
 
-    const ref =
-        String(v.referrer || "").toLowerCase();
-
-    if(ref.includes("naver")){
-        return "네이버";
-    }
-
-    if(ref.includes("google")){
-        return "구글";
-    }
-
-    if(ref.includes("daum")){
-        return "다음";
-    }
-
-    if(ref.includes("kakao")){
-        return "카카오";
-    }
-
-    if(ref){
-        return "외부";
-    }
-
-    return "직접";
+    const hour = Math.floor(min / 60);
+    const remainMin = min % 60;
+    return `${hour}시간 ${remainMin}분`;
 }
 
+function durationClass(seconds){
+    seconds = Number(seconds || 0);
+    if(seconds < 10) return "short";
+    if(seconds >= 60) return "long";
+    return "";
+}
 
-/* =========================================
-   방문기록 렌더링
-========================================= */
+function shortTime(value){
+    if(!value) return "-";
+    try{
+        const d = new Date(value);
+        return d.toLocaleString("ko-KR", {
+            month:"2-digit", day:"2-digit",
+            hour:"2-digit", minute:"2-digit", second:"2-digit",
+            hour12:false
+        });
+    }catch(e){
+        return value;
+    }
+}
 
-function renderVisits(visits){
+function renderMetricList(targetId, data){
+    const target = $(targetId);
+    const entries = Object.entries(data || {}).sort((a,b) => b[1] - a[1]);
 
-    const tbody =
-        document.getElementById("visitTable");
-
-    if(!tbody){
+    if(!entries.length){
+        target.innerHTML = '<div class="empty">데이터 없음</div>';
         return;
     }
 
-    tbody.innerHTML = "";
+    const max = Math.max(...entries.map(x => Number(x[1]) || 0), 1);
 
+    target.innerHTML = entries.map(([name,count]) => {
+        const width = Math.max(2, Math.round((Number(count) / max) * 100));
+        return `
+            <div class="metric-row">
+                <div>${esc(name)}</div>
+                <div class="metric-bar"><span style="width:${width}%"></span></div>
+                <div class="metric-count">${esc(count)}</div>
+            </div>
+        `;
+    }).join("");
+}
 
-    if(!Array.isArray(visits) || visits.length === 0){
+function renderDaily(rows){
+    const target = $("daily");
 
-        tbody.innerHTML = `
+    if(!Array.isArray(rows) || !rows.length){
+        target.innerHTML = '<div class="empty">데이터 없음</div>';
+        return;
+    }
 
+    const maxVisit = Math.max(...rows.map(x => Number(x.visits) || 0), 1);
+
+    target.innerHTML = rows.map(x => {
+        const vWidth = Math.max(2, Math.round((Number(x.visits || 0) / maxVisit) * 100));
+        const cWidth = Math.max(2, Math.round((Number(x.consultations || 0) / maxVisit) * 100));
+
+        return `
+            <div class="day-row">
+                <div>${esc(x.date)}</div>
+                <div class="day-bars">
+                    <div class="day-visit" style="width:${vWidth}%"></div>
+                    ${Number(x.consultations || 0) ? `<div class="day-consult" style="width:${cWidth}%"></div>` : ""}
+                </div>
+                <div class="day-num">${esc(x.visits)} / 상담 ${esc(x.consultations)}</div>
+            </div>
+        `;
+    }).join("");
+}
+
+function renderConsultations(rows){
+    const tbody = $("consultTable");
+
+    if(!Array.isArray(rows) || !rows.length){
+        tbody.innerHTML = '<tr><td colspan="10" class="empty">상담 접수 기록이 없습니다.</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = rows.map(v => {
+        const sms = String(v.sms_status || "");
+        const smsClass = sms.includes("성공") ? "sms-ok" : (sms.includes("실패") ? "sms-fail" : "");
+
+        return `
             <tr>
-
-                <td colspan="9"
-                    style="
-                        text-align:center;
-                        padding:28px;
-                        color:#8a94a3;
-                    ">
-
-                    방문 기록이 없습니다.
-
-                </td>
-
+                <td>${esc(shortTime(v.received_at))}</td>
+                <td>${esc(v.guardian_name || "-")}</td>
+                <td>${esc(v.phone || "-")}</td>
+                <td>${esc(v.death_status || "-")}</td>
+                <td>${esc(v.funeral_type || "-")}</td>
+                <td>${esc(v.address || "-")}</td>
+                <td>${esc(v.traffic_source || "-")}</td>
+                <td>${v.ad ? `<span class="visit-ad">${esc(v.ad)}</span>` : "-"}</td>
+                <td class="keyword" title="${esc(v.keyword || "")}">${esc(v.keyword || "-")}</td>
+                <td class="${smsClass}">${esc(sms || "-")}</td>
             </tr>
-
         `;
+    }).join("");
+}
 
+function renderVisits(rows){
+    const tbody = $("visitTable");
+
+    if(!Array.isArray(rows) || !rows.length){
+        tbody.innerHTML = '<tr><td colspan="10" class="empty">방문 기록이 없습니다.</td></tr>';
         return;
     }
 
-
-    visits.forEach(v => {
-
-        const tr =
-            document.createElement("tr");
-
-
-        const duration =
-            Number(v.duration || v.durationSeconds || 0);
-
-
-        const source =
-            getSourceName(v);
-
-
-        const ad =
-            v.ad ||
-            v.adType ||
-            v.campaign ||
-            "";
-
-
-        const keyword =
-            v.keyword ||
-            v.searchKeyword ||
-            v.query ||
-            "";
-
-
-        const device =
-            v.device ||
-            "-";
-
-
-        const page =
-            v.page ||
-            "/";
-
-
-        const ip =
-            v.ip ||
-            "-";
-
-
-        const screen =
-            v.screen ||
-            "-";
-
-
-        const time =
-            v.time ||
-            v.visitedAt ||
-            "-";
-
-
-        tr.innerHTML = `
-
-            <td>
-                ${escapeHtml(time)}
-            </td>
-
-
-            <td>
-                <span class="visit-source">
-                    ${escapeHtml(source)}
-                </span>
-            </td>
-
-
-            <td>
-
-                ${
-                    ad
-
-                    ? `<span class="visit-ad">
-                        ${escapeHtml(ad)}
-                       </span>`
-
-                    : "-"
-                }
-
-            </td>
-
-
-            <td
-                class="visit-keyword"
-                title="${escapeHtml(keyword)}"
-            >
-
-                ${keyword
-                    ? escapeHtml(keyword)
-                    : "-"
-                }
-
-            </td>
-
-
-            <td>
-                ${escapeHtml(device)}
-            </td>
-
-
-            <td>
-                ${escapeHtml(page)}
-            </td>
-
-
-            <td>
-
-                <span class="
-                    visit-duration
-                    ${durationClass(duration)}
-                ">
-
-                    ${formatDuration(duration)}
-
-                </span>
-
-            </td>
-
-
-            <td>
-                ${escapeHtml(ip)}
-            </td>
-
-
-            <td>
-                ${escapeHtml(screen)}
-            </td>
-
-        `;
-
-
-        tbody.appendChild(tr);
-
-    });
-
+    tbody.innerHTML = rows.map(v => `
+        <tr>
+            <td>${esc(shortTime(v.server_time))}</td>
+            <td>${esc(v.source || "-")}</td>
+            <td>${v.ad ? `<span class="visit-ad">${esc(v.ad)}</span>` : "-"}</td>
+            <td class="keyword" title="${esc(v.keyword || "")}">${esc(v.keyword || "-")}</td>
+            <td class="keyword" title="${esc(v.campaign || "")}">${esc(v.campaign || "-")}</td>
+            <td>${esc(v.device || "-")}</td>
+            <td>${esc(v.page || "/")}</td>
+            <td><span class="duration ${durationClass(v.duration)}">${esc(fmtDuration(v.duration))}</span></td>
+            <td>${esc(v.ip || "-")}</td>
+            <td>${esc(v.screen || "-")}</td>
+        </tr>
+    `).join("");
 }
 
+async function loadStats(){
+    const key = $("adminKey").value.trim();
+    const days = $("days").value;
+    const status = $("status");
+    const btn = $("loadBtn");
 
-/* =========================================
-   체류시간 측정
-========================================= */
+    status.className = "status";
+    status.textContent = "";
 
-const visitPageStartedAt =
-    Date.now();
+    if(!key){
+        status.className = "status error";
+        status.textContent = "관리자 비밀번호를 입력하세요.";
+        return;
+    }
 
+    localStorage.setItem("a365_admin_key", key);
+    localStorage.setItem("a365_admin_days", days);
 
-function getCurrentVisitDuration(){
-
-    return Math.max(
-
-        1,
-
-        Math.floor(
-            (Date.now() - visitPageStartedAt) / 1000
-        )
-
-    );
-
-}
-
-
-/* =========================================
-   URL 광고정보 추출
-========================================= */
-
-function getTrafficParams(){
-
-    const params =
-        new URLSearchParams(
-            location.search
-        );
-
-
-    return {
-
-        utmSource:
-            params.get("utm_source") || "",
-
-        utmMedium:
-            params.get("utm_medium") || "",
-
-        utmCampaign:
-            params.get("utm_campaign") || "",
-
-        keyword:
-            params.get("utm_term") ||
-            params.get("keyword") ||
-            params.get("query") ||
-            "",
-
-        ad:
-            params.get("utm_medium") === "cpc"
-            ? "파워링크"
-            : ""
-
-    };
-
-}
-
-
-/* =========================================
-   페이지 종료 시 체류시간 전송
-========================================= */
-
-function sendVisitDuration(){
-
-    const traffic =
-        getTrafficParams();
-
-
-    const payload = {
-
-        page:
-            location.pathname,
-
-        referrer:
-            document.referrer || "",
-
-        duration:
-            getCurrentVisitDuration(),
-
-        keyword:
-            traffic.keyword,
-
-        ad:
-            traffic.ad,
-
-        utmSource:
-            traffic.utmSource,
-
-        utmMedium:
-            traffic.utmMedium,
-
-        utmCampaign:
-            traffic.utmCampaign
-
-    };
-
-
-    const body =
-        JSON.stringify(payload);
-
+    btn.disabled = true;
+    btn.textContent = "조회 중...";
 
     try{
-
-        navigator.sendBeacon(
-
-            "https://api.odreai.kr/api/visit-duration",
-
-            new Blob(
-
-                [body],
-
-                {
-                    type:"application/json"
-                }
-
-            )
-
+        const response = await fetch(
+            `${API_BASE}/api/admin/stats?days=${encodeURIComponent(days)}`,
+            {
+                headers:{
+                    "X-Admin-Key": key,
+                    "Accept":"application/json"
+                },
+                cache:"no-store"
+            }
         );
 
-    }catch(e){
+        const data = await response.json().catch(() => null);
 
-        /* 종료 시 오류는 무시 */
+        if(!response.ok){
+            throw new Error(
+                data?.detail || `HTTP ${response.status}`
+            );
+        }
 
+        const s = data.summary || {};
+
+        $("visits").textContent = s.visits ?? 0;
+        $("unique").textContent = s.unique_visitors ?? 0;
+        $("consultations").textContent = s.consultations ?? 0;
+        $("conversion").textContent = `${s.conversion_rate ?? 0}%`;
+        $("avgDuration").textContent = fmtDuration(s.avg_duration ?? 0);
+        $("adVisits").textContent = s.ad_visits ?? 0;
+
+        renderMetricList("sources", data.sources);
+        renderMetricList("devices", data.devices);
+        renderDaily(data.daily);
+        renderConsultations(data.recent_consultations);
+        renderVisits(data.recent_visits);
+
+        $("generatedAt").textContent =
+            `갱신 ${shortTime(data.generated_at)}`;
+
+        status.textContent = "정상 조회되었습니다.";
+
+    }catch(error){
+        status.className = "status error";
+        status.textContent = `조회 실패: ${error.message}`;
+    }finally{
+        btn.disabled = false;
+        btn.textContent = "조회";
     }
-
 }
 
+$("loadBtn").addEventListener("click", loadStats);
+$("adminKey").addEventListener("keydown", e => {
+    if(e.key === "Enter") loadStats();
+});
 
-window.addEventListener(
-    "pagehide",
-    sendVisitDuration
-);
+const savedKey = localStorage.getItem("a365_admin_key");
+const savedDays = localStorage.getItem("a365_admin_days");
 
+if(savedKey) $("adminKey").value = savedKey;
+if(savedDays) $("days").value = savedDays;
+
+if(savedKey){
+    loadStats();
+}
+
+// 관리자 화면을 켜둔 경우 30초마다 자동 갱신
+setInterval(() => {
+    if($("adminKey").value.trim()){
+        loadStats();
+    }
+}, 30000);
 </script>
+</body>
+</html>
