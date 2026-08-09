@@ -33,6 +33,11 @@
     .option-list{display:grid;gap:10px}.option-row{min-height:66px;padding:12px 15px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;border:1px solid var(--line);background:#fbfaf7}
     .option-row label{font-size:13px;font-weight:800}.option-row small{display:block;margin-top:5px;color:var(--muted);font-size:10px;line-height:1.5}.option-row input[type="number"]{width:82px;height:40px;padding:0 8px;border:1px solid #cfc8bb;background:#fff;text-align:center;font-weight:800}
     .option-row select{width:min(220px,42vw);height:42px;padding:0 34px 0 12px;border:1px solid #cfc8bb;background:#fff;color:var(--navy);font-size:12px;font-weight:800}
+    .quantity-control{display:grid;grid-template-columns:44px 58px 44px;height:44px;border:1px solid #cfc8bb;background:#fff}
+    .quantity-control button{border:0;background:#f3efe6;color:var(--navy);font-size:22px;font-weight:900;line-height:1}
+    .quantity-control button:disabled{color:#bbb6ac;cursor:not-allowed}
+    .quantity-control input[type="number"]{width:58px;height:42px;padding:0;border:0;border-left:1px solid #ddd6c9;border-right:1px solid #ddd6c9;background:#fff;font-size:17px;-moz-appearance:textfield}
+    .quantity-control input::-webkit-outer-spin-button,.quantity-control input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
     .check{display:flex;align-items:flex-start;gap:10px}.check input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--navy)}
     .benefit{padding:18px;border:1px solid #dac698;background:#fff9ea}.benefit.is-disabled{display:none}.benefit label{font-weight:900}.benefit strong{display:block;margin-top:7px;color:var(--danger);font-size:14px}.benefit small{display:block;margin-top:8px;color:#7c6a46;font-size:10px;line-height:1.6}
     .consult-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.consult{padding:13px;border:1px solid var(--line);background:#fbfaf7;font-size:12px;font-weight:700}.consult input{margin-right:7px;accent-color:var(--navy)}
@@ -78,8 +83,8 @@
         <p class="step">STEP 03</p><h2>상복 수량 변경</h2>
         <p class="help">상품 기본 제공 수량을 초과한 수량만 추가 계산됩니다. 기본 수량을 줄여도 감액되지 않습니다.</p>
         <div class="option-list">
-          <div class="option-row"><div><label for="male">남성 상복 총수량</label><small id="maleInfo"></small></div><input id="male" type="number" min="0" max="30" value="0"></div>
-          <div class="option-row"><div><label for="female">여성 상복 총수량</label><small id="femaleInfo"></small></div><input id="female" type="number" min="0" max="30" value="0"></div>
+          <div class="option-row"><div><label for="male">남성 상복 총수량</label><small id="maleInfo"></small></div><div class="quantity-control"><button type="button" data-step="-1" data-target="male" aria-label="남성 상복 한 벌 줄이기">−</button><input id="male" type="number" min="0" max="30" value="0" readonly><button type="button" data-step="1" data-target="male" aria-label="남성 상복 한 벌 늘리기">+</button></div></div>
+          <div class="option-row"><div><label for="female">여성 상복 총수량</label><small id="femaleInfo"></small></div><div class="quantity-control"><button type="button" data-step="-1" data-target="female" aria-label="여성 상복 한 벌 줄이기">−</button><input id="female" type="number" min="0" max="30" value="0" readonly><button type="button" data-step="1" data-target="female" aria-label="여성 상복 한 벌 늘리기">+</button></div></div>
         </div>
       </section>
 
@@ -155,6 +160,8 @@
       selected=key;
       const p=PRODUCTS[key];
       $("priority").checked=false;
+      $("male").min=p.male;
+      $("female").min=p.female;
       $("male").value=p.male;
       $("female").value=p.female;
       Object.keys(UPGRADE_LABELS).forEach(id=>$(id).value="0");
@@ -191,6 +198,10 @@
       if(!eligible)$("priority").checked=false;
       $("maleInfo").textContent=c.p.male?`기본 ${c.p.male}벌 포함 · 초과 1벌당 7만원`:"기본 제공 없음 · 1벌당 7만원";
       $("femaleInfo").textContent=c.p.female?`기본 ${c.p.female}벌 포함 · 초과 1벌당 8만원`:"기본 제공 없음 · 1벌당 8만원";
+      document.querySelectorAll("[data-step]").forEach(button=>{
+        const input=$(button.dataset.target),step=Number(button.dataset.step),value=Number(input.value);
+        button.disabled=step<0?value<=Number(input.min):value>=Number(input.max);
+      });
       $("sumProduct").textContent=c.p.name;
       $("sumBase").textContent=won(c.p.price);
       $("discountRow").style.display=c.discount?"flex":"none";
@@ -220,6 +231,11 @@
       $("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),1700);
     }
     selected=initialProduct();renderProducts();selectProduct(selected);
+    document.querySelectorAll("[data-step]").forEach(button=>button.addEventListener("click",()=>{
+      const input=$(button.dataset.target),step=Number(button.dataset.step);
+      const next=Math.min(Number(input.max),Math.max(Number(input.min),Number(input.value)+step));
+      input.value=next;render();
+    }));
     ["priority","male","female","shroud","urn","flowers","makeup","limousine","religious"].forEach(id=>$(id).addEventListener("input",render));
     document.querySelectorAll("#consultOptions input").forEach(x=>x.addEventListener("change",render));
     $("copyBtn").onclick=copySummary;$("printBtn").onclick=()=>window.print();
