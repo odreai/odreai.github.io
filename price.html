@@ -324,6 +324,13 @@
         grid-template-columns: repeat(4, 1fr);
         gap: 12px;
       }
+      .tier-grid[data-count="1"] {
+        grid-template-columns: minmax(280px, 380px);
+        justify-content: center;
+      }
+      .tier-grid[data-count="3"] {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
       .tier-grid button {
         min-height: 200px;
         padding: 26px 23px;
@@ -422,15 +429,50 @@
         margin-right: 8px;
         color: var(--gold2);
       }
+      .detail-notes {
+        grid-column: 1 / -1;
+        margin: 0;
+        padding: 24px 42px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        background: #061522;
+        list-style: none;
+      }
+      .detail-notes li {
+        position: relative;
+        padding-left: 19px;
+        color: #9faeb9;
+        font-size: 11px;
+        line-height: 1.75;
+      }
+      .detail-notes li + li {
+        margin-top: 7px;
+      }
+      .detail-notes li::before {
+        content: "※";
+        position: absolute;
+        left: 0;
+        color: var(--gold2);
+      }
+      .detail-actions {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+      }
       .detail-cta {
-        padding: 28px;
+        padding: 18px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        text-align: center;
+      }
+      .detail-cta.estimate {
         background: var(--gold);
         color: var(--navy);
-        text-align: center;
+      }
+      .detail-cta.consult {
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+        background: var(--navy2);
+        color: #fff;
       }
       .detail-cta span {
         font-size: 12px;
@@ -720,13 +762,22 @@
         .tier-grid {
           grid-template-columns: 1fr 1fr;
         }
+        .tier-grid[data-count="1"] {
+          grid-template-columns: minmax(280px, 420px);
+        }
+        .tier-grid[data-count="3"] {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
         .package-detail {
           grid-template-columns: 1fr 1fr;
         }
-        .detail-cta {
+        .detail-actions {
           grid-column: 1/-1;
-          min-height: 90px;
+          min-height: 150px;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr;
         }
+        .detail-cta.consult {border-top:0;border-left:1px solid rgba(255,255,255,.18)}
         .benefit-layout {
           grid-template-columns: 1fr;
         }
@@ -795,6 +846,10 @@
           grid-template-columns: 1fr 1fr;
           gap: 8px;
         }
+        .tier-grid[data-count="1"],
+        .tier-grid[data-count="3"] {
+          grid-template-columns: 1fr;
+        }
         .tier-grid button {
           min-height: 180px;
           padding: 21px 16px;
@@ -809,6 +864,12 @@
         .package-detail {
           grid-template-columns: 1fr;
         }
+        .detail-actions {
+          grid-template-columns: 1fr;
+          grid-template-rows: 1fr 1fr;
+          min-height: 170px;
+        }
+        .detail-cta.consult {border-left:0;border-top:1px solid rgba(255,255,255,.18)}
         .detail-head,
         .detail-list {
           padding: 31px 25px;
@@ -931,7 +992,7 @@
           </div>
           <div class="trust-row">
             <span><b>24</b>시간 상담</span><span><b>5</b>개 지역</span
-            ><span><b>4</b>가지 맞춤 등급</span>
+            ><span><b>4</b>개 정찰 상품</span>
           </div>
         </div>
         <aside class="hero-panel">
@@ -1057,146 +1118,102 @@
     </nav>
     <script>
       const packages = {
-  noHall: {
-    label: "무빈소 장례",
-    description:
-      "빈소와 조문 절차를 생략하고 안치·입관·발인 중심으로 진행하는 합리적인 장례상품입니다.",
+        noHall: {
+          label: "무빈소 장례",
+          description:
+            "빈소와 조문객 접객 없이 안치·입관·발인·화장 중심으로 간결하게 진행합니다.",
+          tiers: [
+            {
+              name: "단일상품",
+              price: "99만원",
+              note: "안치부터 발인·화장까지 간결하게",
+              items: [
+                "장례지도사 전담 안내",
+                "관내 고인 운구 무료",
+                "화장용 관",
+                "화장용 수의",
+                "입관용품 일체",
+                "입관보조 인력 지원",
+                "입관 및 발인 진행",
+                "카니발·스타리아 발인차량 일부 지원",
+                "기본 유골함",
+                "화장장 예약 및 행정절차 안내",
+                "모바일 부고장 지원",
+              ],
+              notes: [
+                "장례식장 안치료·입관실 사용료, 화장장 사용료, 봉안시설 비용 및 발인차량 비용은 상품에 포함되지 않습니다.",
+                "관외 이동 및 추가 선택 품목은 별도 비용이 발생할 수 있으며, 상담 시 사전에 안내해 드립니다.",
+                "수의, 입관 꽃장식, 유골함 등은 유족의 요청에 따라 상위 품목으로 변경할 수 있습니다.",
+              ],
+            },
+          ],
+        },
 
-    tiers: [
-      {
-        name: "알뜰형",
-        price: "99만원",
-        note: "꼭 필요한 장례 절차 중심",
-        items: [
-          "전문 장례지도사 2명",
-          "기본 화장수의",
-          "화장용 관",
-          "염습 및 입관 진행",
-          "입관용품 일체",
-          "화장장 예약 및 장례행정 안내",
-          "모바일 부고장 제작",
-          "발인 운구차량 미지원",
-        ],
-      },
-      {
-        name: "실속형",
-        price: "159만원",
-        note: "입관과 발인 차량까지 한 번에",
-        items: [
-          "알뜰형 전체 구성",
-          "입관 보조인력 1명",
-          "고인 메이크업",
-          "기본 입관 꽃장식",
-          "기본 유골함 제공 (화장 시)",
-          "발인 운구차량 지원",
-          "카니발 또는 스타리아 장례차량",
-        ],
-      },
-      {
-        name: "고급형",
-        price: "219만원",
-        note: "고급 용품과 장례 리무진 지원",
-        items: [
-          "실속형 전체 구성",
-          "고급 화장수의",
-          "고급 입관 꽃장식",
-          "프리미엄 고인 메이크업",
-          "장례 리무진 지원",
-          "발인 및 화장장 이동 안내",
-        ],
-      },
-      {
-        name: "VIP형",
-        price: "299만원",
-        note: "고인을 위한 최고급 맞춤 의전",
-        items: [
-          "고급형 전체 구성",
-          "전담 장례지도사 배정",
-          "최고급 화장수의",
-          "최고급 입관 꽃장식",
-          "VIP 고인 메이크업",
-          "고급 유골함 제공 (화장 시)",
-          "장례 리무진 지원",
-          "종교 및 가족 요청 맞춤 의전",
-        ],
-      },
-    ],
-  },
-
-  hall: {
-    label: "빈소 장례",
-    description:
-      "무빈소 상품에 빈소 운영에 필요한 의전·상복·도우미 서비스를 추가한 상품입니다.",
-
-    tiers: [
-      {
-        name: "알뜰형",
-        price: "199만원",
-        note: "소규모 빈소 장례 기본 구성",
-        items: [
-          "무빈소 알뜰형 전체 구성",
-          "빈소 장례의전 진행",
-          "빈소용 기본 의전용품",
-          "현대식 상복 대여 지원",
-          "조문 및 발인 절차 안내",
-          "장례 도우미 총 30시간 지원",
-          "발인 운구차량 미지원",
-        ],
-      },
-      {
-        name: "실속형",
-        price: "279만원",
-        note: "가장 실용적인 빈소 장례 구성",
-        items: [
-          "무빈소 실속형 전체 구성",
-          "빈소 장례의전 진행",
-          "빈소용 기본 의전용품",
-          "현대식 상복 대여 지원",
-          "발인 운구차량 지원",
-          "카니발 또는 스타리아 장례차량",
-          "장례 도우미 총 45시간 지원",
-        ],
-      },
-      {
-        name: "고급형",
-        price: "369만원",
-        note: "고급 의전과 넉넉한 인력 지원",
-        items: [
-          "무빈소 고급형 전체 구성",
-          "고급 빈소 장례의전",
-          "고급 화장수의",
-          "고급 입관 꽃장식",
-          "현대식 상복 대여 지원",
-          "장례 리무진 지원",
-          "장례 도우미 총 55시간 지원",
-        ],
-      },
-      {
-        name: "VIP형",
-        price: "499만원",
-        note: "가족 상황에 맞춘 최고급 의전",
-        items: [
-          "무빈소 VIP형 전체 구성",
-          "전담 장례지도사 배정",
-          "VIP 빈소 장례의전",
-          "최고급 화장수의",
-          "최고급 입관 꽃장식",
-          "VIP 고인 메이크업",
-          "현대식 상복 대여 지원",
-          "장례 리무진 지원",
-          "장례 도우미 시간 무제한 지원",
-          "종교 및 가족 요청 맞춤 의전",
-        ],
-      },
-    ],
-  },
-};
+        hall: {
+          label: "빈소 장례",
+          description:
+            "조문 규모와 필요한 의전 수준에 따라 알뜰형·기본형·고급형 중 선택할 수 있습니다.",
+          tiers: [
+            {
+              name: "알뜰형",
+              price: "170만원",
+              note: "소규모 빈소 장례를 위한 합리적인 구성",
+              items: [
+                "전문 장례지도사 1명 · 3일 진행",
+                "입관 보조인력 1명",
+                "기본 화장수의 · 기본 화장용 관",
+                "입관용품 및 빈소용품 일체",
+                "기본 유골함",
+                "남성 상복 2벌 · 여성 상복 2벌",
+                "장례 도우미 총 18시간",
+                "카니발·스타리아 발인차량 지원",
+                "화장장 예약 및 장례행정 안내",
+                "입관꽃장식 미포함",
+              ],
+            },
+            {
+              name: "기본형",
+              price: "250만원",
+              note: "가장 실용적인 표준 빈소 장례 구성",
+              items: [
+                "전문 장례지도사 1명 · 3일 진행",
+                "입관 보조인력 1명",
+                "실속 화장수의 · 고급 화장용 관",
+                "입관꽃장식",
+                "입관용품 및 빈소용품 일체",
+                "고급 유골함",
+                "남성 상복 3벌 · 여성 상복 3벌",
+                "장례 도우미 총 35시간",
+                "카니발·스타리아 발인차량 지원",
+                "화장장 예약 및 장례행정 안내",
+              ],
+            },
+            {
+              name: "고급형",
+              price: "350만원",
+              note: "고급 의전과 넉넉한 인력을 갖춘 구성",
+              items: [
+                "전문 장례지도사 1명 · 3일 전담 진행",
+                "입관 보조인력 1명",
+                "고급 화장수의 · 최고급 화장용 관",
+                "고급 입관꽃장식",
+                "입관용품 및 빈소용품 일체",
+                "최고급 유골함",
+                "남성 상복 5벌 · 여성 상복 5벌",
+                "장례 도우미 총 50시간",
+                "장례 리무진 지원",
+                "화장장 예약 및 장례행정 안내",
+              ],
+            },
+          ],
+        },
+      };
       const benefits = {
         priority: {
           eyebrow: "SPECIAL SUPPORT",
           title: "기초생활수급자 · 국가유공자 특별우대",
           items: [
-            ["화장 장례 시", "장의용품 무료"],
+            ["무빈소 화장 장례 시", "20% 할인 · 99만원 → 79만 2천원"],
             ["협력 장례식장 이용 시", "분향실 사용료 50% 할인"],
           ],
           note: "적용 대상과 세부 조건은 상담 시 확인해 드립니다.",
@@ -1205,7 +1222,6 @@
           eyebrow: "CUSTOMER BENEFIT",
           title: "안심365 고객 특별혜택",
           items: [
-            ["화장 장례 시", "장의용품 50% 할인"],
             ["협력 장례식장 이용 시", "분향실 사용료 50% 할인"],
           ],
           note: "안심365 고객을 위한 장례 비용 지원 혜택입니다.",
@@ -1222,18 +1238,25 @@
       };
       let currentType = "noHall",
         currentTier = 0;
+      const estimateProducts = {
+        noHall: ["nohall"],
+        hall: ["budget", "basic", "premium"],
+      };
       function renderPackages() {
         const p = packages[currentType];
         document.getElementById("typeDescription").textContent = p.description;
-        document.getElementById("tierGrid").innerHTML = p.tiers
+        const tierGrid = document.getElementById("tierGrid");
+        tierGrid.dataset.count = p.tiers.length;
+        tierGrid.innerHTML = p.tiers
           .map(
             (x, i) =>
               `<button class="${i === currentTier ? "active" : ""}" data-tier="${i}"><span>0${i + 1}</span>${i === 1 ? "<i>추천</i>" : ""}<h3>${x.name}</h3><p>${x.price}</p><small>${x.note}</small></button>`,
           )
           .join("");
         const x = p.tiers[currentTier];
+        const estimateProduct = estimateProducts[currentType][currentTier];
         document.getElementById("packageDetail").innerHTML =
-          `<div class="detail-head"><p>${p.label} · ${x.name}</p><h3>${x.note}</h3><span class="detail-price">${x.price}</span></div><div class="detail-list"><p>상품 구성</p><ul>${x.items.map((y) => `<li><span>✓</span>${y}</li>`).join("")}</ul></div><a class="detail-cta" href="index.html#funeral-consultation"><span>24시간 상담접수</span><b>바로가기 →</b></a>`;
+          `<div class="detail-head"><p>${p.label} · ${x.name}</p><h3>${x.note}</h3><span class="detail-price">${x.price}</span></div><div class="detail-list"><p>상품 구성</p><ul>${x.items.map((y) => `<li><span>✓</span>${y}</li>`).join("")}</ul></div><div class="detail-actions"><a class="detail-cta estimate" href="estimate.html?product=${estimateProduct}"><span>선택상품 기준</span><b>예상견적 계산하기 →</b></a><a class="detail-cta consult" href="index.html#funeral-consultation"><span>24시간 상담접수</span><b>바로가기 →</b></a></div>${x.notes?.length ? `<ul class="detail-notes">${x.notes.map((note) => `<li>${note}</li>`).join("")}</ul>` : ""}`;
         document.querySelectorAll("[data-tier]").forEach(
           (b) =>
             (b.onclick = () => {
