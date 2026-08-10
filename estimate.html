@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#0f243e">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="shortcut icon" href="/favicon.ico">
-<title>장례비용 직접 견적 TEST13 | 안심365 장례서비스</title>
+<title>장례비용 직접 견적 | 안심365 장례서비스</title>
 <style>
 :root{
   --navy:#0f243e;
@@ -691,16 +691,6 @@ select{width:100%;min-height:48px}
 @media print{.estimate-modal{display:none!important}}
 </style>
 
-<style>
-/* 우측 3단 빠른 메뉴 - 메인 페이지와 동일 */
-.quick-sticky{position:fixed;right:max(8px,calc((100vw - 728px)/2 - 70px));top:50%;z-index:9998;width:56px;display:flex;flex-direction:column;gap:4px;transform:translateY(-50%)}
-.quick-sticky-item{min-height:68px;padding:6px 3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:2px solid #b89b5e;background:#14345a;color:#fff;text-align:center;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
-.quick-sticky-item:first-child{border-radius:14px 0 0 0}.quick-sticky-item:last-child{border-radius:0 0 0 14px}
-.quick-sticky-item:hover{background:#0f2948;transform:translateX(-2px);box-shadow:0 6px 16px rgba(0,0,0,.27)}.quick-sticky-item:active{transform:scale(.96)}
-.quick-sticky-icon{width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#b89b5e;color:#fff;font-size:13px;font-weight:900;line-height:1}
-.quick-sticky-text{color:#fff;font-size:10px;font-weight:900;line-height:1.2}.quick-sticky-item.is-apply{background:#254a70}.quick-sticky-item.is-call{background:#8a6a2f}
-@media(max-width:420px){.quick-sticky{right:4px;width:50px;gap:3px}.quick-sticky-item{min-height:62px;padding:5px 2px;gap:3px}.quick-sticky-icon{width:22px;height:22px;font-size:12px}.quick-sticky-text{font-size:9px}}
-</style>
 </head>
 <body>
 <header class="header">
@@ -1236,7 +1226,8 @@ function calc(){
 
   ids.urn.disabled = false;
   ids.urnConsult.style.display = (!isBurial && ids.urn.value === "consult") ? "block" : "none";
-  const urnTotal = isBurial ? 0 : num(ids.urn.value);
+  const urnValue = isBurial ? "0" : ids.urn.value;
+  const urnTotal = num(urnValue);
   const suitTotal = ceremonyType === "nohall" ? 0 : Number(ids.suitCount.value) * SUIT_PRICE;
   const makeupTotal = ids.makeup.checked ? 100000 : 0;
   const customCeremonyTotal = ids.customCeremony.checked ? 200000 : 0;
@@ -1285,7 +1276,9 @@ function calc(){
       : []),
 
     ...(!isBurial ? [
-      urnTotal === 0 ? `봉안함 기본 목함 제공` : `봉안함 ${urnTotal.toLocaleString("ko-KR")}원`
+      urnValue === "0"
+        ? `봉안함 기본 목함 제공`
+        : `봉안함 ${ids.urn.options[ids.urn.selectedIndex].text}`
     ] : []),
 
     ...((ceremonyType !== "nohall" && num(ids.altar.value) > 0)
@@ -1300,7 +1293,7 @@ function calc(){
       : []),
 
     ...((ceremonyType !== "nohall" && helperTotal > 0)
-      ? [`도우미 ${helperCount}명 × ${HELPER_DAYS}일 × 일 ${helperHours}시간 ${helperTotal.toLocaleString("ko-KR")}원`]
+      ? [`도우미 ${helperCount}명 × ${HELPER_DAYS}일 × ${helperHours}시간 ${helperTotal.toLocaleString("ko-KR")}원`]
       : []),
 
     ...(baseVehicle > 0 ? [`카니발·스타리아 ${baseVehicle.toLocaleString("ko-KR")}원`] : []),
@@ -1671,19 +1664,5 @@ setTimeout(()=>{
 })();
 </script>
 
-<nav class="quick-sticky" aria-label="빠른 메뉴">
-  <a href="/estimate.html" class="quick-sticky-item" aria-label="장례 예상견적 계산하기">
-    <span class="quick-sticky-icon">₩</span>
-    <span class="quick-sticky-text">견적<br>계산</span>
-  </a>
-  <a href="/#funeral-consultation" class="quick-sticky-item is-apply" aria-label="장례 상담 바로 접수하기">
-    <span class="quick-sticky-icon">✓</span>
-    <span class="quick-sticky-text">바로<br>접수</span>
-  </a>
-  <a href="tel:010-5934-3137" class="quick-sticky-item is-call" aria-label="바로 전화상담 연결">
-    <span class="quick-sticky-icon">☎</span>
-    <span class="quick-sticky-text">전화<br>상담</span>
-  </a>
-</nav>
 </body>
 </html>
