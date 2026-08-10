@@ -1,244 +1,1689 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="안심365 장례서비스 상품별 예상 견적을 실시간으로 확인하세요.">
-  <title>안심365 장례 예상견적</title>
-  <style>
-    :root{--navy:#071827;--navy2:#0d2a40;--gold:#c7a15a;--gold2:#e3c886;--ivory:#f7f4ed;--white:#fff;--ink:#172737;--muted:#68747e;--line:#ded8cb;--danger:#a04436}
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--ivory);color:var(--ink);font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo",sans-serif;word-break:keep-all}
-    button,input{font:inherit}
-    button{cursor:pointer}
-    a{text-decoration:none;color:inherit}
-    button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--gold2);outline-offset:3px}
-    .header{height:76px;padding:0 max(20px,calc((100% - 1160px)/2));display:flex;align-items:center;justify-content:space-between;background:var(--navy);color:#fff}
-    .brand{display:flex;align-items:center;gap:10px}
-    .seal{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--gold);border-radius:50%;color:var(--gold2);font:15px Georgia,serif}
-    .brand span:last-child{display:flex;flex-direction:column}.brand b{font-size:16px}.brand small{margin-top:2px;color:#91a0ac;font-size:9px;letter-spacing:.17em}
-    .back{padding:11px 16px;border:1px solid rgba(255,255,255,.3);color:#fff;font-size:12px;font-weight:800}
-    .hero{padding:68px max(20px,calc((100% - 1160px)/2)) 58px;background:linear-gradient(125deg,#061522,#0b2438 65%,#102e45);color:#fff}
-    .eyebrow{margin:0 0 14px;color:var(--gold);font:11px Georgia,serif;letter-spacing:.22em}
-    .hero h1{margin:0;font-family:"Noto Serif KR","Nanum Myeongjo",Georgia,serif;font-size:clamp(36px,5vw,60px);line-height:1.25;letter-spacing:-.045em}
-    .hero h1 em{color:var(--gold2);font-style:normal}.hero-copy{margin:20px 0 0;color:#b9c5cd;font-size:14px;line-height:1.8}
-    .layout{width:min(1160px,calc(100% - 40px));margin:40px auto 80px;display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:24px;align-items:start}
-    .panel{padding:30px;background:#fff;border:1px solid var(--line);box-shadow:0 10px 34px rgba(17,35,49,.06)}
-    .panel+.panel{margin-top:18px}.step{margin:0 0 7px;color:var(--gold);font:700 10px Georgia,serif;letter-spacing:.16em}.panel h2{margin:0 0 24px;font-family:"Noto Serif KR",Georgia,serif;font-size:24px}.help{margin:-13px 0 23px;color:var(--muted);font-size:12px;line-height:1.7}
-    .products{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .product{min-height:130px;padding:19px;border:1px solid var(--line);background:#fbfaf7;text-align:left;transition:.18s}
-    .product:hover{border-color:var(--gold)}.product.active{border:2px solid var(--navy);background:#fff;box-shadow:0 10px 25px rgba(15,32,47,.1)}
-    .product small,.product strong,.product span{display:block}.product small{color:var(--gold);font-size:10px;font-weight:800}.product strong{margin:12px 0 7px;font-size:17px}.product span{font-size:14px;font-weight:900}
-    .option-list{display:grid;gap:10px}.option-row{min-height:66px;padding:12px 15px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;border:1px solid var(--line);background:#fbfaf7}
-    .option-row label{font-size:13px;font-weight:800}.option-row small{display:block;margin-top:5px;color:var(--muted);font-size:10px;line-height:1.5}.option-row input[type="number"]{width:82px;height:40px;padding:0 8px;border:1px solid #cfc8bb;background:#fff;text-align:center;font-weight:800}
-    .option-row select{width:min(220px,42vw);height:42px;padding:0 34px 0 12px;border:1px solid #cfc8bb;background:#fff;color:var(--navy);font-size:12px;font-weight:800}
-    .quantity-control{display:grid;grid-template-columns:44px 58px 44px;height:44px;border:1px solid #cfc8bb;background:#fff}
-    .quantity-control button{border:0;background:#f3efe6;color:var(--navy);font-size:22px;font-weight:900;line-height:1}
-    .quantity-control button:disabled{color:#bbb6ac;cursor:not-allowed}
-    .quantity-control input[type="number"]{width:58px;height:42px;padding:0;border:0;border-left:1px solid #ddd6c9;border-right:1px solid #ddd6c9;background:#fff;font-size:17px;-moz-appearance:textfield}
-    .quantity-control input::-webkit-outer-spin-button,.quantity-control input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-    .check{display:flex;align-items:flex-start;gap:10px}.check input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--navy)}
-    .benefit{padding:18px;border:1px solid #dac698;background:#fff9ea}.benefit.is-disabled{display:none}.benefit label{font-weight:900}.benefit strong{display:block;margin-top:7px;color:var(--danger);font-size:14px}.benefit small{display:block;margin-top:8px;color:#7c6a46;font-size:10px;line-height:1.6}
-    .consult-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.consult{padding:13px;border:1px solid var(--line);background:#fbfaf7;font-size:12px;font-weight:700}.consult input{margin-right:7px;accent-color:var(--navy)}
-    .summary{position:sticky;top:18px;padding:0;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:0 16px 40px rgba(13,31,45,.12)}
-    .summary-head{padding:26px 27px;background:var(--navy);color:#fff}.summary-head small{color:var(--gold2);font:10px Georgia,serif;letter-spacing:.15em}.summary-head h2{margin:9px 0 0;font-family:"Noto Serif KR",Georgia,serif;font-size:25px}
-    .summary-body{padding:25px 27px}.line-item{padding:11px 0;display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid #eee9df;font-size:12px}.line-item span{color:var(--muted)}.line-item b{text-align:right}
-    .discount b{color:var(--danger)}.separate b{color:#6e572d}.total{margin-top:17px;padding-top:18px;display:flex;align-items:flex-end;justify-content:space-between}.total span{font-size:12px;font-weight:800}.total b{color:var(--navy);font-size:29px;letter-spacing:-.04em}
-    .total-note{margin:8px 0 0;color:var(--muted);font-size:10px;text-align:right}.summary-options{margin:20px 0 0;padding:16px;background:var(--ivory)}.summary-options strong{font-size:11px}.summary-options ul{margin:9px 0 0;padding-left:18px;color:var(--muted);font-size:10px;line-height:1.8}
-    .actions{padding:0 27px 27px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.actions button,.consult-btn{min-height:48px;border:1px solid var(--navy);background:#fff;color:var(--navy);font-size:12px;font-weight:900}.actions .primary{background:var(--navy);color:#fff}.consult-btn{grid-column:1/-1;display:flex;align-items:center;justify-content:center;background:var(--gold);border-color:var(--gold);color:var(--navy)}
-    .notice{margin-top:17px;padding:17px;background:#f3efe6;color:var(--muted);font-size:10px;line-height:1.75}.toast{position:fixed;left:50%;bottom:25px;z-index:30;padding:13px 18px;transform:translate(-50%,20px);border-radius:30px;background:var(--navy);color:#fff;font-size:12px;font-weight:800;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
-    @media(max-width:900px){.layout{grid-template-columns:1fr}.summary{position:static}}
-    @media(max-width:560px){.header{height:66px;padding:0 16px}.back{padding:9px 11px}.hero{padding:48px 18px}.hero h1{font-size:36px}.layout{width:calc(100% - 24px);margin:20px auto 55px}.panel{padding:23px 17px}.products{grid-template-columns:1fr 1fr}.product{min-height:120px;padding:15px}.product strong{font-size:15px}.consult-grid{grid-template-columns:1fr}.summary-body,.summary-head{padding-left:20px;padding-right:20px}.actions{padding-left:20px;padding-right:20px}}
-    @media print{body{background:#fff}.header,.hero,.editor,.actions,.toast{display:none!important}.layout{display:block;width:100%;margin:0}.summary{position:static;border:0;box-shadow:none}.summary-head{-webkit-print-color-adjust:exact;print-color-adjust:exact}.summary-body{padding:30px}.notice{border:1px solid #ddd}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="안심365 장례서비스 장례비용 직접 견적. 빈소·무빈소 장례를 선택하고 관, 수의, 봉안함, 상복, 도우미, 발인차량 등 필요한 항목만 직접 선택해 예상비용을 확인하세요.">
+<meta name="theme-color" content="#0f243e">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="shortcut icon" href="/favicon.ico">
+<title>장례비용 직접 견적 TEST13 | 안심365 장례서비스</title>
+<style>
+:root{
+  --navy:#0f243e;
+  --navy2:#163556;
+  --gold:#b89b5e;
+  --bg:#f6f3ed;
+  --line:#ddd6c8;
+  --text:#1d2733;
+  --muted:#6f7780;
+  --white:#fff;
+  --danger:#8d2f2f;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,"Noto Sans KR",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+.header{
+  padding:28px 20px;
+  background:linear-gradient(135deg,var(--navy),var(--navy2));
+  color:#fff;
+}
+.header-inner{max-width:760px;margin:auto}
+.brand{font-size:25px;font-weight:900}
+.header h1{font-size:32px;margin:26px 0 10px;line-height:1.25}
+.header p{margin:0;color:#e5e8ec;line-height:1.7}
+.wrap{max-width:760px;margin:auto;padding:22px 16px 100px}
+.notice{
+  padding:16px 18px;
+  background:#fff8e9;
+  border:1px solid #e4d1a7;
+  border-radius:14px;
+  margin-bottom:20px;
+  line-height:1.6;
+}
+.section{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  margin-bottom:16px;
+  overflow:hidden;
+}
+.section-title{
+  padding:17px 18px;
+  background:#faf9f6;
+  border-bottom:1px solid var(--line);
+  font-size:18px;
+  font-weight:900;
+}
+.item{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding:16px 18px;
+  border-bottom:1px solid #eeeae2;
+  align-items:center;
+}
+.item:last-child{border-bottom:0}
+.item small{display:block;color:var(--muted);margin-top:5px;line-height:1.45}
+.price{font-weight:900;white-space:nowrap}
+.required{
+  display:inline-block;
+  margin-left:6px;
+  padding:3px 7px;
+  border-radius:20px;
+  background:#efe5cf;
+  color:#765c27;
+  font-size:11px;
+  vertical-align:2px;
+}
+.option-row{
+  padding:16px 18px;
+  border-bottom:1px solid #eeeae2;
+}
+.option-row:last-child{border-bottom:0}
+.option-row label.title{
+  font-weight:800;
+  display:block;
+  margin-bottom:10px;
+}
+.sub{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.5}
+select,input[type="number"]{
+  width:100%;
+  border:1px solid #cbc5bb;
+  background:#fff;
+  padding:11px;
+  border-radius:10px;
+  font-size:14px;
+}
+.two{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.choice-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.choice{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  border:1px solid #d9d3c8;
+  border-radius:12px;
+  padding:12px;
+  background:#fff;
+}
+.choice input{margin-top:3px}
+.choice b{display:block;font-size:14px}
+.choice small{display:block;color:var(--muted);margin-top:4px;line-height:1.4}
+.choice.full{grid-column:1/-1}
+.summary{
+  background:var(--navy);
+  color:#fff;
+  padding:22px;
+  border-radius:18px;
+  position:static;
+  margin-top:22px;
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+}
+.summary-top{font-size:13px;color:#d9dfe6}
+.total{
+  font-size:30px;
+  font-weight:900;
+  color:#e4ca92;
+  margin-top:6px;
+}
+.breakdown{
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid rgba(255,255,255,.18);
+  font-size:12px;
+  line-height:1.55;
+  color:#e8edf2;
+}
+.summary small{display:block;margin-top:8px;color:#c9d0d8;line-height:1.45}
+.consult-note{
+  color:var(--danger);
+  font-size:12px;
+  margin-top:7px;
+  font-weight:700;
+}
+@media(max-width:520px){
+  .header h1{font-size:27px}
+  .item{align-items:flex-start}
+  .two,.choice-grid{grid-template-columns:1fr}
+}
+
+.counter-box{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:13px 0;
+  border-bottom:1px solid #eeeae2;
+}
+.counter{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.counter button{
+  width:42px;
+  height:42px;
+  border:1px solid #c9c2b5;
+  border-radius:11px;
+  background:#fff;
+  color:#0f243e;
+  font-size:24px;
+  font-weight:800;
+  line-height:1;
+}
+.counter button:disabled{
+  opacity:.3;
+}
+.counter strong{
+  min-width:64px;
+  text-align:center;
+  font-size:17px;
+}
+.helper-price-info{
+  margin-top:14px;
+  padding:13px 14px;
+  border-radius:11px;
+  background:#f7f4ed;
+  line-height:1.65;
+  font-size:13px;
+}
+</style>
+
+<style>
+.estimate-actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:14px;
+}
+.estimate-action-btn{
+  border:1px solid #c8b07a;
+  background:#fff;
+  color:#173253;
+  border-radius:10px;
+  padding:12px 6px;
+  font-weight:800;
+  font-size:14px;
+  cursor:pointer;
+}
+.estimate-action-btn:active{transform:scale(.98)}
+@media(max-width:420px){
+  .estimate-actions{grid-template-columns:1fr;}
+}
+@media print{
+  .estimate-actions,
+  .sticky,
+  .bottom-sticky,
+  .transport-call-sticky,
+  button,
+  .no-print{display:none!important;}
+  body{background:#fff!important;}
+}
+</style>
+
+
+<style>
+.preset-wrap{
+  margin:18px 0 22px;
+}
+.preset-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+.preset-head h3{
+  margin:0;
+  font-size:20px;
+  color:#173253;
+}
+.preset-head span{
+  font-size:12px;
+  color:#7d8792;
+}
+.preset-slider{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  padding:4px 4px 10px;
+  scrollbar-width:none;
+}
+.preset-slider::-webkit-scrollbar{display:none}
+.preset-card{
+  flex:0 0 86%;
+  max-width:420px;
+  scroll-snap-align:center;
+  background:#fff;
+  border:1px solid #ddd7c8;
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 6px 18px rgba(15,36,62,.07);
+}
+.preset-badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#f4ead3;
+  color:#80672f;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+.preset-title{
+  font-size:20px;
+  font-weight:900;
+  color:#173253;
+  margin-bottom:6px;
+}
+.preset-price{
+  font-size:30px;
+  font-weight:900;
+  color:#0f2f52;
+  margin-bottom:12px;
+}
+.preset-list{
+  margin:0 0 14px;
+  padding-left:18px;
+  color:#5f6871;
+  font-size:14px;
+  line-height:1.7;
+}
+.preset-actions{
+  display:grid;
+  grid-template-columns:1fr 1.4fr;
+  gap:8px;
+}
+.preset-btn{
+  border:1px solid #c8b07a;
+  border-radius:10px;
+  padding:11px 8px;
+  font-weight:800;
+  cursor:pointer;
+}
+.preset-btn.detail{
+  background:#fff;
+  color:#173253;
+}
+.preset-btn.apply{
+  background:#173253;
+  color:#fff;
+}
+.preset-detail{
+  display:none;
+  margin-top:10px;
+  padding:12px;
+  border-radius:10px;
+  background:#faf8f2;
+  color:#666;
+  font-size:13px;
+  line-height:1.65;
+}
+.preset-card.open .preset-detail{display:block}
+.preset-dots{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-top:2px;
+}
+.preset-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#d5d9de;
+}
+.preset-dot.active{background:#173253}
+</style>
+
+
+<style>
+.free-support{
+  margin-left:7px;
+  color:#b08a35;
+  font-weight:900;
+}
+.fixed-item s{
+  color:#8a8f96;
+  text-decoration-thickness:2px;
+}
+</style>
+
+
+<style>
+.free-support{color:#b08a35!important;font-weight:900!important;white-space:nowrap}
+s{color:#8b9198;text-decoration-thickness:2px}
+</style>
+
+<style>
+.free-support{display:inline-block;color:#b08a35!important;font-weight:900!important;margin-top:3px}
+.fixed-price{min-width:145px;text-align:right;white-space:nowrap}
+.fixed-item{align-items:flex-start}
+.fixed-item > div:first-child{min-width:0;flex:1}
+</style>
+
+<style>
+/* ===== TEST10 반응형 최적화 ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+*{box-sizing:border-box}
+body{overflow-x:hidden}
+.wrap{width:min(100%,760px);margin:0 auto}
+button,select,input{font:inherit}
+button,.choice,select{touch-action:manipulation}
+select{width:100%;min-height:48px}
+
+.preset-slider{scroll-padding-inline:4px}
+.preset-card{min-width:0}
+.preset-price{line-height:1.12;word-break:keep-all}
+.preset-list{word-break:keep-all}
+
+.item,.option-row,.choice span{min-width:0}
+.item b,.item small,.option-row .sub,.choice b,.choice small{
+  overflow-wrap:anywhere;word-break:keep-all
+}
+.summary,#breakdown{overflow-wrap:anywhere}
+#total{font-variant-numeric:tabular-nums}
+
+@media (min-width:821px){
+  body{padding:30px 24px 60px}
+  .wrap{width:min(100%,820px)}
+  .preset-slider{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    overflow:visible;
+    gap:14px;
+    padding:4px 0 12px;
+  }
+  .preset-card{
+    flex:none;
+    max-width:none;
+    width:auto;
+    padding:18px 16px;
+    scroll-snap-align:none;
+  }
+  .preset-title{font-size:18px}
+  .preset-price{font-size:25px}
+  .preset-list{font-size:13px;padding-left:17px}
+  .preset-dots{display:none}
+  .preset-actions{grid-template-columns:1fr}
+  .preset-btn{min-height:44px}
+  .choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .estimate-actions{grid-template-columns:repeat(3,1fr)}
+  .mobile-total-bar{display:none!important}
+}
+
+@media (min-width:521px) and (max-width:820px){
+  body{padding:22px 18px 48px}
+  .wrap{width:min(100%,680px)}
+  .preset-card{flex-basis:58%}
+  .preset-price{font-size:28px}
+  .choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media (max-width:520px){
+  body{padding:0}
+  .wrap{
+    width:100%;
+    padding-left:14px;
+    padding-right:14px;
+    padding-bottom:92px;
+  }
+  h1{font-size:28px!important;line-height:1.25}
+  .preset-wrap{margin-top:14px}
+  .preset-head h3{font-size:18px}
+  .preset-slider{
+    gap:10px;
+    margin-left:-2px;
+    margin-right:-2px;
+    padding:4px 2px 12px;
+    scroll-snap-type:x mandatory;
+  }
+  .preset-card{
+    flex:0 0 90%;
+    max-width:none;
+    border-radius:16px;
+    padding:16px;
+    scroll-snap-align:start;
+  }
+  .preset-title{font-size:19px}
+  .preset-price{font-size:28px}
+  .preset-list{font-size:13px;line-height:1.65}
+  .preset-actions{grid-template-columns:1fr 1.35fr}
+  .preset-btn{min-height:46px;font-size:13px}
+
+  .section{
+    border-radius:15px;
+    padding:16px 14px;
+    margin-bottom:12px;
+  }
+  .section-title{font-size:18px}
+  .choice-grid{grid-template-columns:1fr;gap:9px}
+  .choice{min-height:58px}
+  .item{gap:8px}
+  .item>div:first-child{min-width:0}
+  .item .price,.fixed-price{
+    flex:0 0 auto;
+    min-width:auto!important;
+    max-width:42%;
+    font-size:14px;
+    text-align:right;
+  }
+
+  .helper-control{flex-wrap:wrap;gap:8px}
+  .helper-control button{width:44px;height:44px}
+
+  .summary{padding:18px 15px}
+  #total{font-size:31px!important;line-height:1.15}
+  #breakdown{font-size:13px;line-height:1.7}
+
+  .estimate-actions{grid-template-columns:1fr!important;gap:8px}
+  .estimate-action-btn{min-height:48px;font-size:14px}
+
+  .mobile-total-bar{
+    display:flex!important;
+    position:fixed!important;
+    left:0;
+    right:0;
+    bottom:0;
+    width:100%;
+    margin:0!important;
+    padding:12px 18px calc(12px + env(safe-area-inset-bottom));
+    z-index:9999;
+    border-radius:0;
+    box-shadow:0 -4px 18px rgba(0,0,0,.16);
+  }
+  .mobile-total-bar strong{
+    font-size:20px;
+    white-space:nowrap;
+  }
+}
+
+@media (max-width:360px){
+  .wrap{padding-left:11px;padding-right:11px}
+  h1{font-size:25px!important}
+  .preset-card{flex-basis:94%;padding:14px}
+  .preset-price{font-size:25px}
+  .preset-actions{grid-template-columns:1fr}
+  #total{font-size:28px!important}
+}
+</style>
+
+
+<style>
+/* ===== TEST11 하단 작업버튼 최적화 ===== */
+.estimate-actions{
+  width:100%;
+  max-width:820px;
+  margin:18px auto 8px;
+  padding:0;
+  gap:10px;
+}
+.estimate-action-btn{
+  min-height:52px;
+  border-radius:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* PC: 본문 폭 안에서 3개 버튼 */
+@media (min-width:821px){
+  .estimate-actions{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    width:min(100%,820px)!important;
+    max-width:820px!important;
+    margin:20px auto 8px!important;
+  }
+  .estimate-action-btn{
+    width:100%!important;
+    min-width:0!important;
+  }
+}
+
+/* 태블릿 */
+@media (min-width:521px) and (max-width:820px){
+  .estimate-actions{
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    width:100%!important;
+    margin:18px auto 8px!important;
+  }
+}
+
+/* 모바일: 3개 세로 배치 */
+@media (max-width:520px){
+  .estimate-actions{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    width:100%!important;
+    margin:16px auto 8px!important;
+    gap:8px!important;
+  }
+  .estimate-action-btn{
+    width:100%!important;
+    min-height:50px!important;
+    font-size:14px!important;
+  }
+}
+</style>
+
+
+<style>
+/* ===== TEST12 인쇄/PDF 전용 출력 ===== */
+#printEstimateSheet{
+  display:none;
+}
+
+@media print{
+  @page{
+    size:A4;
+    margin:16mm;
+  }
+
+  html,body{
+    background:#fff!important;
+    margin:0!important;
+    padding:0!important;
+  }
+
+  body *{
+    visibility:hidden!important;
+  }
+
+  #printEstimateSheet,
+  #printEstimateSheet *{
+    visibility:visible!important;
+  }
+
+  #printEstimateSheet{
+    display:block!important;
+    position:absolute!important;
+    left:0!important;
+    top:0!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+    background:#fff!important;
+    color:#111!important;
+    font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo",sans-serif!important;
+  }
+
+  .print-estimate-title{
+    padding-bottom:12px;
+    border-bottom:2px solid #111;
+  }
+  .print-estimate-title h1{
+    margin:0;
+    font-size:22pt;
+    color:#111!important;
+  }
+  .print-estimate-title p{
+    margin:6px 0 0;
+    font-size:9.5pt;
+    color:#555!important;
+  }
+
+  .print-estimate-total{
+    margin:22px 0 18px;
+    padding:18px 0;
+    border-top:1px solid #bbb;
+    border-bottom:1px solid #bbb;
+  }
+  .print-estimate-total span{
+    display:block;
+    margin-bottom:5px;
+    font-size:10pt;
+    color:#666!important;
+  }
+  .print-estimate-total strong{
+    display:block;
+    font-size:26pt;
+    line-height:1.15;
+    color:#111!important;
+  }
+
+  .print-estimate-breakdown{
+    font-size:10.5pt;
+    line-height:1.85;
+    color:#111!important;
+  }
+
+  .print-estimate-notice{
+    margin-top:20px;
+    padding-top:12px;
+    border-top:1px solid #ccc;
+    font-size:8.8pt;
+    line-height:1.65;
+    color:#555!important;
+  }
+
+  .print-estimate-footer{
+    margin-top:18px;
+    padding-top:10px;
+    border-top:1px solid #ddd;
+    font-size:8.5pt;
+    color:#666!important;
+  }
+}
+</style>
+
+
+<style>
+.estimate-consult-main{grid-column:1/-1;min-height:52px;border:0;border-radius:10px;background:#0f2f52;color:#fff;font-weight:900;font-size:15px;cursor:pointer}
+.estimate-modal{display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.58);padding:18px;align-items:center;justify-content:center}
+.estimate-modal.open{display:flex}.estimate-modal-card{width:min(460px,100%);background:#fff;border-radius:18px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.28)}
+.estimate-modal-card h3{margin:0 0 8px;color:#173253;font-size:22px}.estimate-modal-card .desc{margin:0 0 18px;color:#69737d;font-size:13px;line-height:1.6}.estimate-modal-summary{padding:13px 14px;margin-bottom:15px;border-radius:10px;background:#f7f4ed;color:#173253;font-size:13px;line-height:1.55}.estimate-field{margin-top:12px}.estimate-field label{display:block;margin-bottom:6px;font-size:13px;font-weight:800;color:#173253}.estimate-field input[type=text],.estimate-field input[type=tel]{width:100%;height:48px;border:1px solid #d4cec2;border-radius:9px;padding:0 13px;font-size:15px}.estimate-privacy{display:flex;gap:8px;align-items:flex-start;margin:15px 0;font-size:12px;line-height:1.5;color:#59636c}.estimate-privacy input{margin-top:2px;width:17px;height:17px}.estimate-modal-actions{display:grid;grid-template-columns:1fr 1.5fr;gap:8px}.estimate-modal-actions button{min-height:48px;border-radius:9px;font-weight:900}.estimate-cancel{border:1px solid #cfc8bb;background:#fff;color:#173253}.estimate-submit{border:0;background:#c8a35d;color:#102b49}.estimate-submit:disabled{opacity:.55}.estimate-error{min-height:18px;margin-top:10px;color:#a04436;font-size:12px;font-weight:700}
+@media(max-width:420px){.estimate-modal-card{padding:20px 17px}.estimate-modal-actions{grid-template-columns:1fr}}
+@media print{.estimate-modal{display:none!important}}
+</style>
+
+<style>
+/* 우측 3단 빠른 메뉴 - 메인 페이지와 동일 */
+.quick-sticky{position:fixed;right:max(8px,calc((100vw - 728px)/2 - 70px));top:50%;z-index:9998;width:56px;display:flex;flex-direction:column;gap:4px;transform:translateY(-50%)}
+.quick-sticky-item{min-height:68px;padding:6px 3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:2px solid #b89b5e;background:#14345a;color:#fff;text-align:center;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:transform .18s ease,background .18s ease,box-shadow .18s ease}
+.quick-sticky-item:first-child{border-radius:14px 0 0 0}.quick-sticky-item:last-child{border-radius:0 0 0 14px}
+.quick-sticky-item:hover{background:#0f2948;transform:translateX(-2px);box-shadow:0 6px 16px rgba(0,0,0,.27)}.quick-sticky-item:active{transform:scale(.96)}
+.quick-sticky-icon{width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#b89b5e;color:#fff;font-size:13px;font-weight:900;line-height:1}
+.quick-sticky-text{color:#fff;font-size:10px;font-weight:900;line-height:1.2}.quick-sticky-item.is-apply{background:#254a70}.quick-sticky-item.is-call{background:#8a6a2f}
+@media(max-width:420px){.quick-sticky{right:4px;width:50px;gap:3px}.quick-sticky-item{min-height:62px;padding:5px 2px;gap:3px}.quick-sticky-icon{width:22px;height:22px;font-size:12px}.quick-sticky-text{font-size:9px}}
+</style>
 </head>
 <body>
-  <header class="header">
-    <a class="brand" href="index.html"><span class="seal">安</span><span><b>안심365</b><small>장례서비스</small></span></a>
-    <a class="back" href="price.html">상품안내로 돌아가기</a>
-  </header>
-  <section class="hero">
-    <p class="eyebrow">FUNERAL ESTIMATE</p>
-    <h1>필요한 항목만 선택해<br><em>예상견적</em>을 확인하세요.</h1>
-    <p class="hero-copy">상품과 추가 항목을 변경하면 예상금액이 즉시 계산됩니다.<br>최종 계약금액은 담당자 상담 후 확정됩니다.</p>
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">안심365 장례서비스</div>
+    <h1>장례에 필요한 항목을<br>직접 선택해 보세요.</h1>
+    <p>필요한 항목만 직접 선택하고 예상 장례비용을 바로 확인하세요.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="notice">
+    <b>장례비용 직접 견적</b><br>
+    빈소 장례와 무빈소 장례 모두 필수 350,000원에서 시작하며 관·수의 등 필요한 항목을 직접 선택할 수 있습니다.
+  </div>
+
+  
+<div class="preset-wrap">
+  <div class="preset-head">
+    <h3>대표 견적 예시</h3>
+    <span>옆으로 넘겨보세요</span>
+  </div>
+
+  <div class="preset-slider" id="presetSlider">
+    <article class="preset-card" data-preset="nohall-cremation">
+      <div class="preset-badge">무빈소</div>
+      <div class="preset-title">무빈소 화장</div>
+      <div class="preset-price">1,100,000원</div>
+      <ul class="preset-list">
+        <li>필수 진행비 45만원 · 장례지도사 10만원 포함</li>
+        <li>화장 기본관 · 오동 0.6치</li>
+        <li>화장 기본수의 · 저마·면 혼방</li>
+        <li>카니발·스타리아 발인차량</li>
+      </ul>
+      <div class="preset-actions">
+        <button type="button" class="preset-btn detail">상세보기</button>
+        <button type="button" class="preset-btn apply">이 견적으로 적용</button>
+      </div>
+      <div class="preset-detail">
+        무빈소 장례 · 화장 · 기본 화장관 15만원 · 기본 화장수의 20만원 · 카니발/스타리아 30만원
+      </div>
+    </article>
+
+    <article class="preset-card" data-preset="hall-cremation">
+      <div class="preset-badge">빈소 화장</div>
+      <div class="preset-title">소규모 빈소 화장</div>
+      <div class="preset-price">2,172,000원</div>
+      <ul class="preset-list">
+        <li>필수 진행비 45만원 · 장례지도사 10만원 포함</li>
+        <li>제단꽃 소형 빈소용</li>
+        <li>상복 4벌</li>
+        <li>도우미 1명 · 2일</li>
+        <li>장의버스 왕복 100km</li>
+      </ul>
+      <div class="preset-actions">
+        <button type="button" class="preset-btn detail">상세보기</button>
+        <button type="button" class="preset-btn apply">이 견적으로 적용</button>
+      </div>
+      <div class="preset-detail">
+        빈소 장례 · 화장 · 기본 화장관 15만원 · 기본 화장수의 20만원 · 소형 제단꽃 30만원 · 상복 4벌 · 도우미 1명×2일×10시간 · 장의버스 50만원
+      </div>
+    </article>
+
+    <article class="preset-card" data-preset="hall-burial">
+      <div class="preset-badge">빈소 매장</div>
+      <div class="preset-title">소규모 빈소 매장</div>
+      <div class="preset-price">2,472,000원</div>
+      <ul class="preset-list">
+        <li>필수 진행비 45만원 · 장례지도사 10만원 포함</li>
+        <li>매장 기본관 · 오동 1.5치</li>
+        <li>매장 기본수의 · 저마 100%</li>
+        <li>도우미 1명 · 2일</li>
+        <li>장의버스 왕복 100km</li>
+      </ul>
+      <div class="preset-actions">
+        <button type="button" class="preset-btn detail">상세보기</button>
+        <button type="button" class="preset-btn apply">이 견적으로 적용</button>
+      </div>
+      <div class="preset-detail">
+        빈소 장례 · 매장 · 기본 매장관 35만원 · 기본 매장수의 30만원 · 소형 제단꽃 30만원 · 상복 4벌 · 도우미 1명×2일×10시간 · 장의버스 50만원
+      </div>
+    </article>
+  </div>
+
+  <div class="preset-dots">
+    <span class="preset-dot active"></span>
+    <span class="preset-dot"></span>
+    <span class="preset-dot"></span>
+  </div>
+</div>
+
+<section class="section">
+    <div class="section-title">장례 형태 선택</div>
+    <div class="option-row">
+      <div class="choice-grid">
+        <label class="choice">
+          <input type="radio" name="ceremonyType" value="hall" checked>
+          <span>
+            <b>빈소 장례</b>
+            <small>필수 기본비용 450,000원</small>
+          </span>
+        </label>
+
+        <label class="choice">
+          <input type="radio" name="ceremonyType" value="nohall">
+          <span>
+            <b>무빈소 장례</b>
+            <small>필수 기본비용 450,000원</small>
+          </span>
+        </label>
+      </div>
+      <div class="sub">장례형태에 따라 필수 기본비용과 선택 가능한 항목이 달라집니다.</div>
+    </div>
   </section>
 
-  <main class="layout">
-    <div class="editor">
-      <section class="panel">
-        <p class="step">STEP 01</p><h2>기본상품 선택</h2>
-        <div class="products" id="products"></div>
-      </section>
+  <section class="section">
+    <div class="section-title">필수 진행 항목</div>
 
-      <section class="panel">
-        <p class="step">STEP 02</p><h2>특별우대 적용</h2>
-        <div class="benefit" id="benefitBox">
-          <div class="check"><input type="checkbox" id="priority"><div><label for="priority">기초생활수급자·국가유공자 특별우대</label><strong>무빈소 장례상품 20% 할인</strong><small>99만원 → 79만 2천원 · 증빙서류 확인 후 적용됩니다.</small></div></div>
-        </div>
-        <p class="help" id="benefitHelp">특별우대는 무빈소 단일상품에만 적용됩니다.</p>
-      </section>
-
-      <section class="panel">
-        <p class="step">STEP 03</p><h2>상복 수량 변경</h2>
-        <p class="help">상품 기본 제공 수량을 초과한 수량만 추가 계산됩니다. 기본 수량을 줄여도 감액되지 않습니다.</p>
-        <div class="option-list">
-          <div class="option-row"><div><label for="male">남성 상복 총수량</label><small id="maleInfo"></small></div><div class="quantity-control"><button type="button" data-step="-1" data-target="male" aria-label="남성 상복 한 벌 줄이기">−</button><input id="male" type="number" min="0" max="30" value="0" readonly><button type="button" data-step="1" data-target="male" aria-label="남성 상복 한 벌 늘리기">+</button></div></div>
-          <div class="option-row"><div><label for="female">여성 상복 총수량</label><small id="femaleInfo"></small></div><div class="quantity-control"><button type="button" data-step="-1" data-target="female" aria-label="여성 상복 한 벌 줄이기">−</button><input id="female" type="number" min="0" max="30" value="0" readonly><button type="button" data-step="1" data-target="female" aria-label="여성 상복 한 벌 늘리기">+</button></div></div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <p class="step">STEP 04</p><h2>품목 업그레이드</h2>
-        <p class="help">원하는 금액 단계를 선택하면 예상견적에 즉시 반영됩니다.</p>
-        <div class="option-list">
-          <div class="option-row"><div><label for="shroud">수의 업그레이드</label><small>기본상품 포함 품목에서 상위 품목으로 변경</small></div><select id="shroud"><option value="0">변경 없음</option><option value="200000">+20만원</option><option value="300000">+30만원</option><option value="500000">+50만원</option><option value="1000000">+100만원</option><option value="1800000">+180만원</option><option value="2500000">+250만원</option></select></div>
-          <div class="option-row"><div><label for="urn">유골함 업그레이드</label><small>기본상품 포함 품목에서 상위 품목으로 변경</small></div><select id="urn"><option value="0">변경 없음</option><option value="300000">+30만원</option><option value="500000">+50만원</option><option value="800000">+80만원</option><option value="1200000">+120만원</option><option value="1500000">+150만원</option><option value="2500000">+250만원</option></select></div>
-          <div class="option-row"><div><label for="flowers">입관꽃장식</label><small>꽃장식 추가 또는 상위 구성으로 변경</small></div><select id="flowers"><option value="0">변경 없음</option><option value="70000">+7만원</option><option value="150000">+15만원</option><option value="300000">+30만원</option></select></div>
-          <div class="option-row"><div><label for="makeup">고인 메이크업</label><small>고급 메이크업 선택</small></div><select id="makeup"><option value="0">변경 없음</option><option value="100000">+10만원</option><option value="150000">+15만원</option></select></div>
-          <div class="option-row"><div><label for="limousine">발인차량 업그레이드</label><small id="limousineInfo">카니발·스타리아에서 장례 리무진으로 변경</small></div><select id="limousine"><option value="0">변경 없음</option><option value="500000">장례 리무진 +50만원</option></select></div>
-          <div class="option-row"><div><label for="religious">종교별 맞춤 의전</label><small>종교와 가족 요청에 맞춘 의전 진행</small></div><select id="religious"><option value="0">선택 안 함</option><option value="300000">종교별 맞춤 의전 +30만원</option></select></div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <p class="step">STEP 05</p><h2>상담 후 확정 항목</h2>
-        <p class="help">아래 항목은 지역과 이용 시설에 따라 금액이 달라지므로 현재 예상금액에는 포함되지 않습니다.</p>
-        <div class="consult-grid" id="consultOptions">
-          <label class="consult"><input type="checkbox" value="관외 운구·차량 추가 운행">관외 차량 운행</label>
-          <label class="consult"><input type="checkbox" value="봉안당·장지·수목장 상담">봉안당·장지·수목장</label>
-        </div>
-      </section>
+    <div class="item">
+      <div>
+        <b id="directorTitle">장례지도사 1명 · 3일 진행</b><span class="required">필수</span>
+        <small id="directorDesc">장례 절차 및 행사 진행</small>
+      </div>
+      <div class="price" id="directorPrice">100,000원</div>
     </div>
 
-    <aside class="summary" id="summary">
-      <div class="summary-head"><small>ANSIM365 ESTIMATE</small><h2>예상견적 요약</h2></div>
-      <div class="summary-body">
-        <div class="line-item"><span>선택상품</span><b id="sumProduct"></b></div>
-        <div class="line-item"><span>기본 상품가격</span><b id="sumBase"></b></div>
-        <div class="line-item discount" id="discountRow"><span>특별우대 할인</span><b id="sumDiscount"></b></div>
-        <div class="line-item"><span>상복 추가</span><b id="sumClothes"></b></div>
-        <div class="line-item"><span>품목 업그레이드</span><b id="sumUpgrades"></b></div>
-        <div class="total"><span>예상 결제금액</span><b id="sumTotal"></b></div>
-        <p class="total-note" id="totalNote"></p>
-        <div class="summary-options"><strong>선택 업그레이드</strong><ul id="sumUpgradeList"><li>선택 항목 없음</li></ul></div>
-        <div class="summary-options"><strong>상담 요청 항목</strong><ul id="sumConsult"><li>선택 항목 없음</li></ul></div>
-        <div class="notice">※ 장례식장 시설사용료·안치료·입관실 사용료·음식비·화장장 사용료·봉안시설 및 장지 비용 등은 별도입니다.<br>※ 본 견적은 예상금액이며 지역·거리·현장 상황에 따라 달라질 수 있습니다.</div>
+    <div class="item">
+      <div>
+        <b>입관 보조인력 1명</b><span class="required">필수</span>
+        <small>입관 진행 보조</small>
       </div>
-      <div class="actions">
-        <button class="primary" type="button" id="copyBtn">견적 복사</button>
-        <button type="button" id="printBtn">인쇄·PDF 저장</button>
-        <a class="consult-btn" href="index.html#funeral-consultation">24시간 상담접수 바로가기</a>
+      <div class="price">100,000원</div>
+    </div>
+
+    <div class="item">
+      <div>
+        <b>기본 입관용품 20여종 일체 (관·수의 제외)</b><span class="required">필수</span>
+        <small>기본 입관 소모품 일체</small>
       </div>
-    </aside>
-  </main>
-  <div class="toast" id="toast">견적 요약을 복사했습니다.</div>
+      <div class="price">250,000원</div>
+    </div>
+  </section>
 
-  <script>
-    const PRODUCTS={
-      nohall:{name:"무빈소 단일상품",price:990000,male:0,female:0,tag:"무빈소 장례"},
-      budget:{name:"빈소 알뜰형",price:1700000,male:2,female:2,tag:"빈소 장례"},
-      basic:{name:"빈소 기본형",price:2500000,male:3,female:3,tag:"빈소 장례"},
-      premium:{name:"빈소 고급형",price:3500000,male:5,female:5,tag:"빈소 장례"}
-    };
-    const EXTRA_MALE=70000,EXTRA_FEMALE=80000;
-    const UPGRADE_LABELS={shroud:"수의",urn:"유골함",flowers:"입관꽃장식",makeup:"고인 메이크업",limousine:"장례 리무진",religious:"종교별 맞춤 의전"};
-    let selected="nohall";
-    const won=n=>new Intl.NumberFormat("ko-KR").format(n)+"원";
-    const man=n=>n%10000===0?`${n/10000}만원`:won(n);
-    const $=id=>document.getElementById(id);
+  
 
-    function initialProduct(){
-      const key=new URLSearchParams(location.search).get("product");
-      return PRODUCTS[key]?key:"nohall";
+  <section class="section">
+    <div class="section-title">관 · 수의 선택</div>
+
+    
+    <div class="option-row">
+      <label class="check-row">
+        <input type="checkbox" id="religiousSupplies" value="100000">
+        <span>
+          <strong>종교별 입관용품 추가</strong>
+          <small>불교 · 기독교 · 천주교 등 종교별 의식용품 · +100,000원</small>
+        </span>
+      </label>
+    </div>
+
+    <div class="option-row" id="cremationCoffinRow">
+      <label class="title" for="cremationCoffin">화장용 관</label>
+      <select id="cremationCoffin">
+        <option value="0">선택 안 함 · 0원</option>
+        <option value="150000">화장 기본관 · 오동나무 0.6치 · 150,000원</option>
+        <option value="220000">화장 고급관 · 오동나무 1.0치 · 220,000원</option>
+        <option value="320000">화장 최고급관 · 오동나무 1.0치 특관 · 320,000원</option>
+      </select>
+      <div class="sub">관은 입관 기본 진행비와 별도로 선택·계산됩니다.</div>
+    </div>
+
+    <div class="option-row" id="burialCoffinRow" style="display:none">
+      <label class="title" for="burialCoffin">매장용 관</label>
+      <select id="burialCoffin">
+        <option value="0">선택 안 함 · 0원</option>
+        <option value="350000">매장 기본관 · 오동나무 1.5치 · 350,000원</option>
+        <option value="700000">매장 고급관 · 솔송나무 1.5치 · 700,000원</option>
+        <option value="1100000">매장 최고급관 · 향나무 1.5치 · 1,100,000원</option>
+        <option value="consult">VIP 매장관 · 고급 향나무 특관 · 상담</option>
+      </select>
+      <div class="consult-note" id="burialCoffinConsult" style="display:none">VIP 매장관은 제품 규격·목재·두께에 따라 상담 후 금액이 확정됩니다.</div>
+    </div>
+
+    <div class="option-row">
+      <label class="title" for="funeralType">장법 선택</label>
+      <select id="funeralType">
+        <option value="cremation">화장</option>
+        <option value="burial">매장</option>
+      </select>
+    </div>
+
+    <div class="option-row" id="cremationShroudRow">
+      <label class="title" for="cremationShroud">화장용 수의</label>
+      <select id="cremationShroud">
+        <option value="0">선택 안 함 · 0원</option>
+        <option value="200000">화장 기본 · 저마·면 혼방 기계직 · <s>200,000원</s> <strong class="free-support"></strong></option>
+        <option value="300000">화장 고급 · 저마 100% 기계직 · 300,000원</option>
+        <option value="450000">화장 최고급 · 대마 100% 기계직 · 450,000원</option>
+        <option value="consult">전통 수제 수의 · 대마 100% 수제직 · 상담</option>
+      </select>
+      <div class="consult-note" id="cremationShroudConsult" style="display:none">
+        전통 수제 수의는 원단·직조·원산지에 따라 상담 후 금액이 확정됩니다.
+      </div>
+      <div class="sub">화장 장례에 적합한 수의 기준입니다.</div>
+    </div>
+
+    <div class="option-row" id="burialShroudRow" style="display:none">
+      <label class="title" for="burialShroud">매장용 수의</label>
+      <select id="burialShroud">
+        <option value="0">선택 안 함 · 0원</option>
+        <option value="300000">매장 기본 · 저마 100% 기계직 · 300,000원</option>
+        <option value="600000">매장 고급 · 대마 100% 기계직 · 600,000원</option>
+        <option value="1200000">매장 최고급 · 국내산 삼베 수제직 · 1,200,000원</option>
+        <option value="consult">VIP 전통수의 · 안동포·전통 수제직 · 상담</option>
+      </select>
+      <div class="consult-note" id="burialShroudConsult" style="display:none">
+        VIP 전통수의는 원단·직조·원산지 및 제품 규격에 따라 상담 후 금액이 확정됩니다.
+      </div>
+      <div class="sub">※ 국내산 표기는 원산지 확인 제품에 한해 적용됩니다.</div>
+    </div>
+  </section>
+
+  <section class="section" id="urnAltarSection">
+    <div class="section-title">봉안함 · 제단꽃</div>
+
+    <div class="option-row" id="urnRow">
+      <label class="title" for="urn">봉안함</label>
+      <select id="urn">
+        <option value="0">기본 봉안함(목함) 제공 · 추가금 없음</option>
+        <option value="200000">고급 진공 봉안함 · +200,000원</option>
+        <option value="400000">최고급 봉안함 · +400,000원</option>
+        <option value="consult">VIP 봉안함 · 상담</option>
+      </select>
+      <div class="consult-note" id="urnConsult" style="display:none">VIP 봉안함은 상담 후 금액이 확정됩니다.</div>
+    </div>
+
+    <div class="option-row" id="altarRow">
+      <label class="title" for="altar">제단 꽃장식</label>
+      <select id="altar">
+        <option value="0">선택 안 함 · 0원</option>
+        <option value="300000">소형 빈소용 · +300,000원</option>
+        <option value="400000">일반 빈소용 · +400,000원</option>
+        <option value="500000">특실 빈소용 · +500,000원</option>
+        <option value="700000">VIP 빈소용 · +700,000원</option>
+      </select>
+      <div class="sub">※ 빈소 및 제단 규모에 따라 구성·금액이 달라질 수 있습니다.</div>
+    </div>
+  </section>
+
+  <section class="section" id="hallServiceSection">
+    <div class="section-title">상복 · 장례 도우미</div>
+
+    <div class="option-row">
+      <label class="title" for="suitCount">상복 대여</label>
+      <div class="two">
+        <select id="suitCount">
+          <option value="0">0벌</option>
+          <option value="1">1벌</option>
+          <option value="2">2벌</option>
+          <option value="3">3벌</option>
+          <option value="4">4벌</option>
+          <option value="5">5벌</option>
+          <option value="6">6벌</option>
+          <option value="7">7벌</option>
+          <option value="8">8벌</option>
+          <option value="9">9벌</option>
+          <option value="10">10벌</option>
+        </select>
+        <div style="padding:11px;border:1px solid #cbc5bb;border-radius:10px;background:#fafafa">
+          1벌당 <b>80,000원</b>
+        </div>
+      </div>
+      <div class="sub">남녀 구분 없이 동일 금액</div>
+    </div>
+
+    <div class="option-row">
+      <label class="title">장례 도우미</label>
+
+      <div class="helper-price-info">
+        기본 <b>1명 · 1일 10시간 126,000원</b><br>
+        기본시간 외 추가근무 시 <b>시간당 15,000원</b><br>
+        <b>근무일수 2일 기준</b>으로 계산됩니다.
+      </div>
+
+      <div class="counter-box">
+        <div>
+          <b>도우미 인원</b>
+          <div class="sub">0~5명 선택 · 소규모 가족장은 0명 가능</div>
+        </div>
+        <div class="counter">
+          <button type="button" id="helperMinus" aria-label="도우미 인원 줄이기">−</button>
+          <strong id="helperCountText">0명</strong>
+          <button type="button" id="helperPlus" aria-label="도우미 인원 늘리기">＋</button>
+        </div>
+      </div>
+
+      <div class="counter-box">
+        <div>
+          <b>1일 근무시간</b>
+          <div class="sub">기본 10시간부터 조절</div>
+        </div>
+        <div class="counter">
+          <button type="button" id="hourMinus" aria-label="근무시간 줄이기">−</button>
+          <strong id="helperHoursText">10시간</strong>
+          <button type="button" id="hourPlus" aria-label="근무시간 늘리기">＋</button>
+        </div>
+      </div>
+
+      <div class="sub">예: 1명 × 2일 × 10시간 = 252,000원 / 2명 × 2일 × 10시간 = 504,000원</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">추가 의전 선택</div>
+
+    <div class="option-row">
+      <div class="choice-grid">
+        <label class="choice full">
+          <input type="checkbox" id="makeup" value="100000">
+          <span>
+            <b>고인 메이크업</b>
+            <small>선택 시 +100,000원</small>
+          </span>
+        </label>
+
+        <label class="choice full">
+          <input type="checkbox" id="customCeremony" value="200000">
+          <span>
+            <b>종교 · 가족 맞춤 의전</b>
+            <small>종교 또는 가족 요청에 맞춘 추가 의전 · +200,000원</small>
+          </span>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">발인차량 선택</div>
+
+    <div class="option-row">
+      <div class="choice-grid">
+        <label class="choice full">
+          <input type="radio" name="baseVehicle" value="0" checked>
+          <span>
+            <b>차량 선택 안 함</b>
+            <small>발인차량 비용 0원</small>
+          </span>
+        </label>
+
+        <label class="choice">
+          <input type="radio" name="baseVehicle" value="300000">
+          <span>
+            <b>카니발 · 스타리아</b>
+            <small>300,000원</small>
+          </span>
+        </label>
+
+        <label class="choice">
+          <input type="checkbox" id="limo" value="500000">
+          <span>
+            <b>장의 리무진</b>
+            <small>500,000원 · 왕복 100km 기준</small>
+          </span>
+        </label>
+
+        <label class="choice">
+          <input type="checkbox" id="bus" value="500000">
+          <span>
+            <b>장의버스</b>
+            <small>500,000원 · 왕복 100km 기준</small>
+          </span>
+        </label>
+      </div>
+      <div class="sub">리무진과 장의버스는 동시에 선택할 수 있으며, 동시 선택 시 1,000,000원이 합산됩니다.</div>
+    </div>
+  </section>
+
+  <div class="summary">
+    <div class="summary-top">현재 예상 장례비용</div>
+    <div class="total" id="total">1,226,000원</div>
+    <div class="breakdown" id="breakdown"></div>
+    <small>
+      장례식장 시설사용료·안치료·입관실 사용료·음식비·화장장 사용료·봉안시설·장지 비용 등은 별도입니다.<br>
+      실제 비용은 지역·시설·거리·현장 상황에 따라 달라질 수 있으며, 상담 항목은 현재 합계에 포함되지 않습니다.
+    </small>
+  </div>
+  <div class="legal-note">
+    본 견적은 선택 항목을 기준으로 계산한 예상금액이며 최종 계약금액은 상담 및 현장 확인 후 확정됩니다.
+  </div>
+
+  <div class="mobile-total-bar">
+    <span>현재 예상금액</span>
+    <strong id="mobileTotal">350,000원</strong>
+  </div>
+</main>
+
+<style>
+.mobile-total-bar{
+  display:none;
+}
+@media(max-width:520px){
+  .wrap{padding-bottom:24px}
+  .summary{margin-bottom:18px}
+  .mobile-total-bar{
+    display:flex;
+    position:sticky;
+    bottom:0;
+    z-index:20;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin:18px -16px -24px;
+    padding:13px 18px;
+    background:#0f243e;
+    color:#fff;
+    border-top:2px solid #b89b5e;
+  }
+  .mobile-total-bar span{font-size:12px;color:#d9dfe6}
+  .mobile-total-bar strong{font-size:20px;color:#e4ca92}
+}
+</style>
+
+<script>
+const HALL_BASE = 450000;
+const NOHALL_BASE = 450000;
+const SUIT_PRICE = 80000;
+const HELPER_BASE_HOURS = 10;
+const HELPER_BASE_PRICE = 126000;
+const HELPER_OVERTIME_RATE = 15000;
+const HELPER_DAYS = 2;
+let helperCount = 0;
+let helperHours = 10;
+
+const ids = {
+  religiousSupplies: document.getElementById("religiousSupplies"),
+  ceremonyType: () => document.querySelector('input[name="ceremonyType"]:checked')?.value || "hall",
+
+  cremationCoffin: document.getElementById("cremationCoffin"),
+  burialCoffin: document.getElementById("burialCoffin"),
+  cremationCoffinRow: document.getElementById("cremationCoffinRow"),
+  burialCoffinRow: document.getElementById("burialCoffinRow"),
+  burialCoffinConsult: document.getElementById("burialCoffinConsult"),
+  funeralType: document.getElementById("funeralType"),
+  cremationShroud: document.getElementById("cremationShroud"),
+  cremationShroudConsult: document.getElementById("cremationShroudConsult"),
+  burialShroud: document.getElementById("burialShroud"),
+  burialShroudConsult: document.getElementById("burialShroudConsult"),
+  urn: document.getElementById("urn"),
+  urnRow: document.getElementById("urnRow"),
+  altar: document.getElementById("altar"),
+  makeup: document.getElementById("makeup"),
+  customCeremony: document.getElementById("customCeremony"),
+  suitCount: document.getElementById("suitCount"),
+
+  limo: document.getElementById("limo"),
+  bus: document.getElementById("bus"),
+  cremationShroudRow: document.getElementById("cremationShroudRow"),
+  burialShroudRow: document.getElementById("burialShroudRow"),
+  urnConsult: document.getElementById("urnConsult")
+};
+
+function num(v){
+  if(v === "consult") return 0;
+  return Number(v || 0);
+}
+
+function selectedBaseVehicle(){
+  const checked = document.querySelector('input[name="baseVehicle"]:checked');
+  return checked ? Number(checked.value) : 0;
+}
+
+function updateCeremonyUI(){
+  const type = ids.ceremonyType();
+  const isNoHall = type === "nohall";
+
+  document.getElementById("directorTitle").textContent =
+    isNoHall ? "장례지도사 1명 · 무빈소 진행" : "장례지도사 1명 · 3일 진행";
+  document.getElementById("directorDesc").textContent =
+    isNoHall ? "안치·입관·발인 중심 무빈소 장례 진행" : "장례 절차 및 행사 진행";
+  document.getElementById("directorPrice").textContent = "100,000원";
+
+  document.getElementById("altarRow").style.display = isNoHall ? "none" : "block";
+  document.getElementById("hallServiceSection").style.display = isNoHall ? "none" : "block";
+
+  if (isNoHall) {
+    ids.altar.value = "0";
+    ids.suitCount.value = "0";
+    helperCount = 0;
+    helperHours = 10;
+  }
+  updateHelperUI();
+}
+
+function updateHelperUI(){
+  document.getElementById("helperCountText").textContent = helperCount + "명";
+  document.getElementById("helperHoursText").textContent = helperHours + "시간";
+  document.getElementById("helperMinus").disabled = helperCount <= 0;
+  document.getElementById("helperPlus").disabled = helperCount >= 5;
+  document.getElementById("hourMinus").disabled = helperHours <= 10;
+}
+
+function syncTotalDisplay(formattedTotal){
+  const mainTotal = document.getElementById("total");
+  const mobileTotal = document.getElementById("mobileTotal");
+  if (mainTotal) mainTotal.textContent = formattedTotal;
+  if (mobileTotal) mobileTotal.textContent = formattedTotal;
+}
+
+function calc(){
+  const ceremonyType = ids.ceremonyType();
+  const BASE = ceremonyType === "nohall" ? NOHALL_BASE : HALL_BASE;
+  const isBurial = ids.funeralType.value === "burial";
+
+  ids.cremationShroudRow.style.display = isBurial ? "none" : "block";
+  ids.burialShroudRow.style.display = isBurial ? "block" : "none";
+
+  ids.cremationCoffinRow.style.display = isBurial ? "none" : "block";
+  ids.burialCoffinRow.style.display = isBurial ? "block" : "none";
+  ids.burialCoffinConsult.style.display =
+    isBurial && ids.burialCoffin.value === "consult" ? "block" : "none";
+
+  const shroudValue = isBurial ? ids.burialShroud.value : ids.cremationShroud.value;
+
+  ids.cremationShroudConsult.style.display =
+    !isBurial && ids.cremationShroud.value === "consult" ? "block" : "none";
+  ids.burialShroudConsult.style.display =
+    isBurial && ids.burialShroud.value === "consult" ? "block" : "none";
+
+  ids.urnRow.style.display = isBurial ? "none" : "block";
+  if (isBurial) {
+    ids.urn.value = "0";
+    ids.urn.disabled = false;
+  }
+
+  ids.urn.disabled = false;
+  ids.urnConsult.style.display = (!isBurial && ids.urn.value === "consult") ? "block" : "none";
+  const urnTotal = isBurial ? 0 : num(ids.urn.value);
+  const suitTotal = ceremonyType === "nohall" ? 0 : Number(ids.suitCount.value) * SUIT_PRICE;
+  const makeupTotal = ids.makeup.checked ? 100000 : 0;
+  const customCeremonyTotal = ids.customCeremony.checked ? 200000 : 0;
+  const overtimeHours = Math.max(0, helperHours - HELPER_BASE_HOURS);
+  const helperPerPerson =
+    HELPER_BASE_PRICE +
+    (overtimeHours * HELPER_OVERTIME_RATE);
+  const helperTotal = ceremonyType === "nohall" ? 0 : helperPerPerson * helperCount * HELPER_DAYS;
+  const baseVehicle = selectedBaseVehicle();
+  const limo = ids.limo.checked ? 500000 : 0;
+  const bus = ids.bus.checked ? 500000 : 0;
+
+  let total =
+    BASE +
+    (ids.religiousSupplies.checked ? 100000 : 0) +
+    num(isBurial ? ids.burialCoffin.value : ids.cremationCoffin.value) +
+    num(shroudValue) +
+    urnTotal +
+    (ceremonyType === "nohall" ? 0 : num(ids.altar.value)) +
+    makeupTotal +
+    customCeremonyTotal +
+    suitTotal +
+    helperTotal +
+    baseVehicle +
+    limo +
+    bus;
+
+  const formattedTotal = total.toLocaleString("ko-KR") + "원";
+  syncTotalDisplay(formattedTotal);
+
+  const lines = [
+    `장례형태 ${ceremonyType === "nohall" ? "무빈소 장례" : "빈소 장례"}`,
+    `필수 진행비용 ${BASE.toLocaleString("ko-KR")}원`,
+    ...(ids.religiousSupplies.checked ? [`종교별 입관용품 +100,000원`] : []),
+
+    ...((isBurial ? ids.burialCoffin.value : ids.cremationCoffin.value) !== "0"
+      ? [`관 ${isBurial
+          ? ids.burialCoffin.options[ids.burialCoffin.selectedIndex].text
+          : ids.cremationCoffin.options[ids.cremationCoffin.selectedIndex].text}`]
+      : []),
+
+    ...(shroudValue !== "0"
+      ? [`수의 ${isBurial
+          ? ids.burialShroud.options[ids.burialShroud.selectedIndex].text
+          : ids.cremationShroud.options[ids.cremationShroud.selectedIndex].text}`]
+      : []),
+
+    ...(!isBurial ? [
+      urnTotal === 0 ? `봉안함 기본 목함 제공` : `봉안함 ${urnTotal.toLocaleString("ko-KR")}원`
+    ] : []),
+
+    ...((ceremonyType !== "nohall" && num(ids.altar.value) > 0)
+      ? [`제단꽃 ${num(ids.altar.value).toLocaleString("ko-KR")}원`]
+      : []),
+
+    ...(makeupTotal > 0 ? [`고인 메이크업 ${makeupTotal.toLocaleString("ko-KR")}원`] : []),
+    ...(customCeremonyTotal > 0 ? [`종교·가족 맞춤 의전 ${customCeremonyTotal.toLocaleString("ko-KR")}원`] : []),
+
+    ...((ceremonyType !== "nohall" && suitTotal > 0)
+      ? [`상복 ${suitTotal.toLocaleString("ko-KR")}원`]
+      : []),
+
+    ...((ceremonyType !== "nohall" && helperTotal > 0)
+      ? [`도우미 ${helperCount}명 × ${HELPER_DAYS}일 × 일 ${helperHours}시간 ${helperTotal.toLocaleString("ko-KR")}원`]
+      : []),
+
+    ...(baseVehicle > 0 ? [`카니발·스타리아 ${baseVehicle.toLocaleString("ko-KR")}원`] : []),
+    ...(limo > 0 ? [`장의 리무진 ${limo.toLocaleString("ko-KR")}원`] : []),
+    ...(bus > 0 ? [`장의버스 ${bus.toLocaleString("ko-KR")}원`] : []),
+  ];
+
+  document.getElementById("breakdown").innerHTML = lines.join("<br>");
+}
+
+document.getElementById("helperMinus").addEventListener("click", ()=>{
+  if(helperCount > 0) helperCount--;
+  updateHelperUI();
+  calc();
+});
+document.getElementById("helperPlus").addEventListener("click", ()=>{
+  if(helperCount < 5) helperCount++;
+  updateHelperUI();
+  calc();
+});
+document.getElementById("hourMinus").addEventListener("click", ()=>{
+  if(helperHours > 10) helperHours--;
+  updateHelperUI();
+  calc();
+});
+document.getElementById("hourPlus").addEventListener("click", ()=>{
+  helperHours++;
+  updateHelperUI();
+  calc();
+});
+
+document.querySelectorAll('input[name="ceremonyType"]').forEach(el=>{
+  el.addEventListener("change", ()=>{
+    updateCeremonyUI();
+    calc();
+  });
+});
+
+document.querySelectorAll("select,input").forEach(el=>{
+  if (el.name !== "ceremonyType") {
+    el.addEventListener("change", calc);
+  }
+});
+
+setTimeout(()=>{
+  if (ids.cremationCoffin) ids.cremationCoffin.value = "0";
+  if (ids.burialCoffin) ids.burialCoffin.value = "0";
+  if (ids.cremationShroud) ids.cremationShroud.value = "0";
+  if (ids.burialShroud) ids.burialShroud.value = "0";
+  updateCeremonyUI();
+  calc();
+}, 0);
+</script>
+
+<div class="estimate-actions no-print">
+  <button type="button" class="estimate-consult-main" id="estimateConsultBtn">이 견적으로 상담하기</button>
+  <button type="button" class="estimate-action-btn" id="copyEstimateBtn">견적 복사하기</button>
+  <button type="button" class="estimate-action-btn" id="printEstimateBtn">견적 인쇄하기</button>
+  <button type="button" class="estimate-action-btn" id="pdfEstimateBtn">PDF 만들기</button>
+</div>
+<div class="sub no-print" style="margin-top:8px;text-align:center;">
+  PDF 만들기는 휴대폰·PC의 인쇄 화면에서 ‘PDF로 저장’을 선택합니다.
+</div>
+
+
+<script>
+(function(){
+  function cleanText(el){
+    if(!el) return "";
+    return (el.innerText || el.textContent || "")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
+  }
+
+  function estimateText(){
+    const title = "안심365 장례서비스 - 상조 견적";
+    const candidates = [
+      document.querySelector(".result"),
+      document.querySelector(".summary"),
+      document.querySelector("#result"),
+      document.querySelector("#summary"),
+      document.querySelector(".estimate-result")
+    ];
+    let result = candidates.find(Boolean);
+
+    // If the page uses individual output fields instead of a result wrapper,
+    // gather the visible estimate area immediately above the action buttons.
+    if(!result){
+      const action = document.querySelector(".estimate-actions");
+      let p = action ? action.previousElementSibling : null;
+      const chunks = [];
+      let count = 0;
+      while(p && count < 8){
+        if(!p.classList.contains("no-print")) chunks.unshift(cleanText(p));
+        p = p.previousElementSibling;
+        count++;
+      }
+      return title + "\n\n" + chunks.filter(Boolean).join("\n\n");
     }
-    function renderProducts(){
-      $("products").innerHTML=Object.entries(PRODUCTS).map(([key,p])=>`<button type="button" class="product ${key===selected?"active":""}" data-product="${key}"><small>${p.tag}</small><strong>${p.name}</strong><span>${man(p.price)}</span></button>`).join("");
-      document.querySelectorAll("[data-product]").forEach(btn=>btn.onclick=()=>selectProduct(btn.dataset.product));
+    return title + "\n\n" + cleanText(result);
+  }
+
+  async function copyEstimate(){
+    const text = estimateText();
+    try{
+      await navigator.clipboard.writeText(text);
+      alert("견적 내용이 텍스트로 복사되었습니다.");
+    }catch(e){
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+      alert("견적 내용이 텍스트로 복사되었습니다.");
     }
-    function selectProduct(key){
-      selected=key;
-      const p=PRODUCTS[key];
-      $("priority").checked=false;
-      $("male").min=p.male;
-      $("female").min=p.female;
-      $("male").value=p.male;
-      $("female").value=p.female;
-      Object.keys(UPGRADE_LABELS).forEach(id=>$(id).value="0");
-      renderProducts();render();
-      history.replaceState(null,"",`${location.pathname}?product=${key}`);
+  }
+
+  document.getElementById("copyEstimateBtn")?.addEventListener("click", copyEstimate);
+  document.getElementById("printEstimateBtn")?.addEventListener("click", function(){
+    window.print();
+  });
+  document.getElementById("pdfEstimateBtn")?.addEventListener("click", function(){
+    window.print();
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  const slider = document.getElementById("presetSlider");
+  const dots = Array.from(document.querySelectorAll(".preset-dot"));
+
+  function setRadio(name, value){
+    const el = document.querySelector(`input[name="${name}"][value="${value}"]`);
+    if(el) el.checked = true;
+  }
+  function setSelect(id, value){
+    const el = document.getElementById(id);
+    if(el) el.value = String(value);
+  }
+  function setCheck(id, checked){
+    const el = document.getElementById(id);
+    if(el) el.checked = checked;
+  }
+  function setSuitCount(count){
+    const el = document.getElementById("suitCount");
+    if(el) el.value = String(count);
+  }
+
+  function applyPreset(type){
+    // common reset
+
+    setCheck("makeup", false);
+    setCheck("customCeremony", false);
+    setCheck("limo", false);
+    setCheck("bus", false);
+    setCheck("religiousSupplies", false);
+    setSelect("altar", 0);
+    setSelect("urn", 0);
+    setSuitCount(0);
+    helperCount = 0;
+    helperHours = 10;
+
+    if(type === "nohall-cremation"){
+      setRadio("ceremonyType", "nohall");
+      setSelect("funeralType", "cremation");
+      setCheck("religiousSupplies", false);
+      setSelect("cremationCoffin", 150000);
+      setSelect("cremationShroud", 200000);
+      setRadio("baseVehicle", "300000");
+      setCheck("bus", false);
+      setCheck("limo", false);
     }
-    function getClothes(){
-      const p=PRODUCTS[selected];
-      const male=Math.max(0,Number($("male").value)||0);
-      const female=Math.max(0,Number($("female").value)||0);
-      return {male,female,extraMale:Math.max(0,male-p.male),extraFemale:Math.max(0,female-p.female)};
+
+    if(type === "hall-cremation"){
+      setRadio("ceremonyType", "hall");
+      setSelect("funeralType", "cremation");
+      setCheck("religiousSupplies", false);
+      setSelect("cremationCoffin", 150000);
+      setSelect("cremationShroud", 200000);
+      setSelect("altar", 300000);
+      setSuitCount(4);
+      helperCount = 1;
+      helperHours = 10;
+      setRadio("baseVehicle", "0");
+      setCheck("bus", true);
+      setCheck("limo", false);
     }
-    function selectedConsult(){return [...document.querySelectorAll("#consultOptions input:checked")].map(x=>x.value)}
-    function selectedUpgrades(){
-      return Object.entries(UPGRADE_LABELS).map(([id,label])=>({id,label,price:Number($(id).value)||0})).filter(x=>x.price>0);
+
+    if(type === "hall-burial"){
+      setRadio("ceremonyType", "hall");
+      setSelect("funeralType", "burial");
+      setCheck("religiousSupplies", false);
+      setSelect("burialCoffin", 350000);
+      setSelect("burialShroud", 300000);
+      setSelect("altar", 300000);
+      setSuitCount(4);
+      helperCount = 1;
+      helperHours = 10;
+      setRadio("baseVehicle", "0");
+      setCheck("bus", true);
+      setCheck("limo", false);
     }
-    function calculate(){
-      const p=PRODUCTS[selected],clothes=getClothes();
-      const discount=selected==="nohall"&&$("priority").checked?198000:0;
-      const clothesCost=clothes.extraMale*EXTRA_MALE+clothes.extraFemale*EXTRA_FEMALE;
-      const upgrades=selectedUpgrades();
-      const upgradeCost=upgrades.reduce((sum,x)=>sum+x.price,0);
-      const packagePay=p.price-discount+clothesCost+upgradeCost;
-      return {p,clothes,discount,clothesCost,upgrades,upgradeCost,packagePay,grand:packagePay,consult:selectedConsult()};
-    }
-    function render(){
-      const c=calculate(),eligible=selected==="nohall";
-      const limousineIncluded=selected==="premium";
-      $("limousine").disabled=limousineIncluded;
-      if(limousineIncluded)$("limousine").value="0";
-      $("limousineInfo").textContent=limousineIncluded?"고급형 상품에 장례 리무진 기본 포함":"카니발·스타리아에서 장례 리무진으로 변경";
-      $("benefitBox").classList.toggle("is-disabled",!eligible);
-      $("benefitHelp").textContent=eligible?"증빙서류 확인 후 특별우대가 적용됩니다.":"특별우대 20% 할인은 무빈소 단일상품에만 적용됩니다.";
-      if(!eligible)$("priority").checked=false;
-      $("maleInfo").textContent=c.p.male?`기본 ${c.p.male}벌 포함 · 초과 1벌당 7만원`:"기본 제공 없음 · 1벌당 7만원";
-      $("femaleInfo").textContent=c.p.female?`기본 ${c.p.female}벌 포함 · 초과 1벌당 8만원`:"기본 제공 없음 · 1벌당 8만원";
-      document.querySelectorAll("[data-step]").forEach(button=>{
-        const input=$(button.dataset.target),step=Number(button.dataset.step),value=Number(input.value);
-        button.disabled=step<0?value<=Number(input.min):value>=Number(input.max);
+
+    updateCeremonyUI();
+    updateHelperUI();
+    calc();
+
+    const target = document.querySelector('input[name="ceremonyType"]');
+    if(target) target.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  document.querySelectorAll(".preset-card").forEach(card=>{
+    card.querySelector(".detail")?.addEventListener("click", ()=>{
+      card.classList.toggle("open");
+    });
+    card.querySelector(".apply")?.addEventListener("click", ()=>{
+      applyPreset(card.dataset.preset);
+    });
+  });
+
+  if(slider){
+    slider.addEventListener("scroll", ()=>{
+      const cards = Array.from(slider.querySelectorAll(".preset-card"));
+      const center = slider.scrollLeft + slider.clientWidth/2;
+      let best = 0, bestDist = Infinity;
+      cards.forEach((card,i)=>{
+        const cardCenter = card.offsetLeft + card.offsetWidth/2;
+        const dist = Math.abs(cardCenter-center);
+        if(dist < bestDist){bestDist = dist; best = i;}
       });
-      $("sumProduct").textContent=c.p.name;
-      $("sumBase").textContent=won(c.p.price);
-      $("discountRow").style.display=c.discount?"flex":"none";
-      $("sumDiscount").textContent="-"+won(c.discount);
-      $("sumClothes").textContent=c.clothesCost?`+${won(c.clothesCost)}`:"추가 없음";
-      $("sumUpgrades").textContent=c.upgradeCost?`+${won(c.upgradeCost)}`:"추가 없음";
-      $("sumTotal").textContent=won(c.grand);
-      $("totalNote").textContent="별도 시설비용을 제외한 예상금액";
-      $("sumUpgradeList").innerHTML=c.upgrades.length?c.upgrades.map(x=>`<li>${x.label} · +${won(x.price)}</li>`).join(""):"<li>선택 항목 없음</li>";
-      $("sumConsult").innerHTML=c.consult.length?c.consult.map(x=>`<li>${x} · 상담 후 금액 확정</li>`).join(""):"<li>선택 항목 없음</li>";
+      dots.forEach((d,i)=>d.classList.toggle("active", i===best));
+    });
+  }
+})();
+</script>
+
+
+
+<div class="estimate-modal no-print" id="estimateConsultModal" role="dialog" aria-modal="true" aria-labelledby="estimateModalTitle">
+  <div class="estimate-modal-card">
+    <h3 id="estimateModalTitle">이 견적으로 상담하기</h3>
+    <p class="desc">현재 선택한 견적내용과 연락처가 안심365 상담 담당자에게 전달됩니다.</p>
+    <div class="estimate-modal-summary" id="estimateModalSummary"></div>
+    <div class="estimate-field"><label for="estimateGuardianName">보호자 성함</label><input type="text" id="estimateGuardianName" maxlength="30" autocomplete="name" placeholder="성함을 입력해주세요"></div>
+    <div class="estimate-field"><label for="estimatePhone">연락처</label><input type="tel" id="estimatePhone" maxlength="13" inputmode="numeric" autocomplete="tel" placeholder="010-0000-0000"></div>
+    <label class="estimate-privacy"><input type="checkbox" id="estimatePrivacy"><span>상담 접수를 위한 개인정보 수집·이용에 동의합니다. (성함, 연락처, 선택 견적내용)</span></label>
+    <div class="estimate-modal-actions"><button type="button" class="estimate-cancel" id="estimateCancelBtn">취소</button><button type="button" class="estimate-submit" id="estimateSubmitBtn">상담 접수 전송</button></div>
+    <div class="estimate-error" id="estimateError"></div>
+  </div>
+</div>
+
+<section id="printEstimateSheet" aria-hidden="true">
+  <div class="print-estimate-title">
+    <h1>안심365 장례 예상견적</h1>
+    <p>선택한 항목을 기준으로 계산한 예상 견적입니다.</p>
+  </div>
+
+  <div class="print-estimate-total">
+    <span>현재 예상 장례비용</span>
+    <strong id="printTotal">0원</strong>
+  </div>
+
+  <div class="print-estimate-breakdown" id="printBreakdown"></div>
+
+  <div class="print-estimate-notice">
+    ※ 장례식장 시설사용료·안치료·입관실 사용료·음식비·화장장 사용료·봉안시설·장지 비용 등은 별도입니다.<br>
+    ※ 실제 비용은 지역·시설·거리·현장 상황에 따라 달라질 수 있습니다.
+  </div>
+
+  <div class="print-estimate-footer">
+    본 견적은 예상금액이며 최종 계약금액은 상담 및 현장 확인 후 확정됩니다.
+  </div>
+</section>
+
+
+<script>
+(function(){
+  function syncPrintEstimate(){
+    const total = document.getElementById("total");
+    const breakdown = document.getElementById("breakdown");
+    const printTotal = document.getElementById("printTotal");
+    const printBreakdown = document.getElementById("printBreakdown");
+
+    if(printTotal && total){
+      printTotal.textContent = total.textContent.trim();
     }
-    function summaryText(){
-      const c=calculate();
-      const lines=["[안심365 장례 예상견적]",`선택상품: ${c.p.name}`,`기본 상품가격: ${won(c.p.price)}`];
-      if(c.discount)lines.push(`특별우대 할인: -${won(c.discount)}`);
-      lines.push(`상복: 남성 ${c.clothes.male}벌 / 여성 ${c.clothes.female}벌`);
-      if(c.clothesCost)lines.push(`상복 추가금: ${won(c.clothesCost)}`);
-      c.upgrades.forEach(x=>lines.push(`${x.label} 업그레이드: +${won(x.price)}`));
-      lines.push(`예상 결제금액: ${won(c.grand)}`);
-      if(c.consult.length)lines.push(`상담 요청: ${c.consult.join(", ")}`);
-      lines.push("※ 시설사용료·안치료·입관실 사용료·음식비·화장장·봉안시설·장지 비용 등 별도","※ 최종 계약금액은 상담 후 확정");
-      return lines.join("\n");
+    if(printBreakdown && breakdown){
+      printBreakdown.innerHTML = breakdown.innerHTML;
     }
-    async function copySummary(){
-      const text=summaryText();
-      try{await navigator.clipboard.writeText(text)}catch(e){const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}
-      $("toast").classList.add("show");setTimeout(()=>$("toast").classList.remove("show"),1700);
-    }
-    selected=initialProduct();renderProducts();selectProduct(selected);
-    document.querySelectorAll("[data-step]").forEach(button=>button.addEventListener("click",()=>{
-      const input=$(button.dataset.target),step=Number(button.dataset.step);
-      const next=Math.min(Number(input.max),Math.max(Number(input.min),Number(input.value)+step));
-      input.value=next;render();
-    }));
-    ["priority","male","female","shroud","urn","flowers","makeup","limousine","religious"].forEach(id=>$(id).addEventListener("input",render));
-    document.querySelectorAll("#consultOptions input").forEach(x=>x.addEventListener("change",render));
-    $("copyBtn").onclick=copySummary;$("printBtn").onclick=()=>window.print();
-  </script>
+  }
+
+  window.addEventListener("beforeprint", syncPrintEstimate);
+
+  const printBtn = document.getElementById("printEstimateBtn");
+  const pdfBtn = document.getElementById("pdfEstimateBtn");
+
+  if(printBtn){
+    printBtn.onclick = function(){
+      syncPrintEstimate();
+      window.print();
+    };
+  }
+
+  if(pdfBtn){
+    pdfBtn.onclick = function(){
+      syncPrintEstimate();
+      window.print();
+    };
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  const API_URL="https://www.odreai.com/api/estimate-consultations";
+  const modal=document.getElementById("estimateConsultModal");
+  const openBtn=document.getElementById("estimateConsultBtn");
+  const cancelBtn=document.getElementById("estimateCancelBtn");
+  const submitBtn=document.getElementById("estimateSubmitBtn");
+  const nameEl=document.getElementById("estimateGuardianName");
+  const phoneEl=document.getElementById("estimatePhone");
+  const privacyEl=document.getElementById("estimatePrivacy");
+  const errorEl=document.getElementById("estimateError");
+  const summaryEl=document.getElementById("estimateModalSummary");
+
+  function currentEstimate(){
+    const total=(document.getElementById("total")?.textContent||"").trim();
+    const detail=(document.getElementById("breakdown")?.innerText||"").replace(/\n{3,}/g,"\n\n").trim();
+    return {total,detail};
+  }
+  function openModal(){
+    const e=currentEstimate();
+    summaryEl.innerHTML='<b>현재 예상금액 '+e.total+'</b><br>선택한 세부 견적내용도 함께 전송됩니다.';
+    errorEl.textContent=""; modal.classList.add("open"); setTimeout(()=>nameEl.focus(),50);
+  }
+  function closeModal(){modal.classList.remove("open")}
+  function formatPhone(v){
+    const d=v.replace(/\D/g,"").slice(0,11);
+    if(d.length<=3)return d;if(d.length<=7)return d.slice(0,3)+"-"+d.slice(3);return d.slice(0,3)+"-"+d.slice(3,7)+"-"+d.slice(7);
+  }
+  phoneEl.addEventListener("input",()=>phoneEl.value=formatPhone(phoneEl.value));
+  openBtn.addEventListener("click",openModal); cancelBtn.addEventListener("click",closeModal);
+  modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&modal.classList.contains("open"))closeModal()});
+
+  submitBtn.addEventListener("click",async()=>{
+    const name=nameEl.value.trim(), phone=phoneEl.value.trim(), estimate=currentEstimate();
+    errorEl.textContent="";
+    if(!name){errorEl.textContent="보호자 성함을 입력해주세요.";nameEl.focus();return}
+    if(!/^010-\d{4}-\d{4}$/.test(phone)){errorEl.textContent="올바른 휴대폰 번호를 입력해주세요.";phoneEl.focus();return}
+    if(!privacyEl.checked){errorEl.textContent="개인정보 수집·이용 동의가 필요합니다.";return}
+    if(!estimate.total||!estimate.detail){errorEl.textContent="견적내용을 불러오지 못했습니다.";return}
+    submitBtn.disabled=true; submitBtn.textContent="전송 중...";
+    try{
+      const res=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({guardian_name:name,phone:phone,privacy_agreed:true,estimate_total:estimate.total,estimate_detail:estimate.detail,page_url:location.href})});
+      if(!res.ok)throw new Error("접수 실패");
+      const data=await res.json();
+      if(!data.success)throw new Error("접수 실패");
+      location.href="complete.html?type=estimate";
+    }catch(err){errorEl.textContent="전송에 실패했습니다. 잠시 후 다시 시도해주세요.";submitBtn.disabled=false;submitBtn.textContent="상담 접수 전송"}
+  });
+})();
+</script>
+
+<nav class="quick-sticky" aria-label="빠른 메뉴">
+  <a href="/estimate.html" class="quick-sticky-item" aria-label="장례 예상견적 계산하기">
+    <span class="quick-sticky-icon">₩</span>
+    <span class="quick-sticky-text">견적<br>계산</span>
+  </a>
+  <a href="/#funeral-consultation" class="quick-sticky-item is-apply" aria-label="장례 상담 바로 접수하기">
+    <span class="quick-sticky-icon">✓</span>
+    <span class="quick-sticky-text">바로<br>접수</span>
+  </a>
+  <a href="tel:010-5934-3137" class="quick-sticky-item is-call" aria-label="바로 전화상담 연결">
+    <span class="quick-sticky-icon">☎</span>
+    <span class="quick-sticky-text">전화<br>상담</span>
+  </a>
+</nav>
 </body>
 </html>
