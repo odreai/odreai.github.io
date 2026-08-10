@@ -13,11 +13,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <meta name="description"
-content="24시간 장례상담, 장례식장 안내, 고인 이송, 운구, 무빈소 장례, 후불상조, 고독사·변사 수습, 이장·개장까지 장례 전문가가 신속하게 안내해드립니다." />
+content="24시간 장례상담과 고인 운구부터 무빈소·빈소 장례까지 안내합니다. 장례용품과 필요한 항목을 직접 선택해 맞춤 장례견적과 예상비용을 바로 계산해 보세요." />
 
 <meta name="keywords"
-content="안심365, 안심365장례서비스, 장례서비스, 장례상담, 24시간장례상담, 장례식장, 장례지도사, 후불상조, 무빈소장례, 무빈소장례식장, 운구, 운구차, 고인이송, 시신이송, 장례절차, 장례비용, 발인, 염습, 화장, 수골, 산골, 유골함, 봉안, 납골, 자연장, 이장, 개장, 고독사수습, 변사수습" />
-
+content="안심365, 안심365장례서비스, 장례서비스, 장례상담, 24시간장례상담, 장례맞춤견적, 맞춤장례견적, 장례직접견적, 장례견적내기, 장례비용계산, 장례비용견적, 장례예상비용, 장례식장, 장례지도사, 후불상조, 무빈소장례, 빈소장례, 운구, 운구차, 고인이송, 시신이송, 장례절차, 장례비용, 발인, 염습, 화장, 유골함, 봉안, 납골, 자연장, 이장, 개장, 고독사수습, 변사수습" />
 <meta name="robots" content="index,follow" />
 
 <meta property="og:type" content="website" />
@@ -1028,140 +1027,6 @@ body{
     }
 }
 
-/* 특별우대 혜택 팝업 */
-
-.benefit-popup {
-    position: fixed;
-    left: max(14px, calc((100vw - 728px) / 2 - 70px));
-    bottom: 24px;
-    z-index: 9997;
-
-    width: min(330px, calc(100vw - 32px));
-    padding: 0;
-
-    overflow: hidden;
-    border: 1px solid rgba(184, 155, 94, 0.75);
-    border-radius: 15px;
-
-    background: #ffffff;
-    box-shadow: 0 12px 34px rgba(8, 28, 46, 0.24);
-
-    animation: benefitPopupIn 0.45s ease-out;
-}
-
-.benefit-popup.is-hidden {
-    display: none;
-}
-
-.benefit-popup-close {
-    position: absolute;
-    top: 8px;
-    right: 9px;
-    z-index: 2;
-
-    width: 28px;
-    height: 28px;
-
-    border: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.14);
-    color: #ffffff;
-
-    font-size: 20px;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.benefit-popup-link {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-}
-
-.benefit-popup-head {
-    padding: 17px 44px 14px 18px;
-    background: #0f2948;
-    color: #ffffff;
-}
-
-.benefit-popup-head small {
-    display: block;
-    margin-bottom: 5px;
-    color: #d8ba77;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-}
-
-.benefit-popup-head strong {
-    display: block;
-    font-size: 16px;
-    line-height: 1.4;
-}
-
-.benefit-popup-body {
-    padding: 16px 18px 17px;
-}
-
-.benefit-popup-body span {
-    display: block;
-    color: #6c7480;
-    font-size: 11px;
-}
-
-.benefit-popup-body b {
-    display: block;
-    margin-top: 5px;
-    color: #0f243e;
-    font-size: 18px;
-    line-height: 1.4;
-}
-
-.benefit-popup-body em {
-    display: block;
-    margin-top: 11px;
-    color: #9a7435;
-    font-size: 11px;
-    font-style: normal;
-    font-weight: 800;
-}
-
-@keyframes benefitPopupIn {
-    from {
-        opacity: 0;
-        transform: translateY(16px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (max-width: 768px) {
-    .benefit-popup {
-        left: 12px;
-        bottom: 14px;
-        width: min(310px, calc(100vw - 76px));
-    }
-
-    .benefit-popup-head {
-        padding: 14px 40px 12px 15px;
-    }
-
-    .benefit-popup-head strong {
-        font-size: 14px;
-    }
-
-    .benefit-popup-body {
-        padding: 13px 15px 14px;
-    }
-
-    .benefit-popup-body b {
-        font-size: 16px;
-    }
-}
-
 .select-option span{
     display:flex;
     flex-direction:column;
@@ -1341,6 +1206,157 @@ body{
         font-size: 9px;
     }
 }
+
+
+/* ===== 최상단 브랜드 바 ===== */
+.brand-topbar{
+    margin:0 -16px;
+    min-height:72px;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    background:#071827;
+    border-bottom:1px solid rgba(199,161,90,.28);
+}
+.brand-topbar-link{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    color:#fff;
+    text-decoration:none;
+}
+.brand-topbar-name{
+    font-family:"Noto Serif KR",serif;
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:-.04em;
+}
+@media (min-width:769px){
+    .brand-topbar{margin-left:-16px;margin-right:-16px;min-height:78px;padding:0 28px;}
+    .brand-topbar-name{font-size:22px;}
+}
+@media (max-width:420px){
+    .brand-topbar{min-height:66px;padding:0 20px;}
+    .brand-topbar-name{font-size:18px;}
+}
+
+/* ===== 2026-08 메인 상단 리뉴얼: 기존 접수폼/기능 유지 ===== */
+.brand-hero{
+    margin:0 -16px 26px;
+    padding:58px 26px 42px;
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg,#061522 0%,#0b2438 62%,#102f47 100%);
+    color:#fff;
+    text-align:left;
+    border-bottom:1px solid rgba(184,155,94,.35);
+}
+.brand-hero::before{
+    content:"";
+    position:absolute;
+    width:340px;height:340px;
+    right:-190px;top:-190px;
+    border:1px solid rgba(199,161,90,.18);
+    border-radius:50%;
+}
+.brand-hero::after{
+    content:"365";
+    position:absolute;
+    right:-12px;bottom:-44px;
+    font-family:Georgia,serif;
+    font-size:150px;
+    color:rgba(255,255,255,.025);
+    line-height:1;
+    pointer-events:none;
+}
+.brand-hero-inner{position:relative;z-index:1;max-width:620px;margin:0 auto;}
+.brand-kicker{
+    margin:0 0 18px;
+    color:#c7a15a;
+    font-family:Georgia,serif;
+    font-size:11px;
+    letter-spacing:.22em;
+    font-weight:700;
+}
+.brand-hero h1{
+    margin:0;
+    font-family:"Noto Serif KR",serif;
+    font-size:clamp(35px,7vw,56px);
+    line-height:1.3;
+    letter-spacing:-.045em;
+    font-weight:800;
+}
+.brand-hero h1 em{color:#e3c886;font-style:normal;}
+.brand-subtitle{
+    margin:22px 0 0;
+    color:#c2ccd4;
+    font-size:15px;
+    line-height:1.85;
+}
+.brand-pay{
+    margin:18px 0 0;
+    color:#fff;
+    font-size:14px;
+    font-weight:800;
+}
+.brand-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:28px;}
+.brand-action{
+    min-height:54px;
+    padding:0 14px;
+    display:flex;align-items:center;justify-content:center;
+    border-radius:4px;
+    font-size:14px;font-weight:900;
+    text-decoration:none;
+}
+.brand-action.primary{background:#c7a15a;color:#071827;}
+.brand-action.secondary{border:1px solid rgba(255,255,255,.34);color:#fff;background:rgba(255,255,255,.02);}
+.brand-mini{
+    margin-top:24px;
+    padding-top:18px;
+    border-top:1px solid rgba(255,255,255,.12);
+    display:flex;gap:10px;flex-wrap:wrap;
+    color:#9fb0bd;font-size:11px;
+}
+.brand-mini span{padding-right:10px;border-right:1px solid rgba(255,255,255,.12);}
+.brand-mini span:last-child{border-right:0;}
+
+.why365{
+    margin:0 0 24px;
+    padding:26px 20px 22px;
+    background:#fff;
+    border:1px solid #e4dccd;
+    box-shadow:0 8px 26px rgba(15,36,62,.06);
+}
+.why365-head{text-align:center;margin-bottom:20px;}
+.why365-head small{display:block;color:#b28b46;font-size:10px;font-weight:900;letter-spacing:.16em;margin-bottom:8px;}
+.why365-head h2{margin:0;font-family:"Noto Serif KR",serif;color:#0f243e;font-size:24px;letter-spacing:-.04em;}
+.why365-head p{margin:10px 0 0;color:#68727b;font-size:13px;line-height:1.7;}
+.why365-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.why365-item{padding:17px 14px;border:1px solid #e8e1d5;background:#fbfaf7;min-height:112px;}
+.why365-item b{display:block;color:#0f243e;font-size:15px;margin-bottom:7px;}
+.why365-item span{display:block;color:#727b83;font-size:12px;line-height:1.55;}
+.why365-num{color:#b89b5e!important;font-family:Georgia,serif;font-size:11px!important;font-weight:800;margin-bottom:9px!important;}
+
+@media (min-width:769px){
+    .brand-hero{margin-left:-16px;margin-right:-16px;padding:78px 48px 56px;}
+    .brand-hero-inner{max-width:640px;}
+    .why365{padding:34px 30px 30px;}
+    .why365-grid{grid-template-columns:repeat(4,1fr);}
+    .why365-item{min-height:132px;}
+}
+@media (max-width:420px){
+    .brand-hero{padding:48px 20px 36px;}
+    .brand-hero h1{font-size:35px;}
+    .brand-subtitle{font-size:14px;}
+    .brand-actions{grid-template-columns:1fr;}
+    .why365{padding:23px 15px 19px;}
+    .why365-grid{grid-template-columns:1fr 1fr;gap:8px;}
+    .why365-item{padding:15px 11px;min-height:118px;}
+    .why365-item b{font-size:14px;}
+    .why365-item span{font-size:11px;}
+}
+
 </style>
 
 
@@ -1353,13 +1369,46 @@ body{
 
 <div class="container">
 
-    <!-- 메인 이미지 -->
-    <div class="hero">
-        <img src="images/hero.webp"
-             alt="안심365 장례서비스">
-    </div>
+    <header class="brand-topbar" aria-label="안심365 장례서비스">
+      <a class="brand-topbar-link" href="/">
+        <span class="brand-topbar-name">안심365 장례서비스</span>
+      </a>
+    </header>
 
-    <!-- 여기부터 기존 내용 -->
+    <!-- 새 메인 상단 : 기존 접수폼 및 이하 전체 콘텐츠 유지 -->
+    <section class="brand-hero" aria-label="안심365 장례서비스 소개">
+      <div class="brand-hero-inner">
+        <p class="brand-kicker">365 DAYS · 24 HOURS</p>
+        <h1>마지막 순간까지<br><em>품격과 정성</em>을 다합니다.</h1>
+        <p class="brand-subtitle">
+          장례상품의 가격과 세부구성을 먼저 확인하고,<br>
+          필요한 항목은 예상견적으로 직접 계산해 보세요.
+        </p>
+        <p class="brand-pay">가입비·월 납입금 없는 후불제 장례서비스</p>
+        <div class="brand-actions">
+          <a class="brand-action primary" href="/estimate.html">내가 직접 맞춤 견적 내기 →</a>
+        </div>
+        <div class="brand-mini">
+          <span>상품가격 공개</span><span>세부품목 확인</span><span>예상견적 계산</span><span>필요한 순간 후불 이용</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="why365" aria-labelledby="why365Title">
+      <div class="why365-head">
+        <small>WHY 안심365</small>
+        <h2 id="why365Title">왜 안심365 장례서비스인가</h2>
+        <p>전화하기 전에 가격과 구성을 먼저 확인하고, 가족에게 필요한 장례를 직접 선택할 수 있습니다.</p>
+      </div>
+      <div class="why365-grid">
+        <div class="why365-item"><span class="why365-num">01</span><b>상품가격 공개</b><span>무빈소·빈소 장례상품의 기본가격을 먼저 확인합니다.</span></div>
+        <div class="why365-item"><span class="why365-num">02</span><b>포함·별도비용 안내</b><span>상품에 포함되는 항목과 별도비용을 구분해 안내합니다.</span></div>
+        <div class="why365-item"><span class="why365-num">03</span><b>예상견적 직접 계산</b><span>선택 품목을 바꾸며 예상금액을 직접 확인할 수 있습니다.</span></div>
+        <div class="why365-item"><span class="why365-num">04</span><b>가입 없는 후불제</b><span>월 납입금 없이 장례가 필요할 때 상담하고 이용합니다.</span></div>
+      </div>
+    </section>
+
+    <!-- 여기부터 기존 내용 전체 유지 -->
 
 <div class="message">
 
@@ -2107,72 +2156,15 @@ window.onclick=function(e){
 };
 
 </script>
-<aside class="benefit-popup" id="benefitPopup" aria-label="안심365 특별우대 혜택">
-    <button
-        type="button"
-        class="benefit-popup-close"
-        id="benefitPopupClose"
-        aria-label="특별우대 혜택 팝업 닫기"
-    >&times;</button>
-
-    <a
-        href="price.html#benefits"
-        class="benefit-popup-link"
-        aria-label="기초생활수급자와 국가유공자 특별우대 혜택 확인하기"
-    >
-        <div class="benefit-popup-head">
-            <small>SPECIAL BENEFIT</small>
-            <strong>기초생활수급자·국가유공자 특별우대</strong>
-        </div>
-
-        <div class="benefit-popup-body">
-            <span>무빈소 장례상품 20% 할인</span>
-            <b>99만원 → 79만 2천원</b>
-            <em>특별지원 혜택 확인하기 →</em>
-        </div>
-    </a>
-</aside>
-
-<script>
-(function initializeBenefitPopup() {
-    const benefitPopup = document.getElementById("benefitPopup");
-    const benefitPopupClose = document.getElementById("benefitPopupClose");
-
-    if (
-        !benefitPopup ||
-        !benefitPopupClose ||
-        benefitPopup.dataset.initialized === "true"
-    ) {
-        return;
-    }
-
-    benefitPopup.dataset.initialized = "true";
-
-    let closeTimerId = null;
-
-    function closeBenefitPopup() {
-        if (closeTimerId !== null) {
-            window.clearTimeout(closeTimerId);
-            closeTimerId = null;
-        }
-
-        benefitPopup.classList.add("is-hidden");
-    }
-
-    benefitPopupClose.addEventListener("click", closeBenefitPopup);
-
-    closeTimerId = window.setTimeout(closeBenefitPopup, 5000);
-})();
-</script>
 
 <nav class="quick-sticky" aria-label="빠른 메뉴">
     <a
-        href="/price.html"
+        href="/estimate.html"
         class="quick-sticky-item"
-        aria-label="장례상품 가격보기"
+        aria-label="장례 예상견적 계산하기"
     >
         <span class="quick-sticky-icon">₩</span>
-        <span class="quick-sticky-text">상품<br>가격</span>
+        <span class="quick-sticky-text">견적<br>계산</span>
     </a>
 
     <a
