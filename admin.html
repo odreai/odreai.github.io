@@ -73,10 +73,11 @@ body{
 }
 .cards{
     display:grid;
-    grid-template-columns:repeat(5,minmax(0,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
     gap:12px;
     margin-bottom:12px;
 }
+.estimate-detail{min-width:360px;max-width:560px;white-space:pre-line;line-height:1.55}
 .card,.panel{
     background:var(--panel);
     border:1px solid var(--line);
@@ -350,7 +351,9 @@ body{
 
     <section class="cards">
         <div class="card"><div class="label">고유 방문자</div><div id="unique" class="value">0</div><small>선택 기간 · IP 기준</small></div>
-        <div class="card"><div class="label">상담 접수</div><div id="consultations" class="value">0</div><small>중복 제외 저장 건수</small></div>
+        <div class="card"><div class="label">전체 상담</div><div id="consultations" class="value">0</div><small>일반 + 견적 상담</small></div>
+        <div class="card"><div class="label">일반 상담</div><div id="generalConsultations" class="value">0</div><small>장례상담 접수</small></div>
+        <div class="card"><div class="label">견적 상담</div><div id="estimateConsultations" class="value">0</div><small>맞춤견적 접수</small></div>
         <div class="card"><div class="label">전환율</div><div id="conversion" class="value">0%</div><small>상담 ÷ 고유 방문자</small></div>
         <div class="card"><div class="label">평균 체류시간</div><div id="avgDuration" class="value">0초</div><small>고유 방문자별 총 체류시간 평균</small></div>
         <div class="card"><div class="label">광고 유입자</div><div id="adVisits" class="value">0</div><small>광고 식별 · IP 중복 제외</small></div>
@@ -364,6 +367,18 @@ body{
         <div class="panel">
             <div class="panel-head"><div><h3>접속 기기</h3><p class="panel-desc">PC / 모바일</p></div></div>
             <div id="devices" class="metric-list"></div>
+        </div>
+    </section>
+
+    <section class="panel full">
+        <div class="panel-head"><div><h3>최근 맞춤견적 상담</h3><p class="panel-desc">예상금액과 고객이 선택한 세부 구성</p></div></div>
+        <div class="table-wrap">
+            <table class="admin-table">
+                <thead><tr>
+                    <th>시간</th><th>보호자</th><th>연락처</th><th>예상금액</th><th>세부 견적내용</th><th>SMS</th>
+                </tr></thead>
+                <tbody id="estimateConsultTable"></tbody>
+            </table>
         </div>
     </section>
 
@@ -498,17 +513,42 @@ function renderDaily(rows){
 
     target.innerHTML = rows.map(x => {
         const vWidth = Math.max(2, Math.round((Number(x.unique_visitors || 0) / maxVisit) * 100));
-        const cWidth = Math.max(2, Math.round((Number(x.consultations || 0) / maxVisit) * 100));
+        const totalConsultations = Number(x.total_consultations ?? x.consultations ?? 0);
+        const cWidth = Math.max(2, Math.round((totalConsultations / maxVisit) * 100));
 
         return `
             <div class="day-row">
                 <div>${esc(x.date)}</div>
                 <div class="day-bars">
                     <div class="day-visit" style="width:${vWidth}%"></div>
-                    ${Number(x.consultations || 0) ? `<div class="day-consult" style="width:${cWidth}%"></div>` : ""}
+                    ${totalConsultations ? `<div class="day-consult" style="width:${cWidth}%"></div>` : ""}
                 </div>
-                <div class="day-num">${esc(x.unique_visitors)}명 / 상담 ${esc(x.consultations)}</div>
+                <div class="day-num">${esc(x.unique_visitors)}명 / 상담 ${esc(totalConsultations)}</div>
             </div>
+        `;
+    }).join("");
+}
+
+function renderEstimateConsultations(rows){
+    const tbody = $("estimateConsultTable");
+
+    if(!Array.isArray(rows) || !rows.length){
+        tbody.innerHTML = '<tr><td colspan="6" class="empty">견적 상담 접수 기록이 없습니다.</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = rows.map(v => {
+        const sms = String(v.sms_status || "");
+        const smsClass = sms.includes("성공") ? "sms-ok" : (sms.includes("실패") ? "sms-fail" : "");
+        return `
+            <tr>
+                <td>${esc(shortTime(v.received_at))}</td>
+                <td>${esc(v.guardian_name || "-")}</td>
+                <td>${esc(v.phone || "-")}</td>
+                <td><strong>${esc(v.estimate_total || "-")}</strong></td>
+                <td class="estimate-detail">${esc(v.estimate_detail || "-")}</td>
+                <td class="${smsClass}">${esc(sms || "-")}</td>
+            </tr>
         `;
     }).join("");
 }
@@ -661,6 +701,8 @@ async function loadStats(page = currentVisitPage, fromPaging = false){
 
         $("unique").textContent = s.unique_visitors ?? 0;
         $("consultations").textContent = s.consultations ?? 0;
+        $("generalConsultations").textContent = s.general_consultations ?? 0;
+        $("estimateConsultations").textContent = s.estimate_consultations ?? 0;
         $("conversion").textContent = `${s.conversion_rate ?? 0}%`;
         $("avgDuration").textContent = fmtDuration(s.avg_duration ?? 0);
         $("adVisits").textContent = s.ad_visitors ?? 0;
@@ -669,6 +711,7 @@ async function loadStats(page = currentVisitPage, fromPaging = false){
         renderMetricList("devices", data.devices);
         renderDaily(data.daily);
         renderConsultations(data.recent_consultations);
+        renderEstimateConsultations(data.recent_estimate_consultations);
         renderVisits(data.recent_visits);
         renderVisitPagination(data.visit_pagination);
 
