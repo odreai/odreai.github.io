@@ -704,7 +704,7 @@ select{width:100%;min-height:48px}
 <main class="wrap">
   <div class="notice">
     <b>장례비용 직접 견적</b><br>
-    빈소 장례와 무빈소 장례 모두 필수 350,000원에서 시작하며 관·수의 등 필요한 항목을 직접 선택할 수 있습니다.
+    무빈소 장례는 필수 500,000원, 빈소 장례는 필수 600,000원에서 시작하며 관·수의 등 필요한 항목을 직접 선택할 수 있습니다.
   </div>
 
   
@@ -718,9 +718,9 @@ select{width:100%;min-height:48px}
     <article class="preset-card" data-preset="nohall-cremation">
       <div class="preset-badge">무빈소</div>
       <div class="preset-title">무빈소 화장</div>
-      <div class="preset-price">1,100,000원</div>
+      <div class="preset-price">1,150,000원</div>
       <ul class="preset-list">
-        <li>필수 진행비 45만원 · 장례지도사 10만원 포함</li>
+        <li>필수 진행비 50만원 · 장례지도사 1인 10만원 포함</li>
         <li>화장 기본관 · 오동 0.6치</li>
         <li>화장 기본수의 · 저마·면 혼방</li>
         <li>카니발·스타리아 발인차량</li>
@@ -737,9 +737,9 @@ select{width:100%;min-height:48px}
     <article class="preset-card" data-preset="hall-cremation">
       <div class="preset-badge">빈소 화장</div>
       <div class="preset-title">소규모 빈소 화장</div>
-      <div class="preset-price">2,172,000원</div>
+      <div class="preset-price">2,322,000원</div>
       <ul class="preset-list">
-        <li>필수 진행비 45만원 · 장례지도사 10만원 포함</li>
+        <li>필수 진행비 60만원 · 장례지도사 2인 20만원 포함</li>
         <li>제단꽃 소형 빈소용</li>
         <li>상복 4벌</li>
         <li>도우미 1명 · 2일</li>
@@ -757,9 +757,9 @@ select{width:100%;min-height:48px}
     <article class="preset-card" data-preset="hall-burial">
       <div class="preset-badge">빈소 매장</div>
       <div class="preset-title">소규모 빈소 매장</div>
-      <div class="preset-price">2,472,000원</div>
+      <div class="preset-price">2,622,000원</div>
       <ul class="preset-list">
-        <li>필수 진행비 45만원 · 장례지도사 10만원 포함</li>
+        <li>필수 진행비 60만원 · 장례지도사 2인 20만원 포함</li>
         <li>매장 기본관 · 오동 1.5치</li>
         <li>매장 기본수의 · 저마 100%</li>
         <li>도우미 1명 · 2일</li>
@@ -790,7 +790,7 @@ select{width:100%;min-height:48px}
           <input type="radio" name="ceremonyType" value="hall" checked>
           <span>
             <b>빈소 장례</b>
-            <small>필수 기본비용 450,000원</small>
+            <small>필수 기본비용 600,000원</small>
           </span>
         </label>
 
@@ -798,7 +798,7 @@ select{width:100%;min-height:48px}
           <input type="radio" name="ceremonyType" value="nohall">
           <span>
             <b>무빈소 장례</b>
-            <small>필수 기본비용 450,000원</small>
+            <small>필수 기본비용 500,000원</small>
           </span>
         </label>
       </div>
@@ -811,10 +811,10 @@ select{width:100%;min-height:48px}
 
     <div class="item">
       <div>
-        <b id="directorTitle">장례지도사 1명 · 3일 진행</b><span class="required">필수</span>
+        <b id="directorTitle">장례지도사 2인 · 3일 진행</b><span class="required">필수</span>
         <small id="directorDesc">장례 절차 및 행사 진행</small>
       </div>
-      <div class="price" id="directorPrice">100,000원</div>
+      <div class="price" id="directorPrice">200,000원</div>
     </div>
 
     <div class="item">
@@ -830,7 +830,7 @@ select{width:100%;min-height:48px}
         <b>기본 입관용품 20여종 일체 (관·수의 제외)</b><span class="required">필수</span>
         <small>기본 입관 소모품 일체</small>
       </div>
-      <div class="price">250,000원</div>
+      <div class="price">300,000원</div>
     </div>
   </section>
 
@@ -1069,7 +1069,7 @@ select{width:100%;min-height:48px}
 
   <div class="summary">
     <div class="summary-top">현재 예상 장례비용</div>
-    <div class="total" id="total">1,226,000원</div>
+    <div class="total" id="total">1,376,000원</div>
     <div class="breakdown" id="breakdown"></div>
     <small>
       장례식장 시설사용료·안치료·입관실 사용료·음식비·화장장 사용료·봉안시설·장지 비용 등은 별도입니다.<br>
@@ -1082,7 +1082,7 @@ select{width:100%;min-height:48px}
 
   <div class="mobile-total-bar">
     <span>현재 예상금액</span>
-    <strong id="mobileTotal">350,000원</strong>
+    <strong id="mobileTotal">600,000원</strong>
   </div>
 </main>
 
@@ -1113,8 +1113,8 @@ select{width:100%;min-height:48px}
 </style>
 
 <script>
-const HALL_BASE = 450000;
-const NOHALL_BASE = 450000;
+const HALL_BASE = 600000;
+const NOHALL_BASE = 500000;
 const SUIT_PRICE = 80000;
 const HELPER_BASE_HOURS = 10;
 const HELPER_BASE_PRICE = 126000;
@@ -1166,10 +1166,10 @@ function updateCeremonyUI(){
   const isNoHall = type === "nohall";
 
   document.getElementById("directorTitle").textContent =
-    isNoHall ? "장례지도사 1명 · 무빈소 진행" : "장례지도사 1명 · 3일 진행";
+    isNoHall ? "장례지도사 1인 · 무빈소 진행" : "장례지도사 2인 · 3일 진행";
   document.getElementById("directorDesc").textContent =
     isNoHall ? "안치·입관·발인 중심 무빈소 장례 진행" : "장례 절차 및 행사 진행";
-  document.getElementById("directorPrice").textContent = "100,000원";
+  document.getElementById("directorPrice").textContent = isNoHall ? "100,000원" : "200,000원";
 
   document.getElementById("altarRow").style.display = isNoHall ? "none" : "block";
   document.getElementById("hallServiceSection").style.display = isNoHall ? "none" : "block";
