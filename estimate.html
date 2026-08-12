@@ -582,102 +582,181 @@ select{width:100%;min-height:48px}
 
 
 <style>
-/* 인쇄/PDF 전용 출력 */
+/* =========================
+   인쇄 / PDF A4 1페이지 전용
+========================= */
+
 #printEstimateSheet{
-  display:none;
+    display:none;
 }
 
 @media print{
-  @page{
-    size:A4;
-    margin:16mm;
-  }
 
-  html,body{
-    background:#fff!important;
-    margin:0!important;
-    padding:0!important;
-  }
+    @page{
+        size:A4 portrait;
+        margin:8mm;
+    }
 
-  body *{
-    visibility:hidden!important;
-  }
+    html,
+    body{
+        margin:0!important;
+        padding:0!important;
+        background:#fff!important;
+        width:100%!important;
+        height:auto!important;
+    }
 
-  #printEstimateSheet,
-  #printEstimateSheet *{
-    visibility:visible!important;
-  }
+    /* 핵심:
+       visibility가 아니라 display:none으로
+       기존 페이지의 인쇄 공간 자체를 제거 */
+    body > *{
+        display:none!important;
+    }
 
-  #printEstimateSheet{
-    display:block!important;
-    position:absolute!important;
-    left:0!important;
-    top:0!important;
-    width:100%!important;
-    max-width:none!important;
-    margin:0!important;
-    padding:0!important;
-    background:#fff!important;
-    color:#111!important;
-    font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo",sans-serif!important;
-  }
+    /* 인쇄용 견적서만 출력 */
+    body > #printEstimateSheet{
+        display:block!important;
+    }
 
-  .print-estimate-title{
-    padding-bottom:12px;
-    border-bottom:2px solid #111;
-  }
-  .print-estimate-title h1{
-    margin:0;
-    font-size:22pt;
-    color:#111!important;
-  }
-  .print-estimate-title p{
-    margin:6px 0 0;
-    font-size:9.5pt;
-    color:#555!important;
-  }
+    #printEstimateSheet{
+        position:static!important;
 
-  .print-estimate-total{
-    margin:22px 0 18px;
-    padding:18px 0;
-    border-top:1px solid #bbb;
-    border-bottom:1px solid #bbb;
-  }
-  .print-estimate-total span{
-    display:block;
-    margin-bottom:5px;
-    font-size:10pt;
-    color:#666!important;
-  }
-  .print-estimate-total strong{
-    display:block;
-    font-size:26pt;
-    line-height:1.15;
-    color:#111!important;
-  }
+        width:100%!important;
+        max-width:none!important;
 
-  .print-estimate-breakdown{
-    font-size:10.5pt;
-    line-height:1.85;
-    color:#111!important;
-  }
+        margin:0!important;
+        padding:0!important;
 
-  .print-estimate-notice{
-    margin-top:20px;
-    padding-top:12px;
-    border-top:1px solid #ccc;
-    font-size:8.8pt;
-    line-height:1.65;
-    color:#555!important;
-  }
+        background:#fff!important;
+        color:#111!important;
 
-  .print-estimate-footer{
-    margin-top:18px;
-    padding-top:10px;
-    border-top:1px solid #ddd;
-    font-size:8.5pt;
-    color:#666!important;
-  }
+        border:0!important;
+        box-shadow:none!important;
+
+        font-family:
+            "Pretendard",
+            "Noto Sans KR",
+            "Apple SD Gothic Neo",
+            sans-serif!important;
+
+        page-break-before:avoid!important;
+        page-break-after:avoid!important;
+        page-break-inside:avoid!important;
+
+        break-before:avoid!important;
+        break-after:avoid!important;
+        break-inside:avoid!important;
+    }
+
+
+    /* 제목 */
+
+    .print-estimate-title{
+        padding-bottom:7px!important;
+        border-bottom:2px solid #111!important;
+    }
+
+    .print-estimate-title h1{
+        margin:0!important;
+        font-size:18pt!important;
+        line-height:1.2!important;
+        color:#111!important;
+    }
+
+    .print-estimate-title p{
+        margin:3px 0 0!important;
+        font-size:8.5pt!important;
+        line-height:1.3!important;
+        color:#555!important;
+    }
+
+
+    /* 예상금액 */
+
+    .print-estimate-total{
+        margin:10px 0!important;
+        padding:9px 0!important;
+
+        border-top:1px solid #bbb!important;
+        border-bottom:1px solid #bbb!important;
+
+        break-inside:avoid!important;
+    }
+
+    .print-estimate-total span{
+        display:block!important;
+
+        margin-bottom:2px!important;
+
+        font-size:9pt!important;
+        line-height:1.2!important;
+
+        color:#666!important;
+    }
+
+    .print-estimate-total strong{
+        display:block!important;
+
+        font-size:20pt!important;
+        line-height:1.15!important;
+
+        color:#111!important;
+    }
+
+
+    /* 상세 견적 */
+
+    .print-estimate-breakdown{
+        margin:0!important;
+        padding:0!important;
+
+        font-size:9pt!important;
+        line-height:1.4!important;
+
+        color:#111!important;
+
+        break-inside:avoid!important;
+        page-break-inside:avoid!important;
+    }
+
+    .print-estimate-breakdown *{
+        margin-top:2px!important;
+        margin-bottom:2px!important;
+    }
+
+
+    /* 안내 */
+
+    .print-estimate-notice{
+        margin-top:9px!important;
+        padding-top:7px!important;
+
+        border-top:1px solid #ccc!important;
+
+        font-size:7.5pt!important;
+        line-height:1.35!important;
+
+        color:#555!important;
+
+        break-inside:avoid!important;
+    }
+
+
+    /* 하단 문구 */
+
+    .print-estimate-footer{
+        margin-top:7px!important;
+        padding-top:6px!important;
+
+        border-top:1px solid #ddd!important;
+
+        font-size:7.5pt!important;
+        line-height:1.3!important;
+
+        color:#666!important;
+
+        break-inside:avoid!important;
+    }
 }
 </style>
 
