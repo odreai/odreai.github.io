@@ -817,6 +817,23 @@ select{width:100%;min-height:48px}
 }
 </style>
 
+
+<style>
+.special-discount-note{
+  margin-top:8px;
+  padding:10px 12px;
+  border-radius:10px;
+  background:#fff8e9;
+  color:#6f5a2b;
+  font-size:12px;
+  line-height:1.55;
+}
+.discount-line{
+  color:#f1d79d;
+  font-weight:900;
+}
+</style>
+
 </head>
 <body>
 <header class="header">
@@ -1187,7 +1204,7 @@ select{width:100%;min-height:48px}
         5벌부터 추가분만 <b>1벌당 50,000원</b>
       </div>
       <div class="counter-box">
-        <div><b>상복 수량</b><div class="sub">기본 4벌 · 최대 10벌 선택</div></div>
+        <div><b>상복 수량</b><div class="sub">기본 4벌 · 최대 30벌 선택</div></div>
         <div class="counter">
           <button type="button" id="suitMinus" aria-label="상복 수량 줄이기">−</button>
           <strong id="suitCountText">4벌</strong>
@@ -1273,6 +1290,43 @@ select{width:100%;min-height:48px}
       <div class="sub">카니발·스타리아, 리무진, 장의버스는 필요한 차량만 각각 체크할 수 있으며 선택 금액이 합산됩니다.</div>
     </div>
   </section>
+
+
+<section class="section" id="specialDiscountSection">
+  <div class="section-title">특별우대 · 장례지원</div>
+  <div class="option-row">
+    <div class="choice-grid">
+      <label class="choice full">
+        <input type="radio" name="specialDiscount" value="none" checked>
+        <span>
+          <b>해당 없음</b>
+          <small>할인 적용 없음</small>
+        </span>
+      </label>
+
+      <label class="choice full">
+        <input type="radio" name="specialDiscount" value="veteran">
+        <span>
+          <b>국가유공자 본인 6% 특별우대</b>
+          <small>국가를 위해 헌신하신 분에 대한 감사와 예우의 마음을 담아 안심365 견적금액의 6%를 할인합니다.</small>
+        </span>
+      </label>
+
+      <label class="choice full">
+        <input type="radio" name="specialDiscount" value="basic">
+        <span>
+          <b>기초생활수급자 4% 장례지원</b>
+          <small>장례비 부담을 덜어드리기 위해 안심365 견적금액의 4%를 할인합니다.</small>
+        </span>
+      </label>
+    </div>
+
+    <div class="special-discount-note">
+      ※ 국가유공자 특별우대는 <b>국가유공자 본인에 한해 적용</b>되며 배우자·유족은 해당되지 않습니다.<br>
+      ※ 증빙서류 확인 후 적용되며 다른 할인과 중복 적용되지 않습니다.
+    </div>
+  </div>
+</section>
 
   <div class="summary">
     <div class="summary-top">현재 예상 장례비용</div>
@@ -1432,7 +1486,7 @@ function updateHelperUI(){
   const suitPlus = document.getElementById("suitPlus");
   if (suitText) suitText.textContent = suitCount + "벌";
   if (suitMinus) suitMinus.disabled = ids.ceremonyType() === "nohall" || suitCount <= 4;
-  if (suitPlus) suitPlus.disabled = suitCount >= 10;
+  if (suitPlus) suitPlus.disabled = suitCount >= 30;
 }
 
 function syncTotalDisplay(formattedTotal){
@@ -1517,6 +1571,22 @@ function calc(){
     limo +
     bus;
 
+  const discountType = document.querySelector('input[name="specialDiscount"]:checked')?.value || "none";
+  const originalTotal = total;
+  let discountRate = 0;
+  let discountLabel = "";
+
+  if (discountType === "veteran") {
+    discountRate = 0.06;
+    discountLabel = "국가유공자 본인 특별우대 6%";
+  } else if (discountType === "basic") {
+    discountRate = 0.04;
+    discountLabel = "기초생활수급자 장례지원 4%";
+  }
+
+  const discountAmount = Math.round(originalTotal * discountRate);
+  total = originalTotal - discountAmount;
+
   const formattedTotal = total.toLocaleString("ko-KR") + "원";
   syncTotalDisplay(formattedTotal);
 
@@ -1578,6 +1648,12 @@ function calc(){
     ...(baseVehicle > 0 ? [`발인차량 카니발·스타리아 +${baseVehicle.toLocaleString("ko-KR")}원`] : []),
     ...(limo > 0 ? [`발인차량 장의 리무진 +${limo.toLocaleString("ko-KR")}원`] : []),
     ...(bus > 0 ? [`발인차량 장의버스 +${bus.toLocaleString("ko-KR")}원`] : []),
+
+    ...(discountAmount > 0 ? [
+      `할인 전 예상금액 ${originalTotal.toLocaleString("ko-KR")}원`,
+      `<span class="discount-line">${discountLabel} · -${discountAmount.toLocaleString("ko-KR")}원</span>`,
+      `<b>할인 적용 예상 장례비용 ${total.toLocaleString("ko-KR")}원</b>`
+    ] : []),
   ];
 
   document.getElementById("breakdown").innerHTML = lines.join("<br>");
@@ -1589,7 +1665,7 @@ document.getElementById("suitMinus")?.addEventListener("click", ()=>{
   calc();
 });
 document.getElementById("suitPlus")?.addEventListener("click", ()=>{
-  if(suitCount < 10) suitCount++;
+  if(suitCount < 30) suitCount++;
   updateHelperUI();
   calc();
 });
@@ -1620,6 +1696,10 @@ document.querySelectorAll('input[name="ceremonyType"]').forEach(el=>{
     updateCeremonyUI();
     calc();
   });
+});
+
+document.querySelectorAll('input[name="specialDiscount"]').forEach(el=>{
+  el.addEventListener("change", calc);
 });
 
 document.querySelectorAll("select,input").forEach(el=>{
