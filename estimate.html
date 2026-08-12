@@ -1077,6 +1077,9 @@ select{width:100%;min-height:48px}
 }
 </style>
 
+  <link rel="preload" as="image" href="images/urn.webp" type="image/webp" fetchpriority="low">
+  <link rel="preload" as="image" href="images/flower.webp" type="image/webp" fetchpriority="low">
+  <link rel="preload" as="image" href="images/coffin-flower.webp" type="image/webp" fetchpriority="low">
 </head>
 <body>
 <header class="header estimate-hero">
@@ -1565,10 +1568,9 @@ select{width:100%;min-height:48px}
           <small id="busDistanceResult">전체 운행거리 150km까지 기본요금에 포함</small>
         </div>
         <div class="vehicle-distance-notice">
-            ※ 장의 리무진은 1차 장지까지 운행하며, 화장 시 화장장에서 운행이 종료됩니다.<br>
-            ※ 장의 리무진은 편도 50km 초과 시 1km당 2,500원이 추가됩니다.<br>
-            ※ 장의버스는 전체 운행거리 150km 초과 시 1km당 2,000원이 추가됩니다.<br>
-            ※ 도로 통행료·주차료 등은 별도입니다.
+          ※ 장의 리무진은 1차 장지까지 운행하며, 화장 시 화장장에서 운행이 종료됩니다.<br>
+          ※ 기본거리 초과 시 1km당 2,000원이 추가됩니다.<br>
+          ※ 도로 통행료·주차료 등은 별도입니다.
         </div>
       </div>
 
@@ -2682,5 +2684,16 @@ setTimeout(()=>{
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&pop.classList.contains('open')) closePop()});
 })();
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  ["images/urn.webp","images/flower.webp","images/coffin-flower.webp"].forEach(function(src){
+    const img = new Image();
+    img.decoding = "async";
+    img.src = src;
+  });
+});
+</script>
+
 </body>
 </html>
