@@ -1078,6 +1078,23 @@ select{width:100%;min-height:48px}
 </style>
 
 
+
+<style>
+/* 모바일 사진 팝업 즉시 재오픈: 닫힘 애니메이션/클릭 지연 제거 */
+#flowerPreviewPopover,
+#coffinFlowerPreviewPopover,
+#urnPreviewPopover{
+  transition:none !important;
+  animation:none !important;
+  pointer-events:none;
+}
+#flowerPreviewPopover.open,
+#coffinFlowerPreviewPopover.open,
+#urnPreviewPopover.open{
+  pointer-events:auto;
+}
+</style>
+
 </head>
 <body>
 <header class="header estimate-hero">
@@ -2684,6 +2701,55 @@ setTimeout(()=>{
 </script>
 
 
+
+
+<script>
+(function(){
+  const configs = [
+    ["flowerPreviewBtn","flowerPreviewPopover"],
+    ["coffinFlowerPreviewBtn","coffinFlowerPreviewPopover"],
+    ["urnPreviewBtn","urnPreviewPopover"]
+  ];
+
+  function forceCloseAll(exceptId){
+    configs.forEach(function(pair){
+      const pop=document.getElementById(pair[1]);
+      if(!pop || pop.id===exceptId) return;
+      pop.classList.remove("open");
+      pop.setAttribute("aria-hidden","true");
+    });
+  }
+
+  configs.forEach(function(pair){
+    const btn=document.getElementById(pair[0]);
+    const pop=document.getElementById(pair[1]);
+    if(!btn || !pop) return;
+
+    btn.addEventListener("pointerdown", function(){
+      forceCloseAll(pop.id);
+    }, {passive:true});
+
+    btn.addEventListener("click", function(){
+      if(pop.classList.contains("open")){
+        forceCloseAll(pop.id);
+        pop.setAttribute("aria-hidden","false");
+      }
+    });
+  });
+
+  document.querySelectorAll(
+    "#flowerPreviewClose,#coffinFlowerPreviewClose,#urnPreviewClose"
+  ).forEach(function(btn){
+    btn.addEventListener("pointerup", function(){
+      const pop=btn.closest(".flower-preview-popover");
+      if(pop){
+        pop.classList.remove("open");
+        pop.setAttribute("aria-hidden","true");
+      }
+    }, {passive:true});
+  });
+})();
+</script>
 
 </body>
 </html>
