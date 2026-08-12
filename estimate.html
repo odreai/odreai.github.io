@@ -376,7 +376,7 @@ s{color:#8b9198;text-decoration-thickness:2px}
 </style>
 
 <style>
-/* ===== TEST10 반응형 최적화 ===== */
+/* 반응형 화면 최적화 */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 *{box-sizing:border-box}
 body{overflow-x:hidden}
@@ -523,7 +523,7 @@ select{width:100%;min-height:48px}
 
 
 <style>
-/* ===== TEST11 하단 작업버튼 최적화 ===== */
+/* 하단 작업버튼 최적화 */
 .estimate-actions{
   width:100%;
   max-width:820px;
@@ -582,7 +582,7 @@ select{width:100%;min-height:48px}
 
 
 <style>
-/* ===== TEST12 인쇄/PDF 전용 출력 ===== */
+/* 인쇄/PDF 전용 출력 */
 #printEstimateSheet{
   display:none;
 }
@@ -691,6 +691,53 @@ select{width:100%;min-height:48px}
 @media print{.estimate-modal{display:none!important}}
 </style>
 
+
+<style>
+.altar-title-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.altar-title-row label.title{margin:0}
+.flower-preview-btn{border:1px solid #c8b07a;background:#fff;color:#173253;border-radius:9px;padding:7px 11px;font-weight:800;cursor:pointer}
+/* 제단꽃 이미지는 section 내부가 아니라 화면 위 모달처럼 표시하여 잘림 방지 */
+.flower-preview-popover{display:none;position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,.68);padding:24px;align-items:center;justify-content:center;flex-direction:column;overflow:auto}
+.flower-preview-popover.open{display:flex}
+.flower-preview-popover img{display:block;width:min(1100px,96vw);max-width:100%;height:auto;max-height:82vh;object-fit:contain;border-radius:12px;background:#fff;box-shadow:0 18px 55px rgba(0,0,0,.35)}
+.flower-preview-caption{margin-top:10px;padding:6px 10px;border-radius:999px;background:rgba(15,36,62,.92);color:#fff;text-align:center;font-size:12px}
+.flower-preview-close{position:fixed;right:max(18px,calc((100vw - min(1100px,96vw))/2));top:18px;width:42px;height:42px;border:0;border-radius:50%;background:#173253;color:#fff;font-size:28px;line-height:1;cursor:pointer;z-index:100001;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+@media(max-width:520px){.flower-preview-popover{padding:12px}.flower-preview-popover img{width:100%;max-height:78vh;border-radius:9px}.flower-preview-close{right:16px;top:16px;width:40px;height:40px}}
+</style>
+
+<style>
+.hall-benefit{
+  margin:0 0 16px;
+  padding:16px 18px;
+  border:1px solid #d8c18e;
+  border-radius:14px;
+  background:#fff9ec;
+  color:#173253;
+}
+.hall-benefit-title{
+  font-size:16px;
+  font-weight:900;
+  margin-bottom:7px;
+}
+.hall-benefit-main{
+  font-size:15px;
+  font-weight:900;
+  line-height:1.55;
+  color:#7a5b20;
+}
+.hall-benefit-sub{
+  margin-top:4px;
+  font-size:12px;
+  color:#6f7780;
+  line-height:1.5;
+}
+@media(max-width:520px){
+  .hall-benefit{padding:14px 15px;margin-bottom:12px}
+  .hall-benefit-title{font-size:15px}
+  .hall-benefit-main{font-size:14px}
+}
+</style>
+
 </head>
 <body>
 <header class="header">
@@ -704,7 +751,7 @@ select{width:100%;min-height:48px}
 <main class="wrap">
   <div class="notice">
     <b>장례비용 직접 견적</b><br>
-    무빈소 장례는 필수 500,000원, 빈소 장례는 필수 600,000원에서 시작하며 관·수의 등 필요한 항목을 직접 선택할 수 있습니다.
+    무빈소 장례는 필수 500,000원, 빈소 장례는 필수 760,000원에서 시작하며 관·수의 등 필요한 항목을 직접 선택할 수 있습니다.
   </div>
 
   
@@ -718,7 +765,7 @@ select{width:100%;min-height:48px}
     <article class="preset-card" data-preset="nohall-cremation">
       <div class="preset-badge">무빈소</div>
       <div class="preset-title">무빈소 화장</div>
-      <div class="preset-price">1,120,000원</div>
+      <div class="preset-price">1,150,000원</div>
       <ul class="preset-list">
         <li>필수 진행비 50만원 · 장례지도사 1인 10만원 포함</li>
         <li>오동나무 0.6치</li>
@@ -730,19 +777,19 @@ select{width:100%;min-height:48px}
         <button type="button" class="preset-btn apply">이 견적으로 적용</button>
       </div>
       <div class="preset-detail">
-        무빈소 장례 · 화장 · 기본 화장관 15만원 · 면 100% 수의 17만원 · 카니발/스타리아 30만원
+        무빈소 장례 · 화장 · 기본 화장관 15만원 · 면 100% 수의 20만원 · 카니발/스타리아 30만원
       </div>
     </article>
 
     <article class="preset-card" data-preset="hall-cremation">
       <div class="preset-badge">빈소 화장</div>
       <div class="preset-title">소규모 빈소 화장</div>
-      <div class="preset-price">2,302,000원</div>
+      <div class="preset-price">2,110,000원</div>
       <ul class="preset-list">
-        <li>필수 진행비 60만원 · 장례지도사 2인 20만원 포함</li>
-        <li>제단꽃 소형 빈소용 · 35만원</li>
-        <li>상복 4벌</li>
-        <li>도우미 1명 · 2일</li>
+        <li>필수 진행비 76만원 · 장례지도사 2인 36만원 포함</li>
+        <li>제단꽃 기본 · 소형빈소 · 50만원</li>
+        <li>상복 4벌 · 기본지원</li>
+        <li>도우미 2명 · 1일 8시간 × 2일 기본지원</li>
         <li>장의버스 왕복 100km</li>
       </ul>
       <div class="preset-actions">
@@ -750,19 +797,19 @@ select{width:100%;min-height:48px}
         <button type="button" class="preset-btn apply">이 견적으로 적용</button>
       </div>
       <div class="preset-detail">
-        빈소 장례 · 화장 · 기본 화장관 15만원 · 면 100% 수의 17만원 · 소형 제단꽃 35만원 · 상복 4벌 · 도우미 1명×2일×10시간 · 장의버스 50만원
+        빈소 장례 · 화장 · 기본 화장관 15만원 · 면 100% 수의 20만원 · 제단꽃 기본·소형빈소 50만원 · 상복 4벌 기본지원 · 도우미 2명×1일 8시간×2일 기본지원 · 장의버스 50만원
       </div>
     </article>
 
     <article class="preset-card" data-preset="hall-burial">
       <div class="preset-badge">빈소 매장</div>
       <div class="preset-title">소규모 빈소 매장</div>
-      <div class="preset-price">2,632,000원</div>
+      <div class="preset-price">2,410,000원</div>
       <ul class="preset-list">
-        <li>필수 진행비 60만원 · 장례지도사 2인 20만원 포함</li>
+        <li>필수 진행비 76만원 · 장례지도사 2인 36만원 포함</li>
         <li>오동나무 1.5치</li>
         <li>일반 수의</li>
-        <li>도우미 1명 · 2일</li>
+        <li>도우미 2명 · 1일 8시간 × 2일 기본지원</li>
         <li>장의버스 왕복 100km</li>
       </ul>
       <div class="preset-actions">
@@ -770,7 +817,7 @@ select{width:100%;min-height:48px}
         <button type="button" class="preset-btn apply">이 견적으로 적용</button>
       </div>
       <div class="preset-detail">
-        빈소 장례 · 매장 · 기본 매장관 35만원 · 기본 매장수의 30만원 · 소형 제단꽃 35만원 · 상복 4벌 · 도우미 1명×2일×10시간 · 장의버스 50만원
+        빈소 장례 · 매장 · 기본 매장관 35만원 · 기본 매장수의 30만원 · 제단꽃 기본·소형빈소 50만원 · 상복 4벌 기본지원 · 도우미 2명×1일 8시간×2일 기본지원 · 장의버스 50만원
       </div>
     </article>
   </div>
@@ -790,7 +837,7 @@ select{width:100%;min-height:48px}
           <input type="radio" name="ceremonyType" value="hall" checked>
           <span>
             <b>빈소 장례</b>
-            <small>필수 기본비용 600,000원</small>
+            <small>필수 기본비용 760,000원</small>
           </span>
         </label>
 
@@ -806,6 +853,12 @@ select{width:100%;min-height:48px}
     </div>
   </section>
 
+  <div class="hall-benefit" id="hallBenefit">
+    <div class="hall-benefit-title">빈소 장례 기본지원 혜택</div>
+    <div class="hall-benefit-main">상복 4벌 기본지원 · 장례 도우미 2명 기본지원</div>
+    <div class="hall-benefit-sub">장례 도우미 1일 8시간 × 2일 기본지원</div>
+  </div>
+
   <section class="section">
     <div class="section-title">필수 진행 항목</div>
 
@@ -814,7 +867,7 @@ select{width:100%;min-height:48px}
         <b id="directorTitle">장례지도사 2인 · 3일 진행</b><span class="required">필수</span>
         <small id="directorDesc">장례 절차 및 행사 진행</small>
       </div>
-      <div class="price" id="directorPrice">200,000원</div>
+      <div class="price" id="directorPrice">360,000원</div>
     </div>
 
     <div class="item">
@@ -867,15 +920,23 @@ select{width:100%;min-height:48px}
     </div>
 
     <div class="option-row" id="altarRow">
-      <label class="title" for="altar">제단 꽃장식</label>
+      <div class="altar-title-row">
+        <label class="title" for="altar">제단 꽃장식</label>
+        <button type="button" class="flower-preview-btn no-print" id="flowerPreviewBtn">사진보기</button>
+      </div>
       <select id="altar">
         <option value="0">선택 안 함 · 0원</option>
-        <option value="350000">소형 빈소용 · +350,000원</option>
-        <option value="500000">일반 빈소용 · +500,000원</option>
-        <option value="700000">특실 빈소용 · +700,000원</option>
-        <option value="1000000">VIP 빈소용 · +1,000,000원</option>
+        <option value="500000">기본 · 소형빈소 · +500,000원</option>
+        <option value="800000">고급 · 일반빈소 · +800,000원</option>
+        <option value="1300000">최고급 · 특실빈소 · +1,300,000원</option>
+        <option value="2200000">명품 · VIP빈소 · +2,200,000원</option>
       </select>
-      <div class="sub">※ 빈소 및 제단 규모에 따라 구성·금액이 달라질 수 있습니다.</div>
+      <div class="sub">※ 이미지는 등급별 구성 예시이며 실제 꽃 종류와 구성은 계절 및 현장 상황에 따라 달라질 수 있습니다.</div>
+      <div class="flower-preview-popover no-print" id="flowerPreviewPopover" aria-hidden="true">
+        <button type="button" class="flower-preview-close" id="flowerPreviewClose" aria-label="제단꽃 사진 닫기">×</button>
+        <img src="images/flower.png" alt="제단꽃 등급별 예시">
+        <div class="flower-preview-caption">제단꽃 등급별 예시</div>
+      </div>
     </div>
 
   </section>
@@ -910,16 +971,15 @@ select{width:100%;min-height:48px}
       <label class="title" for="cremationShroud">화장용 수의</label>
       <select id="cremationShroud">
         <option value="0">선택 안 함 · 0원</option>
-        <option value="170000">면 100% · 기계직 · 170,000원</option>
-        <option value="250000">황토면 100% · 250,000원</option>
+        <option value="200000">면 100% · 기계직 · 200,000원</option>
+        <option value="300000">인견 100% · 기계직 · 300,000원</option>
         <option value="350000">저마 100% · 기계직 · 350,000원</option>
-        <option value="450000">대마 100% · 기계직 · 450,000원</option>
-        <option value="800000">저마 100% · 수제직 · 800,000원</option>
-        <option value="1200000">대마 100% · 수제직 · 1,200,000원</option>
-        <option value="consult">최고급 수제직 · 상담</option>
+        <option value="500000">견(명주) 100% · 500,000원</option>
+        <option value="700000">고급 견(명주) 100% · 700,000원</option>
+        <option value="800000">대마 100% · 고급직 · 800,000원</option>
+        <option value="1300000">최고급 대마 100% · 1,300,000원</option>
       </select>
-      <div class="consult-note" id="cremationShroudConsult" style="display:none">최고급 수제직 수의는 원단·직조·원산지에 따라 상담 후 금액이 확정됩니다.</div>
-      <div class="sub">화장 장례에 적합한 수의 기준입니다.</div>
+            <div class="sub">소재와 직조 방식에 따라 원하는 수의를 선택할 수 있습니다.</div>
     </div>
 
     <div class="option-row" id="burialCoffinRow" style="display:none">
@@ -942,7 +1002,7 @@ select{width:100%;min-height:48px}
         <option value="120000">오동 횡대 · +120,000원</option>
         <option value="consult">고급 횡대 · 상담</option>
       </select>
-      <div class="sub">공공 장례식장 공개가 약 95,000~128,000원 사례를 참고한 테스트 가격입니다.</div>
+      <div class="sub">매장 시 사용하는 장지용품으로 재질·규격에 따라 금액이 달라질 수 있습니다.</div>
     </div>
 
     <div class="option-row" id="metbeRow" style="display:none">
@@ -990,14 +1050,21 @@ select{width:100%;min-height:48px}
 
     
     <div class="option-row">
-      <label class="title" for="coffinFlower">입관 꽃장식</label>
+      <div class="altar-title-row">
+        <label class="title" for="coffinFlower">입관 꽃장식</label>
+        <button type="button" class="flower-preview-btn no-print" id="coffinFlowerPreviewBtn">사진보기</button>
+      </div>
       <select id="coffinFlower">
         <option value="0">선택 안 함 · 0원</option>
-        <option value="70000">기본 생화 입관 꽃장식 · +70,000원</option>
-        <option value="150000">고급 생화 입관 꽃장식 · +150,000원</option>
-        <option value="300000">최고급 생화 입관 꽃장식 · +300,000원</option>
+        <option value="100000">기본형 생화 입관 꽃장식 · +100,000원</option>
+        <option value="200000">일반형 생화 입관 꽃장식 · +200,000원</option>
       </select>
-      <div class="sub">고인의 관 내부·주변을 생화로 장식하는 선택 의전입니다.</div>
+      <div class="sub">※ 이미지는 구성 예시이며 실제 꽃 종류와 구성은 계절 및 현장 상황에 따라 달라질 수 있습니다.</div>
+      <div class="flower-preview-popover no-print" id="coffinFlowerPreviewPopover" aria-hidden="true">
+        <button type="button" class="flower-preview-close" id="coffinFlowerPreviewClose" aria-label="입관 꽃장식 사진 닫기">×</button>
+        <img src="images/coffin-flower.png" alt="입관 꽃장식 기본형·일반형 예시">
+        <div class="flower-preview-caption">입관 꽃장식 · 기본형 10만원 / 일반형 20만원</div>
+      </div>
     </div>
 
     <div class="option-row">
@@ -1011,7 +1078,6 @@ select{width:100%;min-height:48px}
         </label>
       </div>
     </div>
-    </div>
   </section>
 
   
@@ -1022,16 +1088,14 @@ select{width:100%;min-height:48px}
     <div class="option-row">
       <label class="title">상복 세트 대여</label>
       <div class="helper-price-info">
-        남녀 동일 <b>풀세트 3일 대여 · 1벌 70,000원</b>
+        <b>4벌 기본지원</b> · 풀세트 3일 대여<br>
+        5벌부터 추가분만 <b>1벌당 50,000원</b>
       </div>
       <div class="counter-box">
-        <div>
-          <b>상복 수량</b>
-          <div class="sub">0~10벌 선택 · 남녀 동일 금액</div>
-        </div>
+        <div><b>상복 수량</b><div class="sub">기본 4벌 · 최대 10벌 선택</div></div>
         <div class="counter">
           <button type="button" id="suitMinus" aria-label="상복 수량 줄이기">−</button>
-          <strong id="suitCountText">0벌</strong>
+          <strong id="suitCountText">4벌</strong>
           <button type="button" id="suitPlus" aria-label="상복 수량 늘리기">＋</button>
         </div>
       </div>
@@ -1040,36 +1104,27 @@ select{width:100%;min-height:48px}
     <div class="option-row">
       <label class="title">장례 도우미</label>
       <div class="helper-price-info">
-        기본 <b>1명 · 1일 10시간 126,000원</b><br>
-        기본시간 외 추가근무 시 <b>시간당 15,000원</b><br>
-        <b>근무일수 2일 기준</b>으로 계산됩니다.
+        <b>2명 · 1일 8시간 × 2일 기본지원</b><br>
+        기본시간 외 추가근무 시 <b>1인 1시간당 15,000원</b><br>
+        기본 2명을 초과한 추가 도우미는 <b>1명 · 1일 126,000원</b>으로 계산됩니다.
       </div>
-
       <div class="counter-box">
-        <div>
-          <b>도우미 인원</b>
-          <div class="sub">0~5명 선택 · 소규모 가족장은 0명 가능</div>
-        </div>
+        <div><b>도우미 인원</b><div class="sub">기본 2명 · 최대 5명 선택</div></div>
         <div class="counter">
           <button type="button" id="helperMinus" aria-label="도우미 인원 줄이기">−</button>
-          <strong id="helperCountText">0명</strong>
+          <strong id="helperCountText">2명</strong>
           <button type="button" id="helperPlus" aria-label="도우미 인원 늘리기">＋</button>
         </div>
       </div>
-
       <div class="counter-box">
-        <div>
-          <b>1일 근무시간</b>
-          <div class="sub">기본 10시간부터 조절</div>
-        </div>
+        <div><b>1일 근무시간</b><div class="sub">기본 8시간부터 조절</div></div>
         <div class="counter">
           <button type="button" id="hourMinus" aria-label="근무시간 줄이기">−</button>
-          <strong id="helperHoursText">10시간</strong>
+          <strong id="helperHoursText">8시간</strong>
           <button type="button" id="hourPlus" aria-label="근무시간 늘리기">＋</button>
         </div>
       </div>
-
-      <div class="sub">예: 1명 × 2일 × 10시간 = 252,000원 / 2명 × 2일 × 10시간 = 504,000원</div>
+      <div class="sub">예: 기본 2명 × 2일 × 8시간 = 추가금 0원 / 2명이 하루 10시간 근무하면 초과근무 +120,000원</div>
     </div>
   </section>
 
@@ -1126,7 +1181,7 @@ select{width:100%;min-height:48px}
 
   <div class="summary">
     <div class="summary-top">현재 예상 장례비용</div>
-    <div class="total" id="total">600,000원</div>
+    <div class="total" id="total">760,000원</div>
     <div class="breakdown" id="breakdown"></div>
     <small>
       장례식장 시설사용료·안치료·입관실 사용료·음식비·화장장 사용료·봉안시설·장지 비용 등은 별도입니다.<br>
@@ -1139,7 +1194,7 @@ select{width:100%;min-height:48px}
 
   <div class="mobile-total-bar">
     <span>현재 예상금액</span>
-    <strong id="mobileTotal">600,000원</strong>
+    <strong id="mobileTotal">760,000원</strong>
   </div>
 </main>
 
@@ -1170,16 +1225,16 @@ select{width:100%;min-height:48px}
 </style>
 
 <script>
-const HALL_BASE = 600000;
+const HALL_BASE = 760000;
 const NOHALL_BASE = 500000;
-const SUIT_PRICE = 70000;
-const HELPER_BASE_HOURS = 10;
+const SUIT_PRICE = 50000;
+const HELPER_BASE_HOURS = 8;
 const HELPER_BASE_PRICE = 126000;
 const HELPER_OVERTIME_RATE = 15000;
 const HELPER_DAYS = 2;
-let helperCount = 0;
-let helperHours = 10;
-let suitCount = 0;
+let helperCount = 2;
+let helperHours = 8;
+let suitCount = 4;
 
 const ids = {
   religiousSupplies: document.getElementById("religiousSupplies"),
@@ -1192,7 +1247,6 @@ const ids = {
   burialCoffinConsult: document.getElementById("burialCoffinConsult"),
   funeralType: document.getElementById("funeralType"),
   cremationShroud: document.getElementById("cremationShroud"),
-  cremationShroudConsult: document.getElementById("cremationShroudConsult"),
   burialShroud: document.getElementById("burialShroud"),
   burialShroudConsult: document.getElementById("burialShroudConsult"),
   urn: document.getElementById("urn"),
@@ -1232,16 +1286,22 @@ function updateCeremonyUI(){
     isNoHall ? "장례지도사 1인 · 무빈소 진행" : "장례지도사 2인 · 3일 진행";
   document.getElementById("directorDesc").textContent =
     isNoHall ? "안치·입관·발인 중심 무빈소 장례 진행" : "장례 절차 및 행사 진행";
-  document.getElementById("directorPrice").textContent = isNoHall ? "100,000원" : "200,000원";
+  document.getElementById("directorPrice").textContent = isNoHall ? "100,000원" : "360,000원";
 
   document.getElementById("altarRow").style.display = isNoHall ? "none" : "block";
   document.getElementById("hallServiceSection").style.display = isNoHall ? "none" : "block";
+  const hallBenefit = document.getElementById("hallBenefit");
+  if (hallBenefit) hallBenefit.style.display = isNoHall ? "none" : "block";
 
   if (isNoHall) {
     ids.altar.value = "0";
     suitCount = 0;
     helperCount = 0;
-    helperHours = 10;
+    helperHours = 8;
+  } else {
+    if (suitCount < 4) suitCount = 4;
+    if (helperCount < 2) helperCount = 2;
+    if (helperHours < 8) helperHours = 8;
   }
   updateHelperUI();
 }
@@ -1249,14 +1309,14 @@ function updateCeremonyUI(){
 function updateHelperUI(){
   document.getElementById("helperCountText").textContent = helperCount + "명";
   document.getElementById("helperHoursText").textContent = helperHours + "시간";
-  document.getElementById("helperMinus").disabled = helperCount <= 0;
+  document.getElementById("helperMinus").disabled = ids.ceremonyType() === "nohall" || helperCount <= 2;
   document.getElementById("helperPlus").disabled = helperCount >= 5;
-  document.getElementById("hourMinus").disabled = helperHours <= 10;
+  document.getElementById("hourMinus").disabled = helperHours <= 8;
   const suitText = document.getElementById("suitCountText");
   const suitMinus = document.getElementById("suitMinus");
   const suitPlus = document.getElementById("suitPlus");
   if (suitText) suitText.textContent = suitCount + "벌";
-  if (suitMinus) suitMinus.disabled = suitCount <= 0;
+  if (suitMinus) suitMinus.disabled = ids.ceremonyType() === "nohall" || suitCount <= 4;
   if (suitPlus) suitPlus.disabled = suitCount >= 10;
 }
 
@@ -1289,8 +1349,6 @@ function calc(){
 
   const shroudValue = isBurial ? ids.burialShroud.value : ids.cremationShroud.value;
 
-  ids.cremationShroudConsult.style.display =
-    !isBurial && ids.cremationShroud.value === "consult" ? "block" : "none";
   ids.burialShroudConsult.style.display =
     isBurial && ids.burialShroud.value === "consult" ? "block" : "none";
 
@@ -1304,7 +1362,8 @@ function calc(){
   ids.urnConsult.style.display = (!isBurial && ids.urn.value === "consult") ? "block" : "none";
   const urnValue = isBurial ? "0" : ids.urn.value;
   const urnTotal = num(urnValue);
-  const suitTotal = ceremonyType === "nohall" ? 0 : suitCount * SUIT_PRICE;
+  const paidSuitCount = ceremonyType === "nohall" ? 0 : Math.max(0, suitCount - 4);
+  const suitTotal = paidSuitCount * SUIT_PRICE;
   const portraitTotal = num(ids.portraitPhoto ? ids.portraitPhoto.value : 0);
   const coffinFlowerTotal = num(ids.coffinFlower ? ids.coffinFlower.value : 0);
   const crossBarTotal = isBurial ? num(ids.crossBar ? ids.crossBar.value : 0) : 0;
@@ -1312,10 +1371,10 @@ function calc(){
   const makeupTotal = ids.makeup.checked ? 100000 : 0;
   const customCeremonyTotal = ids.customCeremony.checked ? 200000 : 0;
   const overtimeHours = Math.max(0, helperHours - HELPER_BASE_HOURS);
-  const helperPerPerson =
-    HELPER_BASE_PRICE +
-    (overtimeHours * HELPER_OVERTIME_RATE);
-  const helperTotal = ceremonyType === "nohall" ? 0 : helperPerPerson * helperCount * HELPER_DAYS;
+  const extraHelperCount = ceremonyType === "nohall" ? 0 : Math.max(0, helperCount - 2);
+  const extraHelperBaseTotal = extraHelperCount * HELPER_BASE_PRICE * HELPER_DAYS;
+  const helperOvertimeTotal = ceremonyType === "nohall" ? 0 : helperCount * overtimeHours * HELPER_OVERTIME_RATE * HELPER_DAYS;
+  const helperTotal = extraHelperBaseTotal + helperOvertimeTotal;
   const baseVehicle = selectedBaseVehicle();
   const limo = ids.limo.checked ? 500000 : 0;
   const bus = ids.bus.checked ? 500000 : 0;
@@ -1385,12 +1444,16 @@ function calc(){
     ...(makeupTotal > 0 ? [`고인 메이크업 ${makeupTotal.toLocaleString("ko-KR")}원`] : []),
     ...(customCeremonyTotal > 0 ? [`종교·가족 맞춤 의전 ${customCeremonyTotal.toLocaleString("ko-KR")}원`] : []),
 
-    ...((ceremonyType !== "nohall" && suitTotal > 0)
-      ? [`상복 ${suitCount}벌 × 70,000원 = ${suitTotal.toLocaleString("ko-KR")}원`]
+    ...(ceremonyType !== "nohall"
+      ? [suitTotal > 0
+          ? `상복 ${suitCount}벌 · 기본 4벌 + 추가 ${paidSuitCount}벌 · ${suitTotal.toLocaleString("ko-KR")}원`
+          : `상복 ${suitCount}벌 · 기본지원`]
       : []),
 
-    ...((ceremonyType !== "nohall" && helperTotal > 0)
-      ? [`도우미 ${helperCount}명 × ${HELPER_DAYS}일 × ${helperHours}시간 ${helperTotal.toLocaleString("ko-KR")}원`]
+    ...(ceremonyType !== "nohall"
+      ? [helperTotal > 0
+          ? `장례 도우미 ${helperCount}명 · ${helperHours}시간 × ${HELPER_DAYS}일 · 추가금 ${helperTotal.toLocaleString("ko-KR")}원`
+          : `장례 도우미 2명 · 8시간 × 2일 · 기본지원`]
       : []),
 
     ...(baseVehicle > 0 ? [`발인차량 카니발·스타리아 +${baseVehicle.toLocaleString("ko-KR")}원`] : []),
@@ -1402,7 +1465,7 @@ function calc(){
 }
 
 document.getElementById("suitMinus")?.addEventListener("click", ()=>{
-  if(suitCount > 0) suitCount--;
+  if(suitCount > 4) suitCount--;
   updateHelperUI();
   calc();
 });
@@ -1413,7 +1476,7 @@ document.getElementById("suitPlus")?.addEventListener("click", ()=>{
 });
 
 document.getElementById("helperMinus").addEventListener("click", ()=>{
-  if(helperCount > 0) helperCount--;
+  if(helperCount > 2) helperCount--;
   updateHelperUI();
   calc();
 });
@@ -1423,7 +1486,7 @@ document.getElementById("helperPlus").addEventListener("click", ()=>{
   calc();
 });
 document.getElementById("hourMinus").addEventListener("click", ()=>{
-  if(helperHours > 10) helperHours--;
+  if(helperHours > 8) helperHours--;
   updateHelperUI();
   calc();
 });
@@ -1477,7 +1540,7 @@ setTimeout(()=>{
   }
 
   function estimateText(){
-    const title = "안심365 장례서비스 - 상조 견적";
+    const title = "안심365 장례서비스 - 장례 예상견적";
     const candidates = [
       document.querySelector(".result"),
       document.querySelector(".summary"),
@@ -1523,12 +1586,7 @@ setTimeout(()=>{
   }
 
   document.getElementById("copyEstimateBtn")?.addEventListener("click", copyEstimate);
-  document.getElementById("printEstimateBtn")?.addEventListener("click", function(){
-    window.print();
-  });
-  document.getElementById("pdfEstimateBtn")?.addEventListener("click", function(){
-    window.print();
-  });
+
 })();
 </script>
 
@@ -1571,14 +1629,14 @@ setTimeout(()=>{
     setSelect("metbe", 0);
     setSuitCount(0);
     helperCount = 0;
-    helperHours = 10;
+    helperHours = 8;
 
     if(type === "nohall-cremation"){
       setRadio("ceremonyType", "nohall");
       setSelect("funeralType", "cremation");
       setCheck("religiousSupplies", false);
       setSelect("cremationCoffin", 150000);
-      setSelect("cremationShroud", 170000);
+      setSelect("cremationShroud", 200000);
       setCheck("baseVehicle", true);
       setCheck("bus", false);
       setCheck("limo", false);
@@ -1589,11 +1647,11 @@ setTimeout(()=>{
       setSelect("funeralType", "cremation");
       setCheck("religiousSupplies", false);
       setSelect("cremationCoffin", 150000);
-      setSelect("cremationShroud", 170000);
-      setSelect("altar", 350000);
+      setSelect("cremationShroud", 200000);
+      setSelect("altar", 500000);
       setSuitCount(4);
-      helperCount = 1;
-      helperHours = 10;
+      helperCount = 2;
+      helperHours = 8;
       setCheck("baseVehicle", false);
       setCheck("bus", true);
       setCheck("limo", false);
@@ -1605,10 +1663,10 @@ setTimeout(()=>{
       setCheck("religiousSupplies", false);
       setSelect("burialCoffin", 350000);
       setSelect("burialShroud", 300000);
-      setSelect("altar", 350000);
+      setSelect("altar", 500000);
       setSuitCount(4);
-      helperCount = 1;
-      helperHours = 10;
+      helperCount = 2;
+      helperHours = 8;
       setCheck("baseVehicle", false);
       setCheck("bus", true);
       setCheck("limo", false);
@@ -1778,7 +1836,7 @@ setTimeout(()=>{
 
 
 
-<!-- 안심365 방문/광고/검색어/체류시간 추적 -->
+
 <script>
 (function(){
     const API_BASE = "https://www.odreai.com";
@@ -2003,5 +2061,67 @@ setTimeout(()=>{
 })();
 </script>
 
+
+<script>
+(function(){
+  const btn=document.getElementById('flowerPreviewBtn');
+  const pop=document.getElementById('flowerPreviewPopover');
+  const close=document.getElementById('flowerPreviewClose');
+  if(!btn||!pop) return;
+  const open=()=>{pop.classList.add('open');pop.setAttribute('aria-hidden','false')};
+  const hide=()=>{pop.classList.remove('open');pop.setAttribute('aria-hidden','true')};
+  btn.addEventListener('click',e=>{e.stopPropagation();pop.classList.contains('open')?hide():open()});
+  close?.addEventListener('click',e=>{e.stopPropagation();hide()});
+  if(window.matchMedia('(hover:hover)').matches){btn.addEventListener('mouseenter',open);pop.addEventListener('mouseleave',hide)}
+  pop.addEventListener('click',e=>{if(e.target===pop) hide()});
+  pop.querySelector('img')?.addEventListener('click',e=>e.stopPropagation());
+  document.addEventListener('keydown',e=>{if(e.key==='Escape') hide()});
+})();
+</script>
+
+<script>
+(function(){
+  const btn=document.getElementById('coffinFlowerPreviewBtn');
+  const pop=document.getElementById('coffinFlowerPreviewPopover');
+  const close=document.getElementById('coffinFlowerPreviewClose');
+  if(!btn||!pop) return;
+
+  const openPop=()=>{
+    pop.classList.add('open');
+    pop.setAttribute('aria-hidden','false');
+  };
+  const closePop=()=>{
+    pop.classList.remove('open');
+    pop.setAttribute('aria-hidden','true');
+  };
+
+  // 모바일/터치: 클릭으로 열고 닫기
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    pop.classList.contains('open') ? closePop() : openPop();
+  });
+
+  close?.addEventListener('click',function(e){
+    e.stopPropagation();
+    closePop();
+  });
+
+  // PC: 사진보기 버튼에 마우스만 올려도 표시
+  if(window.matchMedia('(hover:hover)').matches){
+    btn.addEventListener('mouseenter',openPop);
+  }
+
+  // 배경 클릭 시 닫기
+  pop.addEventListener('click',function(e){
+    if(e.target===pop) closePop();
+  });
+  pop.querySelector('img')?.addEventListener('click',e=>e.stopPropagation());
+
+  // ESC 닫기
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&pop.classList.contains('open')) closePop();
+  });
+})();
+</script>
 </body>
 </html>
