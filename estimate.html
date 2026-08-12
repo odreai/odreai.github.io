@@ -1055,6 +1055,28 @@ select{width:100%;min-height:48px}
 }
 </style>
 
+<style>
+.vehicle-distance-box{margin-top:12px;padding:13px;border:1px solid #ddd5c7;border-radius:12px;background:#fbfaf7}
+.vehicle-distance-item{margin-bottom:12px}.vehicle-distance-item>b{display:block;margin-bottom:7px;font-size:13px;color:#0e2f4e}
+.vehicle-distance-input{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.vehicle-distance-input input{width:150px;height:44px;padding:0 12px;border:1px solid #cfc7b8;border-radius:10px;background:#fff;font-size:16px;font-weight:800}
+.vehicle-distance-input input:focus{outline:none;border-color:#b89b5e;box-shadow:0 0 0 3px rgba(184,155,94,.12)}
+.vehicle-distance-item small{display:block;color:#765f30;line-height:1.5;font-weight:700}
+.vehicle-distance-notice{padding-top:10px;border-top:1px solid #e3dccf;font-size:11.5px;line-height:1.7;color:#666}
+@media(max-width:520px){.vehicle-distance-input input{width:100%;min-width:0}.vehicle-distance-input{width:100%}}
+</style>
+
+<style>
+.vehicle-route{
+  display:block;
+  margin-top:4px;
+  color:#6b7280!important;
+  font-size:11px!important;
+  line-height:1.45!important;
+  font-weight:700!important;
+}
+</style>
+
 </head>
 <body>
 <header class="header estimate-hero">
@@ -1361,7 +1383,7 @@ select{width:100%;min-height:48px}
       <div class="sub">※ 이미지는 등급별 구성 예시이며 실제 제품의 재질·디자인·색상·장식은 달라질 수 있습니다.</div>
       <div class="flower-preview-popover no-print" id="urnPreviewPopover" aria-hidden="true">
         <button type="button" class="flower-preview-close" id="urnPreviewClose" aria-label="봉안함 사진 닫기">×</button>
-        <img src="images/urn.webp" alt="봉안함 6등급 예시">
+        <img src="images/urn.webp" alt="봉안함 6등급 예시" loading="lazy" decoding="async">
         <div class="flower-preview-caption">봉안함 등급별 예시 · 실제 제품은 재질·디자인·색상·장식에 따라 달라질 수 있습니다.</div>
       </div>
     </div>
@@ -1381,7 +1403,7 @@ select{width:100%;min-height:48px}
       <div class="sub">※ 이미지는 등급별 구성 예시이며 실제 꽃 종류와 구성은 계절 및 현장 상황에 따라 달라질 수 있습니다.</div>
       <div class="flower-preview-popover no-print" id="flowerPreviewPopover" aria-hidden="true">
         <button type="button" class="flower-preview-close" id="flowerPreviewClose" aria-label="제단꽃 사진 닫기">×</button>
-        <img src="images/flower.webp" alt="제단꽃 등급별 예시">
+        <img src="images/flower.webp" alt="제단꽃 등급별 예시" loading="lazy" decoding="async">
         <div class="flower-preview-caption">제단꽃 등급별 예시</div>
       </div>
     </div>
@@ -1416,7 +1438,7 @@ select{width:100%;min-height:48px}
       <div class="sub">※ 이미지는 구성 예시이며 실제 꽃 종류와 구성은 계절 및 현장 상황에 따라 달라질 수 있습니다.</div>
       <div class="flower-preview-popover no-print" id="coffinFlowerPreviewPopover" aria-hidden="true">
         <button type="button" class="flower-preview-close" id="coffinFlowerPreviewClose" aria-label="입관 꽃장식 사진 닫기">×</button>
-        <img src="images/coffin-flower.webp" alt="입관 꽃장식 기본형·일반형 예시">
+        <img src="images/coffin-flower.webp" alt="입관 꽃장식 기본형·일반형 예시" loading="lazy" decoding="async">
         <div class="flower-preview-caption">입관 꽃장식 · 기본형 10만원 / 일반형 20만원</div>
       </div>
     </div>
@@ -1517,7 +1539,7 @@ select{width:100%;min-height:48px}
           <input type="checkbox" id="limo" value="500000">
           <span>
             <b>장의 리무진</b>
-            <small>500,000원 · 왕복 100km 기준</small>
+            <small>500,000원 · 편도 50km · 1차 장지까지</small>
           </span>
         </label>
 
@@ -1525,10 +1547,31 @@ select{width:100%;min-height:48px}
           <input type="checkbox" id="bus" value="500000">
           <span>
             <b>장의버스</b>
-            <small>500,000원 · 왕복 100km 기준</small>
+            <small>500,000원 · 전체 운행거리 150km 기준</small>
+            <small class="vehicle-route">장례식장 → 화장장 → 장지 → 장례식장 복귀</small>
           </span>
         </label>
       </div>
+
+      <div id="vehicleDistanceBox" class="vehicle-distance-box" style="display:none">
+        <div id="limoDistanceWrap" class="vehicle-distance-item" style="display:none">
+          <b>장의 리무진 편도 운행거리</b>
+          <div class="vehicle-distance-input"><input id="limoDistance" type="number" min="0" step="1" inputmode="numeric" placeholder="예: 120"><span>km</span></div>
+          <small id="limoDistanceResult">편도 50km까지 기본요금에 포함</small>
+        </div>
+        <div id="busDistanceWrap" class="vehicle-distance-item" style="display:none">
+          <b>장의버스 전체 운행거리</b>
+          <div class="vehicle-distance-input"><input id="busDistance" type="number" min="0" step="1" inputmode="numeric" placeholder="예: 250"><span>km</span></div>
+          <small id="busDistanceResult">전체 운행거리 150km까지 기본요금에 포함</small>
+        </div>
+        <div class="vehicle-distance-notice">
+            ※ 장의 리무진은 1차 장지까지 운행하며, 화장 시 화장장에서 운행이 종료됩니다.<br>
+            ※ 장의 리무진은 편도 50km 초과 시 1km당 2,500원이 추가됩니다.<br>
+            ※ 장의버스는 전체 운행거리 150km 초과 시 1km당 2,000원이 추가됩니다.<br>
+            ※ 도로 통행료·주차료 등은 별도입니다.
+        </div>
+      </div>
+
       <div class="sub">카니발·스타리아, 리무진, 장의버스는 필요한 차량만 각각 체크할 수 있으며 선택 금액이 합산됩니다.</div>
     </div>
   </section>
@@ -1565,7 +1608,8 @@ select{width:100%;min-height:48px}
 
     <div class="special-discount-note">
       ※ 국가유공자 특별우대는 <b>국가유공자 본인에 한해 적용</b>되며 배우자·유족은 해당되지 않습니다.<br>
-      ※ 증빙서류 확인 후 적용되며 다른 할인과 중복 적용되지 않습니다.
+      ※ 증빙서류 확인 후 적용되며 다른 할인과 중복 적용되지 않습니다.<br>
+      ※ 카니발·스타리아·장의 리무진·장의버스 등 <b>발인차량 비용은 할인 대상에서 제외</b>됩니다.
     </div>
   </div>
 </section>
@@ -1738,6 +1782,31 @@ function syncTotalDisplay(formattedTotal){
   if (mobileTotal) mobileTotal.textContent = formattedTotal;
 }
 
+const LIMO_EXTRA_PER_KM = 2500;
+const BUS_EXTRA_PER_KM = 2000;
+const LIMO_BASE_KM = 50;
+const BUS_BASE_KM = 150;
+
+function vehicleDistanceData(){
+  const ld=Math.max(0,Number(document.getElementById("limoDistance")?.value||0));
+  const bd=Math.max(0,Number(document.getElementById("busDistance")?.value||0));
+  const lek=Math.max(0,ld-LIMO_BASE_KM), bek=Math.max(0,bd-BUS_BASE_KM);
+  return {ld,bd,lek,bek,le:lek*LIMO_EXTRA_PER_KM,be:bek*BUS_EXTRA_PER_KM};
+}
+function updateVehicleDistanceUI(){
+  const lc=document.getElementById("limo")?.checked;
+  const bc=document.getElementById("bus")?.checked;
+  const box=document.getElementById("vehicleDistanceBox");
+  if(!box)return;
+  box.style.display=(lc||bc)?"block":"none";
+  document.getElementById("limoDistanceWrap").style.display=lc?"block":"none";
+  document.getElementById("busDistanceWrap").style.display=bc?"block":"none";
+  const d=vehicleDistanceData();
+  const lr=document.getElementById("limoDistanceResult"), br=document.getElementById("busDistanceResult");
+  if(lr) lr.textContent=!d.ld?"편도 50km까지 기본요금에 포함":d.lek?`편도 ${d.ld}km · 초과 ${d.lek}km × 2,500원 = +${d.le.toLocaleString("ko-KR")}원`:`편도 ${d.ld}km · 기본거리 50km 이내`;
+  if(br) br.textContent=!d.bd?"전체 운행거리 150km까지 기본요금에 포함":d.bek?`전체 ${d.bd}km · 초과 ${d.bek}km × 2,000원 = +${d.be.toLocaleString("ko-KR")}원`:`전체 ${d.bd}km · 기본거리 150km 이내`;
+}
+
 function calc(){
   const ceremonyType = ids.ceremonyType();
   const BASE = ceremonyType === "nohall" ? NOHALL_BASE : HALL_BASE;
@@ -1793,6 +1862,9 @@ function calc(){
   const baseVehicle = selectedBaseVehicle();
   const limo = ids.limo.checked ? 500000 : 0;
   const bus = ids.bus.checked ? 500000 : 0;
+  const vehicleDistance = vehicleDistanceData();
+  const limoDistanceExtra = limo > 0 ? vehicleDistance.le : 0;
+  const busDistanceExtra = bus > 0 ? vehicleDistance.be : 0;
 
   let total =
     BASE +
@@ -1811,7 +1883,9 @@ function calc(){
     helperTotal +
     baseVehicle +
     limo +
-    bus;
+    bus +
+    limoDistanceExtra +
+    busDistanceExtra;
 
   const discountType = document.querySelector('input[name="specialDiscount"]:checked')?.value || "none";
   const originalTotal = total;
@@ -1826,7 +1900,17 @@ function calc(){
     discountLabel = "기초생활수급자 장례지원 3%";
   }
 
-  const discountAmount = Math.round(originalTotal * discountRate);
+  // 특별우대/장례지원 할인은 발인차량 비용을 제외한 금액에만 적용
+  // 카니발·스타리아, 장의 리무진, 장의버스 및 차량 거리 초과요금 모두 할인 제외
+  const vehicleTotalForDiscount =
+    baseVehicle +
+    limo +
+    bus +
+    limoDistanceExtra +
+    busDistanceExtra;
+
+  const discountBase = Math.max(0, originalTotal - vehicleTotalForDiscount);
+  const discountAmount = Math.round(discountBase * discountRate);
   total = originalTotal - discountAmount;
 
   const formattedTotal = total.toLocaleString("ko-KR") + "원";
@@ -1888,12 +1972,12 @@ function calc(){
       : []),
 
     ...(baseVehicle > 0 ? [`발인차량 카니발·스타리아 +${baseVehicle.toLocaleString("ko-KR")}원`] : []),
-    ...(limo > 0 ? [`발인차량 장의 리무진 +${limo.toLocaleString("ko-KR")}원`] : []),
-    ...(bus > 0 ? [`발인차량 장의버스 +${bus.toLocaleString("ko-KR")}원`] : []),
+    ...(limo > 0 ? [`발인차량 장의 리무진 +${(limo+limoDistanceExtra).toLocaleString("ko-KR")}원 · ${vehicleDistance.ld ? `편도 ${vehicleDistance.ld}km${vehicleDistance.lek ? ` · 초과거리 +${limoDistanceExtra.toLocaleString("ko-KR")}원` : ""}` : "편도 50km 기준"}`] : []),
+    ...(bus > 0 ? [`발인차량 장의버스 +${(bus+busDistanceExtra).toLocaleString("ko-KR")}원 · ${vehicleDistance.bd ? `전체 ${vehicleDistance.bd}km${vehicleDistance.bek ? ` · 초과거리 +${busDistanceExtra.toLocaleString("ko-KR")}원` : ""}` : "전체 150km 기준"}`] : []),
 
     ...(discountAmount > 0 ? [
       `할인 전 예상금액 ${originalTotal.toLocaleString("ko-KR")}원`,
-      `<span class="discount-line">${discountLabel} · -${discountAmount.toLocaleString("ko-KR")}원</span>`,
+      `<span class="discount-line">${discountLabel} · -${discountAmount.toLocaleString("ko-KR")}원</span> <small>(발인차량 제외 금액 기준)</small>`,
       `<b>할인 적용 예상 장례비용 ${total.toLocaleString("ko-KR")}원</b>`
     ] : []),
   ];
@@ -1936,6 +2020,20 @@ document.getElementById("hourPlus").addEventListener("click", ()=>{
 document.querySelectorAll('input[name="ceremonyType"]').forEach(el=>{
   el.addEventListener("change", ()=>{
     updateCeremonyUI();
+    calc();
+  });
+});
+
+["limo","bus"].forEach(id=>{
+  document.getElementById(id)?.addEventListener("change", ()=>{
+    updateVehicleDistanceUI();
+    calc();
+  });
+});
+
+["limoDistance","busDistance"].forEach(id=>{
+  document.getElementById(id)?.addEventListener("input", ()=>{
+    updateVehicleDistanceUI();
     calc();
   });
 });
@@ -2115,6 +2213,7 @@ setTimeout(()=>{
 
     updateCeremonyUI();
     updateHelperUI();
+    updateVehicleDistanceUI();
     calc();
 
     const target = document.querySelector('input[name="ceremonyType"]');
