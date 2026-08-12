@@ -312,6 +312,11 @@ body{
     cursor:not-allowed;
 }
 
+
+.collapse-btn{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;background:#f7f9fb;color:var(--navy);font:inherit;font-weight:900;cursor:pointer}
+.collapsed-section{margin-top:18px}
+.daily-head{margin-top:0}
+
 @media(max-width:1100px){
     .cards{grid-template-columns:repeat(3,1fr)}
 }
@@ -323,7 +328,8 @@ body{
     .cards{grid-template-columns:repeat(2,1fr)}
     .grid{grid-template-columns:1fr}
     .metric-row{grid-template-columns:90px 1fr 45px}
-    .admin-table{min-width:1050px}
+    .admin-table{min-width:760px}
+    .visit-table{min-width:780px}
 }
 </style>
 </head>
@@ -333,11 +339,11 @@ body{
     <div class="topbar">
         <div class="brand">
             <h1>안심365 관리자 대시보드</h1>
-            <p>방문 · 광고유입 · 검색어 · 체류시간 · 상담전환</p>
+            <p>방문 · 유입경로 · 체류시간 · 상담전환</p>
         </div>
 
         <div class="controls">
-            <input id="adminKey" type="password" placeholder="kimo3137">
+            <input id="adminKey" type="password" placeholder="관리자 비밀번호">
             <select id="days">
                 <option value="1">오늘</option>
                 <option value="3">최근 3일</option>
@@ -351,17 +357,14 @@ body{
 
     <section class="cards">
         <div class="card"><div class="label">고유 방문자</div><div id="unique" class="value">0</div><small>선택 기간 · IP 기준</small></div>
-        <div class="card"><div class="label">전체 상담</div><div id="consultations" class="value">0</div><small>일반 + 견적 상담</small></div>
-        <div class="card"><div class="label">일반 상담</div><div id="generalConsultations" class="value">0</div><small>장례상담 접수</small></div>
-        <div class="card"><div class="label">견적 상담</div><div id="estimateConsultations" class="value">0</div><small>맞춤견적 접수</small></div>
+        <div class="card"><div class="label">상담 접수</div><div id="consultations" class="value">0</div><small>일반 + 맞춤견적</small></div>
         <div class="card"><div class="label">전환율</div><div id="conversion" class="value">0%</div><small>상담 ÷ 고유 방문자</small></div>
-        <div class="card"><div class="label">평균 체류시간</div><div id="avgDuration" class="value">0초</div><small>고유 방문자별 총 체류시간 평균</small></div>
-        <div class="card"><div class="label">광고 유입자</div><div id="adVisits" class="value">0</div><small>광고 식별 · IP 중복 제외</small></div>
+        <div class="card"><div class="label">평균 체류시간</div><div id="avgDuration" class="value">0초</div><small>직접방문 0초 제외</small></div>
     </section>
 
     <section class="grid">
         <div class="panel">
-            <div class="panel-head"><div><h3>유입 경로</h3><p class="panel-desc">네이버 · 직접방문 · 기타</p></div></div>
+            <div class="panel-head"><div><h3>유입 경로</h3><p class="panel-desc">검색광고 · 일반검색 · 외부링크 · 직접방문</p></div></div>
             <div id="sources" class="metric-list"></div>
         </div>
         <div class="panel">
@@ -371,54 +374,36 @@ body{
     </section>
 
     <section class="panel full">
-        <div class="panel-head"><div><h3>최근 맞춤견적 상담</h3><p class="panel-desc">예상금액과 고객이 선택한 세부 구성</p></div></div>
-        <div class="table-wrap">
-            <table class="admin-table">
-                <thead><tr>
-                    <th>시간</th><th>보호자</th><th>연락처</th><th>예상금액</th><th>세부 견적내용</th><th>SMS</th>
-                </tr></thead>
-                <tbody id="estimateConsultTable"></tbody>
-            </table>
-        </div>
+        <div class="panel-head"><div><h3>최근 상담 접수</h3><p class="panel-desc">일반 장례상담 접수 내역</p></div></div>
+        <div class="table-wrap"><table class="admin-table">
+            <thead><tr><th>시간</th><th>보호자</th><th>연락처</th><th>임종상태</th><th>장례형태</th><th>위치</th><th>유입</th><th>SMS</th></tr></thead>
+            <tbody id="consultTable"></tbody>
+        </table></div>
     </section>
 
     <section class="panel full">
-        <div class="panel-head">
-            <div><h3>날짜별 추이</h3><p class="panel-desc">고유 방문자(IP 기준) 및 상담 접수 현황</p></div>
-            <span id="generatedAt" class="updated"></span>
-        </div>
-        <div id="daily" class="daily"></div>
-        <div class="legend"><span class="dot"></span>방문 <span class="dot red"></span>상담</div>
+        <div class="panel-head"><div><h3>최근 맞춤견적 상담</h3><p class="panel-desc">예상금액과 고객 선택 구성</p></div></div>
+        <div class="table-wrap"><table class="admin-table">
+            <thead><tr><th>시간</th><th>보호자</th><th>연락처</th><th>예상금액</th><th>세부 견적내용</th><th>SMS</th></tr></thead>
+            <tbody id="estimateConsultTable"></tbody>
+        </table></div>
     </section>
 
     <section class="panel full">
-        <div class="panel-head"><div><h3>최근 상담 접수</h3><p class="panel-desc">광고/검색어까지 함께 확인</p></div></div>
-        <div class="table-wrap">
-            <table class="admin-table">
-                <thead><tr>
-                    <th>시간</th><th>보호자</th><th>연락처</th><th>임종상태</th>
-                    <th>장례형태</th><th>위치</th><th>유입</th><th>광고</th><th>검색어</th><th>SMS</th>
-                </tr></thead>
-                <tbody id="consultTable"></tbody>
-            </table>
-        </div>
+        <div class="panel-head"><div><h3>최근 방문자 기록</h3><p class="panel-desc">동일 IP 1명 기준 · 실제 이동경로 · 총 체류시간</p></div></div>
+        <div class="table-wrap"><table class="admin-table visit-table">
+            <thead><tr><th>시간</th><th>유입</th><th>기기</th><th>페이지 이동</th><th>체류시간</th><th>IP</th><th>해상도</th></tr></thead>
+            <tbody id="visitTable"></tbody>
+        </table></div>
+        <div class="pagination-wrap"><div id="visitPageInfo" class="pagination-info">총 0건</div><div id="visitPagination" class="pagination"></div></div>
     </section>
 
     <section class="panel full">
-        <div class="panel-head"><div><h3>최근 방문자 기록</h3><p class="panel-desc">동일 IP 1명 기준 · 이동경로 · 총 체류시간</p></div></div>
-        <div class="table-wrap">
-            <table class="admin-table">
-                <thead><tr>
-                    <th>시간</th><th>유입</th><th>광고</th><th>검색어</th><th>캠페인</th>
-                    <th>기기</th><th>페이지뷰</th><th>이동경로</th><th>총 체류시간</th><th>IP</th><th>화면</th>
-                </tr></thead>
-                <tbody id="visitTable"></tbody>
-            </table>
-        </div>
-
-        <div class="pagination-wrap">
-            <div id="visitPageInfo" class="pagination-info">총 0건</div>
-            <div id="visitPagination" class="pagination"></div>
+        <button id="dailyToggle" class="collapse-btn" type="button" aria-expanded="false">날짜별 추이 보기 ▼</button>
+        <div id="dailySection" class="collapsed-section" hidden>
+            <div class="panel-head daily-head"><div><h3>날짜별 추이</h3><p class="panel-desc">고유 방문자(IP 기준) 및 상담 접수 현황</p></div><span id="generatedAt" class="updated"></span></div>
+            <div id="daily" class="daily"></div>
+            <div class="legend"><span class="dot"></span>방문 <span class="dot red"></span>상담</div>
         </div>
     </section>
 
@@ -557,7 +542,7 @@ function renderConsultations(rows){
     const tbody = $("consultTable");
 
     if(!Array.isArray(rows) || !rows.length){
-        tbody.innerHTML = '<tr><td colspan="10" class="empty">상담 접수 기록이 없습니다.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" class="empty">상담 접수 기록이 없습니다.</td></tr>';
         return;
     }
 
@@ -574,8 +559,6 @@ function renderConsultations(rows){
                 <td>${esc(v.funeral_type || "-")}</td>
                 <td>${esc(v.address || "-")}</td>
                 <td>${esc(v.traffic_source || "-")}</td>
-                <td>${v.ad ? `<span class="visit-ad">${esc(v.ad)}</span>` : "-"}</td>
-                <td class="keyword" title="${esc(v.keyword || "")}">${esc(v.keyword || "-")}</td>
                 <td class="${smsClass}">${esc(sms || "-")}</td>
             </tr>
         `;
@@ -586,7 +569,7 @@ function renderVisits(rows){
     const tbody = $("visitTable");
 
     if(!Array.isArray(rows) || !rows.length){
-        tbody.innerHTML = '<tr><td colspan="11" class="empty">방문 기록이 없습니다.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="empty">방문 기록이 없습니다.</td></tr>';
         return;
     }
 
@@ -594,11 +577,7 @@ function renderVisits(rows){
         <tr>
             <td>${esc(shortTime(v.server_time))}</td>
             <td>${esc(v.source || "-")}</td>
-            <td>${v.ad ? `<span class="visit-ad">${esc(v.ad)}</span>` : "-"}</td>
-            <td class="keyword" title="${esc(v.keyword || "")}">${esc(v.keyword || "-")}</td>
-            <td class="keyword" title="${esc(v.campaign || "")}">${esc(v.campaign || "-")}</td>
             <td>${esc(v.device || "-")}</td>
-            <td>${esc(v.pageviews || 1)}</td>
             <td class="keyword" title="${esc(v.page || "/")}">${esc(v.page || "/")}</td>
             <td><span class="duration ${durationClass(v.duration)}">${esc(fmtDuration(v.duration))}</span></td>
             <td>${esc(v.ip || "-")}</td>
@@ -701,11 +680,8 @@ async function loadStats(page = currentVisitPage, fromPaging = false){
 
         $("unique").textContent = s.unique_visitors ?? 0;
         $("consultations").textContent = s.consultations ?? 0;
-        $("generalConsultations").textContent = s.general_consultations ?? 0;
-        $("estimateConsultations").textContent = s.estimate_consultations ?? 0;
         $("conversion").textContent = `${s.conversion_rate ?? 0}%`;
         $("avgDuration").textContent = fmtDuration(s.avg_duration ?? 0);
-        $("adVisits").textContent = s.ad_visitors ?? 0;
 
         renderMetricList("sources", data.sources);
         renderMetricList("devices", data.devices);
@@ -739,6 +715,14 @@ $("days").addEventListener("change", () => {
 });
 $("adminKey").addEventListener("keydown", e => {
     if(e.key === "Enter"){ currentVisitPage = 1; loadStats(1, false); }
+});
+
+$("dailyToggle").addEventListener("click", () => {
+    const section = $("dailySection");
+    const opening = section.hidden;
+    section.hidden = !opening;
+    $("dailyToggle").textContent = opening ? "날짜별 추이 접기 ▲" : "날짜별 추이 보기 ▼";
+    $("dailyToggle").setAttribute("aria-expanded", String(opening));
 });
 
 const savedKey = localStorage.getItem("a365_admin_key");
