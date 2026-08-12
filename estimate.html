@@ -834,6 +834,16 @@ select{width:100%;min-height:48px}
 }
 </style>
 
+
+<style>
+/* 모바일 하단 고정 예상금액 바 공간 확보 */
+@media(max-width:520px){
+  .wrap{
+    padding-bottom:120px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <header class="header">
@@ -1307,16 +1317,16 @@ select{width:100%;min-height:48px}
       <label class="choice full">
         <input type="radio" name="specialDiscount" value="veteran">
         <span>
-          <b>국가유공자 본인 6% 특별우대</b>
-          <small>국가를 위해 헌신하신 분에 대한 감사와 예우의 마음을 담아 안심365 견적금액의 6%를 할인합니다.</small>
+          <b>국가유공자 본인 5% 특별우대</b>
+          <small>국가를 위해 헌신하신 분에 대한 감사와 예우의 마음을 담아 안심365 견적금액의 5%를 할인합니다.</small>
         </span>
       </label>
 
       <label class="choice full">
         <input type="radio" name="specialDiscount" value="basic">
         <span>
-          <b>기초생활수급자 4% 장례지원</b>
-          <small>장례비 부담을 덜어드리기 위해 안심365 견적금액의 4%를 할인합니다.</small>
+          <b>기초생활수급자 3% 장례지원</b>
+          <small>장례비 부담을 덜어드리기 위해 안심365 견적금액의 3%를 할인합니다.</small>
         </span>
       </label>
     </div>
@@ -1577,11 +1587,11 @@ function calc(){
   let discountLabel = "";
 
   if (discountType === "veteran") {
-    discountRate = 0.06;
-    discountLabel = "국가유공자 본인 특별우대 6%";
+    discountRate = 0.05;
+    discountLabel = "국가유공자 본인 특별우대 5%";
   } else if (discountType === "basic") {
-    discountRate = 0.04;
-    discountLabel = "기초생활수급자 장례지원 4%";
+    discountRate = 0.03;
+    discountLabel = "기초생활수급자 장례지원 3%";
   }
 
   const discountAmount = Math.round(originalTotal * discountRate);
