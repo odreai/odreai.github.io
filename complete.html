@@ -5,6 +5,10 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f243e">
+<meta name="description" content="안심365 장례서비스 상담 접수 완료 안내">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="shortcut icon" href="/favicon.ico">
 
 <title>안심365 상담 접수 완료</title>
 
@@ -302,11 +306,165 @@ color:#0f243e;
 
 </style>
 
+<style>
+:root{
+  --navy:#0f243e;
+  --navy2:#163556;
+  --gold:#b89b5e;
+  --gold-light:#e4ca92;
+  --bg:#f6f3ed;
+  --line:#ddd6c8;
+  --text:#1d2733;
+  --muted:#6f7780;
+  --white:#fff;
+}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,"Pretendard","Noto Sans KR",sans-serif;
+}
+.site-header{
+  padding:26px 20px 30px;
+  background:linear-gradient(135deg,var(--navy),var(--navy2));
+  color:#fff;
+}
+.site-header-inner{width:min(100%,760px);margin:auto}
+.brand{
+  font-family:"Noto Serif KR",serif;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:.4px;
+}
+.brand span{color:var(--gold-light)}
+.site-header p{margin:9px 0 0;color:#e5e8ec;font-size:14px;line-height:1.6}
+.container{width:min(100%,760px);max-width:none;margin:auto;padding:24px 16px 52px}
+.logo{display:none}
+.card{
+  margin:0;
+  padding:32px 26px;
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(15,36,62,.08);
+  text-align:center;
+}
+.check{
+  display:flex;
+  width:72px;
+  height:72px;
+  margin:0 auto 20px;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#f4ead3;
+  color:var(--navy);
+  font-size:0;
+  box-shadow:inset 0 0 0 1px #e4d1a7;
+}
+.check::before{content:"✓";font-size:42px;font-weight:900;line-height:1}
+h1{
+  margin:0;
+  color:var(--navy);
+  font-family:"Noto Serif KR",serif;
+  font-size:30px;
+  line-height:1.42;
+}
+.gold{color:var(--gold);font-weight:900}
+.message{margin-top:22px;color:#59636c;font-size:16px;line-height:1.85}
+.message b{color:var(--navy);font-size:17px}
+#userPhone:empty::before{content:"입력하신 연락처";color:var(--navy)}
+.process{
+  margin-top:28px;
+  padding:0;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  text-align:left;
+}
+.process-title{
+  margin:0;
+  padding:15px 17px;
+  background:#faf9f6;
+  border-bottom:1px solid var(--line);
+  color:var(--navy);
+  font-size:17px;
+  font-weight:900;
+}
+.step{padding:14px 17px;border-bottom:1px solid #eeeae2;color:#66717b;font-size:14px}
+.step:last-child{border-bottom:0}
+.step.done{color:#80672f;background:#fffaf0;font-weight:900}
+.call{
+  display:block;
+  margin-top:22px;
+  padding:17px 18px;
+  border-radius:12px;
+  background:var(--navy);
+  color:#fff;
+  text-decoration:none;
+  font-size:17px;
+  font-weight:900;
+  box-shadow:0 6px 16px rgba(15,36,62,.16);
+}
+.call:active,.sub-action:active{transform:scale(.99)}
+.sub-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.sub-action{
+  display:flex;
+  min-height:50px;
+  align-items:center;
+  justify-content:center;
+  padding:12px 10px;
+  border:1px solid #c8b07a;
+  border-radius:12px;
+  background:#fff;
+  color:var(--navy);
+  text-decoration:none;
+  font-size:14px;
+  font-weight:800;
+}
+.info{
+  margin-top:25px;
+  padding:20px;
+  border:1px solid #e4d1a7;
+  border-radius:14px;
+  background:#fff8e9;
+  color:#59636c;
+  font-size:14px;
+  line-height:1.9;
+  text-align:left;
+}
+.info b{color:var(--navy);font-size:16px}
+.footer{margin-top:27px;color:#7a838c;font-size:13px;line-height:1.75;text-align:center}
+.footer b{color:var(--navy)}
+@media(max-width:520px){
+  .site-header{padding:23px 18px 26px}
+  .brand{font-size:23px}
+  .container{padding:16px 14px calc(34px + env(safe-area-inset-bottom))}
+  .card{padding:28px 17px;border-radius:16px}
+  .check{width:64px;height:64px;margin-bottom:17px}
+  .check::before{font-size:37px}
+  h1{font-size:26px}
+  .message{font-size:15px;line-height:1.8}
+  .sub-actions{grid-template-columns:1fr}
+}
+</style>
+
 
 </head>
 
 
 <body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="brand">안심<span>365</span> 장례서비스</div>
+    <p>24시간 장례 상담 · 운구 · 빈소·무빈소 장례 안내</p>
+  </div>
+</header>
 
 
 <div class="container">
@@ -314,7 +472,7 @@ color:#0f243e;
 
 <div class="logo">
 
-안심<span>365</span>
+안심<span>365</span> 장례서비스
 
 </div>
 
@@ -412,9 +570,14 @@ color:#0f243e;
 
 <a href="tel:010-5934-3137" class="call">
 
-📞 24시간 긴급 상담 전화
+24시간 긴급 상담 전화
 
 </a>
+
+<div class="sub-actions">
+  <a href="/" class="sub-action">안심365 홈으로</a>
+  <a href="/estimate.html" class="sub-action">장례비용 견적보기</a>
+</div>
 
 
 
