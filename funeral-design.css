@@ -1,0 +1,268 @@
+/* Funeral service presentation only. App policy documents do not load this file.
+   Existing scripts, calculator contracts and print styles remain authoritative. */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;600;700&display=swap");
+
+@media screen {
+  html:has(body.funeral-site) { scroll-padding-block: 24px 100px; }
+  .funeral-site {
+    --funeral-navy: #0d2433;
+    --funeral-gold: #d6bd89;
+    --funeral-ivory: #f7f4ed;
+    --funeral-paper: #fffdf8;
+    --funeral-line: #dcd7cc;
+    --funeral-muted: #53616a;
+    --funeral-sans: "Noto Sans KR", "Malgun Gothic", sans-serif;
+    --funeral-serif: "Noto Serif KR", "Batang", serif;
+    margin: 0;
+    padding: 0;
+    background: var(--funeral-ivory);
+    overflow-x: visible;
+  }
+  .funeral-site :is(.brand-hero, .why365, .message, .video-section, .card, .form-heading, .final-message, .footer, .estimate-hero, .wrap, .estimate-actions, .site-header, .quick-sticky) {
+    font-family: var(--funeral-sans);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-height: 1.75;
+  }
+  .funeral-site :is(.brand-hero, .why365, .message, .video-section, .card, .form-heading, .final-message, .footer, .estimate-hero, .wrap, .estimate-actions, .site-header, .quick-sticky) * {
+    font-family: inherit;
+  }
+  .funeral-site :is(h1, h2, .brand-topbar-name, .brand, .section-title, .preset-title, .form-heading, .card .title, .process-title) {
+    font-family: var(--funeral-serif);
+    font-weight: 600;
+    letter-spacing: -.035em;
+    word-break: keep-all;
+    overflow-wrap: normal;
+  }
+  .funeral-site :is(button, select, input, .brand-action, .main-btn, .call, .sub-action, .home-link) {
+    font-family: var(--funeral-sans);
+  }
+  .funeral-site :is(.brand-action, .main-btn, .call, .sub-action, .home-link, .preset-btn, .estimate-action-btn, .estimate-consult-main, .submit, .quick-sticky-item) {
+    min-height: 48px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    box-shadow: none;
+    transition: background-color .16s ease, color .16s ease;
+    word-break: keep-all;
+  }
+  .funeral-site :is(.brand-action.primary, .submit, .estimate-consult-main, .call) {
+    background: var(--funeral-gold);
+    border: 1px solid var(--funeral-gold);
+    color: var(--funeral-navy);
+  }
+  .funeral-site :is(.brand-action.primary, .submit, .estimate-consult-main, .call):hover { background: #e3cfa8; }
+  .funeral-site :is(.brand-action.primary, .submit, .estimate-consult-main, .call):active { background: #c5a972; transform: none; }
+  .funeral-site :is(.brand-action, .main-btn, .call, .sub-action, .home-link, .preset-btn, .estimate-action-btn, .estimate-consult-main, .submit, .quick-sticky-item, select, .card input):focus-visible {
+    outline: 3px solid #83652f;
+    outline-offset: 4px;
+  }
+  .funeral-site :is(.card, .section, .preset-card, .summary, .notice, .info, .process, .hall-benefit) {
+    border-radius: 6px;
+    box-shadow: none;
+    border: 1px solid var(--funeral-line);
+  }
+  .funeral-site :is(.card, .section, .preset-card) { background: var(--funeral-paper); }
+  .funeral-site :is(.section-guide, .address-info, .price-notice, .service-note, .video-text, .sub, .item small, .choice small, .preset-list, .legal-note, .helper-price-info, .vehicle-distance-notice) {
+    font-family: var(--funeral-sans);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--funeral-muted);
+  }
+  .funeral-site :is(select, .card input[type="text"], .card input[type="tel"], input[type="number"]) {
+    min-height: 50px;
+    border: 1px solid #aaa99e;
+    border-radius: 4px;
+    background: var(--funeral-paper);
+    color: #243742;
+    font-size: 16px;
+    font-weight: 400;
+    max-width: 100%;
+  }
+  .funeral-site input::placeholder { color: #666e72; opacity: 1; }
+
+  /* Home: generous desktop width, readable consultation column. */
+  .funeral-home > .container { max-width: 1120px; padding: 0 32px 48px; }
+  .funeral-home .brand-topbar { margin: 0 -32px; padding: 0 56px; min-height: 86px; background: var(--funeral-navy); border-color: #354650; }
+  .funeral-home .brand-topbar-name { font-size: 21px; color: #fffdf8; }
+  .funeral-home .brand-hero { margin: 0 -32px 0; padding: 76px 56px 64px; background: var(--funeral-navy); border: 0; }
+  .funeral-home .brand-hero::before, .funeral-home .brand-hero::after, .funeral-estimate .estimate-hero::after { display: none; }
+  .funeral-home .brand-hero-inner { max-width: none; }
+  .funeral-home .brand-kicker { color: var(--funeral-gold); font-size: 12px; margin-bottom: 24px; }
+  .funeral-home .brand-hero h1 { font-size: clamp(32px, 4vw, 52px); line-height: 1.5; font-weight: 500; }
+  .funeral-home .brand-hero h1 em { color: var(--funeral-gold); }
+  .funeral-home .brand-subtitle { font-size: 16px; color: #d3dce1; max-width: 620px; margin-top: 28px; }
+  .funeral-home .brand-pay { font-size: 14px; font-weight: 500; }
+  .funeral-home .brand-actions { max-width: 330px; margin-top: 30px; }
+  .funeral-home .brand-action { min-height: 56px; padding: 12px 18px; }
+  .funeral-home .brand-mini { color: #c2cdd2; font-size: 13px; gap: 12px; margin-top: 36px; }
+  .funeral-home .why365 { padding: 64px 0 48px; margin: 0; border: 0; box-shadow: none; background: transparent; }
+  .funeral-home .why365-head { text-align: left; margin-bottom: 30px; }
+  .funeral-home .why365-head small { color: #715b32; font-size: 12px; }
+  .funeral-home .why365-head h2 { font-size: 28px; line-height: 1.5; }
+  .funeral-home .why365-head p { color: var(--funeral-muted); font-size: 15px; }
+  .funeral-home .why365-grid { gap: 24px; }
+  .funeral-home .why365-item { border: 0; border-top: 1px solid #bbb6a8; background: transparent; padding: 20px 0 0; min-height: 0; }
+  .funeral-home .why365-item b { font-size: 17px; font-weight: 600; }
+  .funeral-home .why365-item span { font-size: 14px; color: var(--funeral-muted); line-height: 1.75; }
+  .funeral-home .why365-num { color: #715b32 !important; font-size: 13px !important; }
+  .funeral-home .message { margin: 0 auto; max-width: 820px; padding: 24px 0; color: var(--funeral-muted); font-size: 16px; }
+  .funeral-home .card { padding: 28px 32px; margin: 0 auto 20px; max-width: 820px; }
+  .funeral-home .card .title { font-size: 22px; margin-bottom: 20px; }
+  .funeral-home .card .title h3 { font: inherit; margin: 0 0 12px; }
+  .funeral-home .section-guide { text-align: left; font-weight: 400; letter-spacing: 0; }
+  .funeral-home .address-title { font-size: 17px; font-weight: 500; }
+  .funeral-home .select-option span { min-height: 52px; padding: 12px 16px; border-radius: 4px; background: transparent; border-color: #c5c6bf; text-align: left; }
+  .funeral-home .select-option input:checked + span { background: #eaf0ef; color: var(--funeral-navy); border: 1px solid #48616b; box-shadow: inset 3px 0 #48616b; }
+  .funeral-home .select-option input:checked + span :is(strong, small) { color: var(--funeral-navy); }
+  .funeral-home .select-option small { color: var(--funeral-muted); }
+  .funeral-home .main-btn { max-width: 420px; min-height: 54px; border: 1px solid #314d5e; background: var(--funeral-navy); margin: 28px auto; }
+  .funeral-home .main-btn:hover { background: #254454; }
+  .funeral-home .video-section { border-top: 1px solid var(--funeral-line); border-bottom: 1px solid var(--funeral-line); background: transparent; padding: 44px 0; margin: 36px auto 56px; }
+  .funeral-home .video-wrap { border: 0; border-radius: 4px; box-shadow: none; }
+  .funeral-home .form-heading { max-width: 820px; margin: 0 auto 24px; font-size: 28px; scroll-margin-top: 24px; }
+  .funeral-home .form-heading span { display: block; font-family: var(--funeral-sans); color: var(--funeral-muted); font-size: 15px; font-weight: 400; margin-top: 8px; }
+  .funeral-home .final-message { margin: 32px auto; }
+  .funeral-home .submit { display: block; width: 100%; max-width: 820px; margin: 24px auto; min-height: 56px; }
+  .funeral-home .footer { padding: 36px 0 0; border-top: 1px solid var(--funeral-line); color: var(--funeral-muted); }
+  .funeral-home .quick-sticky { right: max(12px, calc((100vw - 1120px) / 2 - 72px)); width: 60px; gap: 0; }
+  .funeral-home .quick-sticky-item { background: var(--funeral-navy); border: 0; border-bottom: 1px solid #435563; border-radius: 0; min-height: 72px; padding: 8px 4px; }
+  .funeral-home .quick-sticky-item:first-child { border-radius: 4px 4px 0 0; }
+  .funeral-home .quick-sticky-item:last-child { border-radius: 0 0 4px 4px; }
+  .funeral-home .quick-sticky-item:hover { background: #2b4554; transform: none; box-shadow: none; }
+  .funeral-home .quick-sticky-icon { background: transparent; color: var(--funeral-gold); font-size: 16px; }
+  .funeral-home .quick-sticky-text { font-size: 12px; font-weight: 500; }
+
+  /* Quote: preserve every control and the existing total bar. */
+  .funeral-estimate .estimate-hero { padding: 30px 32px 48px; background: var(--funeral-navy); border: 0; }
+  .funeral-estimate .header-inner { max-width: 1056px; }
+  .funeral-estimate .estimate-topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 24px; border-bottom: 1px solid #354650; }
+  .funeral-estimate .brand { font-size: 21px; }
+  .funeral-estimate .home-link { display: inline-flex; align-items: center; gap: 12px; padding: 0 12px; color: #fffdf8; border: 1px solid #61727c; white-space: nowrap; }
+  .funeral-estimate .home-link:hover { background: #294452; }
+  .funeral-estimate .hero-kicker { color: var(--funeral-gold); margin-top: 44px; font-size: 12px; letter-spacing: .18em; }
+  .funeral-estimate .estimate-hero h1 { font-size: 42px; line-height: 1.5; font-weight: 500; }
+  .funeral-estimate .estimate-hero h1 span { color: var(--funeral-gold); }
+  .funeral-estimate .hero-desc { font-size: 16px; }
+  .funeral-estimate .hero-trust { font-size: 14px; font-weight: 500; }
+  .funeral-estimate .hero-points { gap: 12px 0; }
+  .funeral-estimate .hero-points span { font-size: 13px; }
+  .funeral-estimate .wrap { max-width: 1120px; width: 100%; padding: 40px 32px 24px; }
+  .funeral-estimate .notice { background: #ede9df; border: 0; border-left: 3px solid #a9946a; padding: 24px; font-size: 15px; margin-bottom: 36px; }
+  .funeral-estimate .preset-head h3 { font-family: var(--funeral-serif); font-size: 24px; }
+  .funeral-estimate .preset-head span { color: var(--funeral-muted); font-size: 13px; }
+  .funeral-estimate .preset-card { padding: 24px; }
+  .funeral-estimate .preset-title { font-size: 21px; }
+  .funeral-estimate .preset-price { color: var(--funeral-navy); font-size: 29px; font-weight: 600; margin: 12px 0 20px; }
+  .funeral-estimate .preset-badge { border-radius: 3px; background: #ece9df; color: #44545e; font-weight: 500; }
+  .funeral-estimate .preset-btn.apply { background: var(--funeral-navy); color: white; border-color: var(--funeral-navy); }
+  .funeral-estimate .preset-btn.detail, .funeral-estimate .estimate-action-btn { background: transparent; color: var(--funeral-navy); border: 1px solid #aab0af; }
+  .funeral-estimate :is(.preset-btn, .estimate-action-btn):hover { background: #e6ebe8; color: var(--funeral-navy); }
+  .funeral-estimate :is(.section, .hall-benefit, .summary, .legal-note) { max-width: 880px; margin-left: auto; margin-right: auto; }
+  .funeral-estimate .section { padding: 8px 24px; margin-bottom: 24px; }
+  .funeral-estimate .section-title { padding: 20px 0; background: transparent; font-size: 22px; }
+  .funeral-estimate :is(.item, .option-row) { padding: 20px 0; }
+  .funeral-estimate .choice { border-radius: 4px; padding: 16px; background: transparent; min-height: 64px; }
+  .funeral-estimate .choice:has(input:checked) { border-color: #48616b; background: #eaf0ef; }
+  .funeral-estimate .choice b { font-size: 16px; font-weight: 600; }
+  .funeral-estimate .required { border-radius: 3px; color: #635333; background: #eee8d9; font-size: 12px; }
+  .funeral-estimate .hall-benefit { background: #eeeee5; padding: 22px 24px; border: 0; margin-bottom: 24px; }
+  .funeral-estimate .counter button { width: 46px; height: 46px; border-radius: 4px; }
+  .funeral-estimate .counter-box { flex-wrap: wrap; }
+  .funeral-estimate .summary { background: var(--funeral-navy); border: 0; padding: 32px; margin-top: 32px; }
+  .funeral-estimate .summary-top { font-size: 15px; }
+  .funeral-estimate .total { color: var(--funeral-gold); font-size: 36px; }
+  .funeral-estimate .summary small { font-size: 14px; line-height: 1.8; color: #d3dce1; }
+  .funeral-estimate #breakdown { font-size: 14px; line-height: 1.8; }
+  .funeral-estimate .legal-note { font-size: 13px; padding: 20px 0; }
+  .funeral-estimate .estimate-actions { max-width: 880px !important; width: calc(100% - 64px) !important; grid-template-columns: repeat(4, minmax(0, 1fr)) !important; margin: 16px auto !important; gap: 12px; }
+  .funeral-estimate .estimate-consult-main { grid-column: 1 / -1; min-height: 56px; }
+  .funeral-estimate > .sub { padding: 0 20px 40px; }
+  .funeral-estimate .mobile-total-bar { box-shadow: none; border-top: 1px solid #65717a; }
+  .funeral-estimate .vehicle-route { font-size: 13px !important; color: #53616a !important; }
+  .funeral-estimate .free-support { color: #715b32 !important; }
+  .funeral-estimate .special-discount-note { color: #53616a; font-size: 14px; line-height: 1.75; background: #efede4; border-radius: 4px; }
+  .funeral-estimate .estimate-modal-card { border-radius: 6px; box-shadow: none; background: var(--funeral-paper); }
+  .funeral-estimate .estimate-modal-card h3 { font-family: var(--funeral-serif); font-weight: 600; word-break: keep-all; }
+  .funeral-estimate .estimate-modal-card .desc { color: #53616a; font-size: 14px; }
+
+  /* Completion screen uses the same restrained type and component language. */
+  .funeral-complete .site-header { background: var(--funeral-navy); padding: 30px 24px; }
+  .funeral-complete .site-header-inner { max-width: 1056px; }
+  .funeral-complete .container { width: 100%; max-width: 880px; padding: 48px 24px; }
+  .funeral-complete .card { padding: 40px; }
+  .funeral-complete .gold { color: #715b32; }
+  .funeral-complete .info { background: #efede4; }
+
+  @media (max-width: 1279px) and (min-width: 769px) {
+    .funeral-home > .container { max-width: calc(100% - 160px); }
+  }
+  @media (max-width: 768px) {
+    .funeral-home { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+    .funeral-home > .container { padding: 0 20px 32px; }
+    .funeral-home .brand-topbar { margin: 0 -20px; padding: 0 24px; min-height: 72px; }
+    .funeral-home .brand-hero { margin: 0 -20px; padding: 44px 24px 36px; }
+    .funeral-home .brand-hero h1 { font-size: clamp(28px, 7.3vw, 40px); line-height: 1.55; }
+    .funeral-home .brand-subtitle { font-size: 15px; }
+    .funeral-home .brand-actions { max-width: none; }
+    .funeral-home .brand-mini { font-size: 12px; gap: 10px; }
+    .funeral-home .why365 { padding: 40px 0 24px; }
+    .funeral-home .why365-head h2 { font-size: 24px; }
+    .funeral-home .why365-grid { grid-template-columns: 1fr 1fr; gap: 24px 18px; }
+    .funeral-home .why365-item b { font-size: 16px; }
+    .funeral-home .card { padding: 24px 20px; }
+    .funeral-home .form-heading { font-size: 25px; }
+    .funeral-home .quick-sticky { top: auto; bottom: 0; left: 0; right: 0; width: 100%; transform: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; padding-bottom: env(safe-area-inset-bottom); background: var(--funeral-navy); border-top: 1px solid #65717a; }
+    .funeral-home .quick-sticky-item { min-height: 64px; padding: 10px 4px; flex-direction: row; gap: 5px; border: 0; border-right: 1px solid #435563; border-radius: 0; }
+    .funeral-home .quick-sticky-item:last-child { border: 0; }
+    .funeral-home .quick-sticky-text { font-size: 13px; white-space: nowrap; }
+    .funeral-home .quick-sticky-text br { display: none; }
+    .funeral-home .quick-sticky-icon { width: 22px; flex-shrink: 0; }
+    .funeral-estimate .estimate-hero { padding: 16px 20px 32px; }
+    .funeral-estimate .estimate-topbar { gap: 8px; padding-bottom: 16px; }
+    .funeral-estimate .brand { font-size: 18px; }
+    .funeral-estimate .home-link { font-size: 13px; padding: 0 8px; gap: 6px; }
+    .funeral-estimate .hero-kicker { margin-top: 32px; font-size: 11px; }
+    .funeral-estimate .estimate-hero h1 { font-size: clamp(27px, 7vw, 38px) !important; line-height: 1.55 !important; }
+    .funeral-estimate .hero-desc { font-size: 15px; }
+    .funeral-estimate .hero-points span { font-size: 12px; }
+    .funeral-estimate .wrap { padding: 24px 20px; }
+    .funeral-estimate .notice { padding: 20px; }
+    .funeral-estimate .section { padding: 4px 20px; }
+    .funeral-estimate .section-title { font-size: 21px; }
+    .funeral-estimate .preset-card { padding: 20px; border-radius: 6px; }
+    .funeral-estimate .summary { padding: 24px 20px; }
+    .funeral-estimate .estimate-actions { width: calc(100% - 40px) !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .funeral-complete .card { padding: 28px 20px; }
+  }
+  @media (max-width: 520px) {
+    .funeral-estimate { padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
+    .funeral-estimate .wrap { padding-bottom: 24px !important; }
+    .funeral-estimate .mobile-total-bar { padding: 14px 20px calc(14px + env(safe-area-inset-bottom)); }
+    .funeral-estimate .mobile-total-bar span { font-size: 14px; }
+    .funeral-estimate .mobile-total-bar strong { font-size: 23px; color: var(--funeral-gold); }
+    .funeral-estimate .item { flex-wrap: wrap; }
+    .funeral-estimate .item .price { margin-left: auto; max-width: 100%; font-size: 16px; }
+    .funeral-estimate .preset-actions { grid-template-columns: 1fr; }
+    .funeral-estimate .choice { padding: 12px; }
+    .funeral-home .brand-subtitle br { display: none; }
+  }
+  @media (max-width: 359px) {
+    .funeral-home > .container { padding-left: 16px; padding-right: 16px; }
+    .funeral-home .brand-topbar, .funeral-home .brand-hero { margin-left: -16px; margin-right: -16px; padding-left: 20px; padding-right: 20px; }
+    .funeral-home .brand-topbar-name { font-size: 19px; }
+    .funeral-home .card { padding: 20px 16px; }
+    .funeral-home .why365-grid { grid-template-columns: 1fr; }
+    .funeral-estimate .brand { font-size: 16px; }
+    .funeral-estimate .estimate-topbar .home-link { font-size: 12px; }
+    .funeral-estimate .hero-points { gap: 10px; }
+    .funeral-estimate .hero-points span { padding: 0; }
+    .funeral-estimate .hero-points span::after { display: none; }
+    .funeral-estimate .counter { gap: 4px; }
+    .funeral-estimate .counter strong { min-width: 48px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .funeral-site :is(a, button, input, select, .select-option span) { transition: none; }
+  }
+}
