@@ -844,12 +844,6 @@ document.getElementById("userPhone").innerText = phone;
                 campaign: traffic.campaign || "",
                 medium: traffic.medium || ""
             })
-        }).then(function(response){
-            if(!response.ok) return;
-            response.clone().json().then(function(data){
-                window.A365PhoneTouchReady = data.phone_touch_collection === "ready";
-                window.dispatchEvent(new Event("a365:phone-analytics-ready"));
-            }).catch(function(){});
         }).catch(function(error){
             console.error("방문기록 실패:", error);
         });
@@ -879,7 +873,7 @@ document.getElementById("userPhone").innerText = phone;
 })();
 </script>
 
-<script src="/phone-touch.js" defer></script>
+<script src="/phone-touch.js?v=20261101-2" defer></script>
 </body>
 
 </html>

@@ -2,18 +2,12 @@
 (function () {
     "use strict";
     var endpoint = "https://www.odreai.com/api/visit";
-    var pending = [];
     function send(payload) {
         try {
             fetch(endpoint, {method:"POST",headers:{"Content-Type":"application/json"},body:payload,
                 keepalive:true,credentials:"omit"}).catch(function () {});
         } catch (ignore) {}
     }
-    window.addEventListener("a365:phone-analytics-ready", function () {
-        var queued = pending;
-        pending = [];
-        if (window.A365PhoneTouchReady === true) queued.forEach(send);
-    });
     function eventId() {
         if (window.crypto && typeof window.crypto.randomUUID === "function") return window.crypto.randomUUID();
         return "c-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 14);
@@ -38,10 +32,7 @@
             var snapshot = window.A365Tracker && window.A365Tracker.snapshot ? window.A365Tracker.snapshot() : {};
             var payload = JSON.stringify({eventType:"phone_click",eventId:eventId(),page:location.pathname,
                 cta:buttonId(link),trafficSource:String(snapshot.trafficSource || "").slice(0,100)});
-            // Older servers treat unknown events as visits. Send only after the
-            // existing visit response explicitly confirms the new contract.
-            if (window.A365PhoneTouchReady === true) send(payload);
-            else if (window.A365PhoneTouchReady !== false && pending.length < 20) pending.push(payload);
+            send(payload);
         } catch (ignore) {}
     }, {capture:true,passive:true});
 })();
