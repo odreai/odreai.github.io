@@ -7,21 +7,22 @@
 <title>안심365 관리자 대시보드</title>
 <style>
 :root{
-    --navy:#0f243e;
-    --navy2:#14345a;
-    --gold:#b89b5e;
-    --bg:#f4f6f8;
-    --panel:#ffffff;
-    --line:#e5e9ef;
-    --text:#1f2937;
-    --muted:#7b8794;
-    --red:#9f2d2d;
-    --green:#216e4e;
+    color-scheme:dark;
+    --navy:#edf7f9;
+    --navy2:#63d7e8;
+    --gold:#67e8c4;
+    --bg:#07131b;
+    --panel:#0b1c25;
+    --line:#284651;
+    --text:#edf7f9;
+    --muted:#9cb2ba;
+    --red:#ffb8c4;
+    --green:#8df0ca;
 }
 *{box-sizing:border-box}
 body{
     margin:0;
-    background:var(--bg);
+    background:radial-gradient(circle at 82% -10%,#17404b 0,transparent 30%),var(--bg);
     color:var(--text);
     font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo",sans-serif;
 }
@@ -59,7 +60,8 @@ body{
     height:40px;
     border:1px solid var(--line);
     border-radius:9px;
-    background:#fff;
+    background:#07161e;
+    color:var(--text);
     padding:0 12px;
     font:inherit;
 }
@@ -67,7 +69,7 @@ body{
 .controls button{
     border-color:var(--navy2);
     background:var(--navy2);
-    color:#fff;
+    color:#07151b;
     font-weight:800;
     cursor:pointer;
 }
@@ -77,15 +79,17 @@ body{
     gap:12px;
     margin-bottom:12px;
 }
-.estimate-detail{min-width:360px;max-width:560px;white-space:pre-line;line-height:1.55}
+.estimate-detail{min-width:260px;max-width:480px;white-space:normal !important;line-height:1.55}
+.estimate-preview{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-height:3.1em;white-space:pre-line;overflow-wrap:anywhere}
 .card,.panel{
     background:var(--panel);
     border:1px solid var(--line);
     border-radius:14px;
-    box-shadow:0 3px 14px rgba(15,36,62,.04);
+    box-shadow:0 10px 30px #0002;
 }
 .card{
     padding:20px;
+    background:linear-gradient(145deg,#0d222c,#091a22);
 }
 .card .label{
     color:var(--muted);
@@ -94,14 +98,14 @@ body{
 }
 .card .value{
     margin-top:8px;
-    color:var(--navy);
+    color:var(--navy2);
     font-size:28px;
     font-weight:900;
 }
 .card small{
     display:block;
     margin-top:5px;
-    color:#9aa3ad;
+    color:var(--muted);
     font-size:11px;
 }
 .grid{
@@ -147,7 +151,7 @@ body{
     height:9px;
     overflow:hidden;
     border-radius:20px;
-    background:#eef1f4;
+    background:#203b45;
 }
 .metric-bar span{
     display:block;
@@ -221,16 +225,25 @@ body{
 .admin-table th{
     position:sticky;
     top:0;
-    background:#f7f9fb;
-    color:#566270;
+    background:#102630;
+    color:#bdd4db;
     font-weight:800;
 }
-.admin-table tbody tr:hover{background:#fafbfd}
+.admin-table tbody tr:hover{background:#102630}
+.consultation-table{table-layout:fixed;min-width:1060px}
+.consultation-table.estimate-table{min-width:980px}
+.consultation-table td{overflow:hidden;text-overflow:ellipsis}
+.consultation-table .estimate-detail{min-width:0;max-width:none;overflow:hidden}
+.consultation-table .sms-cell{position:sticky;right:106px;z-index:1;width:96px;min-width:96px;background:var(--panel);border-left:1px solid var(--line);text-align:center;white-space:normal}
+.consultation-table th.sms-cell{z-index:3;background:#102630}
+.sms-badge{display:inline-flex;align-items:center;justify-content:center;min-height:27px;max-width:100%;padding:4px 9px;border:1px solid #365762;border-radius:99px;background:#102630;color:var(--muted);font-weight:800;white-space:nowrap;line-height:1.3}
+.sms-badge.sms-ok{border-color:#245d4d;background:#123e32;color:var(--green)}
+.sms-badge.sms-fail{border-color:#70404a;background:#4a2028;color:var(--red)}
 .visit-ad{
     display:inline-block;
     padding:4px 8px;
     border-radius:20px;
-    background:#edf2f7;
+    background:#12303b;
     color:var(--navy2);
     font-weight:800;
 }
@@ -291,7 +304,7 @@ body{
     padding:0 10px;
     border:1px solid var(--line);
     border-radius:8px;
-    background:#fff;
+    background:#102630;
     color:var(--navy);
     font-weight:800;
     cursor:pointer;
@@ -304,7 +317,7 @@ body{
 .page-btn.active{
     background:var(--navy2);
     border-color:var(--navy2);
-    color:#fff;
+    color:#07151b;
 }
 
 .page-btn:disabled{
@@ -313,9 +326,32 @@ body{
 }
 
 
-.collapse-btn{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;background:#f7f9fb;color:var(--navy);font:inherit;font-weight:900;cursor:pointer}
+.collapse-btn{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;background:#102630;color:var(--navy);font:inherit;font-weight:900;cursor:pointer}
 .collapsed-section{margin-top:18px}
 .daily-head{margin-top:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.detail-action{position:sticky;right:0;z-index:1;width:106px;min-width:106px;background:var(--panel);box-shadow:-8px 0 12px #07131b80;text-align:right !important}
+.admin-table th.detail-action{z-index:3;background:#102630}
+.row-detail-btn{min-height:34px;padding:7px 12px;border:1px solid #365762;border-radius:8px;background:#12303b;color:var(--navy2);font:inherit;font-size:12px;font-weight:800;white-space:nowrap;cursor:pointer}
+.row-detail-btn:hover{border-color:var(--navy2);background:#17404b}
+body.detail-open{overflow:hidden}
+.consult-dialog{width:min(700px,calc(100% - 32px));max-height:calc(100dvh - 40px);padding:0;overflow-y:auto;border:1px solid #365762;border-radius:20px;background:var(--panel);color:var(--text);box-shadow:0 30px 100px #0008;overscroll-behavior:contain}
+.consult-dialog::backdrop{background:#020b11c9;backdrop-filter:blur(4px)}
+.detail-header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:24px;border-bottom:1px solid var(--line);background:linear-gradient(145deg,#12303b,#0b1c25)}
+.detail-eyebrow{margin:0 0 7px;color:var(--navy2);font-size:11px;font-weight:800;letter-spacing:.08em}
+.detail-header h2{margin:0;font-size:23px;line-height:1.4}
+.detail-time{margin:7px 0 0;color:var(--muted);font-size:12px;overflow-wrap:anywhere}
+.detail-close{flex-shrink:0;width:36px;height:36px;border:1px solid var(--line);border-radius:10px;background:#102630;color:var(--text);font-size:24px;cursor:pointer}
+.detail-body{padding:24px}
+.detail-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0}
+.detail-field{min-width:0;padding:16px;border:1px solid var(--line);border-radius:12px;background:#091a22}
+.detail-field.wide{grid-column:1/-1}
+.detail-field dt{margin:0 0 7px;color:var(--muted);font-size:12px}
+.detail-field dd{margin:0;color:var(--text);font-size:15px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere}
+.detail-field.price dd{color:var(--gold);font-size:24px;font-weight:800}
+.detail-footer{display:flex;justify-content:flex-end;padding:0 24px 24px}
+.detail-done{min-height:42px;padding:9px 24px;border:1px solid var(--navy2);border-radius:9px;background:var(--navy2);color:#07151b;font:inherit;font-weight:800;cursor:pointer}
+@media(max-width:520px){.detail-header,.detail-body{padding:20px}.detail-fields{grid-template-columns:1fr}.detail-header h2{font-size:21px}.detail-footer{padding:0 20px 20px}}
 
 @media(max-width:1100px){
     .cards{grid-template-columns:repeat(3,1fr)}
@@ -360,6 +396,7 @@ body{
         <div class="card"><div class="label">상담 접수</div><div id="consultations" class="value">0</div><small>일반 + 맞춤견적</small></div>
         <div class="card"><div class="label">전환율</div><div id="conversion" class="value">0%</div><small>상담 ÷ 고유 방문자</small></div>
         <div class="card"><div class="label">평균 체류시간</div><div id="avgDuration" class="value">0초</div><small>직접방문 0초 제외</small></div>
+        <div class="card"><div class="label">전화상담 터치</div><div id="phoneTouches" class="value">확인 전</div><small id="phoneTouchNote">버튼 터치 기준 · 통화 연결과 구분</small></div>
     </section>
 
     <section class="grid">
@@ -375,16 +412,18 @@ body{
 
     <section class="panel full">
         <div class="panel-head"><div><h3>최근 상담 접수</h3><p class="panel-desc">일반 장례상담 접수 내역</p></div></div>
-        <div class="table-wrap"><table class="admin-table">
-            <thead><tr><th>시간</th><th>보호자</th><th>연락처</th><th>임종상태</th><th>장례형태</th><th>위치</th><th>유입</th><th>SMS</th></tr></thead>
+        <div class="table-wrap"><table class="admin-table consultation-table">
+            <colgroup><col style="width:145px"><col style="width:100px"><col style="width:145px"><col style="width:130px"><col style="width:110px"><col><col style="width:100px"><col style="width:96px"><col style="width:106px"></colgroup>
+            <thead><tr><th>시간</th><th>보호자</th><th>연락처</th><th>임종상태</th><th>장례형태</th><th>위치</th><th>유입</th><th class="sms-cell">SMS</th><th class="detail-action">상세</th></tr></thead>
             <tbody id="consultTable"></tbody>
         </table></div>
     </section>
 
     <section class="panel full">
         <div class="panel-head"><div><h3>최근 맞춤견적 상담</h3><p class="panel-desc">예상금액과 고객 선택 구성</p></div></div>
-        <div class="table-wrap"><table class="admin-table">
-            <thead><tr><th>시간</th><th>보호자</th><th>연락처</th><th>예상금액</th><th>세부 견적내용</th><th>SMS</th></tr></thead>
+        <div class="table-wrap"><table class="admin-table consultation-table estimate-table">
+            <colgroup><col style="width:145px"><col style="width:100px"><col style="width:145px"><col style="width:150px"><col><col style="width:96px"><col style="width:106px"></colgroup>
+            <thead><tr><th>시간</th><th>보호자</th><th>연락처</th><th>예상금액</th><th>세부 견적내용</th><th class="sms-cell">SMS</th><th class="detail-action">상세</th></tr></thead>
             <tbody id="estimateConsultTable"></tbody>
         </table></div>
     </section>
@@ -410,10 +449,21 @@ body{
     <p id="status" class="status"></p>
 </div>
 
+<dialog id="consultDetailDialog" class="consult-dialog" aria-labelledby="consultDetailTitle" aria-describedby="consultDetailTime">
+    <div class="detail-header">
+        <div><p class="detail-eyebrow">안심365 · 상담 내역</p><h2 id="consultDetailTitle">상담 상세</h2><p id="consultDetailTime" class="detail-time"></p></div>
+        <button id="consultDetailClose" class="detail-close" type="button" aria-label="상담 상세 닫기" autofocus>×</button>
+    </div>
+    <div id="consultDetailBody" class="detail-body"></div>
+    <div class="detail-footer"><button id="consultDetailDone" class="detail-done" type="button">닫기</button></div>
+</dialog>
+
 <script>
 const API_BASE = "https://www.odreai.com";
 const VISIT_PAGE_SIZE = 50;
 let currentVisitPage = 1;
+const consultationDetails = {general: [], estimate: []};
+let detailTrigger = null;
 
 const $ = id => document.getElementById(id);
 
@@ -514,25 +564,40 @@ function renderDaily(rows){
     }).join("");
 }
 
+function smsPresentation(value){
+    const text = String(value || "").trim();
+    if(text.includes("실패")) return {label:"실패", className:"sms-fail"};
+    if(text.includes("성공")) return {label:"성공", className:"sms-ok"};
+    return {label:text === "미발송" ? "미발송" : (text ? "확인 필요" : "-"), className:""};
+}
+
+function renderPhoneTouchStats(data){
+    const count = data?.summary?.phone_touches;
+    const ready = data?.phone_touch_collection === "ready" && Number.isInteger(count) && count >= 0;
+    $("phoneTouches").textContent = ready ? `${count}회` : "확인 불가";
+    $("phoneTouchNote").textContent = ready ? "선택 기간 · 실제 통화 연결은 미확인" : "수집 상태를 확인할 수 없습니다.";
+}
+
 function renderEstimateConsultations(rows){
     const tbody = $("estimateConsultTable");
+    consultationDetails.estimate = Array.isArray(rows) ? rows : [];
 
     if(!Array.isArray(rows) || !rows.length){
-        tbody.innerHTML = '<tr><td colspan="6" class="empty">견적 상담 접수 기록이 없습니다.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="empty">견적 상담 접수 기록이 없습니다.</td></tr>';
         return;
     }
 
-    tbody.innerHTML = rows.map(v => {
-        const sms = String(v.sms_status || "");
-        const smsClass = sms.includes("성공") ? "sms-ok" : (sms.includes("실패") ? "sms-fail" : "");
+    tbody.innerHTML = rows.map((v, index) => {
+        const sms = smsPresentation(v.sms_status);
         return `
             <tr>
                 <td>${esc(shortTime(v.received_at))}</td>
                 <td>${esc(v.guardian_name || "-")}</td>
                 <td>${esc(v.phone || "-")}</td>
                 <td><strong>${esc(v.estimate_total || "-")}</strong></td>
-                <td class="estimate-detail">${esc(v.estimate_detail || "-")}</td>
-                <td class="${smsClass}">${esc(sms || "-")}</td>
+                <td class="estimate-detail"><div class="estimate-preview">${esc(v.estimate_detail || "-")}</div></td>
+                <td class="sms-cell"><span class="sms-badge ${sms.className}">${esc(sms.label)}</span></td>
+                <td class="detail-action"><button class="row-detail-btn" type="button" data-consult-kind="estimate" data-consult-index="${index}" aria-label="맞춤견적 상담 상세보기">상세보기</button></td>
             </tr>
         `;
     }).join("");
@@ -540,15 +605,15 @@ function renderEstimateConsultations(rows){
 
 function renderConsultations(rows){
     const tbody = $("consultTable");
+    consultationDetails.general = Array.isArray(rows) ? rows : [];
 
     if(!Array.isArray(rows) || !rows.length){
-        tbody.innerHTML = '<tr><td colspan="8" class="empty">상담 접수 기록이 없습니다.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="9" class="empty">상담 접수 기록이 없습니다.</td></tr>';
         return;
     }
 
-    tbody.innerHTML = rows.map(v => {
-        const sms = String(v.sms_status || "");
-        const smsClass = sms.includes("성공") ? "sms-ok" : (sms.includes("실패") ? "sms-fail" : "");
+    tbody.innerHTML = rows.map((v, index) => {
+        const sms = smsPresentation(v.sms_status);
 
         return `
             <tr>
@@ -559,10 +624,47 @@ function renderConsultations(rows){
                 <td>${esc(v.funeral_type || "-")}</td>
                 <td>${esc(v.address || "-")}</td>
                 <td>${esc(v.traffic_source || "-")}</td>
-                <td class="${smsClass}">${esc(sms || "-")}</td>
+                <td class="sms-cell"><span class="sms-badge ${sms.className}">${esc(sms.label)}</span></td>
+                <td class="detail-action"><button class="row-detail-btn" type="button" data-consult-kind="general" data-consult-index="${index}" aria-label="일반 상담 접수 상세보기">상세보기</button></td>
             </tr>
         `;
     }).join("");
+}
+
+function detailField(label, value, className = ""){
+    return `<div class="detail-field ${className}"><dt>${esc(label)}</dt><dd>${esc(value || "-")}</dd></div>`;
+}
+
+function openConsultationDetail(kind, index, trigger){
+    if(kind !== "general" && kind !== "estimate") return;
+    if(!Number.isInteger(index) || index < 0) return;
+    const record = consultationDetails[kind][index];
+    if(!record) return;
+
+    const fields = [
+        detailField("보호자", record.guardian_name),
+        detailField("연락처", record.phone)
+    ];
+    if(kind === "estimate"){
+        fields.push(detailField("예상금액", record.estimate_total, "wide price"));
+        fields.push(detailField("세부 견적내용", record.estimate_detail, "wide"));
+    }else{
+        fields.push(detailField("현재 상황", record.death_status));
+        fields.push(detailField("장례 형태", record.funeral_type));
+        if(record.deceased_name) fields.push(detailField("고인 성함", record.deceased_name));
+        fields.push(detailField("위치", record.address, "wide"));
+        fields.push(detailField("유입", record.traffic_source));
+    }
+    fields.push(detailField("SMS 발송 상태", record.sms_status));
+    if(record.receipt_id) fields.push(detailField("접수번호", record.receipt_id, "wide"));
+
+    $("consultDetailTitle").textContent = kind === "estimate" ? "맞춤견적 상담 상세" : "상담 접수 상세";
+    $("consultDetailTime").textContent = `접수시간 · ${record.received_at || "-"}`;
+    $("consultDetailBody").innerHTML = `<dl class="detail-fields">${fields.join("")}</dl>`;
+    detailTrigger = trigger;
+    document.body.classList.add("detail-open");
+    const dialog = $("consultDetailDialog");
+    if(!dialog.open) dialog.showModal();
 }
 
 function renderVisits(rows){
@@ -677,6 +779,7 @@ async function loadStats(page = currentVisitPage, fromPaging = false){
         }
 
         const s = data.summary || {};
+        renderPhoneTouchStats(data);
 
         $("unique").textContent = s.unique_visitors ?? 0;
         $("consultations").textContent = s.consultations ?? 0;
@@ -704,6 +807,28 @@ async function loadStats(page = currentVisitPage, fromPaging = false){
         btn.textContent = "조회";
     }
 }
+
+for(const tableId of ["consultTable", "estimateConsultTable"]){
+    $(tableId).addEventListener("click", event => {
+        const trigger = event.target.closest("button[data-consult-kind]");
+        if(!trigger || !$(tableId).contains(trigger)) return;
+        openConsultationDetail(trigger.dataset.consultKind, Number(trigger.dataset.consultIndex), trigger);
+    });
+}
+$("consultDetailClose").addEventListener("click", () => $("consultDetailDialog").close());
+$("consultDetailDone").addEventListener("click", () => $("consultDetailDialog").close());
+$("consultDetailDialog").addEventListener("click", event => {
+    const dialog = $("consultDetailDialog");
+    if(event.target !== dialog) return;
+    const rect = dialog.getBoundingClientRect();
+    if(event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
+});
+$("consultDetailDialog").addEventListener("close", () => {
+    document.body.classList.remove("detail-open");
+    if(detailTrigger?.isConnected) detailTrigger.focus();
+    else $("loadBtn").focus();
+    detailTrigger = null;
+});
 
 $("loadBtn").addEventListener("click", () => {
     currentVisitPage = 1;
