@@ -662,7 +662,8 @@ function openConsultationDetail(kind, index, trigger){
 
     const fields = [
         detailField("보호자", record.guardian_name),
-        detailField("연락처", record.phone)
+        detailField("연락처", record.phone),
+        detailField("고객 검색 키워드", customerKeywords(record), "wide")
     ];
     if(kind === "estimate"){
         fields.push(detailField("예상금액", record.estimate_total, "wide price"));
@@ -676,7 +677,6 @@ function openConsultationDetail(kind, index, trigger){
         if(record.ad) fields.push(detailField("광고", record.ad));
         if(record.campaign) fields.push(detailField("캠페인 · 광고그룹", record.campaign, "wide"));
     }
-    fields.push(detailField("고객 검색 키워드", customerKeywords(record), "wide"));
     fields.push(detailField("SMS 발송 상태", record.sms_status));
     if(record.receipt_id) fields.push(detailField("접수번호", record.receipt_id, "wide"));
 
