@@ -234,6 +234,7 @@ body{
 .consultation-table.estimate-table{min-width:980px}
 .consultation-table td{overflow:hidden;text-overflow:ellipsis}
 .consultation-table .estimate-detail{min-width:0;max-width:none;overflow:hidden}
+.consultation-table .traffic-source{white-space:normal;overflow-wrap:anywhere;line-height:1.6}
 .consultation-table .sms-cell{position:sticky;right:106px;z-index:1;width:96px;min-width:96px;background:var(--panel);border-left:1px solid var(--line);text-align:center;white-space:normal}
 .consultation-table th.sms-cell{z-index:3;background:#102630}
 .sms-badge{display:inline-flex;align-items:center;justify-content:center;min-height:27px;max-width:100%;padding:4px 9px;border:1px solid #365762;border-radius:99px;background:#102630;color:var(--muted);font-weight:800;white-space:nowrap;line-height:1.3}
@@ -435,8 +436,8 @@ body.detail-open{overflow:hidden}
     <section class="panel full">
         <div class="panel-head"><div><h3>최근 맞춤견적 상담</h3><p class="panel-desc">예상금액과 고객 선택 구성</p></div></div>
         <div class="table-wrap"><table class="admin-table consultation-table estimate-table">
-            <colgroup><col style="width:145px"><col style="width:100px"><col style="width:145px"><col style="width:150px"><col><col style="width:96px"><col style="width:106px"></colgroup>
-            <thead><tr><th>시간</th><th>보호자</th><th>연락처</th><th>예상금액</th><th>세부 견적내용</th><th class="sms-cell">SMS</th><th class="detail-action">상세</th></tr></thead>
+            <colgroup><col style="width:145px"><col style="width:100px"><col style="width:145px"><col style="width:150px"><col><col style="width:100px"><col style="width:96px"><col style="width:106px"></colgroup>
+            <thead><tr><th>시간</th><th>보호자</th><th>연락처</th><th>예상금액</th><th>세부 견적내용</th><th>유입</th><th class="sms-cell">SMS</th><th class="detail-action">상세</th></tr></thead>
             <tbody id="estimateConsultTable"></tbody>
         </table></div>
     </section>
@@ -596,7 +597,7 @@ function renderEstimateConsultations(rows){
     consultationDetails.estimate = Array.isArray(rows) ? rows : [];
 
     if(!Array.isArray(rows) || !rows.length){
-        tbody.innerHTML = '<tr><td colspan="7" class="empty">견적 상담 접수 기록이 없습니다.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" class="empty">견적 상담 접수 기록이 없습니다.</td></tr>';
         return;
     }
 
@@ -609,6 +610,7 @@ function renderEstimateConsultations(rows){
                 <td>${esc(v.phone || "-")}</td>
                 <td><strong>${esc(v.estimate_total || "-")}</strong></td>
                 <td class="estimate-detail"><div class="estimate-preview">${esc(v.estimate_detail || "-")}</div></td>
+                <td class="traffic-source">${esc(consultationSource(v))}</td>
                 <td class="sms-cell"><span class="sms-badge ${sms.className}">${esc(sms.label)}</span></td>
                 <td class="detail-action"><button class="row-detail-btn" type="button" data-consult-kind="estimate" data-consult-index="${index}" aria-label="맞춤견적 상담 상세보기">상세보기</button></td>
             </tr>
@@ -654,6 +656,14 @@ function customerKeywords(record){
     return keywords.join(" · ") || "수집된 키워드 없음";
 }
 
+function consultationSource(record){
+    const source = String(record.traffic_source || "").trim();
+    if(!source || source === "-") return "수집된 유입 없음";
+    if(source.toLowerCase() === "naver") return record.ad ? "네이버 검색광고" : "네이버";
+    if(source.toLowerCase() === "direct") return "직접방문";
+    return source;
+}
+
 function openConsultationDetail(kind, index, trigger){
     if(kind !== "general" && kind !== "estimate") return;
     if(!Number.isInteger(index) || index < 0) return;
@@ -666,6 +676,9 @@ function openConsultationDetail(kind, index, trigger){
         detailField("고객 검색 키워드", customerKeywords(record), "wide")
     ];
     if(kind === "estimate"){
+        fields.push(detailField("유입", consultationSource(record)));
+        if(record.ad) fields.push(detailField("광고", record.ad));
+        if(record.campaign) fields.push(detailField("캠페인 · 광고그룹", record.campaign, "wide"));
         fields.push(detailField("예상금액", record.estimate_total, "wide price"));
         fields.push(detailField("세부 견적내용", record.estimate_detail, "wide"));
     }else{
