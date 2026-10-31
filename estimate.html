@@ -2508,7 +2508,8 @@ setTimeout(()=>{
     if(!estimate.total||!estimate.detail){errorEl.textContent="견적내용을 불러오지 못했습니다.";return}
     submitBtn.disabled=true; submitBtn.textContent="전송 중...";
     try{
-      const res=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({guardian_name:name,phone:phone,privacy_agreed:true,estimate_total:estimate.total,estimate_detail:estimate.detail,page_url:location.href})});
+      const traffic=window.A365Tracker?.snapshot() || {};
+      const res=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({guardian_name:name,phone:phone,privacy_agreed:true,estimate_total:estimate.total,estimate_detail:estimate.detail,page_url:location.href,keyword:traffic.keyword || "",traffic_source:traffic.trafficSource || "",ad:traffic.ad || "",campaign:traffic.campaign || ""})});
       if(!res.ok)throw new Error("접수 실패");
       const data=await res.json();
       if(!data.success)throw new Error("접수 실패");
@@ -2567,11 +2568,12 @@ setTimeout(()=>{
         const params = new URLSearchParams(location.search);
 
         const naverKeyword =
-            params.get("n_keyword") ||
             params.get("n_query") ||
+            params.get("n_keyword") ||
             "";
 
         const keyword =
+            params.get("n_query") ||
             params.get("utm_term") ||
             naverKeyword ||
             params.get("keyword") ||

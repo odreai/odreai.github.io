@@ -252,6 +252,7 @@ body{
     overflow:hidden;
     text-overflow:ellipsis;
 }
+.search-keyword{min-width:145px;max-width:220px;white-space:normal !important;overflow-wrap:anywhere;line-height:1.6;color:var(--gold)}
 .duration{
     color:var(--navy2);
     font-weight:800;
@@ -431,7 +432,7 @@ body.detail-open{overflow:hidden}
     <section class="panel full">
         <div class="panel-head"><div><h3>최근 방문자 기록</h3><p class="panel-desc">동일 IP 1명 기준 · 실제 이동경로 · 총 체류시간</p></div></div>
         <div class="table-wrap"><table class="admin-table visit-table">
-            <thead><tr><th>시간</th><th>유입</th><th>기기</th><th>페이지 이동</th><th>체류시간</th><th>IP</th><th>해상도</th></tr></thead>
+            <thead><tr><th>시간</th><th>유입</th><th>고객 검색 키워드</th><th>기기</th><th>페이지 이동</th><th>체류시간</th><th>IP</th><th>해상도</th></tr></thead>
             <tbody id="visitTable"></tbody>
         </table></div>
         <div class="pagination-wrap"><div id="visitPageInfo" class="pagination-info">총 0건</div><div id="visitPagination" class="pagination"></div></div>
@@ -635,6 +636,12 @@ function detailField(label, value, className = ""){
     return `<div class="detail-field ${className}"><dt>${esc(label)}</dt><dd>${esc(value || "-")}</dd></div>`;
 }
 
+function customerKeywords(record){
+    const values = Array.isArray(record.keywords) ? record.keywords : [record.keyword];
+    const keywords = [...new Set(values.map(value => String(value || "").trim()).filter(value => value && value !== "-"))];
+    return keywords.join(" · ") || "수집된 키워드 없음";
+}
+
 function openConsultationDetail(kind, index, trigger){
     if(kind !== "general" && kind !== "estimate") return;
     if(!Number.isInteger(index) || index < 0) return;
@@ -655,9 +662,9 @@ function openConsultationDetail(kind, index, trigger){
         fields.push(detailField("위치", record.address, "wide"));
         fields.push(detailField("유입", record.traffic_source));
         if(record.ad) fields.push(detailField("광고", record.ad));
-        if(record.keyword) fields.push(detailField("검색 키워드", record.keyword));
         if(record.campaign) fields.push(detailField("캠페인 · 광고그룹", record.campaign, "wide"));
     }
+    fields.push(detailField("고객 검색 키워드", customerKeywords(record), "wide"));
     fields.push(detailField("SMS 발송 상태", record.sms_status));
     if(record.receipt_id) fields.push(detailField("접수번호", record.receipt_id, "wide"));
 
@@ -674,7 +681,7 @@ function renderVisits(rows){
     const tbody = $("visitTable");
 
     if(!Array.isArray(rows) || !rows.length){
-        tbody.innerHTML = '<tr><td colspan="7" class="empty">방문 기록이 없습니다.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" class="empty">방문 기록이 없습니다.</td></tr>';
         return;
     }
 
@@ -682,6 +689,7 @@ function renderVisits(rows){
         <tr>
             <td>${esc(shortTime(v.server_time))}</td>
             <td>${esc(v.source || "-")}</td>
+            <td class="search-keyword" title="${esc(customerKeywords(v))}">${esc(customerKeywords(v))}</td>
             <td>${esc(v.device || "-")}</td>
             <td class="keyword" title="${esc(v.page || "/")}">${esc(v.page || "/")}</td>
             <td><span class="duration ${durationClass(v.duration)}">${esc(fmtDuration(v.duration))}</span></td>

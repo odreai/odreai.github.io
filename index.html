@@ -971,11 +971,12 @@ window.onclick=function(e){
         const params = new URLSearchParams(location.search);
 
         const naverKeyword =
-            params.get("n_keyword") ||
             params.get("n_query") ||
+            params.get("n_keyword") ||
             "";
 
         const keyword =
+            params.get("n_query") ||
             params.get("utm_term") ||
             naverKeyword ||
             params.get("keyword") ||
