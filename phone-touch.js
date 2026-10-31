@@ -1,6 +1,7 @@
 /* Counts phone-button activation only; never cancels or delays the tel action. */
 (function () {
     "use strict";
+    if (window.A365TrackingDisabled === true) return;
     var endpoint = "https://www.odreai.com/api/visit";
     function send(payload) {
         try {

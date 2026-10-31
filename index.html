@@ -837,7 +837,7 @@ submitBtn.onclick = async function(){
                 ? "&receipt_id=" + encodeURIComponent(receiptId)
                 : "");
 
-        location.href = completeUrl;
+        location.href = completeUrl + (window.A365TrackingDisabled ? "&a365_no_track=1" : "");
 
     }catch(error){
         console.error("상담 접수 오류:", error);
@@ -928,6 +928,28 @@ window.onclick=function(e){
 <script>
 (function(){
     const API_BASE = "https://www.odreai.com";
+    const preference = new URLSearchParams(location.search).get("a365_no_track");
+    let trackingDisabled = preference === "1";
+    try{
+        if(preference === "1") sessionStorage.setItem("a365_admin_no_track", "1");
+        if(preference === "0") sessionStorage.removeItem("a365_admin_no_track");
+        trackingDisabled = trackingDisabled || sessionStorage.getItem("a365_admin_no_track") === "1";
+    }catch(ignore){}
+    window.A365TrackingDisabled = trackingDisabled;
+    if(trackingDisabled){
+        document.addEventListener("DOMContentLoaded", function(){
+            document.querySelectorAll("a[href]").forEach(function(link){
+                try{
+                    const url = new URL(link.href, location.href);
+                    if(url.origin === location.origin && ["/", "/index.html", "/estimate.html", "/complete.html"].includes(url.pathname)){
+                        url.searchParams.set("a365_no_track", "1");
+                        link.href = url.href;
+                    }
+                }catch(ignore){}
+            });
+        });
+        return;
+    }
     const TRAFFIC_KEY = "a365_traffic_v1";
     const startedAt = Date.now();
 
@@ -1158,6 +1180,6 @@ document.getElementById("privacyBtn").addEventListener("click", function(event){
     event.preventDefault();
 });
 </script>
-<script src="/phone-touch.js?v=20261101-2" defer></script>
+<script src="/phone-touch.js?v=20261101-3" defer></script>
 </body>
 </html>

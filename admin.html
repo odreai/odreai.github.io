@@ -253,6 +253,9 @@ body{
     text-overflow:ellipsis;
 }
 .search-keyword{min-width:145px;max-width:220px;white-space:normal !important;overflow-wrap:anywhere;line-height:1.6;color:var(--gold)}
+.admin-shortcuts{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.admin-shortcut{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:9px 14px;border:1px solid #365762;border-radius:8px;background:#102630;color:var(--text);font:inherit;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer}
+.admin-shortcut:hover{border-color:var(--navy2);color:var(--navy2)}
 .duration{
     color:var(--navy2);
     font-weight:800;
@@ -391,6 +394,11 @@ body.detail-open{overflow:hidden}
             <button id="loadBtn" type="button">조회</button>
         </div>
     </div>
+
+    <nav class="admin-shortcuts" aria-label="관리자 바로가기">
+        <a class="admin-shortcut" href="/?a365_no_track=1" target="_blank" rel="noopener">통계 제외하고 홈페이지 열기 ↗</a>
+        <button class="admin-shortcut" id="statsRefresh" type="button">통계 새로고침</button>
+    </nav>
 
     <section class="cards">
         <div class="card"><div class="label">고유 방문자</div><div id="unique" class="value">0</div><small>선택 기간 · IP 기준</small></div>
@@ -819,6 +827,7 @@ async function loadStats(page = currentVisitPage, fromPaging = false){
     }
 }
 
+$("statsRefresh").addEventListener("click", () => $("loadBtn").click());
 for(const tableId of ["consultTable", "estimateConsultTable"]){
     $(tableId).addEventListener("click", event => {
         const trigger = event.target.closest("button[data-consult-kind]");
