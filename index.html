@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-
-  <link rel="icon" href="/favicon.ico" sizes="any">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" href="/favicon.png">
 
@@ -36,1812 +36,578 @@ content="24시간 장례상담 · 고인 이송 · 운구 · 장례식장 안내
 <link rel="canonical" href="https://www.odreai.kr/" />
 
 <title>안심365 장례서비스 | 24시간 장례상담</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Pretendard:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-
-*{
-    box-sizing:border-box;
-    font-family:"Pretendard","Noto Sans KR",sans-serif;
-}
-
-html{scroll-behavior:smooth;}
-
-
-    
-body{
-
-    margin:0;
-
-    background:#f8f5ef;
-
-    color:#222;
-
-}
-
-.container{
-    width:100%;
-    max-width:560px;
-    margin:0 auto;
-    padding:0 16px 40px;
-}
-
-/* PC 화면 */
-@media (min-width:769px){
-    .container{
-        max-width:728px;
-    }
-
-    .price-sticky{
-        right:max(14px, calc((100vw - 728px) / 2 - 70px));
-    }
-}
-
-/* HEADER */
-
-.header{
-
-    text-align:center;
-
-    padding:35px 10px 25px;
-
-}
-
-.logo{
-
-    font-family:"Noto Serif KR",serif;
-
-    font-size:32px;
-
-    font-weight:900;
-
-    letter-spacing:2px;
-
-    color:#0f243e;
-
-}
-
-.logo span{
-
-    color:#b89b5e;
-
-}
-
-.header h1{
-
-    font-family:"Noto Serif KR",serif;
-
-    font-size:24px;
-
-    font-weight:700;
-
-    line-height:1.6;
-
-    letter-spacing:-1px;
-
-    margin:22px 0 12px;
-
-}
-
-.header p{
-
-    color:#555;
-
-    line-height:1.8;
-
-}
-
-
-.main-btn{
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-
-    width:calc(100% - 32px);
-
-    margin:0 auto 22px;
-
-    margin-top:16px;
-
-    padding:16px;
-
-    border:2px solid #b89b5e;
-
-    border-radius:16px;
-
-    background:#14345a;
-    color:#fff;
-
-    font-size:18px;
-    font-weight:700;
-
-    text-decoration:none;
-
-    box-shadow:0 6px 18px rgba(0,0,0,.18);
-
-    transition:.2s;
-}
-
-.main-btn:hover{
-
-    background:#0f2d4d;
-
-    box-shadow:0 10px 24px rgba(0,0,0,.25);
-
-}
-
-.main-btn:active{
-
-    transform:scale(.98);
-
-}
-
-.phone-svg{
-
-    width:28px;
-    height:28px;
-
-    color:#fff;
-
-    flex-shrink:0;
-
-}
-
-.message{
-
-
-    text-align:center;
-
-
-    margin:30px 10px;
-
-
-    line-height:2;
-
-
-    color:#555;
-
-
-}
-
-
-.message b{
-
-
-    font-family:"Noto Serif KR",serif;
-
-
-    font-size:18px;
-
-
-    color:#0f243e;
-
-
-}
-
-
-/* CARD */
-
-
-.card{
-
-
-    background:white;
-
-
-    border-radius:16px;
-
-
-    padding:22px;
-
-
-    margin-bottom:18px;
-
-
-    box-shadow:0 3px 10px rgba(0,0,0,.04)
-
-
-}
-
-
-.title{
-
-
-    font-size:19px;
-
-
-    font-weight:900;
-
-
-    color:#0f243e;
-
-
-    margin-bottom:18px;
-
-
-}
-
-/* 선택 버튼 */
-
-
-.select-option{
-
-
-    display:block;
-
-
-    margin-bottom:12px;
-
-
-}
-
-
-.select-option input{
-
-
-    display:none;
-
-
-}
-
-
-.select-option span{
-
-
-    display:block;
-
-
-    padding:11px 14px;
-
-
-    border-radius:12px;
-
-
-    border:1px solid #ddd;
-
-
-    background:white;
-
-
-    text-align:center;
-
-
-    font-size:15px;
-
-
-    transition:.2s;
-
-
-}
-
-
-.select-option input:checked + span{
-
-
-    background:#111;
-
-
-    color:white;
-
-
-    border:2px solid #b89b5e;
-
-
-}
-
-
-
-/* 입력 */
-
-input[type=text],
-input[type=tel]{
-
-
-    width:100%;
-
-
-    padding:12px 14px;
-
-
-    border-radius:14px;
-
-
-    border:1px solid #ddd;
-
-
-    font-size:15px;
-
-
-    margin-bottom:12px;
-
-
-}
-
-/* 주소 */
-
-
-.address-title{
-
-
-    font-size:21px;
-
-
-    font-weight:900;
-
-
-    color:#0f243e;
-
-
-    margin-bottom:10px;
-
-
-}
-
-
-.address-info{
-
-
-    font-size:14px;
-
-
-    color:#777;
-
-
-    margin-bottom:15px;
-
-
-}
-
-
-.address-input{
-
-
-    width:100%;
-
-
-    padding:15px;
-
-
-    border-radius:16px;
-
-
-    border:3px solid #b89b5e;
-
-
-    font-size:16px;
-
-
-    font-weight:bold;
-
-
-    outline:none;
-
-
-    animation:addressPulse 2s infinite;
-
-
-}
-
-
-.address-input::placeholder{
-
-
-    color:#999;
-
-
-    font-size:16px;
-
-
-    font-weight:bold;
-
-
-}
-
-
-.address-input:focus{
-
-
-    border-color:#7a1010;
-
-
-    box-shadow:0 0 15px rgba(122,16,16,.25);
-
-
-    animation:none;
-
-
-}
-
-
-@keyframes addressPulse{
-
-
-0%{
-
-border-color:#b89b5e;
-
-}
-
-50%{
-
-border-color:#7a1010;
-
-}
-
-100%{
-
-border-color:#b89b5e;
-
-}
-
-}
-
-
-/* 제출 버튼 */
-
-
-.submit{
-
-
-    width:100%;
-
-
-    padding:17px;
-
-
-    border:none;
-
-
-    border-radius:16px;
-
-
-    background:#0f243e;
-
-
-    color:white;
-
-
-    font-size:18px;
-
-
-    font-weight:bold;
-
-
-    cursor:pointer;
-    transition:.2s;
-
-
-}
-
-.submit:disabled{
-    opacity:.65;
-    cursor:not-allowed;
-}
-
-
-.footer{
-
-
-    text-align:center;
-
-
-    margin-top:35px;
-
-
-    padding:25px;
-
-
-    border-top:1px solid #ddd;
-
-
-    line-height:2;
-
-
-    color:#555;
-
-
-}
-
-
-
-.gold{
-
-
-    color:#b89b5e;
-
-
-    font-weight:bold;
-
-
-}
-
-.footer-menu{
-
-    margin-bottom:25px;
-
-    font-size:14px;
-
-}
-
-
-.footer-menu a{
-
-    color:#555;
-
-    text-decoration:none;
-
-}
-
-
-.footer-menu span{
-
-    margin:0 10px;
-
-    color:#aaa;
-
-}
-
-/* 개인정보 보기 버튼 */
-.agree{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    margin:20px 5px 14px;
-
-    padding:12px;
-
-    font-size:15px;
-
-    color:#777;
-
-    line-height:1.5;
-
-    border:2px solid transparent;
-
-    border-radius:10px;
-
-    transition:.2s;
-
-}
-
-
-.agree input{
-
-    width:20px;
-
-    height:20px;
-
-}
-
-
-
-.agree-warning{
-    border:2px solid #7a1010;
-    background:#fff0f0;
-    color:#7a1010;
-    font-weight:bold;
-    border-radius:10px;
-    padding:10px;
-    animation:shake .3s;
-}
-
-@keyframes shake{
-    0%{transform:translateX(0)}
-    25%{transform:translateX(-5px)}
-    50%{transform:translateX(5px)}
-    75%{transform:translateX(-5px)}
-    100%{transform:translateX(0)}
-}
-
-
-.privacy-btn{
-
-    border:none;
-    background:none;
-
-    color:#7a1010;
-
-    font-size:14px;
-
-    font-weight:bold;
-
-    text-decoration:underline;
-
-    cursor:pointer;
-
-}
-
-
-/* 개인정보 팝업 */
-
-.modal{
-
-    display:none;
-
-    position:fixed;
-
-    z-index:9999;
-
-    left:0;
-    top:0;
-
-    width:100%;
-    height:100%;
-
-    background:rgba(0,0,0,.55);
-
-}
-
-
-.modal-content{
-
-    background:white;
-
-    width:90%;
-
-    max-width:430px;
-
-    margin:25% auto;
-
-    padding:25px;
-
-    border-radius:18px;
-
-    line-height:1.7;
-
-}
-
-
-.close{
-
-    float:right;
-
-    width:35px;
-    height:35px;
-
-    text-align:center;
-
-    line-height:32px;
-
-    font-size:28px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    color:#555;
-
-}
-
-
-.privacy-text{
-
-    max-height:350px;
-
-    overflow-y:auto;
-
-    font-size:14px;
-
-}
-
-
-
-/* 전환율 개선 영역 */
-.quick-trust{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    margin:18px 0 8px;
-}
-
-.quick-trust div{
-    background:#fff;
-    border:1px solid #eadfca;
-    border-radius:13px;
-    padding:11px 8px;
-    text-align:center;
-    font-size:13px;
-    font-weight:800;
-    color:#0f243e;
-}
-
-.reason-card{
-    background:#0f243e;
-    color:white;
-}
-
-.reason-card .title{
-    color:white;
-}
-
-.reason-list{
-    display:grid;
-    gap:12px;
-    margin-top:5px;
-}
-
-.reason-item{
-    display:flex;
-    align-items:flex-start;
-    gap:10px;
-    line-height:1.55;
-    font-size:15px;
-}
-
-.reason-check{
-    color:#d8bc7a;
-    font-weight:900;
-}
-
-.urgent-copy{
-    margin-top:10px;
-    color:#7a1010;
-    font-size:14px;
-    font-weight:800;
-}
-
-.final-message{
-    text-align:center;
-    margin:26px 8px 18px;
-    line-height:1.8;
-    color:#444;
-}
-
-.final-message b{
-    color:#0f243e;
-    font-family:"Noto Serif KR",serif;
-    font-size:20px;
-}
-
-.service-area{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px 8px;
-    margin-top:20px;
-    font-size:16px;
-    line-height:1.5;
-    text-align:center;
-}
-
-.service-area > div{
-    white-space:nowrap;
-}
-
-.service-area .wide{
-    grid-column:1 / -1;
-    text-align:center;
-    font-weight:bold;
-    margin-bottom:2px;
-}
-
-.service-note{
-    margin-top:22px;
-    color:#777;
-    text-align:center;
-    line-height:1.8;
-    font-size:13px;
-}
-
-.section-guide{
-    margin:6px 0 18px;
-    font-size:14px;
-    color:#777;
-    text-align:center;
-}
-
-.form-heading{
-    margin:34px 0 18px;
-    text-align:left;
-    font-size:24px;
-    font-weight:900;
-    color:#0f243e;
-}
-
-.form-heading span{
-    display:block;
-    margin-top:7px;
-    font-size:14px;
-    font-weight:500;
-    color:#777;
-}
-
-.hero{
-
-    margin-bottom:18px;
-
-}
-
-.hero img{
-
-    width:100%;
-
-    display:block;
-
-}
-
-.process{
-
-margin-top:18px;
-
-}
-
-.process img{
-
-width:100%;
-
-display:block;
-
-border-radius:18px;
-
-}
-
-body{
-    margin:0;
-    background:#f8f5ef;
-}
-
-
-/* 우측 장례상품 가격보기 스티키 */
-
-.price-sticky {
-    position: fixed;
-
-    right: max(14px, calc((100vw - 560px) / 2 - 70px));
-    top: 50%;
-    transform: translateY(-50%);
-
-    z-index: 9998;
-
-    width: 58px;
-    min-height: 122px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 7px;
-    padding: 10px 5px;
-
-    background: #14345a;
-    color: #ffffff;
-
-    border: 2px solid #b89b5e;
-    border-radius: 17px 0 0 17px;
-
-    text-align: center;
-    text-decoration: none;
-
-    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-}
-
-/* 가격 아이콘 */
-
-.price-sticky-icon {
-    width: 32px;
-    height: 32px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: #b89b5e;
-    color: #ffffff;
-
-    font-size: 17px;
-    font-weight: 900;
-    line-height: 1;
-}
-
-/* 스티키 문구 */
-
-.price-sticky-text {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    gap: 2px;
-
-    font-size: 12px;
-    font-weight: 800;
-    line-height: 1.25;
-    letter-spacing: 0;
-}
-
-.price-sticky-text strong {
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 900;
-}
-
-.price-sticky-text small {
-    color: #e1c587;
-    font-size: 11px;
-    font-weight: 700;
-}
-
-/* 마우스를 올렸을 때 */
-
-.price-sticky:hover {
-    background: #0f2948;
-
-    transform:
-        translateY(-50%)
-        translateX(-3px);
-
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
-}
-
-/* 누르는 순간 */
-
-.price-sticky:active {
-    transform:
-        translateY(-50%)
-        scale(0.96);
-}
-
-/* 작은 휴대폰 화면 */
-
-@media (max-width: 420px) {
-    .price-sticky {
-        right: 6px;
-
-        width: 54px;
-        min-height: 114px;
-
-        padding: 8px 4px;
-
-        border-radius: 15px 0 0 15px;
-    }
-
-    .price-sticky-icon {
-        width: 29px;
-        height: 29px;
-
-        font-size: 15px;
-    }
-
-    .price-sticky-text strong {
-        font-size: 12px;
-    }
-
-    .price-sticky-text small {
-        font-size: 10px;
-    }
-}
-
-.select-option span{
-    display:flex;
-    flex-direction:column;
-    gap:4px;
-}
-
-.select-option strong{
-    font-size:17px;
-    font-weight:700;
-    color:#1f2d3d;
-}
-
-.select-option small{
-    font-size:14px;
-    font-weight:500;
-    color:#8a6d3b;
-}
-
-.price-notice{
-    margin-top:14px;
-    padding:12px 14px;
-    border-radius:8px;
-    background:#f7f4ed;
-    font-size:13px;
-    line-height:1.6;
-    color:#666;
-}
-
-.video-section {
-  padding: 40px 20px;
-  text-align: center;
-  background: #f7f4ee;
-}
-
-.video-section h2 {
-  margin: 0 0 20px;
-  color: #0f243e;
-  font-size: 23px;
-  font-weight: 800;
-}
-
-.video-wrap {
-  width: min(100%, 340px);
-  aspect-ratio: 9 / 16;
-  margin: 0 auto;
-  overflow: hidden;
-  border: 2px solid #b89b5e;
-  border-radius: 18px;
-  background: #000;
-  box-shadow: 0 10px 26px rgba(15, 36, 62, 0.16);
-}
-
-.video-wrap iframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-.video-text {
-  margin: 18px 0 0;
-  color: #485260;
-  font-size: 15px;
-  line-height: 1.7;
-}
-
-/* 우측 3단 빠른 메뉴 */
-
-.quick-sticky {
-    position: fixed;
-    right: max(8px, calc((100vw - 728px) / 2 - 70px));
-    top: 50%;
-    z-index: 9998;
-
-    width: 56px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-
-    transform: translateY(-50%);
-}
-
-.quick-sticky-item {
-    min-height: 68px;
-    padding: 6px 3px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-
-    border: 2px solid #b89b5e;
-    background: #14345a;
-    color: #ffffff;
-
-    text-align: center;
-    text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-
-    transition:
-        transform 0.18s ease,
-        background 0.18s ease,
-        box-shadow 0.18s ease;
-}
-
-.quick-sticky-item:first-child {
-    border-radius: 14px 0 0 0;
-}
-
-.quick-sticky-item:last-child {
-    border-radius: 0 0 0 14px;
-}
-
-.quick-sticky-item:hover {
-    background: #0f2948;
-    transform: translateX(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.27);
-}
-
-.quick-sticky-item:active {
-    transform: scale(0.96);
-}
-
-.quick-sticky-icon {
-    width: 24px;
-    height: 24px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-    background: #b89b5e;
-    color: #ffffff;
-
-    font-size: 13px;
-    font-weight: 900;
-    line-height: 1;
-}
-
-.quick-sticky-text {
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: 900;
-    line-height: 1.2;
-}
-
-.quick-sticky-item.is-apply {
-    background: #254a70;
-}
-
-.quick-sticky-item.is-call {
-    background: #8a6a2f;
-}
-
-@media (max-width: 420px) {
-    .quick-sticky {
-        right: 4px;
-        width: 50px;
-        gap: 3px;
-    }
-
-    .quick-sticky-item {
-        min-height: 62px;
-        padding: 5px 2px;
-        gap: 3px;
-    }
-
-    .quick-sticky-icon {
-        width: 22px;
-        height: 22px;
-        font-size: 12px;
-    }
-
-    .quick-sticky-text {
-        font-size: 9px;
-    }
-}
-
-
-/* ===== 최상단 브랜드 바 ===== */
-.brand-topbar{
-    margin:0 -16px;
-    min-height:72px;
-    padding:0 20px;
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    background:#071827;
-    border-bottom:1px solid rgba(199,161,90,.28);
-}
-.brand-topbar-link{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    color:#fff;
-    text-decoration:none;
-}
-.brand-topbar-name{
-    font-family:"Noto Serif KR",serif;
-    font-size:20px;
-    font-weight:900;
-    letter-spacing:-.04em;
-}
-@media (min-width:769px){
-    .brand-topbar{margin-left:-16px;margin-right:-16px;min-height:78px;padding:0 28px;}
-    .brand-topbar-name{font-size:22px;}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  /* 기존 운영 사이트 색상 토큰 유지 */
+  --navy:#0d2433;
+  --navy-2:#163447;
+  --navy-line:#294452;
+  --gold:#d6bd89;
+  --gold-deep:#a9873f;
+  --gold-text:#83652f;
+  --ivory:#f7f4ed;
+  --paper:#fffdf8;
+  --line:#dcd7cc;
+  --ink:#1c2a33;
+  --muted:#53616a;
+  --serif:"Noto Serif KR","Batang",serif;
+  --sans:"Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;
+  --radius:10px;
+  --wrap:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.7;word-break:keep-all}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.35;margin:0;letter-spacing:-.01em}
+.eyebrow{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--gold-text);text-transform:uppercase}
+.on-dark .eyebrow{color:var(--gold)}
+
+/* 헤더 */
+.site-header{position:sticky;top:0;z-index:30;background:rgba(13,36,51,.97);border-bottom:1px solid var(--navy-line);backdrop-filter:blur(6px)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font-family:var(--serif);font-weight:700;font-size:19px;color:#fff;text-decoration:none;letter-spacing:-.01em}
+.brand small{display:block;font-family:var(--sans);font-size:10.5px;font-weight:600;letter-spacing:.2em;color:var(--gold);margin-top:-2px}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{color:#cfd8dd;text-decoration:none;font-size:15px}
+.nav a:hover{color:#fff}
+.header-call{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy)!important;font-weight:700;padding:9px 16px;border-radius:999px}
+
+/* 버튼 */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 26px;border-radius:var(--radius);font-family:var(--sans);font-size:17px;font-weight:700;text-decoration:none;cursor:pointer;border:0;transition:transform .15s,background .15s,box-shadow .15s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--gold);color:var(--navy);box-shadow:0 8px 24px rgba(214,189,137,.22)}
+.btn-primary:hover{background:#e2cb9b}
+.btn-primary .num{font-size:19px;letter-spacing:.01em}
+.btn-secondary{background:transparent;color:#fff;border:1px solid rgba(214,189,137,.55)}
+.btn-secondary:hover{background:rgba(214,189,137,.1)}
+.btn-dark{background:var(--navy);color:#fff}
+.btn-dark:hover{background:var(--navy-2)}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* 히어로 */
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto -10% -40% auto;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(214,189,137,.08),transparent 65%);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-top:72px;padding-bottom:80px;position:relative;z-index:1}
+.hero h1{font-size:46px;margin:18px 0 20px;font-weight:600}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .lead{font-size:18px;color:#c9d3d8;max-width:30em;margin:0 0 10px}
+.hero .postpaid{display:inline-block;margin:6px 0 32px;font-size:14.5px;color:var(--gold);border-bottom:1px solid rgba(214,189,137,.4);padding-bottom:2px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.cta-note{margin-top:14px;font-size:14px;color:#9fb0b9}
+.hero-points{display:flex;flex-wrap:wrap;gap:8px 20px;list-style:none;padding:0;margin:40px 0 0;border-top:1px solid var(--navy-line);padding-top:22px}
+.hero-points li{font-size:14px;color:#b9c5cb;display:flex;align-items:center;gap:7px}
+.hero-points li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold)}
+
+/* 서비스 이미지 */
+.scene-image{margin:0;overflow:hidden;border-radius:14px;border:1px solid rgba(214,189,137,.22);background:#ece7dc}
+.scene-image img{width:100%;height:100%;object-fit:cover}
+.hero-visual{display:flex;flex-direction:column;gap:14px}
+.hero-visual .scene-image{aspect-ratio:4/3;box-shadow:0 24px 60px rgba(0,0,0,.18)}
+
+/* 가격 요약 카드 (히어로 하단) */
+.price-strip{background:var(--paper);border-bottom:1px solid var(--line)}
+.price-strip .wrap{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:0;align-items:stretch}
+.ps-item{padding:26px 24px;border-right:1px solid var(--line)}
+.ps-item:first-child{padding-left:0}
+.ps-item .k{font-size:13.5px;color:var(--muted);font-weight:500}
+.ps-item .v{font-family:var(--serif);font-size:26px;font-weight:700;color:var(--navy);margin-top:2px}
+.ps-item .v small{font-family:var(--sans);font-size:14px;font-weight:500;color:var(--muted);margin-left:2px}
+.ps-item .d{font-size:13px;color:var(--muted)}
+.ps-link{display:flex;align-items:center;padding-left:28px}
+.ps-link a{font-weight:700;color:var(--gold-text);text-decoration:none;white-space:nowrap;font-size:15px}
+.ps-link a:hover{text-decoration:underline}
+
+/* 섹션 공통 */
+section{padding:96px 0}
+.sec-head{max-width:640px;margin-bottom:48px}
+.sec-head h2{font-size:34px;margin:12px 0 14px;color:var(--navy)}
+.sec-head p{margin:0;color:var(--muted);font-size:17px}
+
+/* 왜 안심365 */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.why-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px}
+.why-card .no{font-family:var(--serif);color:var(--gold-deep);font-size:15px;font-weight:700}
+.why-card h3{font-size:20px;margin:10px 0 8px;color:var(--navy)}
+.why-card p{margin:0;font-size:15px;color:var(--muted)}
+
+/* 대표 견적 예시 */
+.packages{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pkg{border:1px solid var(--line);border-radius:12px;background:#fff;display:flex;flex-direction:column;overflow:hidden}
+.pkg-top{padding:26px 26px 20px;border-bottom:1px solid var(--line)}
+.pkg .tag{display:inline-block;font-size:12.5px;font-weight:700;color:var(--gold-text);background:#f4ecda;padding:3px 10px;border-radius:999px}
+.pkg h3{font-size:21px;margin:12px 0 6px;color:var(--navy)}
+.pkg .price{font-family:var(--serif);font-size:32px;font-weight:700;color:var(--navy)}
+.pkg .price small{font-family:var(--sans);font-size:15px;font-weight:500;margin-left:2px}
+.pkg ul{list-style:none;margin:0;padding:20px 26px;flex:1}
+.pkg li{font-size:14.5px;color:#3b4a53;padding:6px 0 6px 18px;position:relative;border-bottom:1px dashed #ebe6da}
+.pkg li:last-child{border-bottom:0}
+.pkg li::before{content:"";position:absolute;left:2px;top:15px;width:7px;height:7px;border-right:1.5px solid var(--gold-deep);border-bottom:1.5px solid var(--gold-deep);transform:rotate(-45deg)}
+.pkg-foot{padding:0 26px 24px}
+.pkg-foot a{display:block;text-align:center;padding:12px;border:1px solid var(--navy);border-radius:8px;color:var(--navy);text-decoration:none;font-weight:700;font-size:15px}
+.pkg-foot a:hover{background:var(--navy);color:#fff}
+.fine{margin-top:22px;font-size:13.5px;color:var(--muted);line-height:1.75}
+.fine p{margin:2px 0}
+
+/* 절차 안내 */
+.process .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.process .scene-image{aspect-ratio:5/4}
+.process h2{font-size:34px;color:var(--navy);margin:12px 0 16px}
+.process p.desc{color:var(--muted);font-size:17px;margin:0 0 26px}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 30px;padding:0;list-style:none}
+.chips li{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:15px;font-weight:500;color:var(--navy);display:flex;align-items:center;gap:8px}
+.chips li::before{content:"";width:16px;height:16px;flex:none;border-radius:50%;background:var(--navy) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='%23d6bd89' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+
+/* 위로 문구 띠 */
+.quote-band{background:var(--navy);color:#fff;padding:72px 0;text-align:center}
+.quote-band h2{font-size:30px;font-weight:500;line-height:1.6}
+.quote-band h2 em{font-style:normal;color:var(--gold)}
+.quote-band p{color:#b9c5cb;margin:16px 0 0}
+
+/* 접수 폼 */
+.consult .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.consult-side h2{font-size:32px;color:var(--navy);margin:12px 0 14px}
+.consult-side p{color:var(--muted);margin:0 0 24px}
+.side-call{background:var(--navy);color:#fff;border-radius:12px;padding:26px}
+.side-call .k{font-size:14px;color:#b9c5cb}
+.side-call .v{font-family:var(--serif);font-size:28px;font-weight:700;color:var(--gold);margin:4px 0 16px;letter-spacing:.01em}
+.side-call .btn{width:100%}
+.side-quote{margin-top:22px;font-family:var(--serif);font-size:18px;line-height:1.75;color:var(--navy);border-left:2px solid var(--gold);padding-left:16px}
+
+.form-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:36px;box-shadow:0 12px 40px rgba(13,36,51,.06)}
+.form-card h3{font-size:22px;color:var(--navy)}
+.form-card .sub{color:var(--muted);font-size:14.5px;margin:4px 0 0}
+.step{padding:26px 0;border-bottom:1px solid #eee9dd}
+.step:last-of-type{border-bottom:0}
+.step-label{display:flex;align-items:center;gap:10px;font-family:var(--sans);font-weight:700;font-size:16.5px;color:var(--navy)}
+.step-label .n{width:24px;height:24px;border-radius:50%;background:var(--navy);color:var(--gold);font-size:12.5px;display:grid;place-items:center;flex:none}
+.step-label .opt{font-weight:500;color:var(--muted);font-size:13px}
+.step-help{font-size:14px;color:var(--muted);margin:4px 0 14px 34px}
+.choices{display:grid;gap:10px;margin-left:34px}
+.choices.c2{grid-template-columns:1fr 1fr}
+.choices.c3{grid-template-columns:1fr 1fr 1fr}
+.choice{position:relative}
+.choice input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.choice span{display:block;border:1.5px solid var(--line);border-radius:9px;padding:13px 14px;font-size:15.5px;font-weight:500;color:var(--ink);background:var(--paper);transition:border-color .15s,background .15s;line-height:1.45}
+.choice span small{display:block;font-size:13px;color:var(--muted);font-weight:400;margin-top:2px}
+.choice input:checked + span{border-color:var(--navy);background:#eef2f4;box-shadow:inset 0 0 0 1px var(--navy)}
+.choice input:focus-visible + span{outline:2px solid var(--gold-deep);outline-offset:2px}
+.fields{display:grid;gap:10px;margin-left:34px}
+.fields.c2{grid-template-columns:1fr 1fr}
+.input{width:100%;height:52px;border:1.5px solid var(--line);border-radius:9px;padding:0 14px;font-family:var(--sans);font-size:16px;color:var(--ink);background:#fff}
+.input::placeholder{color:#9aa3a8}
+.input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(13,36,51,.08)}
+.form-note{margin:14px 0 0 34px;font-size:13px;color:var(--muted)}
+.agree{display:flex;align-items:center;gap:10px;padding:16px;border-radius:9px;background:var(--ivory);margin-top:8px;font-size:15px}
+.agree input{width:20px;height:20px;accent-color:var(--navy);flex:none}
+.agree button{background:none;border:0;color:var(--gold-text);font-weight:700;cursor:pointer;font-size:14px;padding:0;margin-left:auto;font-family:var(--sans)}
+.agree.agree-warning{outline:2px solid #b4553f}
+#submitBtn{width:100%;margin-top:16px;font-size:18px}
+#submitBtn:disabled{opacity:.7;cursor:wait}
+.submit-alt{text-align:center;font-size:14px;color:var(--muted);margin-top:12px}
+.submit-alt a{color:var(--navy);font-weight:700}
+
+/* 푸터 */
+footer{background:#0a1d29;color:#9fb0b9;padding:56px 0 40px;font-size:14px}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px}
+footer .brand{font-size:20px}
+footer .slogan{font-family:var(--serif);color:#dfe5e8;font-size:17px;margin:14px 0 18px}
+.f-tags{display:flex;flex-wrap:wrap;gap:6px 16px;list-style:none;padding:0;margin:0}
+.f-tags li::before{content:"✓ ";color:var(--gold)}
+.f-right{text-align:right}
+.f-links a{color:#cfd8dd;text-decoration:none;margin-left:14px}
+.f-links a:first-child{margin-left:0}
+.f-links a:hover{color:#fff}
+.f-copy{grid-column:1/-1;border-top:1px solid #1e3644;padding-top:20px;font-size:12.5px;color:#6f838e}
+
+/* 데스크톱 우측 플로팅(기존 기능 유지, 축소) */
+.float-nav{position:fixed;right:20px;bottom:24px;z-index:40;display:flex;flex-direction:column;gap:8px}
+.float-nav a{display:flex;align-items:center;gap:8px;background:#fff;color:var(--navy);border:1px solid var(--line);border-radius:999px;padding:10px 16px;text-decoration:none;font-size:14px;font-weight:700;box-shadow:0 6px 18px rgba(13,36,51,.12)}
+.float-nav a.call{background:var(--gold);border-color:var(--gold)}
+.float-nav svg{width:16px;height:16px}
+
+/* 모바일 하단 고정 바 */
+.mbar{display:none}
+
+/* 모달 */
+.modal{display:none;position:fixed;inset:0;z-index:60;background:rgba(8,20,28,.6);padding:20px;overflow:auto}
+.modal-box{background:#fff;max-width:560px;margin:8vh auto;border-radius:14px;padding:32px;position:relative}
+.modal-box h3{color:var(--navy);font-size:22px;margin-bottom:16px}
+.modal-close{position:absolute;right:14px;top:10px;background:none;border:0;font-size:28px;cursor:pointer;color:var(--muted)}
+.faq dt{font-weight:700;color:var(--navy);margin-top:16px}
+.faq dd{margin:4px 0 0;color:var(--muted)}
+.privacy p{margin:0 0 12px;color:#3b4a53;font-size:15px}
+
+/* ── 태블릿 ── */
+@media (max-width:1000px){
+  .hero .wrap{grid-template-columns:1fr;gap:40px}
+  .hero-visual{display:none}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .pkg-grid{grid-template-columns:1fr}
+  .process .wrap,.consult .wrap{grid-template-columns:1fr;gap:36px}
+  .price-strip .wrap{grid-template-columns:1fr 1fr 1fr}
+  .ps-link{grid-column:1/-1;padding:0 0 20px}
+}
+
+/* ── 모바일 ── */
+@media (max-width:640px){
+  body{font-size:15.5px;padding-bottom:76px}
+  .wrap{padding:0 16px}
+  .site-header .wrap{height:58px}
+  .brand{font-size:17px}
+  .nav a:not(.header-call){display:none}
+  .header-call{padding:7px 12px;font-size:13.5px}
+  .hero .wrap{padding-top:40px;padding-bottom:44px}
+  .hero h1{font-size:31px;margin:12px 0 14px}
+  .hero .lead{font-size:16px}
+  .hero .postpaid{margin-bottom:24px;font-size:14px}
+  .cta-row{flex-direction:column}
+  .cta-row .btn{width:100%}
+  .hero-points{margin-top:28px;gap:8px 14px}
+  .hero-points li{font-size:13.5px}
+
+  .price-strip .wrap{grid-template-columns:1fr;padding:0}
+  .ps-item{padding:16px;border-right:0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .ps-item:first-child{padding-left:16px}
+  .ps-item .v{font-size:21px;white-space:nowrap}
+  .ps-item .d{display:none}
+  .ps-link{padding:14px 16px}
+
+  section{padding:60px 0}
+  .sec-head{margin-bottom:28px}
+  .sec-head h2,.process h2,.consult-side h2{font-size:25px}
+  .sec-head p,.process p.desc{font-size:15.5px}
+  .why-grid{grid-template-columns:1fr;gap:10px}
+  .why-card{padding:18px 18px;display:grid;grid-template-columns:34px 1fr;column-gap:8px}
+  .why-card .no{grid-row:span 2;padding-top:3px}
+  .why-card h3{font-size:17.5px;margin:0 0 2px}
+  .why-card p{font-size:14.5px}
+
+  .pkg-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:0 16px 8px}
+  .pkg{flex:0 0 84%;scroll-snap-align:start}
+  .pkg-top{padding:20px}
+  .pkg .price{font-size:27px}
+  .pkg ul{padding:14px 20px}
+  .pkg-foot{padding:0 20px 20px}
+  .swipe-hint{display:block!important}
+
+  .chips{grid-template-columns:1fr 1fr}
+  .quote-band{padding:52px 0}
+  .quote-band h2{font-size:22px}
+
+  .form-card{padding:22px 18px;border-radius:12px}
+  .step{padding:20px 0}
+  .step-help,.choices,.fields,.form-note{margin-left:0}
+  .choices.c2,.choices.c3,.fields.c2{grid-template-columns:1fr}
+  .side-call{display:none}
+  .side-quote{display:none}
+
+  footer .wrap{grid-template-columns:1fr;gap:24px}
+  .f-right{text-align:left}
+
+  .float-nav{display:none}
+  .mbar{display:grid;grid-template-columns:1fr 1fr 2fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,253,248,.97);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -6px 20px rgba(13,36,51,.08)}
+  .mbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;height:52px;border-radius:9px;text-decoration:none;font-size:12.5px;font-weight:700;color:var(--navy);border:1px solid var(--line);background:#fff;line-height:1.2}
+  .mbar a svg{width:18px;height:18px;margin-bottom:2px}
+  .mbar a.call{flex-direction:row;gap:8px;background:var(--navy);color:#fff;border-color:var(--navy);font-size:16px}
+  .mbar a.call svg{color:var(--gold);margin:0}
 }
-@media (max-width:420px){
-    .brand-topbar{min-height:66px;padding:0 20px;}
-    .brand-topbar-name{font-size:18px;}
-}
-
-/* ===== 2026-08 메인 상단 리뉴얼: 기존 접수폼/기능 유지 ===== */
-.brand-hero{
-    margin:0 -16px 26px;
-    padding:58px 26px 42px;
-    position:relative;
-    overflow:hidden;
-    background:linear-gradient(135deg,#061522 0%,#0b2438 62%,#102f47 100%);
-    color:#fff;
-    text-align:left;
-    border-bottom:1px solid rgba(184,155,94,.35);
-}
-.brand-hero::before{
-    content:"";
-    position:absolute;
-    width:340px;height:340px;
-    right:-190px;top:-190px;
-    border:1px solid rgba(199,161,90,.18);
-    border-radius:50%;
-}
-.brand-hero::after{
-    content:"365";
-    position:absolute;
-    right:-12px;bottom:-44px;
-    font-family:Georgia,serif;
-    font-size:150px;
-    color:rgba(255,255,255,.025);
-    line-height:1;
-    pointer-events:none;
-}
-.brand-hero-inner{position:relative;z-index:1;max-width:620px;margin:0 auto;}
-.brand-kicker{
-    margin:0 0 18px;
-    color:#c7a15a;
-    font-family:Georgia,serif;
-    font-size:11px;
-    letter-spacing:.22em;
-    font-weight:700;
-}
-.brand-hero h1{
-    margin:0;
-    font-family:"Noto Serif KR",serif;
-    font-size:clamp(35px,7vw,56px);
-    line-height:1.3;
-    letter-spacing:-.045em;
-    font-weight:800;
-}
-.brand-hero h1 em{color:#e3c886;font-style:normal;}
-.brand-subtitle{
-    margin:22px 0 0;
-    color:#c2ccd4;
-    font-size:15px;
-    line-height:1.85;
-}
-.brand-pay{
-    margin:18px 0 0;
-    color:#fff;
-    font-size:14px;
-    font-weight:800;
-}
-.brand-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:28px;}
-.brand-action{
-    min-height:54px;
-    padding:0 14px;
-    display:flex;align-items:center;justify-content:center;
-    border-radius:4px;
-    font-size:14px;font-weight:900;
-    text-decoration:none;
-}
-.brand-action.primary{background:#c7a15a;color:#071827;}
-.brand-action.secondary{border:1px solid rgba(255,255,255,.34);color:#fff;background:rgba(255,255,255,.02);}
-.brand-mini{
-    margin-top:24px;
-    padding-top:18px;
-    border-top:1px solid rgba(255,255,255,.12);
-    display:flex;gap:10px;flex-wrap:wrap;
-    color:#9fb0bd;font-size:11px;
-}
-.brand-mini span{padding-right:10px;border-right:1px solid rgba(255,255,255,.12);}
-.brand-mini span:last-child{border-right:0;}
-
-.why365{
-    margin:0 0 24px;
-    padding:26px 20px 22px;
-    background:#fff;
-    border:1px solid #e4dccd;
-    box-shadow:0 8px 26px rgba(15,36,62,.06);
-}
-.why365-head{text-align:center;margin-bottom:20px;}
-.why365-head small{display:block;color:#b28b46;font-size:10px;font-weight:900;letter-spacing:.16em;margin-bottom:8px;}
-.why365-head h2{margin:0;font-family:"Noto Serif KR",serif;color:#0f243e;font-size:24px;letter-spacing:-.04em;}
-.why365-head p{margin:10px 0 0;color:#68727b;font-size:13px;line-height:1.7;}
-.why365-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.why365-item{padding:17px 14px;border:1px solid #e8e1d5;background:#fbfaf7;min-height:112px;}
-.why365-item b{display:block;color:#0f243e;font-size:15px;margin-bottom:7px;}
-.why365-item span{display:block;color:#727b83;font-size:12px;line-height:1.55;}
-.why365-num{color:#b89b5e!important;font-family:Georgia,serif;font-size:11px!important;font-weight:800;margin-bottom:9px!important;}
-
-@media (min-width:769px){
-    .brand-hero{margin-left:-16px;margin-right:-16px;padding:78px 48px 56px;}
-    .brand-hero-inner{max-width:640px;}
-    .why365{padding:34px 30px 30px;}
-    .why365-grid{grid-template-columns:repeat(4,1fr);}
-    .why365-item{min-height:132px;}
-}
-@media (max-width:420px){
-    .brand-hero{padding:48px 20px 36px;}
-    .brand-hero h1{font-size:35px;}
-    .brand-subtitle{font-size:14px;}
-    .brand-actions{grid-template-columns:1fr;}
-    .why365{padding:23px 15px 19px;}
-    .why365-grid{grid-template-columns:1fr 1fr;gap:8px;}
-    .why365-item{padding:15px 11px;min-height:118px;}
-    .why365-item b{font-size:14px;}
-    .why365-item span{font-size:11px;}
-}
-
 </style>
-
-
-<link rel="stylesheet" href="/funeral-design.css">
 </head>
+<body>
 
-
-
-<body class="funeral-site funeral-home">
-
-
-<div class="container">
-
-    <header class="brand-topbar" aria-label="안심365 장례서비스">
-      <a class="brand-topbar-link" href="/">
-        <span class="brand-topbar-name">안심365 장례서비스</span>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">안심365 장례서비스<small>365 DAYS · 24 HOURS</small></a>
+    <nav class="nav">
+      <a href="#price">장례비용</a>
+      <a href="#process">장례 절차</a>
+      <a href="#funeral-consultation">상담 접수</a>
+      <a href="#" id="faqBtnTop">자주 묻는 질문</a>
+      <a class="header-call" href="tel:010-5934-3137">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.6a1 1 0 01-.25 1z"/></svg>
+        상담하기
       </a>
-    </header>
-
-    <!-- 새 메인 상단 : 기존 접수폼 및 이하 전체 콘텐츠 유지 -->
-    <section class="brand-hero" aria-label="안심365 장례서비스 소개">
-      <div class="brand-hero-inner">
-        <p class="brand-kicker">365 DAYS · 24 HOURS</p>
-        <h1>마지막 순간까지<br><em>품격과 정성</em>을 다합니다.</h1>
-        <p class="brand-subtitle">
-          장례상품의 가격과 세부구성을 먼저 확인하고,<br>
-          필요한 항목은 예상견적으로 직접 계산해 보세요.
-        </p>
-        <p class="brand-pay">가입비·월 납입금 없는 후불제 장례서비스</p>
-        <div class="brand-actions">
-          <a class="brand-action primary" href="/estimate.html">내가 직접 맞춤 견적 내기 →</a>
-        </div>
-        <div class="brand-mini">
-          <span>상품가격 공개</span><span>세부품목 확인</span><span>예상견적 계산</span><span>필요한 순간 후불 이용</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="why365" aria-labelledby="why365Title">
-      <div class="why365-head">
-        <small>WHY 안심365</small>
-        <h2 id="why365Title">왜 안심365 장례서비스인가</h2>
-        <p>전화하기 전에 가격과 구성을 먼저 확인하고, 가족에게 필요한 장례를 직접 선택할 수 있습니다.</p>
-      </div>
-      <div class="why365-grid">
-        <div class="why365-item"><span class="why365-num">01</span><b>상품가격 공개</b><span>무빈소·빈소 장례상품의 기본가격을 먼저 확인합니다.</span></div>
-        <div class="why365-item"><span class="why365-num">02</span><b>포함·별도비용 안내</b><span>상품에 포함되는 항목과 별도비용을 구분해 안내합니다.</span></div>
-        <div class="why365-item"><span class="why365-num">03</span><b>예상견적 직접 계산</b><span>선택 품목을 바꾸며 예상금액을 직접 확인할 수 있습니다.</span></div>
-        <div class="why365-item"><span class="why365-num">04</span><b>가입 없는 후불제</b><span>월 납입금 없이 장례가 필요할 때 상담하고 이용합니다.</span></div>
-      </div>
-    </section>
-
-    <!-- 여기부터 기존 내용 전체 유지 -->
-
-<div class="message">
-
-<div class="card">
-
-<div class="title">
-    장례 절차, 처음부터 함께 안내합니다
-</div>
-
-<div class="service-area">
-
-    <div class="wide">
-        임종 직후부터 발인까지
-    </div>
-
-    <div>✔ 고인 운구</div>
-    <div>✔ 장례식장 안내</div>
-
-    <div>✔ 장례 절차</div>
-    <div>✔ 후불상조 상담</div>
-
-    <div>✔ 무빈소 장례</div>
-    <div>✔ 화장·장지 안내</div>
-
-</div>
-
-<p class="service-note">
-    병원·자택·요양시설 어디에서든<br>
-    현재 상황에 필요한 절차를 차분하게 안내해드립니다.
-</p>
-
-
-<!-- 실제 전화 버튼 -->
-    <a href="tel:010-5934-3137" class="main-btn">
-
-    <svg class="phone-svg"
-         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="currentColor">
-
-    <path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.32.56 3.58.56a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1C10.4 22 2 13.6 2 3a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.26.19 2.46.56 3.58a1 1 0 0 1-.24 1.01l-2.2 2.2z"/>
-
-    </svg>
-
-    바로 장례상담하기
-
-    </a>
-</div>
-
-갑작스러운 이별 앞에서<br>
-
-무엇부터 해야 할지 막막하지 않도록<br>
-
-<b>안심365</b>가 운구부터 발인까지<br>
-원스톱으로 안내합니다.
-  
-</div>
-
-
-  <section class="video-section">
-  <h2>이별의 순간, 함께하겠습니다</h2>
-
-  <div class="video-wrap">
-    <iframe
-      src="https://www.youtube.com/embed/R06PfadcSZs"
-      title="이별 준비, 안심365 장례서비스"
-      loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen>
-    </iframe>
+    </nav>
   </div>
+</header>
 
-  <p class="video-text">
-    운구부터 장례식장, 장례 절차와 발인까지<br>
-    안심365가 함께 안내합니다.
-  </p>
+<main id="top">
+
+<!-- 1. 히어로 -->
+<section class="hero on-dark" style="padding:0">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">365 Days · 24 Hours 장례상담</p>
+      <h1>마지막 순간까지<br><em>품격과 정성</em>을 다합니다.</h1>
+      <p class="lead">장례상품의 가격과 세부구성을 먼저 확인하고,<br>필요한 항목은 예상견적으로 직접 계산해 보세요.</p>
+      <span class="postpaid">가입비·월 납입금 없는 후불제 장례서비스</span>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="tel:010-5934-3137">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.6a1 1 0 01-.25 1z"/></svg>
+          상담하기
+        </a>
+        <a class="btn btn-secondary" href="https://www.odreai.kr/estimate.html">맞춤 견적 내기 →</a>
+      </div>
+      <p class="cta-note">24시간 접수 · 상담비 무료</p>
+      <ul class="hero-points">
+        <li>상품가격 공개</li><li>세부품목 확인</li><li>예상견적 계산</li><li>필요한 순간 후불 이용</li>
+      </ul>
+    </div>
+    <div class="hero-visual">
+      <figure class="scene-image">
+        <img src="images/funeral-consultation.webp" alt="차분하게 상담을 나누는 모습" width="1448" height="1086" fetchpriority="high" decoding="async">
+      </figure>
+    </div>
+  </div>
 </section>
-  
-<div class="form-heading" id="funeral-consultation">
-  장례 상담 접수
-  <span>아래 항목을 순서대로 입력해 주세요.</span>
+
+<!-- 2. 가격 요약 -->
+<div class="price-strip" id="price">
+  <div class="wrap">
+    <div class="ps-item"><div class="k">무빈소 장례 필수 기본비용</div><div class="v">550,000<small>원부터</small></div><div class="d">조문객을 받지 않는 장례</div></div>
+    <div class="ps-item"><div class="k">빈소 장례 필수 기본비용</div><div class="v">800,000<small>원부터</small></div><div class="d">조문객을 받는 장례</div></div>
+    <div class="ps-item"><div class="k">관내 최초 고인 운구비</div><div class="v">무료</div><div class="d">관외 운구 시 추가요금 발생</div></div>
+    <div class="ps-link"><a href="https://www.odreai.kr/estimate.html">전체 품목·가격 보기 →</a></div>
+  </div>
 </div>
 
-<!-- 현재 상황 -->
+<!-- 3. 왜 안심365 -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Why 안심365</p>
+      <h2>전화하기 전에,<br>가격과 구성을 먼저 확인하세요.</h2>
+      <p>가족에게 필요한 장례를 직접 보고 선택할 수 있도록 안내합니다.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card"><div class="no">01</div><h3>상품가격 공개</h3><p>무빈소·빈소 장례상품의 기본가격을 먼저 확인합니다.</p></div>
+      <div class="why-card"><div class="no">02</div><h3>포함·별도비용 안내</h3><p>상품에 포함되는 항목과 별도비용을 구분해 안내합니다.</p></div>
+      <div class="why-card"><div class="no">03</div><h3>예상견적 직접 계산</h3><p>선택 품목을 바꾸며 예상금액을 직접 확인할 수 있습니다.</p></div>
+      <div class="why-card"><div class="no">04</div><h3>가입 없는 후불제</h3><p>월 납입금 없이 장례가 필요할 때 상담하고 이용합니다.</p></div>
+    </div>
+  </div>
+</section>
 
-<div class="card">
+<!-- 4. 대표 견적 예시 -->
+<section class="packages">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">대표 견적 예시</p>
+      <h2>자주 선택하시는 구성입니다</h2>
+      <p>예시를 시작점으로 삼아 필요한 품목만 바꿔 계산할 수 있습니다.</p>
+      <p class="swipe-hint" style="display:none;margin-top:8px;font-size:13.5px;color:var(--gold-text);font-weight:700">옆으로 넘겨보세요 →</p>
+    </div>
+    <div class="pkg-grid">
+      <article class="pkg">
+        <div class="pkg-top"><span class="tag">무빈소</span><h3>무빈소 화장</h3><div class="price">1,200,000<small>원</small></div></div>
+        <ul>
+          <li>필수 진행비 55만원 · 장례지도사 1인 15만원 포함</li>
+          <li>화장관 오동나무 0.6치</li>
+          <li>수의 면 100% · 기계직</li>
+          <li>카니발·스타리아 발인차량</li>
+        </ul>
+        <div class="pkg-foot"><a href="https://www.odreai.kr/estimate.html">맞춤 견적 계산하기</a></div>
+      </article>
+      <article class="pkg">
+        <div class="pkg-top"><span class="tag">빈소 화장</span><h3>소규모 빈소 화장</h3><div class="price">2,050,000<small>원</small></div></div>
+        <ul>
+          <li>필수 진행비 80만원 · 장례지도사 1명 · 3일 40만원 포함</li>
+          <li>제단꽃 알뜰형 · 일반빈소 · 40만원</li>
+          <li>상복 4벌 · 기본지원</li>
+          <li>도우미 1명 · 1일 8시간 × 2일 기본지원</li>
+          <li>장의버스 · 전체 운행거리 150km 기준</li>
+        </ul>
+        <div class="pkg-foot"><a href="https://www.odreai.kr/estimate.html">맞춤 견적 계산하기</a></div>
+      </article>
+      <article class="pkg">
+        <div class="pkg-top"><span class="tag">빈소 매장</span><h3>소규모 빈소 매장</h3><div class="price">2,350,000<small>원</small></div></div>
+        <ul>
+          <li>필수 진행비 80만원 · 장례지도사 1명 · 3일 40만원 포함</li>
+          <li>매장관 오동나무 1.5치</li>
+          <li>일반 수의</li>
+          <li>도우미 1명 · 1일 8시간 × 2일 기본지원</li>
+          <li>장의버스 · 전체 운행거리 150km 기준</li>
+        </ul>
+        <div class="pkg-foot"><a href="https://www.odreai.kr/estimate.html">맞춤 견적 계산하기</a></div>
+      </article>
+    </div>
+    <div class="fine">
+      <p>※ 장례식장 시설사용료·안치료·입관실 사용료·음식비·화장장 사용료·봉안시설·장지 비용 등은 별도입니다.</p>
+      <p>※ 장례식장, 지역, 종교 및 선택 품목에 따라 최종 비용이 달라질 수 있으며, 최종 계약금액은 상담 및 현장 확인 후 확정됩니다.</p>
+    </div>
+  </div>
+</section>
 
-    <div class="title">
-    <h3>현재 상황</h3>
-    <p class="section-guide">
-        현재 고인의 상황을 선택해 주세요.
-    </p>
+<!-- 5. 절차 안내 -->
+<section class="process" id="process">
+  <div class="wrap">
+    <figure class="scene-image">
+      <img src="images/funeral-flowers.webp" alt="흰 국화와 백합이 놓인 차분한 공간" width="1402" height="1122" loading="lazy" decoding="async">
+    </figure>
+    <div>
+      <p class="eyebrow">장례 절차 안내</p>
+      <h2>임종 직후부터 발인까지,<br>처음부터 함께 안내합니다</h2>
+      <p class="desc">병원·자택·요양시설 어디에서든<br>현재 상황에 필요한 절차를 차분하게 안내해드립니다.</p>
+      <ul class="chips">
+        <li>고인 운구</li><li>장례식장 안내</li><li>장례 절차</li>
+        <li>후불상조 상담</li><li>무빈소 장례</li><li>화장·장지 안내</li>
+      </ul>
+      <a class="btn btn-dark" href="tel:010-5934-3137">
+        <svg viewBox="0 0 24 24" fill="#d6bd89" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.6a1 1 0 01-.25 1z"/></svg>
+        상담하기
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 6. 위로 문구 -->
+<div class="quote-band on-dark">
+  <div class="wrap">
+    <h2>갑작스러운 이별 앞에서<br>무엇부터 해야 할지 막막하지 않도록,<br><em>운구부터 발인까지</em> 원스톱으로 안내합니다.</h2>
+    <p>이별의 순간, 안심365가 함께하겠습니다.</p>
+  </div>
 </div>
 
-<label class="select-option">
-    <input type="radio" name="death" value="아직 생존">
-    <span>임종 전 상담이 필요합니다</span>
-</label>
-
-<label class="select-option">
-    <input type="radio" name="death" value="며칠 내 임종 예상">
-    <span>임종이 임박한 상황입니다</span>
-</label>
-
-<label class="select-option">
-    <input type="radio" name="death" value="임종 직후">
-    <span>방금 임종하셨습니다</span>
-</label>
-
-<label class="select-option">
-    <input type="radio" name="death" value="사망 후 시간 경과">
-    <span>임종 후 시간이 경과했습니다</span>
-</label>
-
-</div> <!-- 현재 상황 카드 닫기 -->
-
-
-<!-- 고인 위치 -->
-
-
-<div class="card">
-
-
-<div class="title">
-고인 위치
-</div>
-
-<div class="address-title">
-현재 고인이 계신 장소
-</div>
-
-<p class="address-info">
-병원명, 요양시설명 또는 주소를 입력해 주세요.
-</p>
-
-<input
-id="address"
-class="address-input"
-type="text"
-autocomplete="street-address"
-placeholder="예) ○○요양원 / 대구 달서구 ○○">
-
-
-</div>
-
-<!-- 장례 형태 -->
-
-<div class="card">
-
-    <div class="title">
-        <h3>희망 장례 형태</h3>
-        <p class="section-guide">
-            현재 생각하고 계신 장례 형태를 선택해 주세요.
-        </p>
+<!-- 7. 상담 접수 (기존 필드·ID·검증 로직 유지) -->
+<section class="consult" id="funeral-consultation">
+  <div class="wrap">
+    <div class="consult-side">
+      <p class="eyebrow">장례 상담 접수</p>
+      <h2>남겨주시면<br>먼저 연락드리겠습니다</h2>
+      <p>아래 항목을 순서대로 입력해 주세요.<br>급하신 경우 전화가 가장 빠릅니다.</p>
+      <div class="side-call">
+        <div class="k">24시간 전화상담</div>
+        <a class="btn btn-primary" href="tel:010-5934-3137">상담하기</a>
+      </div>
+      <p class="side-quote">갑작스러운 상황일수록<br>혼자 결정하지 마세요.<br>안심365가 함께하겠습니다.</p>
     </div>
 
-    <label class="select-option">
-        <input type="radio" name="funeral" value="빈소 장례">
-        <span>
-            <strong>빈소 장례</strong>
-            <small>조문객을 받는 장례</small>
-        </span>
-    </label>
-
-    <label class="select-option">
-        <input type="radio" name="funeral" value="무빈소 장례">
-        <span>
-            <strong>무빈소 장례</strong>
-            <small>조문객을 받지 않는 장례</small>
-        </span>
-    </label>
-
-    <label class="select-option">
-        <input type="radio" name="funeral" value="미정">
-        <span>
-            <strong>아직 결정하지 못했습니다</strong>
-            <small>상담 후 상황에 맞게 안내해 드립니다.</small>
-        </span>
-    </label>
-
-    <p class="price-notice">
-    ※ 장례식장, 지역, 종교 및 선택 품목에 따라 최종 비용이 달라질 수 있습니다.
-    </p>
-
-</div>
-
-
-<!-- 고인 정보 -->
-
-
-<div class="card">
-
-
-<div class="title">
-
-<h3>고인 정보</h3>
-
-</div>
-
-
-
-<input
-id="deceasedName"
-type="text"
-autocomplete="off"
-placeholder="고인 성함 (선택)">
-
-
-
-</div>
-
-
-<!-- 보호자 -->
-
-
-<div class="card">
-
-
-<div class="title">
-
-보호자 정보
-
-</div>
-
-
-
-<input
-id="guardianName"
-type="text"
-autocomplete="name"
-placeholder="보호자 성함">
-
-
-
-<input
-
-id="phone"
-name="phone"
-type="tel"
-autocomplete="tel"
-
-inputmode="numeric"
-
-maxlength="13"
-
-placeholder="연락처 010-0000-0000">
-
-
-</div>
-
-
-<div class="final-message">
-  갑작스러운 상황일수록<br>
-  <b>혼자 결정하지 마세요.</b><br>
-  안심365가 함께하겠습니다.
-</div>
-
-<label class="agree" id="agreeBox">
-
-<input type="checkbox" id="agree">
-
-<span>
-개인정보 수집 및 상담 연락에 동의합니다.
-</span>
-
-<button type="button" class="privacy-btn" id="privacyBtn">
-[보기]
-</button>
-
-</label>
-
-
-<button id="submitBtn" class="submit">
-장례 상담 접수하기
-</button>
-
-<div class="footer">
-
-
-<span class="gold">
-
-안심365 장례서비스
-
-</span>
-
-
-<br><br>
-
-
-가족의 마지막 순간까지<br>
-
-안심을 연결합니다.
-
-
-
-<br><br>
-
-
-✓ 24시간 접수<br>
-✓ 상담비 무료<br>
-✓ 후불상조 상담<br>
-✓ 무빈소 장례 전문<br>
-✓ 운구부터 발인까지 원스톱 연결
-
-
-
-<br><br>
-
-<div class="footer-menu">
-
-<a href="https://pqc.odreai.com/">ODRE PQC</a>
-<span>|</span>
-<a href="#" id="faqBtn">자주 묻는 질문(Q&A)</a>
-<span>|</span>
-<a href="javascript:void(0)" id="privacyFooterBtn">
-개인정보 처리방침
-</a>
-
-</div>
-
-<p style="margin-top:20px;font-size:15px;line-height:1.8;">
-<strong>Contact Us</strong><br>
-📧 goskm@naver.com
-</p>
-
-<small>
-
-© 2026 ODRE AI. All rights reserved.
-
-</small>
-
-
-
-</div>
-
-
-</div>
-
-
-<div id="privacyModal" class="modal">
-
-  <div class="modal-content">
-
-    <span class="close" id="privacyClose">&times;</span>
-
+    <div class="form-card">
+      <h3>장례 상담 접수</h3>
+      <p class="sub">아래 항목을 순서대로 입력해 주세요.</p>
+
+      <div class="step">
+        <div class="step-label"><span class="n">1</span>현재 상황</div>
+        <p class="step-help">현재 고인의 상황을 선택해 주세요.</p>
+        <div class="choices c2">
+          <label class="choice"><input type="radio" name="death" value="아직 생존"><span>임종 전 상담이 필요합니다</span></label>
+          <label class="choice"><input type="radio" name="death" value="며칠 내 임종 예상"><span>임종이 임박한 상황입니다</span></label>
+          <label class="choice"><input type="radio" name="death" value="임종 직후"><span>방금 임종하셨습니다</span></label>
+          <label class="choice"><input type="radio" name="death" value="사망 후 시간 경과"><span>임종 후 시간이 경과했습니다</span></label>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-label"><span class="n">2</span>고인 위치</div>
+        <p class="step-help">병원명, 요양시설명 또는 주소를 입력해 주세요.</p>
+        <div class="fields"><input class="input" aria-label="고인 위치" type="text" id="address" placeholder="예) ○○요양원 / 대구 달서구 ○○"></div>
+      </div>
+
+      <div class="step">
+        <div class="step-label"><span class="n">3</span>희망 장례 형태</div>
+        <p class="step-help">현재 생각하고 계신 장례 형태를 선택해 주세요.</p>
+        <div class="choices c3">
+          <label class="choice"><input type="radio" name="funeral" value="빈소 장례"><span>빈소 장례<small>조문객을 받는 장례</small></span></label>
+          <label class="choice"><input type="radio" name="funeral" value="무빈소 장례"><span>무빈소 장례<small>조문객을 받지 않는 장례</small></span></label>
+          <label class="choice"><input type="radio" name="funeral" value="미정"><span>아직 결정하지 못했습니다<small>상담 후 안내해 드립니다</small></span></label>
+        </div>
+        <p class="form-note">※ 장례식장, 지역, 종교 및 선택 품목에 따라 최종 비용이 달라질 수 있습니다.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-label"><span class="n">4</span>고인 · 보호자 정보</div>
+        <p class="step-help">연락받으실 보호자 정보를 입력해 주세요.</p>
+        <div class="fields c2">
+          <input class="input" aria-label="고인 성함 (선택)" type="text" id="deceasedName" placeholder="고인 성함 (선택)">
+          <input class="input" aria-label="보호자 성함" autocomplete="name" type="text" id="guardianName" placeholder="보호자 성함">
+        </div>
+        <div class="fields" style="margin-top:10px">
+          <input class="input" aria-label="보호자 연락처" autocomplete="tel" type="tel" name="phone" id="phone" inputmode="numeric" placeholder="연락처 010-0000-0000">
+        </div>
+      </div>
+
+      <label class="agree" id="agreeBox">
+        <input type="checkbox" id="agree">
+        <span>개인정보 수집 및 상담 연락에 동의합니다.</span>
+        <button type="button" id="privacyBtn">보기</button>
+      </label>
+
+      <button type="submit" class="btn btn-dark" id="submitBtn">장례 상담 접수하기</button>
+      <p class="submit-alt">급하신 경우 <a href="tel:010-5934-3137">상담하기</a>를 눌러 바로 연결하세요.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="brand">안심365 장례서비스</div>
+      <p style="margin:10px 0 0"><a href="https://www.odreai.com" style="color:var(--gold);text-decoration:none;font-weight:600;letter-spacing:.04em">www.odreai.com</a></p>
+      <p class="slogan">가족의 마지막 순간까지 안심을 연결합니다.</p>
+      <ul class="f-tags">
+        <li>24시간 접수</li><li>상담비 무료</li><li>후불상조 상담</li><li>무빈소 장례 전문</li><li>운구부터 발인까지 원스톱 연결</li>
+      </ul>
+    </div>
+    <div class="f-right">
+      <p class="f-links"><a href="https://pqc.odreai.com/">ODRE PQC</a><a href="#" id="faqBtn">자주 묻는 질문(Q&amp;A)</a><a href="javascript:void(0)" id="privacyFooterBtn">개인정보 처리방침</a></p>
+      <p>Contact Us · goskm@naver.com</p>
+    </div>
+    <div class="f-copy">© 2026 ODRE AI. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- 데스크톱 플로팅 (기존 3개 기능 유지) -->
+<nav class="float-nav" aria-label="빠른 메뉴">
+  <a href="https://www.odreai.kr/estimate.html">₩ 견적계산</a>
+  <a href="#funeral-consultation">✓ 바로접수</a>
+  <a class="call" href="tel:010-5934-3137">☎ 상담하기</a>
+</nav>
+
+<!-- 모바일 하단 고정 바 -->
+<nav class="mbar" aria-label="모바일 빠른 메뉴">
+  <a href="https://www.odreai.kr/estimate.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2"/></svg>견적계산</a>
+  <a href="#funeral-consultation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h14v16H5z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>바로접수</a>
+  <a class="call" href="tel:010-5934-3137"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.6a1 1 0 01-.25 1z"/></svg>상담하기</a>
+</nav>
+
+<!-- 개인정보 처리방침 (기존 문구 그대로) -->
+<div class="modal" id="privacyModal">
+  <div class="modal-box privacy">
+    <button class="modal-close" id="privacyClose" aria-label="닫기">×</button>
     <h3>개인정보 처리방침</h3>
-
-    <div class="privacy-text">
-
-      <p>
-      안심365 장례서비스는 상담 신청을 위해 아래와 같이 개인정보를 수집합니다.
-      </p>
-
-      <p>
-      ■ 수집 항목<br>
-      이름, 연락처, 입력하신 주소, 상담 내용
-      </p>
-
-      <p>
-      ■ 이용 목적<br>
-      장례 상담 및 서비스 안내
-      </p>
-
-      <p>
-      ■ 보유 기간<br>
-      상담 완료 후 관련 법령에 따라 보관 후 파기합니다.
-      </p>
-
-      <p>
-      ■ 개인정보 제공<br>
-      서비스 진행을 위해 필요한 경우 협력 업체에 제공될 수 있습니다.
-      </p>
-
-    </div>
-
+    <p>안심365 장례서비스는 상담 신청을 위해 아래와 같이 개인정보를 수집합니다.</p>
+    <p><b>■ 수집 항목</b><br>이름, 연락처, 입력하신 주소, 상담 내용</p>
+    <p><b>■ 이용 목적</b><br>장례 상담 및 서비스 안내</p>
+    <p><b>■ 보유 기간</b><br>상담 완료 후 관련 법령에 따라 보관 후 파기합니다.</p>
+    <p><b>■ 개인정보 제공</b><br>서비스 진행을 위해 필요한 경우 협력 업체에 제공될 수 있습니다.</p>
   </div>
-
 </div>
 
-
-<!-- FAQ 팝업 -->
-
-<div id="faqModal" class="modal">
-
-  <div class="modal-content">
-
-    <span class="close" id="faqClose">&times;</span>
-
+<!-- FAQ (기존 문구 그대로) -->
+<div class="modal" id="faqModal">
+  <div class="modal-box">
+    <button class="modal-close" id="faqClose" aria-label="닫기">×</button>
     <h3>자주 묻는 질문</h3>
-
-    <div class="privacy-text">
-
-      <p>
-      <b>Q. 상담 요청 후 얼마나 빨리 연락 오나요?</b><br>
-      A. 접수 후 5분 이내 전문가가 연락드립니다.
-      </p>
-
-
-      <p>
-      <b>Q. 야간이나 새벽에도 가능한가요?</b><br>
-      A. 안심365는 24시간 상담 접수를 운영합니다.
-      </p>
-
-
-      <p>
-      <b>Q. 운구만 요청 가능한가요?</b><br>
-      A. 가능합니다. 장례 진행 여부와 관계없이 운구 상담을 도와드립니다.
-      </p>
-
-      <p>
-      <b>Q. 병원에서 돌아가신 경우도 가능한가요?</b><br>
-      A. 병원, 자택, 요양시설 모두 상담 가능합니다.
-      </p>
-
-      <p>
-      <b>Q. 고독사로 발견이 늦어진 경우도 상담 가능한가요?</b><br>
-      A. 가능합니다. 발견 시점과 현장 상황에 따라 
-         필요한 절차와 운구 방법을 안내해드립니다.
-      </p>
-
-      <p>
-       <b>Q. 사망 후 시간이 많이 지난 경우 운구가 가능한가요?</b><br>
-      A. 가능합니다. 현장 상황을 확인 후 필요한 준비와 절차를 안내드립니다.
-      </p>
-
-    </div>
-
+    <dl class="faq">
+      <dt>Q. 상담 요청 후 얼마나 빨리 연락 오나요?</dt><dd>A. 접수 후 5분 이내 전문가가 연락드립니다.</dd>
+      <dt>Q. 야간이나 새벽에도 가능한가요?</dt><dd>A. 안심365는 24시간 상담 접수를 운영합니다.</dd>
+      <dt>Q. 운구만 요청 가능한가요?</dt><dd>A. 가능합니다. 장례 진행 여부와 관계없이 운구 상담을 도와드립니다.</dd>
+      <dt>Q. 병원에서 돌아가신 경우도 가능한가요?</dt><dd>A. 병원, 자택, 요양시설 모두 상담 가능합니다.</dd>
+      <dt>Q. 고독사로 발견이 늦어진 경우도 상담 가능한가요?</dt><dd>A. 가능합니다. 발견 시점과 현장 상황에 따라 필요한 절차와 운구 방법을 안내해드립니다.</dd>
+      <dt>Q. 사망 후 시간이 많이 지난 경우 운구가 가능한가요?</dt><dd>A. 가능합니다. 현장 상황을 확인 후 필요한 준비와 절차를 안내드립니다.</dd>
+    </dl>
   </div>
-
 </div>
-
 
 <script>
 
@@ -2159,39 +925,6 @@ window.onclick=function(e){
 };
 
 </script>
-
-<nav class="quick-sticky" aria-label="빠른 메뉴">
-    <a
-        href="/estimate.html"
-        class="quick-sticky-item"
-        aria-label="장례 예상견적 계산하기"
-    >
-        <span class="quick-sticky-icon">₩</span>
-        <span class="quick-sticky-text">견적<br>계산</span>
-    </a>
-
-    <a
-        href="#funeral-consultation"
-        class="quick-sticky-item is-apply"
-        aria-label="장례 상담 바로 접수하기"
-    >
-        <span class="quick-sticky-icon">✓</span>
-        <span class="quick-sticky-text">바로<br>접수</span>
-    </a>
-
-    <a
-        href="tel:010-5934-3137"
-        class="quick-sticky-item is-call"
-        aria-label="바로 전화상담 연결"
-    >
-        <span class="quick-sticky-icon">☎</span>
-        <span class="quick-sticky-text">전화<br>상담</span>
-    </a>
-</nav>
-
-
-
-<!-- 안심365 방문/광고/검색어/체류시간 추적 -->
 <script>
 (function(){
     const API_BASE = "https://www.odreai.com";
@@ -2415,7 +1148,14 @@ window.onclick=function(e){
     });
 })();
 </script>
-
+<script>
+document.getElementById("faqBtnTop").addEventListener("click", function(event){
+    event.preventDefault();
+    document.getElementById("faqBtn").click();
+});
+document.getElementById("privacyBtn").addEventListener("click", function(event){
+    event.preventDefault();
+});
+</script>
 </body>
-
 </html>
