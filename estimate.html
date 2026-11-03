@@ -2594,13 +2594,15 @@ setTimeout(()=>{
             params.get("n_keyword") ||
             "";
 
-        const keyword =
+        const rawKeyword =
             params.get("n_query") ||
             params.get("utm_term") ||
             naverKeyword ||
             params.get("keyword") ||
             params.get("query") ||
             "";
+
+        const keyword = /^\{[^}]+\}$/.test(rawKeyword.trim()) ? "" : rawKeyword;
 
         const campaign =
             params.get("utm_campaign") ||
@@ -2612,8 +2614,10 @@ setTimeout(()=>{
             params.get("utm_medium") ||
             (naverKeyword ? "cpc" : "");
 
+        const googleClick = ["gclid", "gbraid", "wbraid"].some(key => params.has(key));
         let source =
             params.get("utm_source") ||
+            (googleClick ? "google" : "") ||
             (naverKeyword ? "naver" : "") ||
             hostSource(document.referrer);
 
@@ -2631,9 +2635,10 @@ setTimeout(()=>{
             ad = "파워링크";
             if(!source) source = "naver";
         }else if(
+            googleClick ||
             ["cpc","paid","ppc","search_ad"].includes(mediumLower)
         ){
-            ad = "검색광고";
+            ad = source.toLowerCase() === "google" ? "Google 검색광고" : "검색광고";
         }
 
         const current = {

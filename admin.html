@@ -443,7 +443,8 @@ body.detail-open{overflow:hidden}
     </section>
 
     <section class="panel full">
-        <div class="panel-head"><div><h3>최근 방문자 기록</h3><p class="panel-desc">동일 IP 1명 기준 · 실제 이동경로 · 총 체류시간</p></div></div>
+        <div class="panel-head"><div><h3>최근 방문자 기록</h3><p class="panel-desc">동일 IP 1명 기준 · 실제 이동경로 · 총 체류시간</p>
+            <p class="panel-desc">Google 광고 키워드는 매칭된 등록 키워드입니다. 실제 검색어 원문과 다를 수 있습니다.</p></div></div>
         <div class="table-wrap"><table class="admin-table visit-table">
             <thead><tr><th>시간</th><th>유입</th><th>고객 검색 키워드</th><th>기기</th><th>페이지 이동</th><th>체류시간</th><th>IP</th><th>해상도</th></tr></thead>
             <tbody id="visitTable"></tbody>
@@ -638,7 +639,7 @@ function renderConsultations(rows){
                 <td>${esc(v.death_status || "-")}</td>
                 <td>${esc(v.funeral_type || "-")}</td>
                 <td>${esc(v.address || "-")}</td>
-                <td>${esc(v.traffic_source || "-")}</td>
+                <td>${esc(consultationSource(v))}</td>
                 <td class="sms-cell"><span class="sms-badge ${sms.className}">${esc(sms.label)}</span></td>
                 <td class="detail-action"><button class="row-detail-btn" type="button" data-consult-kind="general" data-consult-index="${index}" aria-label="일반 상담 접수 상세보기">상세보기</button></td>
             </tr>
@@ -660,6 +661,7 @@ function consultationSource(record){
     const source = String(record.traffic_source || "").trim();
     if(!source || source === "-") return "수집된 유입 없음";
     if(source.toLowerCase() === "naver") return record.ad ? "네이버 검색광고" : "네이버";
+    if(source.toLowerCase() === "google") return record.ad ? "구글 검색광고" : "구글 일반검색";
     if(source.toLowerCase() === "direct") return "직접방문";
     return source;
 }
@@ -686,7 +688,7 @@ function openConsultationDetail(kind, index, trigger){
         fields.push(detailField("장례 형태", record.funeral_type));
         if(record.deceased_name) fields.push(detailField("고인 성함", record.deceased_name));
         fields.push(detailField("위치", record.address, "wide"));
-        fields.push(detailField("유입", record.traffic_source));
+        fields.push(detailField("유입", consultationSource(record)));
         if(record.ad) fields.push(detailField("광고", record.ad));
         if(record.campaign) fields.push(detailField("캠페인 · 광고그룹", record.campaign, "wide"));
     }
