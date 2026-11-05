@@ -98,6 +98,20 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.35;margin:0;lett
 .hero h1{font-size:46px;margin:18px 0 20px;font-weight:600}
 .hero h1 em{font-style:normal;color:var(--gold)}
 .hero .lead{font-size:18px;color:#c9d3d8;max-width:30em;margin:0 0 10px}
+.no-room-summary{margin:22px 0 24px;padding:22px 24px;border:1px solid rgba(214,189,137,.45);border-radius:14px;background:#16313f}
+.no-room-summary .summary-title{font-family:var(--sans);font-size:16px;color:#fff;font-weight:700}
+.no-room-summary .summary-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 12px;margin:4px 0 12px;line-height:1.35}
+.summary-price strong{font-family:var(--serif);font-size:38px;color:var(--gold)}
+.summary-price strong small{font-family:var(--sans);font-size:20px;margin-left:3px}
+.summary-price span{font-size:13px;color:#c9d3d8}
+.no-room-summary p{margin:8px 0;font-size:14px;line-height:1.65;color:#d7e0e4}
+.no-room-summary p strong{color:#fff}
+.no-room-summary .summary-extra{padding-top:10px;border-top:1px solid #405663;color:#e4d3af}
+.no-room-summary .summary-final{font-size:12.5px;color:#c0cdd4}
+.no-room-summary h3{font-family:var(--sans);font-size:14px;color:#fff;margin:16px 0 9px}
+.no-room-steps{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;padding:0;margin:0;list-style:none;counter-reset:funeral-step}
+.no-room-steps li{display:flex;align-items:center;gap:7px;font-size:13.5px;color:#e2e8eb;counter-increment:funeral-step}
+.no-room-steps li::before{content:counter(funeral-step);display:grid;place-items:center;width:20px;height:20px;flex:none;border-radius:50%;background:var(--gold);color:var(--navy);font-size:11px;font-weight:700}
 .hero .postpaid{display:inline-block;margin:6px 0 32px;font-size:14.5px;color:var(--gold);border-bottom:1px solid rgba(214,189,137,.4);padding-bottom:2px}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
 .cta-note{margin-top:14px;font-size:14px;color:#9fb0b9}
@@ -264,9 +278,16 @@ footer .slogan{font-family:var(--serif);color:#dfe5e8;font-size:17px;margin:14px
   .brand{font-size:17px}
   .nav a:not(.header-call){display:none}
   .header-call{padding:7px 12px;font-size:13.5px}
-  .hero .wrap{padding-top:40px;padding-bottom:44px}
-  .hero h1{font-size:31px;margin:12px 0 14px}
+  .hero .wrap{padding-top:24px;padding-bottom:44px}
+  .hero h1{font-size:28px;margin:12px 0 14px}
   .hero .lead{font-size:16px}
+  .no-room-summary{margin:18px 0 20px;padding:17px 18px}
+  .no-room-summary .summary-title{font-size:15px}
+  .summary-price strong{font-size:34px}
+  .no-room-summary p{font-size:13px}
+  .no-room-summary .summary-final{font-size:12px}
+  .no-room-steps{gap:7px 8px}
+  .no-room-steps li{font-size:12.5px}
   .hero .postpaid{margin-bottom:24px;font-size:14px}
   .cta-row{flex-direction:column}
   .cta-row .btn{width:100%}
@@ -348,6 +369,18 @@ footer .slogan{font-family:var(--serif);color:#dfe5e8;font-size:17px;margin:14px
       <p class="eyebrow">365 Days · 24 Hours 장례상담</p>
       <h1>갑작스러운 임종,<br><em>무엇부터 해야 할지</em> 안내합니다.</h1>
       <p class="lead">빈소·무빈소 장례 · 가입 없는 후불제</p>
+      <div class="no-room-summary" aria-labelledby="no-room-summary-title">
+        <h2 class="summary-title" id="no-room-summary-title">무빈소 화장, 비용과 진행 안내</h2>
+        <div class="summary-price"><strong>120<small>만원</small></strong><span>대표 구성 예시 · 별도 비용 있음</span></div>
+        <p><strong>55만원은 필수 기본비용</strong>으로 위 구성에 포함되며, 장례 총비용이 아닙니다.</p>
+        <h3>무빈소 장례는 이렇게 진행합니다</h3>
+        <ol class="no-room-steps">
+          <li>상담·비용 확인</li><li>고인 운구·안치</li><li>입관·발인</li><li>화장·장지 안내</li>
+        </ol>
+        <p><strong>포함</strong> · 필수 진행비, 장례지도사 1인, 화장관, 수의, 발인차량</p>
+        <p class="summary-extra"><strong>별도</strong> · 장례식장 시설·안치·입관실, 화장장, 봉안시설·장지, 음식비 등</p>
+        <p class="summary-final">선택 품목·시설·지역에 따라 비용이 달라지며, 최종 금액은 상담 및 현장 확인 후 확정됩니다.</p>
+      </div>
       <div class="cta-row">
         <a class="btn btn-primary" href="tel:010-5934-3137">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.6a1 1 0 01-.25 1z"/></svg>
