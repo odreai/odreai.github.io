@@ -160,6 +160,7 @@ section{padding:96px 0}
 .pkg h3{font-size:21px;margin:12px 0 6px;color:var(--navy)}
 .pkg .price{font-family:var(--serif);font-size:32px;font-weight:700;color:var(--navy)}
 .pkg .price small{font-family:var(--sans);font-size:15px;font-weight:500;margin-left:2px}
+.pkg-includes{font-family:var(--sans);font-size:13px;font-weight:700;color:var(--gold-text);margin:18px 26px -12px}
 .pkg ul{list-style:none;margin:0;padding:20px 26px;flex:1}
 .pkg li{font-size:14.5px;color:#3b4a53;padding:6px 0 6px 18px;position:relative;border-bottom:1px dashed #ebe6da}
 .pkg li:last-child{border-bottom:0}
@@ -311,13 +312,12 @@ footer .slogan{font-family:var(--serif);color:#dfe5e8;font-size:17px;margin:14px
   .why-card h3{font-size:17.5px;margin:0 0 2px}
   .why-card p{font-size:14.5px}
 
-  .pkg-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:0 16px 8px}
-  .pkg{flex:0 0 84%;scroll-snap-align:start}
+  .pkg-grid{grid-template-columns:1fr;gap:14px}
   .pkg-top{padding:20px}
   .pkg .price{font-size:27px}
   .pkg ul{padding:14px 20px}
+  .pkg-includes{margin:16px 20px -6px}
   .pkg-foot{padding:0 20px 20px}
-  .swipe-hint{display:block!important}
 
   .chips{grid-template-columns:1fr 1fr}
   .quote-band{padding:52px 0}
@@ -364,9 +364,22 @@ footer .slogan{font-family:var(--serif);color:#dfe5e8;font-size:17px;margin:14px
 .national-steps span{font-size:13px;color:var(--muted)}
 .footer-service-area{font-size:13px;color:#bacbd3}
 #no-room-cost,#room-cost{scroll-margin-top:88px}
+.quick-consult{padding:32px 0;background:var(--navy-2);border-top:1px solid var(--navy-line);border-bottom:1px solid var(--navy-line)}
+.quick-consult h2{font-size:24px;margin:0 0 8px;color:#fff}
+.quick-consult p{font-size:14px;color:#c9d3d8;margin:0 0 18px}
+.quick-consult-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.quick-consult-grid a{display:flex;align-items:center;justify-content:center;min-height:58px;padding:12px;border:1px solid #49606c;border-radius:10px;background:#16313f;color:#fff;font-size:15px;font-weight:700;text-align:center;text-decoration:none;line-height:1.5;word-break:keep-all}
+.quick-consult-grid a:hover,.quick-consult-grid a:focus-visible{border-color:var(--gold);outline:2px solid var(--gold);outline-offset:2px}
+#funeral-consultation{scroll-margin-top:88px}
 @media(max-width:640px){
  .hero h1{font-size:28px}.hero .cta-row{gap:9px}.hero .cta-note{margin:10px 0}
- .national-costs{margin-top:22px;padding:16px}.national-costs h2{font-size:15px}.national-cost-grid a{padding:12px 10px}.national-cost-grid span{font-size:13px}.national-cost-grid strong{font-size:28px}
+ .national-costs{margin-top:22px;padding:16px}.national-costs h2{font-size:15px;margin-bottom:8px}
+ .national-cost-grid{grid-template-columns:1fr;gap:0}
+ .national-cost-grid a{padding:13px 0;border:0;border-bottom:1px solid #49606c;border-radius:0;background:transparent;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:8px;align-items:center}
+ .national-cost-grid a:last-child{border-bottom:0}
+ .national-cost-grid span{font-size:14px;word-break:keep-all}.national-cost-grid strong{font-size:25px;white-space:nowrap;grid-column:2;grid-row:1 / span 2}.national-cost-grid em{font-size:12px;grid-column:1}
+ .national-costs p{font-size:13px;line-height:1.75}
+ .quick-consult{padding:26px 0}.quick-consult h2{font-size:22px}.quick-consult-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.quick-consult-grid a{font-size:14px;padding:12px 8px}
  .national-area{padding:40px 0}.national-area .wrap{grid-template-columns:1fr;gap:24px}.national-area h2{font-size:25px}.national-area p{font-size:14px}
 }
 </style>
@@ -449,6 +462,19 @@ footer .slogan{font-family:var(--serif);color:#dfe5e8;font-size:17px;margin:14px
   </div>
 </section>
 
+<section class="quick-consult on-dark" aria-labelledby="quick-consult-title">
+  <div class="wrap">
+    <h2 id="quick-consult-title">지금 어떤 상황이신가요?</h2>
+    <p>상황을 선택하면 상담 접수폼에 자동으로 반영됩니다.</p>
+    <div class="quick-consult-grid">
+      <a href="#funeral-consultation" data-consult-death="임종 직후">방금 임종하셨어요</a>
+      <a href="#funeral-consultation" data-consult-death="며칠 내 임종 예상">임종이 임박했어요</a>
+      <a href="#funeral-consultation" data-consult-death="아직 생존">임종 전 미리 상담</a>
+      <a href="#funeral-consultation" data-consult-death="사망 후 시간 경과">임종 후 시간이 지났어요</a>
+    </div>
+  </div>
+</section>
+
 <!-- 2. 가격 요약 -->
 <div class="price-strip" id="price">
   <div class="wrap">
@@ -499,11 +525,11 @@ footer .slogan{font-family:var(--serif);color:#dfe5e8;font-size:17px;margin:14px
       <p class="eyebrow">대표 견적 예시</p>
       <h2>자주 선택하시는 구성입니다</h2>
       <p>예시를 시작점으로 삼아 필요한 품목만 바꿔 계산할 수 있습니다.</p>
-      <p class="swipe-hint" style="display:none;margin-top:8px;font-size:13.5px;color:var(--gold-text);font-weight:700">옆으로 넘겨보세요 →</p>
     </div>
     <div class="pkg-grid">
       <article class="pkg" id="no-room-cost">
         <div class="pkg-top"><span class="tag">무빈소</span><h3>무빈소 화장</h3><div class="price">1,200,000<small>원</small></div></div>
+        <h4 class="pkg-includes">포함 품목</h4>
         <ul>
           <li>필수 진행비 55만원 · 장례지도사 1인 15만원 포함</li>
           <li>화장관 오동나무 0.6치</li>
@@ -514,6 +540,7 @@ footer .slogan{font-family:var(--serif);color:#dfe5e8;font-size:17px;margin:14px
       </article>
       <article class="pkg" id="room-cost">
         <div class="pkg-top"><span class="tag">빈소 화장</span><h3>소규모 빈소 화장</h3><div class="price">2,050,000<small>원</small></div></div>
+        <h4 class="pkg-includes">포함 품목</h4>
         <ul>
           <li>필수 진행비 80만원 · 장례지도사 1명 · 3일 40만원 포함</li>
           <li>제단꽃 알뜰형 · 일반빈소 · 40만원</li>
@@ -525,6 +552,7 @@ footer .slogan{font-family:var(--serif);color:#dfe5e8;font-size:17px;margin:14px
       </article>
       <article class="pkg">
         <div class="pkg-top"><span class="tag">빈소 매장</span><h3>소규모 빈소 매장</h3><div class="price">2,350,000<small>원</small></div></div>
+        <h4 class="pkg-includes">포함 품목</h4>
         <ul>
           <li>필수 진행비 80만원 · 장례지도사 1명 · 3일 40만원 포함</li>
           <li>매장관 오동나무 1.5치</li>
@@ -536,7 +564,7 @@ footer .slogan{font-family:var(--serif);color:#dfe5e8;font-size:17px;margin:14px
       </article>
     </div>
     <div class="fine">
-      <p>※ 장례식장 시설사용료·안치료·입관실 사용료·음식비·화장장 사용료·봉안시설·장지 비용 등은 별도입니다.</p>
+      <p><strong>별도 비용</strong> · 장례식장 시설사용료·안치료·입관실 사용료·음식비·화장장 사용료·봉안시설·장지 비용 등은 별도입니다.</p>
       <p>※ 장례식장, 지역, 종교 및 선택 품목에 따라 최종 비용이 달라질 수 있으며, 최종 계약금액은 상담 및 현장 확인 후 확정됩니다.</p>
     </div>
   </div>
@@ -1288,5 +1316,21 @@ document.getElementById("privacyBtn").addEventListener("click", function(event){
 });
 </script>
 <script src="/phone-touch.js?v=20261101-3" defer></script>
+<script>
+// 빠른 상담은 기존 접수폼의 현재 상황만 선택합니다. 전송·저장 로직은 기존 폼을 사용합니다.
+document.querySelectorAll("[data-consult-death]").forEach(function(link){
+    link.addEventListener("click", function(event){
+        const value = link.getAttribute("data-consult-death");
+        const input = Array.from(document.querySelectorAll('input[name="death"]')).find(function(radio){ return radio.value === value; });
+        const form = document.getElementById("funeral-consultation");
+        if(!input || !form) return;
+        event.preventDefault();
+        input.checked = true;
+        input.dispatchEvent(new Event("change", {bubbles:true}));
+        input.focus({preventScroll:true});
+        form.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",block:"start"});
+    });
+});
+</script>
 </body>
 </html>
