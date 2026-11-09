@@ -869,21 +869,6 @@ select{width:100%;min-height:48px}
 </style>
 
 
-<style>
-.special-discount-note{
-  margin-top:8px;
-  padding:10px 12px;
-  border-radius:10px;
-  background:#fff8e9;
-  color:#6f5a2b;
-  font-size:12px;
-  line-height:1.55;
-}
-.discount-line{
-  color:#f1d79d;
-  font-weight:900;
-}
-</style>
 
 
 <style>
@@ -1654,42 +1639,6 @@ select{width:100%;min-height:48px}
   </section>
 
 
-<section class="section" id="specialDiscountSection">
-  <div class="section-title">특별우대 · 장례지원</div>
-  <div class="option-row">
-    <div class="choice-grid">
-      <label class="choice full">
-        <input type="radio" name="specialDiscount" value="none" checked>
-        <span>
-          <b>해당 없음</b>
-          <small>할인 적용 없음</small>
-        </span>
-      </label>
-
-      <label class="choice full">
-        <input type="radio" name="specialDiscount" value="veteran">
-        <span>
-          <b>국가유공자 본인 5% 특별우대</b>
-          <small>국가를 위해 헌신하신 분에 대한 감사와 예우의 마음을 담아 안심365 견적금액의 5%를 할인합니다.</small>
-        </span>
-      </label>
-
-      <label class="choice full">
-        <input type="radio" name="specialDiscount" value="basic">
-        <span>
-          <b>기초생활수급자 3% 장례지원</b>
-          <small>장례비 부담을 덜어드리기 위해 안심365 견적금액의 3%를 할인합니다.</small>
-        </span>
-      </label>
-    </div>
-
-    <div class="special-discount-note">
-      ※ 국가유공자 특별우대는 <b>국가유공자 본인에 한해 적용</b>되며 배우자·유족은 해당되지 않습니다.<br>
-      ※ 증빙서류 확인 후 적용되며 다른 할인과 중복 적용되지 않습니다.<br>
-      ※ 카니발·스타리아·장의 리무진·장의버스 등 <b>발인차량 비용은 할인 대상에서 제외</b>됩니다.
-    </div>
-  </div>
-</section>
 
   <div class="summary">
     <div class="summary-top">현재 예상 장례비용</div>
@@ -1965,7 +1914,7 @@ function calc(){
   const limoDistanceExtra = limo > 0 ? vehicleDistance.le : 0;
   const busDistanceExtra = bus > 0 ? vehicleDistance.be : 0;
 
-  let total =
+  const total =
     BASE +
     directorExtraTotal +
     (ids.religiousSupplies.checked ? 100000 : 0) +
@@ -1986,32 +1935,6 @@ function calc(){
     bus +
     limoDistanceExtra +
     busDistanceExtra;
-
-  const discountType = document.querySelector('input[name="specialDiscount"]:checked')?.value || "none";
-  const originalTotal = total;
-  let discountRate = 0;
-  let discountLabel = "";
-
-  if (discountType === "veteran") {
-    discountRate = 0.05;
-    discountLabel = "국가유공자 본인 특별우대 5%";
-  } else if (discountType === "basic") {
-    discountRate = 0.03;
-    discountLabel = "기초생활수급자 장례지원 3%";
-  }
-
-  // 특별우대/장례지원 할인은 발인차량 비용을 제외한 금액에만 적용
-  // 카니발·스타리아, 장의 리무진, 장의버스 및 차량 거리 초과요금 모두 할인 제외
-  const vehicleTotalForDiscount =
-    baseVehicle +
-    limo +
-    bus +
-    limoDistanceExtra +
-    busDistanceExtra;
-
-  const discountBase = Math.max(0, originalTotal - vehicleTotalForDiscount);
-  const discountAmount = Math.round(discountBase * discountRate);
-  total = originalTotal - discountAmount;
 
   const formattedTotal = total.toLocaleString("ko-KR") + "원";
   syncTotalDisplay(formattedTotal);
@@ -2087,11 +2010,6 @@ function calc(){
     ...(limo > 0 ? [`발인차량 장의 리무진 +${(limo+limoDistanceExtra).toLocaleString("ko-KR")}원 · ${vehicleDistance.ld ? `편도 ${vehicleDistance.ld}km${vehicleDistance.lek ? ` · 초과거리 +${limoDistanceExtra.toLocaleString("ko-KR")}원` : ""}` : "편도 50km 기준"}`] : []),
     ...(bus > 0 ? [`발인차량 장의버스 +${(bus+busDistanceExtra).toLocaleString("ko-KR")}원 · ${vehicleDistance.bd ? `전체 ${vehicleDistance.bd}km${vehicleDistance.bek ? ` · 초과거리 +${busDistanceExtra.toLocaleString("ko-KR")}원` : ""}` : "전체 150km 기준"}`] : []),
 
-    ...(discountAmount > 0 ? [
-      `할인 전 예상금액 ${originalTotal.toLocaleString("ko-KR")}원`,
-      `<span class="discount-line">${discountLabel} · -${discountAmount.toLocaleString("ko-KR")}원</span> <small>(발인차량 제외 금액 기준)</small>`,
-      `<b>할인 적용 예상 장례비용 ${total.toLocaleString("ko-KR")}원</b>`
-    ] : []),
   ];
 
   document.getElementById("breakdown").innerHTML = lines.join("<br>");
@@ -2148,10 +2066,6 @@ document.querySelectorAll('input[name="ceremonyType"]').forEach(el=>{
     updateVehicleDistanceUI();
     calc();
   });
-});
-
-document.querySelectorAll('input[name="specialDiscount"]').forEach(el=>{
-  el.addEventListener("change", calc);
 });
 
 ids.directorDays.addEventListener("input", ()=>{
@@ -2256,9 +2170,7 @@ setTimeout(()=>{
     if(!confirm("선택한 견적 항목을 모두 초기화할까요?")) return;
 
     const hall=document.querySelector('input[name="ceremonyType"][value="hall"]');
-    const noDiscount=document.querySelector('input[name="specialDiscount"][value="none"]');
     if(hall) hall.checked=true;
-    if(noDiscount) noDiscount.checked=true;
 
     [
       "religiousSupplies","makeup","customCeremony",
