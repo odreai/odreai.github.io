@@ -1182,8 +1182,8 @@ select{width:100%;min-height:48px}
 <main class="wrap">
   <div class="notice">
     <b>장례비용 직접 견적</b><br>
-    아래 금액은 선택한 서비스·품목의 예상비용입니다. 장례식장·안치실·입관실·음식·화장장·봉안시설·장지 비용 등은 별도이며, 지역·이동거리·시설·일정에 따라 비용이 달라질 수 있습니다. 최종 비용과 진행 가능 일정은 상담 시 확인해 주세요.<br>
-    무빈소 장례는 필수 550,000원, 빈소 장례는 필수 800,000원에서 시작하며 관·수의 등 필요한 항목을 직접 선택할 수 있습니다.
+    아래 금액은 선택한 서비스·품목의 예상비용입니다. 안치실 사용료·시설 이용료는 상품 금액에 포함되지 않으며, 장례식장과 이용 기간에 따라 달라집니다. 입관실·음식·화장장·봉안시설·장지 비용 등도 별도이며, 지역·이동거리·일정에 따라 비용이 달라질 수 있습니다. 최종 비용과 진행 가능 일정은 상담 시 확인해 주세요.<br>
+    무빈소 장례는 필수 330,000원, 빈소 장례는 3일 기준 필수 590,000원에서 시작하며 관·수의 등 필요한 항목을 직접 선택할 수 있습니다.
   </div>
 
   
@@ -1197,9 +1197,9 @@ select{width:100%;min-height:48px}
     <article class="preset-card" data-preset="nohall-cremation">
       <div class="preset-badge">무빈소</div>
       <div class="preset-title">무빈소 화장</div>
-      <div class="preset-price">1,200,000원</div>
+      <div class="preset-price">980,000원</div>
       <ul class="preset-list">
-        <li>필수 진행비 55만원 · 장례지도사 1인 15만원 포함</li>
+        <li>필수 진행비 33만원 · 장례지도사 1인 13만원 포함</li>
         <li>오동나무 0.6치</li>
         <li>면 100% · 기계직</li>
         <li>카니발·스타리아 발인차량</li>
@@ -1216,9 +1216,9 @@ select{width:100%;min-height:48px}
     <article class="preset-card" data-preset="hall-cremation">
       <div class="preset-badge">빈소 화장</div>
       <div class="preset-title">소규모 빈소 화장</div>
-      <div class="preset-price">2,050,000원</div>
+      <div class="preset-price">1,840,000원</div>
       <ul class="preset-list">
-        <li>필수 진행비 80만원 · 장례지도사 1명 · 3일 40만원 포함</li>
+        <li>필수 진행비 59만원 · 장례지도사 1명 · 3일 39만원 포함</li>
         <li>제단꽃 알뜰형 · 일반빈소 · 40만원</li>
         <li>상복 4벌 · 기본지원</li>
         <li>도우미 1명 · 1일 8시간 × 2일 기본지원</li>
@@ -1236,9 +1236,9 @@ select{width:100%;min-height:48px}
     <article class="preset-card" data-preset="hall-burial">
       <div class="preset-badge">빈소 매장</div>
       <div class="preset-title">소규모 빈소 매장</div>
-      <div class="preset-price">2,350,000원</div>
+      <div class="preset-price">2,140,000원</div>
       <ul class="preset-list">
-        <li>필수 진행비 80만원 · 장례지도사 1명 · 3일 40만원 포함</li>
+        <li>필수 진행비 59만원 · 장례지도사 1명 · 3일 39만원 포함</li>
         <li>오동나무 1.5치</li>
         <li>일반 수의</li>
         <li>도우미 1명 · 1일 8시간 × 2일 기본지원</li>
@@ -1269,7 +1269,7 @@ select{width:100%;min-height:48px}
           <input type="radio" name="ceremonyType" value="hall" checked>
           <span>
             <b>빈소 장례</b>
-            <small>필수 기본비용 800,000원</small>
+            <small>3일 기준 필수 기본비용 590,000원</small>
           </span>
         </label>
 
@@ -1277,7 +1277,7 @@ select{width:100%;min-height:48px}
           <input type="radio" name="ceremonyType" value="nohall">
           <span>
             <b>무빈소 장례</b>
-            <small>필수 기본비용 550,000원</small>
+            <small>필수 기본비용 330,000원</small>
           </span>
         </label>
       </div>
@@ -1297,9 +1297,15 @@ select{width:100%;min-height:48px}
     <div class="item">
       <div>
         <b id="directorTitle">장례지도사 1명 · 3일 진행</b><span class="required">필수</span>
-        <small id="directorDesc">장례 절차 및 행사 진행 · 3일 초과 시 1일당 150,000원 추가</small>
+        <small id="directorDesc">장례 절차 및 행사 진행 · 3일 초과 시 1일당 130,000원 추가</small>
       </div>
-      <div class="price" id="directorPrice">400,000원</div>
+      <div class="price" id="directorPrice">390,000원</div>
+    </div>
+
+    <div class="option-row" id="directorDaysRow">
+      <label class="title" for="directorDays">장례지도사 진행일수</label>
+      <input type="number" id="directorDays" min="3" step="1" value="3" inputmode="numeric" aria-describedby="directorDaysHelp">
+      <div class="sub" id="directorDaysHelp">빈소 장례는 기본 3일 390,000원이며, 3일 초과분은 1일당 130,000원이 자동 가산됩니다.</div>
     </div>
 
     <div class="item">
@@ -1315,7 +1321,7 @@ select{width:100%;min-height:48px}
         <b>기본 입관용품 20여종 일체 (관·수의 제외)</b><span class="required">필수</span>
         <small>기본 입관 소모품 일체</small>
       </div>
-      <div class="price">300,000원</div>
+      <div class="price">100,000원</div>
     </div>
   </section>
 
@@ -1687,10 +1693,10 @@ select{width:100%;min-height:48px}
 
   <div class="summary">
     <div class="summary-top">현재 예상 장례비용</div>
-    <div class="total" id="total">760,000원</div>
+    <div class="total" id="total">590,000원</div>
     <div class="breakdown" id="breakdown"></div>
     <small>
-      장례식장 시설사용료·안치료·입관실 사용료·음식비·화장장 사용료·봉안시설·장지 비용 등은 별도입니다.<br>
+      <span id="facilityFeeNotice">안치실 사용료·시설 이용료는 상품 금액에 포함되지 않으며, 장례식장과 이용 기간에 따라 달라집니다.</span> 입관실 사용료·음식비·화장장 사용료·봉안시설·장지 비용 등도 별도입니다.<br>
       실제 비용은 지역·시설·거리·현장 상황에 따라 달라질 수 있으며, 상담 항목은 현재 합계에 포함되지 않습니다.
     </small>
   </div>
@@ -1705,7 +1711,7 @@ select{width:100%;min-height:48px}
 
   <div class="mobile-total-bar">
     <span>현재 예상금액</span>
-    <strong id="mobileTotal">760,000원</strong>
+    <strong id="mobileTotal">590,000원</strong>
   </div>
 </main>
 
@@ -1736,8 +1742,12 @@ select{width:100%;min-height:48px}
 </style>
 
 <script>
-const HALL_BASE = 800000;
-const NOHALL_BASE = 550000;
+const DIRECTOR_DAILY_RATE = 130000;
+const HALL_INCLUDED_DAYS = 3;
+const ASSISTANT_PRICE = 100000;
+const BASIC_SUPPLIES_PRICE = 100000;
+const HALL_BASE = DIRECTOR_DAILY_RATE * HALL_INCLUDED_DAYS + ASSISTANT_PRICE + BASIC_SUPPLIES_PRICE;
+const NOHALL_BASE = DIRECTOR_DAILY_RATE + ASSISTANT_PRICE + BASIC_SUPPLIES_PRICE;
 const SUIT_PRICE = 50000;
 const HELPER_BASE_HOURS = 8;
 const HELPER_HOURLY_RATE = 15000;
@@ -1748,6 +1758,7 @@ let helperHours = 8;
 let suitCount = 4;
 
 const ids = {
+  directorDays: document.getElementById("directorDays"),
   religiousSupplies: document.getElementById("religiousSupplies"),
   ceremonyType: () => document.querySelector('input[name="ceremonyType"]:checked')?.value || "hall",
 
@@ -1806,11 +1817,11 @@ function updateCeremonyUI(){
     if (burialOption) burialOption.disabled = false;
   }
 
-  document.getElementById("directorTitle").textContent =
-    isNoHall ? "장례지도사 1인 · 무빈소 진행" : "장례지도사 1명 · 3일 진행";
   document.getElementById("directorDesc").textContent =
-    isNoHall ? "안치·입관·발인 중심 무빈소 장례 진행" : "장례 절차 및 행사 진행 · 3일 초과 시 1일당 150,000원 추가";
-  document.getElementById("directorPrice").textContent = isNoHall ? "150,000원" : "400,000원";
+    isNoHall ? "안치·입관·발인 중심 무빈소 장례 진행" : "장례 절차 및 행사 진행 · 3일 초과 시 1일당 130,000원 추가";
+  document.getElementById("directorDaysRow").style.display = isNoHall ? "none" : "block";
+  ids.directorDays.disabled = isNoHall;
+  if (isNoHall) ids.directorDays.value = String(HALL_INCLUDED_DAYS);
 
   document.getElementById("altarRow").style.display = isNoHall ? "none" : "block";
   document.getElementById("hallServiceSection").style.display = isNoHall ? "none" : "block";
@@ -1886,6 +1897,18 @@ function updateVehicleDistanceUI(){
 function calc(){
   const ceremonyType = ids.ceremonyType();
   const BASE = ceremonyType === "nohall" ? NOHALL_BASE : HALL_BASE;
+  const enteredDays = Number(ids.directorDays.value);
+  const hallDays = ceremonyType === "hall" && Number.isFinite(enteredDays)
+    ? Math.max(HALL_INCLUDED_DAYS, Math.floor(enteredDays))
+    : HALL_INCLUDED_DAYS;
+  ids.directorDays.value = String(hallDays);
+  const directorExtraDays = ceremonyType === "hall" ? hallDays - HALL_INCLUDED_DAYS : 0;
+  const directorExtraTotal = directorExtraDays * DIRECTOR_DAILY_RATE;
+  const baseDirectorPrice = ceremonyType === "nohall" ? DIRECTOR_DAILY_RATE : DIRECTOR_DAILY_RATE * HALL_INCLUDED_DAYS;
+  document.getElementById("directorTitle").textContent = ceremonyType === "nohall"
+    ? "장례지도사 1인 · 무빈소 진행"
+    : `장례지도사 1명 · ${hallDays}일 진행`;
+  document.getElementById("directorPrice").textContent = (baseDirectorPrice + directorExtraTotal).toLocaleString("ko-KR") + "원";
 
   if (ceremonyType === "nohall" && ids.funeralType.value !== "cremation") {
     ids.funeralType.value = "cremation";
@@ -1944,6 +1967,7 @@ function calc(){
 
   let total =
     BASE +
+    directorExtraTotal +
     (ids.religiousSupplies.checked ? 100000 : 0) +
     num(isBurial ? ids.burialCoffin.value : ids.cremationCoffin.value) +
     num(shroudValue) +
@@ -1995,6 +2019,8 @@ function calc(){
   const lines = [
     `장례형태 ${ceremonyType === "nohall" ? "무빈소 장례" : "빈소 장례"}`,
     `필수 진행비용 ${BASE.toLocaleString("ko-KR")}원`,
+    `필수 진행비용에 포함 · 장례지도사 ${baseDirectorPrice.toLocaleString("ko-KR")}원 · 입관 보조인력 ${ASSISTANT_PRICE.toLocaleString("ko-KR")}원 · 기본 입관용품 ${BASIC_SUPPLIES_PRICE.toLocaleString("ko-KR")}원`,
+    ...(directorExtraDays > 0 ? [`장례지도사 추가 진행 ${directorExtraDays}일 × ${DIRECTOR_DAILY_RATE.toLocaleString("ko-KR")}원 = +${directorExtraTotal.toLocaleString("ko-KR")}원`] : []),
     ...(ids.religiousSupplies.checked ? [`종교별 입관용품 +100,000원`] : []),
 
     ...((isBurial ? ids.burialCoffin.value : ids.cremationCoffin.value) !== "0"
@@ -2128,6 +2154,11 @@ document.querySelectorAll('input[name="specialDiscount"]').forEach(el=>{
   el.addEventListener("change", calc);
 });
 
+ids.directorDays.addEventListener("input", ()=>{
+  const days = Number(ids.directorDays.value);
+  if (Number.isInteger(days) && days >= HALL_INCLUDED_DAYS) calc();
+});
+
 document.querySelectorAll("select,input").forEach(el=>{
   if (el.name !== "ceremonyType") {
     el.addEventListener("change", calc);
@@ -2251,6 +2282,7 @@ setTimeout(()=>{
     if(funeralType) funeralType.value="cremation";
     if(limoDistance) limoDistance.value="";
     if(busDistance) busDistance.value="";
+    ids.directorDays.value=String(HALL_INCLUDED_DAYS);
 
     suitCount=4;
     helperCount=1;
@@ -2310,6 +2342,7 @@ setTimeout(()=>{
     setSelect("coffinFlower", 0);
     setSelect("crossBar", 0);
     setSelect("metbe", 0);
+    setSelect("directorDays", HALL_INCLUDED_DAYS);
     setSuitCount(0);
     helperCount = 0;
     helperHours = 8;
@@ -2419,7 +2452,7 @@ setTimeout(()=>{
 
   <div class="print-estimate-notice">
 
-    ※ 장례식장 시설사용료·안치료·입관실 사용료·음식비·화장장 사용료·봉안시설·장지 비용 등은 별도입니다.<br>
+    ※ 안치실 사용료·시설 이용료는 상품 금액에 포함되지 않으며, 장례식장과 이용 기간에 따라 달라집니다. 입관실 사용료·음식비·화장장 사용료·봉안시설·장지 비용 등도 별도입니다.<br>
     ※ 실제 비용은 지역·시설·거리·현장 상황에 따라 달라질 수 있습니다.
   </div>
 
@@ -2483,7 +2516,8 @@ setTimeout(()=>{
   function currentEstimate(){
     const total=(document.getElementById("total")?.textContent||"").trim();
     const detail=(document.getElementById("breakdown")?.innerText||"").replace(/\n{3,}/g,"\n\n").trim();
-    return {total,detail};
+    const facilityNotice=(document.getElementById("facilityFeeNotice")?.textContent||"").trim();
+    return {total,detail:[detail,facilityNotice].filter(Boolean).join("\n")};
   }
   function openModal(){
     const e=currentEstimate();
